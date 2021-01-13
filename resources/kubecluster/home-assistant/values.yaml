@@ -1,0 +1,96 @@
+service:
+  type: ClusterIP
+  port: 8123
+  portName: api
+  additionalPorts: []
+  # - name: homematicproxy
+  #   port: 2001
+  #   targetPort: 2001
+  annotations: {}
+  labels: {}
+  clusterIP: ""
+  ## List of IP addresses at which the hass-configurator service is available
+  ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
+  ##
+  externalIPs: []
+  loadBalancerIP: ""
+  loadBalancerSourceRanges: []
+  # nodePort: 30000
+  publishNotReadyAddresses: false
+
+ingress:
+  enabled: true
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - hass.jackhil.de
+  tls: []
+  #  - secretName: home-assistant-tls
+  #    hosts:
+  #      - home-assistant.local
+
+hostNetwork: false
+
+persistence:
+  enabled: true
+  ## home-assistant data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  storageClass: "nfs-client"
+  ##
+  ## If you want to reuse an existing claim, you can pass the name of the PVC using
+  ## the existingClaim variable
+  # existingClaim: your-claim
+  ##
+  ## If you want to use a volume on the host machine instead of a PVC:
+  # hostPath: /path/to/the/config/folder
+  accessMode: ReadWriteOnce
+  size: 16Gi
+
+## Additional hass container environment variable
+## For instance to add a http_proxy
+##
+extraEnv: {}
+
+## Additional hass container environment variable from k8s secrets
+## For instance to add a password
+## can use `!env_var` in the home assistant configuration to reference these variables
+extraEnvSecrets:
+  # Example
+  # This will set ${MQTT_PASSWORD} to the 'password' key from the 'mqtt' secret
+  # MQTT_PASSWORD:
+  #   secret: mqtt
+  #   key: password
+
+## If you'd like to provide your own Kubernetes Secret object instead of passing your values
+## individually, pass in the name of a created + populated Secret.
+## All secrets will be mounted as environment variables, with each key/value mapping to a
+## corresponding environment variable.
+##
+extraSecretForEnvFrom: []
+# - home-assistant-secrets
+
+# Enable pod security context (must be `true` if runAsUser or fsGroup are set)
+usePodSecurityContext: true
+# Set runAsUser to 1000 to let home-assistant run as non-root user 'hass' which exists in 'runningman84/alpine-homeassistant' docker image.
+# When setting runAsUser to a different value than 0 also set fsGroup to the same value:
+# runAsUser: <defaults to 0>
+# fsGroup: <will be omitted in deployment if runAsUser is 0>
+
+# Any extra volumes to define for the pod
+extraVolumes: []
+  # - name: example-name
+  #   hostPath:
+  #     path: /path/on/host
+  #     type: DirectoryOrCreate
+
+# Any extra volume mounts to define for the containers
+extraVolumeMounts: []
+#   - name: example-name
+#     mountPath: /path/in/container

@@ -1,0 +1,23 @@
+ipaclients:
+  hosts:
+    mew.jackhil.de: null
+ipaserver:
+  hosts:
+    klefki.jackhil.de: null
+  vars:
+    ipaadmin_password: ADMPassword1
+    ipadm_password: DMPassword1
+    ipaserver_auto_forwarders: true
+    ipaserver_domain: jackhil.de
+    ipaserver_realm: JACKHIL.DE
+    ipaserver_setup_dns: true
+kube:
+  hosts:
+    wailord-1.jackhil.de: null
+    wailord-2.jackhil.de: null
+    wailord-3.jackhil.de: null
+    wailord-4.jackhil.de: null
+minecraft:
+  hosts: abra
+steamcmd:
+  hosts: null

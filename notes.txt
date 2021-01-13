@@ -1,0 +1,14 @@
+
+# FreeIPA/keycloak
++ Create LXC container on system based on centos
++ Install openssh/server and sudo
++ Run from ansible_freeipa
+```
+  - name: Playbook to configure IPA server
+  hosts: ipaserver
+  become: true
+
+  roles:
+  - role: ipaserver
+    state: present
+```

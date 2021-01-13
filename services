@@ -1,0 +1,14 @@
+homelab:
+  kube:
+    hass
+    esp
+    jenkins
+    bin
+    grafana
+    gitlab
+    nullboard
+    mqtt
+    
+docker registry
+
+minio/
