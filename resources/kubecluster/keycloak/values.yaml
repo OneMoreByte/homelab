@@ -32,20 +32,19 @@ extraEnvFrom: ""
 priorityClassName: ""
 
 extraVolumeMounts: |
-  - name: freeipa-keytab
-    mountPath: /secrets/
-    readOnly: true
   - name: freeipa-cert
     mountPath: /secrets/certs/
     readOnly: true
-
-extraVolumes: |
   - name: freeipa-keytab
-    secret:
-      secretName: keycloak-freeipa-keytab
+    mountPath: /secrets/
+    readOnly: true
+extraVolumes: |
   - name: freeipa-cert
     secret:
       secretName: keycloak-freeipa-cert
+  - name: freeipa-keytab
+    secret:
+      secretName: keycloak-freeipa-keytab
 ingress:
   # If `true`, an Ingress is created
   enabled: true
@@ -65,7 +64,8 @@ ingress:
       host: auth.jackhil.de
       # Paths for the host
       paths:
-        - /
+        - path: /
+          pathType: Prefix
   tls: []
 
 

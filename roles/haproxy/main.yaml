@@ -1,0 +1,31 @@
+- name: install/upgrade haproxy and letsencrypt
+  dnf:
+    name: 
+      - haproxy
+      - certbot
+      - certbot-dns-route53
+    state: latest
+
+- name: Make sure haproxy is shut down for maintenance 
+  dnf:
+    name: haproxy
+    state: latest
+
+- name: Template a file to /etc/file.conf
+  ansible.builtin.template:
+    src: /mytemplates/foo.j2
+    dest: /etc/file.conf
+    owner: bin
+    group: wheel
+    mode: '0644'
+
+- name: Install 
+
+- name: Turn logging in syslog
+    name: haproxy
+    state: latest
+
+- name: Start and enable haproxy
+  dnf:
+    name: haproxy
+    state: latest

@@ -1,0 +1,6 @@
+- hosts: cisco_switches
+  roles:
+    - cisco-switch
+- hosts: haproxy
+  roles:
+    - haproxy

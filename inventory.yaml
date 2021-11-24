@@ -1,23 +1,64 @@
-ipaclients:
+cisco_switches:
   hosts:
-    mew.jackhil.de: null
+    samuricop.localdomain:
+      vars_files:
+        - "host_vars/samuricop.localdomain.yaml"
+  vars:
+    ansible_network_os: ios
+    ansible_connection: network_cli
+    cli:
+      timeout: 45
+    ansible_persistent_log_messages: True
+
+
 ipaserver:
   hosts:
-    klefki.jackhil.de: null
+    klefki.jackhil.de:
+
+ipaclients:
+  children:
+    proxmox_systems:
+    physical_systems:
+    vms:
+    lxcs:
   vars:
-    ipaadmin_password: ADMPassword1
-    ipadm_password: DMPassword1
-    ipaserver_auto_forwarders: true
+    ipaclient_allow_repair: yes
+    ipaclient_no_dns_lookup: yes
+    #    ansible_python_interpreter: "/usr/bin/python3"
+
+ipacluster:
+  children:
+    ipaserver:
+    ipaclients:
+  vars:
+    ipaadmin_principal: admin
+    ipaadmin_password: "{{ipaadmin_pass}}"
+    ipadm_password: "{{ipaadmin_pass}}"
     ipaserver_domain: jackhil.de
     ipaserver_realm: JACKHIL.DE
-    ipaserver_setup_dns: true
-kube:
-  hosts:
-    wailord-1.jackhil.de: null
-    wailord-2.jackhil.de: null
-    wailord-3.jackhil.de: null
-    wailord-4.jackhil.de: null
-minecraft:
-  hosts: abra
-steamcmd:
-  hosts: null
+
+
+plexserver: {}
+
+haproxy: {}
+
+haproxy_endpoint: {}
+
+
+
+unifi: {}
+
+
+
+podman_registry: {}
+
+podman_system: {}
+
+
+
+steamcmd_server: {}
+
+minecraft_server: {}
+
+
+hass_server: {}

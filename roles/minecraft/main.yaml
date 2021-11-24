@@ -3,3 +3,6 @@
     name: openjdk-8-jdk
     state: present
 
+- name: Install minecraft
+  craft:
+    state: present

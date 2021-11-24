@@ -31,3 +31,24 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+extraSecretMounts:
+  - name: keycloak-client-secret
+    secretName: grafana-keycloak-client-secret
+    defaultMode: 0440
+    mountPath: /etc/secrets/grafana-oauth
+    readOnly: true
+grafana.ini:
+  server:
+    domain: "grafana.jackhil.de"
+    root_url: "https://grafana.jackhil.de"
+  auth.generic_oauth:
+    enabled: true
+    oauth_name: "Login Keycloak"
+    scopes: "openid profile email"
+    allow_sign_up: true
+    client_id: grafana.jackhil.de
+    client_secret: "$__file{/etc/secrets/grafana-oauth/client_secret}"
+    auth_url: "https://auth.jackhil.de/auth/realms/jsckland/protocol/openid-connect/auth"
+    token_url: "https://auth.jackhil.de/auth/realms/jsckland/protocol/openid-connect/token"
+    api_url: "https://auth.jackhil.de/auth/realms/jsckland/protocol/openid-connect/userinfo"
+    role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"

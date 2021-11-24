@@ -1,0 +1,12 @@
+#cloud-config
+hostname: voron
+
+users:
+  - name: voron
+    gecos: Voron printer user
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPa+cfjcC/sNWw+oGlGGFX2bcVvv21f6MU5LXVB2sfxo catch22
+
+preserve_hostname: false
+ssh_pwauth: true

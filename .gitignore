@@ -1,3 +1,5 @@
 .terraform
 terraform.tfstate.backup
 .terraform.lock.hcl
+__pycache__
+crash.log
