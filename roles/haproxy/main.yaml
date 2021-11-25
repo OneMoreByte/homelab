@@ -13,7 +13,7 @@
 
 - name: Install haproxy config
   ansible.builtin.template:
-    src: ./templates/haproxy.cfg.j2
+    src: ./templates/haproxy/haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
     owner: root
     group: root
@@ -35,9 +35,23 @@
 
 # TODO: Maybe add SELinux stuff?
 
+ name: Make sure .aws directory exists
+  ansible.builtin.file:
+    path: /root/.aws/
+    state: directory
+    mode: '0700'
+
+- name: Install AWS Credentials for certbot
+  ansible.builtin.template:
+    src: ./templates/haproxy/awsconfig
+    dest: /root/.aws/config
+    owner: root
+    group: root
+    mode: '0600'
+
 - name: Install cert renewal script
   ansible.builtin.template:
-    src: ./templates/certbot-renew.sh.js
+    src: ./templates/haproxy/certbot-renew.sh.js
     dest: /usr/local/bin/certbot-renew
     owner: root
     group: root
