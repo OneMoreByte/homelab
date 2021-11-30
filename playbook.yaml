@@ -1,6 +1,8 @@
-- hosts: cisco_switches
-  roles:
-    - cisco-switch
+
+#- hosts: cisco_switches
+#  roles:
+#    - cisco-switch
 - hosts: haproxy
   roles:
+    - linux
     - haproxy

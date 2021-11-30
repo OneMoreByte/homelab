@@ -1,10 +1,14 @@
 #!/bin/bash
 
-DOMAINS=( {{certbot_domains.join('"', '" ')}})
+# Use venv we create with ansible
+source /opt/certbot/bin/activate
+
+DOMAINS=( "{{ certbot_domains | join('" "') }}" )
 # Try to add domain to certbot if it hasn't been put in yet.
 for domain in "${DOMAINS[@]}"; do
     if [ ! -d "/etc/letsencrypt/live/${domain}" ]; then
-        certbot certonly --dns-route53 -d "*.${domain}"
+        echo "registering '*.${domain}'"
+        certbot certonly --non-interactive --agree-tos -m jack@jackhil.de --dns-route53 -d "*.${domain}"
     fi
 done
 
@@ -13,6 +17,6 @@ certbot renew
 
 # We need to combine all the certs together or haproxy will try to serve the first one it finds.
 for domain in "${DOMAINS[@]}"; do
-    echo "Combining fullchain and privkey for $domain
+    echo "Combining fullchain and privkey for $domain"
     cat "/etc/letsencrypt/live/${domain}/fullchain.pem" "/etc/letsencrypt/live/${domain}/privkey.pem" | tee "/etc/ssl/${domain}.pem"
 done

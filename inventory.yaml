@@ -40,7 +40,12 @@ ipacluster:
 
 plexserver: {}
 
-haproxy: {}
+haproxy:
+  hosts:
+    ditto.localdomain:
+      #      vars_files:
+      #        - "host_vars/samuricop.localdomain.yaml"
+
 
 haproxy_endpoint: {}
 

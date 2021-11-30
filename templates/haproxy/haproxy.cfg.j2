@@ -53,7 +53,6 @@ defaults
     timeout http-keep-alive 10s
     timeout check           10s
     maxconn                 3000
-    balance                 roundrobin
 
 #---------------------------------------------------------------------
 # frontends
@@ -68,148 +67,25 @@ frontend ingress
    mode http
 
    # Match rules
-   {% for entry in data %}
+   {% for entry in haproxy_entities %}
    acl host_{{ entry.name }} {% if entry.wildcard %} hdr_end(host) {% else %} hdr(host) {%endif%} -i {{ entry.domain }}
    {% endfor %}
 
    # Links for rules to backends
-   {% for entry in data %} 
+   {% for entry in haproxy_entities %}
    use_backend {{ entry.name }} if host_{{ entry.name }}
    {% endfor %}
-   acl host_news     hdr_end(host)     -i pokemonnews.net
-   acl host_jackplex hdr(host)     -i plex.jackhil.de
-   acl host_jackapt  hdr(host)     -i apt.jackhil.de
-   acl host_jackyum  hdr(host)     -i yum.jackhil.de
-   acl host_fateful  hdr(host)     -i fateful.jackhil.de
-   acl host_books    hdr(host)     -i books.jackhil.de
-   acl host_unifi    hdr(host)     -i unifi.localdomain
-   acl host_ipa      hdr(host)     -i klefki.jackhil.de OR -i auth.jackhil.de/ipa
-   acl host_traefik  hdr(host)     -i traefik.localdomain
-   acl host_bin      hdr(host)     -i bin.jackhil.de
-   acl host_buckets  hdr(host)     -i bucket.jackhil.de
-   acl host_red      hdr(host)     -i red.jackhil.de
-   acl host_hass     hdr(host)     -i home.jackhil.de
-   acl host_esp      hdr(host)     -i esp.jackhil.de
-   acl host_buckets_console  hdr(host)     -i console.bucket.jackhil.de
-   acl host_meme     hdr(host)     -i totallynothax.net
-   acl host_meme2    hdr(host)     -i totalynothax.net
-   acl host_fallthr  hdr_end(host) -i jackhil.de
-   acl host_ben      hdr_end(host) -i zeta.cloudyskys.org
 
- #  http-request redirect code 301 location http://totallynothax.net if host_meme2
- #  http-request redirect code 301 location https://www.youtube.com/watch?v=dQw4w9WgXcQ if host_meme
-
-   use_backend  jackplex      if host_jackplex
-#   use_backend  apt           if host_jackapt
-#   use_backend  yum           if host_jackyum
-   use_backend  filezilla     if host_bin
-   use_backend  fateful-prox  if host_fateful
-   use_backend  books-prox    if host_books
-   use_backend  unifi         if host_unifi
-#   use_backend  7day          if host_7day
-#   use_backend  bin           if host_bin
-   use_backend  ipa           if host_ipa
-   use_backend  room_red      if host_red
-   use_backend  room_hass     if host_hass
-   use_backend  room_esp      if host_esp
-   use_backend  minio         if host_buckets
-   use_backend  minio-console if host_buckets_console
-   use_backend  zeta          if host_ben
-   use_backend  kube-lb       if host_traefik
-   use_backend  kube-lb       if host_fallthr
-
-
-#   tcp-request connection reject if !host_fallthr !host_ben
 
 #---------------------------------------------------------------------
 # backends
 #---------------------------------------------------------------------
 
-{% for entry in data %}
+{% for entry in haproxy_entities %}
 backend {{ entry.name }}
-    server {{entry.name}} {{entry.ip}} check verify none {% if entry.ssl %}} ssl {% endif %} {% if entry.proxy %}} send-proxy {% endif %}
+    balance roundrobin
+    server {{entry.name}} {{entry.ip}} check {% if entry.ssl %}ssl verify none{% endif %} {% if entry.proxy %}send-proxy{% endif %}
+
+
 {% endfor %}
 
-#---------------------------------------------------------------------
-# Jack's Plex server backend
-#---------------------------------------------------------------------
-backend jackplex
-    balance     roundrobin
-    server      prod 192.168.13.233:32400 check ssl verify none
-
-backend zeta
-    balance     roundrobin
-    server      prod 192.168.60.200:80 check verify none
-
-#---------------------------------------------------------------------
-# round robin balancing between wailord's two masters for traefik
-#---------------------------------------------------------------------
-backend kubecluster
-    balance     roundrobin
-    server  wailord1 192.168.13.201:8080 check
-    server  wailord2 192.168.13.202:8080 check
-
-backend kube-lb-ssl
-    balance     roundrobin
-    server      traefik 192.168.13.140:443 check ssl verify none send-proxy
-
-backend kube-lb
-    balance     roundrobin
-    server      traefik 192.168.13.140:80 check send-proxy
-#---------------------------------------------------------------------
-# Proxmox backends
-#---------------------------------------------------------------------
-backend fateful-prox
-    balance roundrobin
-    server fateful 192.168.13.133:8006 check ssl verify none
-
-backend books-prox
-    balance roundrobin
-    server fateful 192.168.1.13:8006 check ssl verify none
-
-#---------------------------------------------------------------------
-# unifi
-#---------------------------------------------------------------------
-
-
-backend unifi
-    balance roundrobin
-    server umbreon 192.168.1.25:8443 check ssl verify none
-
-backend ipa
-    balance roundrobin
-    server klefki 192.168.1.10 ssl verify none
-
-
-
-backend filezilla
-    balance roundrobin
-    server  prod 192.168.13.233:80 check
-
-backend 7day
-   balance roundrobin
-   server  charizard 192.168.13.207:8080 check
-
-backend april
-    balance roundrobin
-    server prod 192.168.13.233:9090 check
-
-backend minio
-    balance roundrobin
-    server prod 192.168.13.233:9000 check
-
-backend minio-console
-    balance roundrobin
-    server prod 192.168.13.233:9001 check
-
-backend room_red
-    balance roundrobin
-    server theroom 192.168.13.130:1880 check
-
-backend room_hass
-    balance roundrobin
-    server theroom 192.168.13.130:8123 check
-
-backend room_esp
-    balance roundrobin
-    server theroom 192.168.13.130:6052 check

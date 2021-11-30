@@ -1,17 +1,35 @@
-- name: install/upgrade haproxy and letsencrypt
+- name: install/upgrade epel-release
+  become: yes
+  dnf:
+    name: epel-release
+    state: latest
+
+
+- name: install/upgrade haproxy and python
+  become: yes
   dnf:
     name: 
       - haproxy
-      - certbot
-      - certbot-dns-route53
+      - python3
+      - python3-virtualenv
     state: latest
 
+- name: Install the aws route 53 plugin for certbot
+  become: yes
+  pip:
+    name:
+      - certbot 
+      - certbot-dns-route53
+    virtualenv: /opt/certbot
+
 - name: Make sure haproxy is shut down for maintenance 
+  become: yes
   ansible.builtin.systemd:
     name: haproxy.service
     state: stopped  
 
 - name: Install haproxy config
+  become: yes
   ansible.builtin.template:
     src: ./templates/haproxy/haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
@@ -20,12 +38,14 @@
     mode: '0644'
 
 - name: Create extra directory required for rsyslog
+  become: yes
   ansible.builtin.file:
     path: /var/lib/haproxy/dev
     state: directory
     mode: '0755'
 
 - name: Add haproxy config to rsyslog
+  become: yes
   ansible.builtin.copy:
     src: resources/haproxy/99-haproxy.conf
     dest: /etc/rsyslog.d/99-haproxy.conf
@@ -35,13 +55,15 @@
 
 # TODO: Maybe add SELinux stuff?
 
- name: Make sure .aws directory exists
+- name: Make sure .aws directory exists
+  become: yes
   ansible.builtin.file:
     path: /root/.aws/
     state: directory
     mode: '0700'
 
 - name: Install AWS Credentials for certbot
+  become: yes
   ansible.builtin.template:
     src: ./templates/haproxy/awsconfig
     dest: /root/.aws/config
@@ -50,24 +72,33 @@
     mode: '0600'
 
 - name: Install cert renewal script
+  become: yes
   ansible.builtin.template:
-    src: ./templates/haproxy/certbot-renew.sh.js
+    src: ./templates/haproxy/certbot-renew.sh.j2
     dest: /usr/local/bin/certbot-renew
     owner: root
     group: root
     mode: '0755'
 
 - name: Run cert renewal script
+  become: yes
   ansible.builtin.shell: /usr/local/bin/certbot-renew
 
 - name: Add cert renewal script to cron if it isn't already
+  become: yes
   ansible.builtin.lineinfile:
     path: /etc/crontab
     line: '1  2  *  *  * root /usr/local/bin/certbot-renew'
     regexp: '^1  2  *  *  * root /usr/local/bin/certbot-renew$'
 
 - name: Start and enable haproxy
+  become: yes
   ansible.builtin.systemd:
     name: haproxy.service
     state: started
-    enabled: yes  
+    enabled: yes
+
+# Rsyslog wasn't making a file in /var/log/. This fixes it somehow?
+- name: Restart for rsyslog
+  reboot:
+  become: yes
