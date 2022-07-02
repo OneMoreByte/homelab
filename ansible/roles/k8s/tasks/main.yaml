@@ -1,0 +1,6 @@
+- name: Install needed packages for kubespray
+  dnf:
+    name:
+    - tar
+    state: latest
+

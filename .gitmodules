@@ -1,0 +1,3 @@
+[submodule "packer/packer-maas"]
+	path = packer/packer-maas
+	url = git@github.com:canonical/packer-maas.git

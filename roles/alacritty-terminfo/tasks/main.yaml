@@ -1,5 +1,0 @@
-
-- name: Install term info for alacritty
-curl -o /tmp/alacritty.info https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
-sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
-

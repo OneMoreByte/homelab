@@ -1,0 +1,13 @@
+#cloud-config
+hostname: troll2
+
+users:
+  - name: svc
+    gecos: service account user
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    passwd: $6$bGZuOK6iOwFs9yO7$/je6yneqnaN6x8B9ySGWQrEBVNPhJCCX7T7fgL2UwKrKVxbFXLI0Cw6KJnF/IS6V4kngxPlZOow21JEoncl5Q/
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPa+cfjcC/sNWw+oGlGGFX2bcVvv21f6MU5LXVB2sfxo catch22
+
+preserve_hostname: false
+ssh_pwauth: true

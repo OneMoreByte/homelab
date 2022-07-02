@@ -1,0 +1,29 @@
+
+
+
+- name: Create VLANs
+  nmcli con add type vlan ifname (name) dev enp3s0 id (id)
+
+  13,50,60,131
+
+  nmcli con add type vlan ifname vlan_jscknet dev enp3s0 id 13
+  nmcli con add type vlan ifname vlan_iotscum dev enp3s0 id 50
+  nmcli con add type vlan ifname vlan_lagg dev enp3s0 id 60
+
+- name: install ovirt repo
+  dnf install https://resources.ovirt.org/pub/yum-repo/ovirt-release44.rpm
+
+
+- name: install requirements
+  dnf install vim nfs-utils cockpit podman cockpit-ovirt-dashboard setroubleshoot-server -y
+
+
+) firewall-cmd --zone=public --add-port=24007-24008/tcp --permanent
+
+2) firewall-cmd --zone=public --add-port=24009/tcp --permanent
+
+3) firewall-cmd --zone=public --add-service=nfs --add-service=samba --add-service=samba-client --permanent
+
+4) firewall-cmd --zone=public --add-port=111/tcp --add-port=139/tcp --add-port=445/tcp --add-port=965/tcp --add-port=2049/tcp --add-port=38465-38469/tcp --add-port=631/tcp --add-port=111/udp --add-port=963/udp --add-port=49152-49251/tcp --permanent
+
+5) firewall-cmd --reload

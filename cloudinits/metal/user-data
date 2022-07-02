@@ -1,0 +1,30 @@
+#cloud-config
+
+
+hostname: metal.jsck.network
+
+## Set up the keyboard layout. See localectl(1), in particular the various
+# Enable password authentication with the SSH daemon
+ssh_pwauth: true
+
+
+users:
+- name: svc
+  gecos: service account
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  passwd: $6$rounds=4096$6lLAV7fBhCQ3U8IZ$n6K/INVOz3zx8v0ivQ4i1dFKBCczrbYiM5M0TQhCkt4AF/snJVakl7/jGzTQPvxtbOxNHRirYMz7gWa.rW7Ux0
+  ssh_authorized_keys:
+  - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPa+cfjcC/sNWw+oGlGGFX2bcVvv21f6MU5LXVB2sfxo catch22
+  shell: /bin/bash
+
+## Update apt database and upgrade packages on first boot
+package_update: true
+package_upgrade: true
+
+## Install additional packages on first boot
+packages:
+- postgresql
+
+snap:
+  commands:
+    00: ['install', 'maas']

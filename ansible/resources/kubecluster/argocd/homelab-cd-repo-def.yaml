@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: homelab-cd-repo
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  url: git@github.com:OneMoreByte/homelab-cd.git
+  sshPrivateKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+    QyNTUxOQAAACA+RdTsJIa0ofWuSPuH9c+8AFUQIVzznQeyfDdCXqIt5wAAAJiMprY+jKa2
+    PgAAAAtzc2gtZWQyNTUxOQAAACA+RdTsJIa0ofWuSPuH9c+8AFUQIVzznQeyfDdCXqIt5w
+    AAAEBU9qqGXlcySQahfGam+3KVVLSxZW298MQyPs8NAcbCFD5F1OwkhrSh9a5I+4f1z7wA
+    VRAhXPOdB7J8N0Jeoi3nAAAAD2pzY2tAZG91YmxlZG93bgECAwQFBg==
+    -----END OPENSSH PRIVATE KEY-----
+
