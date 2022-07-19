@@ -1,0 +1,12 @@
+version: "3.9" 
+services:
+  web:
+    image: dperson/samba
+    ports:
+      - "139:139"
+      - "445:445"
+    volumes:
+      - ./kickstart-isos:/mount/kickstart:ro
+    command:
+    - "-s"
+    - "kickstart;/mount/kickstart"

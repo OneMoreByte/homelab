@@ -10,6 +10,6 @@
   when: infocmp_alacritty.rc != 0
 
 - name: Install term info file for alacritty
-  become: yes
+  become: true
   ansible.builtin.shell: "tic -xe alacritty,alacritty-direct /tmp/alacritty.info"
   when: infocmp_alacritty.rc != 0
