@@ -6,7 +6,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:OneMoreByte/homelab.git'
-    path: ./argocd/argocd
+    path: argo/argocd
     targetRevision: "HEAD"
   destination:
     namespace: argocd
@@ -24,7 +24,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:OneMoreByte/homelab.git'
-    path: ./argocd/traefik
+    path: argo/traefik
     targetRevision: "HEAD"
   destination:
     namespace: traefik
@@ -43,7 +43,7 @@ metadata:
 spec:
   project: default
   source:
-    path: ./argocd/jenkins/
+    path: argo/jenkins/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -68,7 +68,7 @@ metadata:
 spec:
   project: default
   source:
-    path: ./argocd/calibre-web/
+    path: argo/calibre-web/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -93,7 +93,7 @@ metadata:
 spec:
   project: default
   source:
-    path: ./argocd/calibre/
+    path: argo/calibre/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -118,7 +118,7 @@ metadata:
 spec:
   project: default
   source:
-    path: ./argocd/flood/
+    path: argo/flood/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -143,7 +143,7 @@ metadata:
 spec:
   project: default
   source:
-    path: ./argocd/plex/
+    path: argo/plex/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -168,7 +168,7 @@ metadata:
 spec:
   project: default
   source:
-    path: ./argocd/jellyfin/
+    path: argo/jellyfin/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -193,7 +193,7 @@ metadata:
 spec:
   project: default
   source:
-    path: ./argocd/mva/
+    path: argo/mva/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -218,7 +218,7 @@ metadata:
 spec:
   project: default
   source:
-    path: ./argocd/longhorn/
+    path: argo/longhorn/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
