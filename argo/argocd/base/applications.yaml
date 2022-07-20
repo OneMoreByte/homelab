@@ -10,7 +10,7 @@ spec:
     targetRevision: "HEAD"
   destination:
     namespace: argocd
-    name: in-cluster
+    name: wailord.jsck.network
   syncPolicy:
     automated: {}
     syncOptions:
@@ -28,7 +28,7 @@ spec:
     targetRevision: "HEAD"
   destination:
     namespace: traefik
-    name: in-cluster
+    name: wailord.jsck.network
   syncPolicy:
     automated: {}
     syncOptions:
@@ -51,7 +51,7 @@ spec:
       valueFiles:
       - values.yaml
   destination:
-    name: in-cluster
+    name: wailord.jsck.network
     namespace: jenkins
   syncPolicy:
     automated:
@@ -76,7 +76,7 @@ spec:
       valueFiles:
       - values.yaml
   destination:
-    name: in-cluster
+    name: wailord.jsck.network
     namespace: calibre-web
   syncPolicy:
     automated:
@@ -101,7 +101,7 @@ spec:
       valueFiles:
       - values.yaml
   destination:
-    name: in-cluster
+    name: wailord.jsck.network
     namespace: calibre-web
   syncPolicy:
     automated:
@@ -126,7 +126,7 @@ spec:
       valueFiles:
       - values.yaml
   destination:
-    name: in-cluster
+    name: wailord.jsck.network
     namespace: media-svcs
   syncPolicy:
     automated:
@@ -151,7 +151,7 @@ spec:
       valueFiles:
       - values.yaml
   destination:
-    name: in-cluster
+    name: wailord.jsck.network
     namespace: media-svcs
   syncPolicy:
     automated:
@@ -176,7 +176,7 @@ spec:
       valueFiles:
       - values.yaml
   destination:
-    name: in-cluster
+    name: wailord.jsck.network
     namespace: media-svcs
   syncPolicy:
     automated:
@@ -201,7 +201,7 @@ spec:
       valueFiles:
       - values.yaml
   destination:
-    name: in-cluster
+    name: wailord.jsck.network
     namespace: media-svcs
   syncPolicy:
     automated:
@@ -226,7 +226,7 @@ spec:
       valueFiles:
       - values.yaml
   destination:
-    name: in-cluster
+    name: wailord.jsck.network
     namespace: longhorn-system
   syncPolicy:
     automated:
