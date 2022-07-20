@@ -1,0 +1,236 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:OneMoreByte/homelab.git'
+    path: ./argocd/argocd
+    targetRevision: "HEAD"
+  destination:
+    namespace: argocd
+    name: in-cluster
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:OneMoreByte/homelab.git'
+    path: ./argocd/traefik
+    targetRevision: "HEAD"
+  destination:
+    namespace: traefik
+    name: in-cluster
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jenkins
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: ./argocd/jenkins/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: jenkins
+      valueFiles:
+      - values.yaml
+  destination:
+    name: in-cluster
+    namespace: jenkins
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: calibre-web
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: ./argocd/calibre-web/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: calibre-web
+      valueFiles:
+      - values.yaml
+  destination:
+    name: in-cluster
+    namespace: calibre-web
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: calibre
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: ./argocd/calibre/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: calibre
+      valueFiles:
+      - values.yaml
+  destination:
+    name: in-cluster
+    namespace: calibre-web
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: flood
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: ./argocd/flood/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: flood
+      valueFiles:
+      - values.yaml
+  destination:
+    name: in-cluster
+    namespace: media-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: plex
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: ./argocd/plex/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: plex
+      valueFiles:
+      - values.yaml
+  destination:
+    name: in-cluster
+    namespace: media-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jellyfin
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: ./argocd/jellyfin/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: jellyfin
+      valueFiles:
+      - values.yaml
+  destination:
+    name: in-cluster
+    namespace: media-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mva
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: ./argocd/mva/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: mva
+      valueFiles:
+      - values.yaml
+  destination:
+    name: in-cluster
+    namespace: media-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: ./argocd/longhorn/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: longhorn
+      valueFiles:
+      - values.yaml
+  destination:
+    name: in-cluster
+    namespace: longhorn-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

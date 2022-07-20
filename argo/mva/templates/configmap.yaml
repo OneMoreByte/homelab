@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mva.fullname" . }}-configs
+data:
+  # Config for mva
+  mva.yaml: |
+    {{ toYaml .Values.flexget_config | nindent 4  }}
+  # Config for flexget
+  config.yaml: | 
+    {{ toYaml .Values.mva_config | nindent 4 }}

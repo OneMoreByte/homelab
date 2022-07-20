@@ -1,0 +1,728 @@
+# Default values for mva.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: docker.io/jsckh/mva
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+podSecurityContext:
+  runAsUser: 11337
+  runAsGroup: 11337
+  fsGroup: 11337
+
+service:
+  type: ClusterIP
+  port: 3000
+
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+
+ingress:
+  main:
+    enabled: true
+    primary: true
+    annotations: {}
+    labels: {}
+    hosts:
+      - host: flexget.jackhil.de
+        paths:
+          - path: /
+            pathType: Prefix
+    tls: []
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - bulk-datastore
+
+
+flexget_config:
+  web_server:
+    bind: 0.0.0.0
+    port: 3000
+    web_ui: yes
+  tasks:
+    subsplease_add:
+      rss: 'https://subsplease.org/rss/?r=1080'
+      series:
+      - Appare-Ranman!
+      - Gleipnir
+      - Yesterday wo Utatte
+      - Nami yo Kiitekure
+      - Hamefura
+      - Tower of God
+      - Plunderer
+      - The God of High School
+      - Re Zero kara Hajimeru Isekai Seikatsu
+      - Deca-Dence
+      - No Guns Life
+      - Maou Gakuin no Futekigousha
+      # Subsplease cutoff
+      - Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S3
+      - Akudama Drive
+      - Jujutsu Kaisen
+      - Enen no Shouboutai S2 
+      - Tensei Shitara Slime Datta Ken 
+      - Dr. Stone S2
+      - Yuru Camp S2
+      - Yakusoku no Neverland S2
+      - Mars Red
+      - Odd Taxi
+      - Full Dive
+      - Zombieland Saga S2
+      - Isekai Maou to Shoukan Shoujo no Dorei Majutsu S2
+      - Kumo desu ga, Nani ka
+      - SSSS.Dynazenon
+      - Mashiro no Oto
+      - Boku no Hero Academia
+      - Ijiranaide, Nagatoro-san
+      - Vivy – Fluorite Eye’s Song
+      - 86 - Eighty Six
+      - Shadows House
+      - Tokyo Revengers
+      - Nomad - Megalo Box 2
+      - Fumetsu no Anata e
+      - Edens Zero
+      - Slime Taoshite 300-nen, Shiranai Uchi ni Level Max ni Nattemashita
+      - Vanitas no Karte # Not on subsplease
+      - Kobayashi-san Chi no Maid Dragon S2
+      - Tantei wa Mou, Shindeiru.
+      - Sonny Boy
+      - Jahy-sama wa Kujikenai!
+      - Kaizoku Oujo
+      - Heion Sedai no Idaten-tachi
+      - Tsuki ga Michibiku Isekai Douchuu
+      - Shinigami Bocchan to Kuro Maid
+      - Sekai Saikou no Ansatsusha, Isekai Kizoku ni Tensei suru
+      - Takt Op. Destiny
+      - Platinum End
+      - Saihate no Paladin
+      - Sakugan
+      - Shin no Nakama
+      - Komi-san wa, Comyushou desu.
+      - Ousama Ranking
+      - Kimetsu no Yaiba – Yuukaku-hen
+      - Shingeki no Kyojin (The Final Season)
+      - Genjitsu Shugi Yuusha no Oukoku Saikenki
+      - Spy x Family
+      - Tomodachi Game
+      - Tate no Yuusha no Nariagari S2
+      - Kono Healer, Mendokusai
+      - Kaguya-sama wa Kokurasetai S3
+      - Kawaii dake ja Nai Shikimori-san
+      - Birdie Wing - Golf Girls' Story
+      - Overlord IV
+      - Made in Abyss - Retsujitsu no Ougonkyou
+      - Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e S2
+      - Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4
+      - Hataraku Maou-sama!!
+      - Shadows House S2
+      rtorrent_magnet: /torrents
+    trigger_mva:
+      exec:
+      - python /app/mva.py
+  schedules:
+  - tasks: '*'
+    interval:
+      minutes: 30
+
+mva_config:
+  anime:
+    86 - Eighty Six:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Akudama Drive:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Appare-Ranman!:
+      seasons:
+        '1':
+          alias: appare ranman
+          episodes:
+          - 1
+          - 99
+    Deca-Dence:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Dr. Stone:
+      seasons:
+        '2':
+          alias: Dr. Stone S2
+          episodes:
+          - 1
+          - 99
+    Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka:
+      seasons:
+        '3':
+          alias: Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S3
+          episodes:
+          - 1
+          - 99
+        '4':
+          alias: Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4
+          episodes:
+          - 1
+          - 99
+    Edens Zero:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Eizouken ni wa Te wo Dasu na!:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Enen no Shouboutai:
+      seasons:
+        '2':
+          alias: Enen no Shouboutai S2
+          episodes:
+          - 1
+          - 99
+    Full Dive:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Fumetsu no Anata e:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Gleipnir:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Hamefura:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Ijiranaide, Nagatoro-san:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Isekai Maou to Shoukan Shoujo no Dorei Majutsu:
+      seasons:
+        '2':
+          alias: Isekai Maou to Shoukan Shoujo no Dorei Majutsu S2
+          episodes:
+          - 1
+          - 99
+    Itai no wa Iya nano de Bougyoryoku ni Kyokufuri Shitai to Omoimasu:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Jujutsu Kaisen:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Kabukicho Sherlock:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Kumo desu ga, Nani ka:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Kyokou Suiri:
+      seasons:
+        '1':
+          alias: appare ranman
+          episodes:
+          - 1
+          - 99
+    Maou Gakuin no Futekigousha:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Mars Red:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Mashiro no Oto:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Megalo Box:
+      seasons:
+        '2':
+          alias: Nomad - Megalo Box 2
+          episodes:
+          - 1
+          - 99
+    My Hero Academia:
+      seasons:
+        '5':
+          alias: Boku no Hero Academia
+          episodes:
+          - 89
+          - 114
+    Nami yo Kiitekure:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    No Guns Life:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Odd Taxi:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Plunderer:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Re Zero kara Hajimeru Isekai Seikatsu:
+      seasons:
+        '2':
+          alias: ''
+          episodes:
+          - 26
+          - 99
+    SSSS.Dynazenon:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Shadows House:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Slime Taoshite 300-nen, Shiranai Uchi ni Level Max ni Nattemashita:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Somali to Mori no Kamisama:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Tensei Shitara Slime Datta Ken:
+      seasons:
+        '2':
+          alias: ''
+          episodes:
+          - 25
+          - 99
+    The God of High School:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Tokyo Revengers:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Tower of God:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Vivy - Fluorite Eye's Song:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Wonder Egg Priority:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Yakusoku no Neverland:
+      seasons:
+        '2':
+          alias: Yakusoku no Neverland S2
+          episodes:
+          - 1
+          - 99
+    Yesterday wo Utatte:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Yuru Camp:
+      seasons:
+        '2':
+          alias: Yuru Camp S2
+          episodes:
+          - 1
+          - 99
+    Zashiki Warashi no Tatami-chan:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Zombieland Saga:
+      seasons:
+        '2':
+          alias: Zombieland Saga S2
+          episodes:
+          - 1
+          - 99
+    Miss Kobayashi's Dragon Maid:
+      seasons:
+        '2':
+          alias: Kobayashi-san Chi no Maid Dragon S2
+          episodes:
+          - 1
+          - 26
+    Tantei wa Mou, Shindeiru.:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Sonny Boy:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Vanitas no Karte:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Jahy-sama wa Kujikenai!:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Kaizoku Oujo:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Heion Sedai no Idaten-tachi:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Shinigami Bocchan to Kuro Maid:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Tsuki ga Michibiku Isekai Douchuu:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Sekai Saikou no Ansatsusha, Isekai Kizoku ni Tensei suru:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Takt Op. Destiny:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Platinum End:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Saihate no Paladin:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Sakugan:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Shin no Nakama:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Ousama Ranking:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Komi-san wa, Comyushou desu.:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Kimetsu no Yaiba:
+      seasons:
+        '3':
+          alias: 'Kimetsu no Yaiba - Yuukaku-hen'
+          episodes:
+          - 1
+          - 99
+    JoJo's Bizarre Adventure:
+      seasons:
+        '4':
+          alias: "JoJo's Bizarre Adventure - Golden Wind"
+          episodes:
+          - 1
+          - 99
+    Shingeki no Kyojin:
+      seasons:
+        '4':
+          alias: "Shingeki no Kyojin (The Final Season)"
+          episodes:
+          - 1
+          - 99
+    Sono Bisque Doll wa Koi wo Suru:
+      seasons:
+        '1':
+          alias: 'Sono Bisque Doll wa Koi wo Suru'
+          episodes:
+          - 1
+          - 99
+    Genjitsu Shugi Yuusha no Oukoku Saikenki:
+      seasons:
+        '1':
+          alias: 'Genjitsu Shugi Yuusha no Oukoku Saikenki'
+          episodes:
+          - 1
+          - 99
+    Spy x Family:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+
+    Tomodachi Game:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+
+    Tate no Yuusha no Nariagari:
+      seasons:
+        '2':
+          alias: 'Tate no Yuusha no Nariagari S2'
+          episodes:
+          - 1
+          - 99
+
+    Kono Healer, Mendokusai:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+
+    Kaguya-sama wa Kokurasetai:
+      seasons:
+        '1':
+          alias: 'Kaguya-sama wa Kokurasetai S3'
+          episodes:
+          - 1
+          - 99
+
+    Kawaii dake ja Nai Shikimori-san:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Haikyuu!!:
+      seasons:
+        '4':
+          alias: 'Haikyuu!! To The Top'
+          episodes:
+          - 1
+          - 99
+    Birdie Wing - Golf Girls' Story:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Overlord:
+      seasons:
+        '4':
+          alias: 'Overlord IV'
+          episodes:
+          - 1
+          - 99
+    Hataraku Maou-sama!:
+      seasons:
+        '2':
+          alias: 'Hataraku Maou-sama!!'
+          episodes:
+          - 1
+          - 99
+    Made in Abyss:
+      seasons:
+        '2':
+          alias: 'Made in Abyss: Retsujitsu no Ougonkyou'
+          episodes:
+          - 1
+          - 99
+    Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e:
+      seasons:
+        '2':
+          alias: 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e S2'
+          episodes:
+          - 1
+          - 99
+  name: producers
+  plex_dir: /plex-files/Anime/MKV
+  torrent_dir: /mva
+  backup_dir: /metadata
+  seedbox_user: jsck
+  seedbox_pass: thatsjustGR8
+  seedbox_host: "jsck.cloud.seedboxes.cc"
+  seedbox_port: 41062
+  webhook_url: "https://discordapp.com/api/webhooks/879396265878782012/R0PBBlm9btmPL7roXH4y1ebqrMpxeSWaEWGNNzgQe-jAcRTm0tqD-aI05QUlC5fk_rdG" 

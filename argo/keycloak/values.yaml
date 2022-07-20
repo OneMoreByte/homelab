@@ -1,0 +1,85 @@
+
+
+replicas: 3
+
+# Termination grace period in seconds for Keycloak shutdown. Clusters with a large cache might need to extend this to give Infinispan more time to rebalance
+terminationGracePeriodSeconds: 60
+
+# Additional environment variables for Keycloak
+extraEnv: |
+  - name: KEYCLOAK_USER
+    value: trainer
+  - name: KEYCLOAK_PASSWORD
+    value: S&0eGXf2matX
+  - name: PROXY_ADDRESS_FORWARDING
+    value: "true"
+  - name: KEYCLOAK_FRONTEND_URL
+    value: https://auth.jackhil.de/auth
+  - name: JGROUPS_DISCOVERY_PROTOCOL
+    value: dns.DNS_PING
+  - name: JGROUPS_DISCOVERY_PROPERTIES
+    value: 'dns_query={{ include "keycloak.serviceDnsName" . }}'
+  - name: CACHE_OWNERS_COUNT
+    value: "3"
+  - name: CACHE_OWNERS_AUTH_SESSIONS_COUNT
+    value: "3"
+  - name: X509_CA_BUNDLE
+    value: "/secrets/certs/*.crt"
+# Additional environment variables for Keycloak mapped from Secret or ConfigMap
+extraEnvFrom: ""
+
+#  Pod priority class name
+priorityClassName: ""
+
+extraVolumeMounts: |
+  - name: freeipa-cert
+    mountPath: /secrets/certs/
+    readOnly: true
+  - name: freeipa-keytab
+    mountPath: /secrets/
+    readOnly: true
+extraVolumes: |
+  - name: freeipa-cert
+    secret:
+      secretName: keycloak-freeipa-cert
+  - name: freeipa-keytab
+    secret:
+      secretName: keycloak-freeipa-keytab
+ingress:
+  # If `true`, an Ingress is created
+  enabled: true
+  # The Service port targeted by the Ingress
+  # Ingress annotations
+  annotations: {}
+    ## Resolve HTTP 502 error using ingress-nginx:
+    ## See https://www.ibm.com/support/pages/502-error-ingress-keycloak-response
+    # nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+
+  # Additional Ingress labels
+  labels: {}
+   # List of rules for the Ingress
+  rules:
+    -
+      # Ingress host
+      host: auth.jackhil.de
+      # Paths for the host
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+
+postgresql:
+  # If `true`, the Postgresql dependency is enabled
+  enabled: true
+  # PostgreSQL User to create
+  postgresqlUsername: keycloak
+  # PostgreSQL Password for the new user
+  postgresqlPassword: 71T%kORURJTx
+  # PostgreSQL Database to create
+  postgresqlDatabase: keycloak
+  # Persistent Volume Storage configuration
+
+  # PostgreSQL network policy configuration
+  networkPolicy:
+    enabled: false

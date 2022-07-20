@@ -1,0 +1,11 @@
+apiVersion: v2
+name: calibre
+type: application
+version: 0.0.1
+sources:
+  - https://artifacthub.io/packages/helm/k8s-at-home/calibre
+dependencies:
+  - name: calibre
+    version: 5.2.0
+    appVersion: 5.37.0
+    repository: "https://k8s-at-home.com/charts/"
