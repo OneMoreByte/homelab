@@ -46,5 +46,13 @@ ansible-galaxy install githubixx.ansible_role_wireguard
 
 ## Install Kubernetes with kubespray
 
+Label storage node:
+```
+kubectl label node producers app=bulk-datastore
+```
+
+Bookstrap argo so it can deploy all the apps in this repo:
+```
 kubectl create ns argocd
 kubectl create -k ./argocd
+```
