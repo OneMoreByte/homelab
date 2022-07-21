@@ -24,18 +24,6 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      initContainers:
-        - name: {{ .Chart.Name }}-init-links
-          image: busybox:stable
-          # We need the yaml files in the root of /config, but we need to store some stateful 
-          # db stuff for flexget in there too.
-          command: ['/bin/sh', '-c'] 
-          args: ['cd /config-yaml; for f in *; do rm -f /config/$f; ln -s /config-yaml/$f /config/$f; done']
-          volumeMounts:
-          - name: config-yaml
-            mountPath: /config-yaml
-          - name: config
-            mountPath: /config
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -68,7 +56,7 @@ spec:
           - name: data
             mountPath: /data  
           command: ["flexget"]
-          args: ['daemon', 'start']
+          args: ['-c', '/config-yaml/config.yaml', 'daemon', 'start']
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
