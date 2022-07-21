@@ -17,7 +17,7 @@ spec:
       labels:
         {{- include "mva.selectorLabels" . | nindent 8 }}
     spec:
-      serviceAccountName: {{ include "test.serviceAccountName" . }}
+      serviceAccountName: {{ include "mva.serviceAccountName" . }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
