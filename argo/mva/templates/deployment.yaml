@@ -55,8 +55,8 @@ spec:
             mountPath: /config
           - name: data
             mountPath: /data  
-          command: ["flexget"]
-          args: ['-c', '/config-yaml/config.yaml', 'daemon', 'start']
+          command: ["sh"]
+          args: ['-c', 'ln -s /config/config.yaml /config-yaml/config.yaml && flexget daemon start']
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
