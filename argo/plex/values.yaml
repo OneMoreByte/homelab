@@ -21,13 +21,13 @@ plex:
     # -- Set the container timezone
     TZ: America/Chicago
     HOSTNAME: producers
-    # PLEX_UID: 11337
-    # PLEX_GID: 11337
+    PLEX_UID: 11337
+    PLEX_GID: 11337
     CHANGE_CONFIG_DIR_OWNERSHIP: false
     # ADVERTISE_IP:
     # ALLOWED_NETWORKS:
-    PLEX_CLAIM: claim-tsSBKuGePxMDzsHG4BdU
-    # PLEX_PREFERENCE_1: "FriendlyName=plex-kubernetes"
+    PLEX_CLAIM: claim-8zwd13n8SRF6TNxhR2EY
+    PLEX_PREFERENCE_1: "FriendlyName=producers"
     # PLEX_PREFERENCE_2: "EnableIPv6=0"
     # PLEX_PREFERENCE_3: "logDebug=0"
     # PLEX_PREFERENCE_4: "DisableTLSv1_0=1"
