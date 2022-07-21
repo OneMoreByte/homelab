@@ -30,32 +30,32 @@ spec:
             args: ['/app/mva.py']
             resources:
                 {{- toYaml .Values.resources | nindent 12 }}
-        {{- with .Values.nodeSelector }}
-        nodeSelector:
-            {{- toYaml . | nindent 8 }}
-        {{- end }}
-        {{- with .Values.affinity }}
-        affinity:
-            {{- toYaml . | nindent 8 }}
-        {{- end }}
-        {{- with .Values.tolerations }}
-        tolerations:
-            {{- toYaml . | nindent 8 }}
-        {{- end }}
-        volumes:
-        - name: media-dir
-          hostPath:
-            path: /store/plex-files
-            type: Directory
-        - name: metadata-dir
-          hostPath:
-            path: /store/meta
-            type: Directory
-        - name: torrent-dir
-          persistentVolumeClaim:
-            claimName: {{ include "mva.fullname" . }}-torrent-pvc
-        - name: config-yaml
-          configMap:
-            name: {{ include "mva.fullname" . }}-configs
-        - name: config
-        restartPolicy: OnFailure
+            {{- with .Values.nodeSelector }}
+            nodeSelector:
+                {{- toYaml . | nindent 8 }}
+            {{- end }}
+            {{- with .Values.affinity }}
+            affinity:
+                {{- toYaml . | nindent 8 }}
+            {{- end }}
+            {{- with .Values.tolerations }}
+            tolerations:
+                {{- toYaml . | nindent 8 }}
+            {{- end }}
+            volumes:
+            - name: media-dir
+              hostPath:
+                path: /store/plex-files
+                type: Directory
+            - name: metadata-dir
+              hostPath:
+                path: /store/meta
+                type: Directory
+            - name: torrent-dir
+              persistentVolumeClaim:
+                claimName: {{ include "mva.fullname" . }}-torrent-pvc
+            - name: config-yaml
+              configMap:
+                name: {{ include "mva.fullname" . }}-configs
+            - name: config
+            restartPolicy: OnFailure
