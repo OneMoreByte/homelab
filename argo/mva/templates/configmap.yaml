@@ -5,7 +5,7 @@ metadata:
 data:
   # Config for mva
   mva.yml: |
-    {{ toYaml .Values.flexget_config | nindent 4  }}
+    {{ toYaml .Values.mva_config | nindent 4  }}
   # Config for flexget
   config.yml: | 
-    {{ toYaml .Values.mva_config | nindent 4 }}
+    {{ toYaml .Values.flexget_config | nindent 4 }}
