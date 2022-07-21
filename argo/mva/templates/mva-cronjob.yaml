@@ -2,6 +2,8 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: mva-cron
+  labels:
+    {{- include "mva.labels" . | nindent 4 }}
 spec:
   schedule: "*/30 * * * *"
   concurrencyPolicy: Forbid
@@ -10,20 +12,20 @@ spec:
       template:
         spec:
           containers:
-          - name: {{ .Chart.Name }}-mva-cron
+          - name: "{{ .Chart.Name }}-mva-cron"
             securityContext:
-              {{- toYaml .Values.securityContext | nindent 12 }}
+              {{- toYaml .Values.podSecurityContext | nindent 12 }}
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
             imagePullPolicy: {{ .Values.image.pullPolicy }}
             volumeMounts:
             - name: media-dir
-                mountPath: /plex-files
+              mountPath: /plex-files
             - name: metadata-dir
-                mountPath: /metadata
+              mountPath: /metadata
             - name: torrent-tmpdir
-                mountPath: /mva
+              mountPath: /mva
             - name: config-yaml
-                mountPath: /config-yaml
+              mountPath: /config-yaml
             command: ["python3"]
             args: ['/app/mva.py']
             resources:
