@@ -99,7 +99,7 @@ spec:
             name: {{ include "mva.fullname" . }}-configs
         - name: config
           persistentVolumeClaim:
-            claimName: {{ include "mva.fullname" . }}-config
+            claimName: {{ include "mva.fullname" . }}-config-pvc
         - name: data
           persistentVolumeClaim:
-            claimName: {{ include "mva.fullname" . }}-data
+            claimName: {{ include "mva.fullname" . }}-data-pvc
