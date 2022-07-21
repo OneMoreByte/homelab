@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mva-cron
+spec:
+  schedule: "*/30 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ .Chart.Name }}-mva-cron
+            securityContext:
+              {{- toYaml .Values.securityContext | nindent 12 }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            volumeMounts:
+            - name: media-dir
+                mountPath: /plex-files
+            - name: metadata-dir
+                mountPath: /metadata
+            - name: torrent-tmpdir
+                mountPath: /mva
+            - name: config-yaml
+                mountPath: /config-yaml
+            command: ["python3"]
+            args: ['/app/mva.py']
+            resources:
+                {{- toYaml .Values.resources | nindent 12 }}
+        {{- with .Values.nodeSelector }}
+        nodeSelector:
+            {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.affinity }}
+        affinity:
+            {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- with .Values.tolerations }}
+        tolerations:
+            {{- toYaml . | nindent 8 }}
+        {{- end }}
+        volumes:
+            - name: media-dir
+            hostPath:
+                path: /store/plex-files
+                type: Directory
+            - name: metadata-dir
+            hostPath:
+                path: /store/meta
+                type: Directory
+            - name: torrent-dir
+            persistentVolumeClaim:
+                claimName: {{ include "mva.fullname" . }}-torrent-pvc
+            - name: config-yaml
+            configMap:
+                name: {{ include "mva.fullname" . }}-configs
+            - name: config
+          restartPolicy: OnFailure

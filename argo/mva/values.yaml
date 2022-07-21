@@ -154,13 +154,10 @@ flexget_config:
       - Hataraku Maou-sama!!
       - Shadows House S2
       rtorrent_magnet: /mva
-    trigger_mva:
-      exec:
-      - python /app/mva.py
   schedules:
   - tasks: '*'
     interval:
-      minutes: 30
+      minutes: 10
 
 mva_config:
   anime:
