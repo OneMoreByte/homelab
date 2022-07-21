@@ -35,7 +35,7 @@ rtorrent-flood:
     # -- ADVANCED: rTorrent daemon managed by Flood
     FLOOD_OPTION_RTORRENT: "true"
     # -- Allowed path for file operations
-    FLOOD_OPTION_ALLOWEDPATH: "/downloads"
+    FLOOD_OPTION_ALLOWEDPATH: "/store/torrent"
 
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
