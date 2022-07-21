@@ -6,7 +6,7 @@ resources:
 - base/applications.yaml
 - base/ingress.yaml
 - base/wailord-cluster.yaml
-- hhttps://github.com/argoproj/argo-cd/blob/v2.4.7/manifests/cluster-install/
+- https://github.com/argoproj/argo-cd/blob/v2.4.7/manifests/cluster-install/
 
 patchesStrategicMerge:
 - overlays/service.yaml
