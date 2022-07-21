@@ -99,11 +99,11 @@ rtorrent-flood:
     # or, on top of custom config: import = /etc/rtorrent/rtorrent.rc
 
     method.insert = cfg.basedir,  private|const|string, (cat,(fs.homedir),"/.local/share/rtorrent/")
-    method.insert = cfg.download, private|const|string, (cat,"/store/torrent/")
-    method.insert = cfg.logs,     private|const|string, (cat,(cfg.download),"log/")
+    method.insert = cfg.download, private|const|string, (cat,"/store/torrent/", "download/")
+    method.insert = cfg.logs,     private|const|string, (cat,"/store/torrent/","log/")
     method.insert = cfg.logfile,  private|const|string, (cat,(cfg.logs),"rtorrent-",(system.time),".log")
     method.insert = cfg.session,  private|const|string, (cat,(cfg.basedir),".session/")
-    method.insert = cfg.watch,    private|const|string, (cat,(cfg.download),"watch/")
+    method.insert = cfg.watch,    private|const|string, (cat,"/store/torrent/","watch/")
 
 
     # Create directories
