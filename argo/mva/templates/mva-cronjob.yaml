@@ -20,7 +20,7 @@ spec:
               mountPath: /plex-files
             - name: metadata-dir
               mountPath: /metadata
-            - name: torrent-tmpdir
+            - name: torrent-dir
               mountPath: /mva
             - name: config-yaml
               mountPath: /config-yaml
