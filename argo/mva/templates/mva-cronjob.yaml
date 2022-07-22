@@ -14,7 +14,7 @@ spec:
           containers:
           - name: "{{ .Chart.Name }}-mva-cron"
             securityContext:
-              {{- toYaml .Values.podSecurityContext | nindent 12 }}
+              {{- toYaml .Values.podSecurityContext | nindent 14 }}
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
             imagePullPolicy: {{ .Values.image.pullPolicy }}
             volumeMounts:
@@ -29,33 +29,33 @@ spec:
             command: ["python3"]
             args: ['/app/mva.py']
             resources:
-                {{- toYaml .Values.resources | nindent 12 }}
+              {{- toYaml .Values.resources | nindent 14 }}
             {{- with .Values.nodeSelector }}
-            nodeSelector:
-                {{- toYaml . | nindent 8 }}
-            {{- end }}
-            {{- with .Values.affinity }}
-            affinity:
-                {{- toYaml . | nindent 8 }}
-            {{- end }}
-            {{- with .Values.tolerations }}
-            tolerations:
-                {{- toYaml . | nindent 8 }}
-            {{- end }}
-            volumes:
-            - name: media-dir
-              hostPath:
-                path: /store/plex-files
-                type: Directory
-            - name: metadata-dir
-              hostPath:
-                path: /store/meta
-                type: Directory
-            - name: torrent-dir
-              persistentVolumeClaim:
-                claimName: {{ include "mva.fullname" . }}-torrent-pvc
-            - name: config-yaml
-              configMap:
-                name: {{ include "mva.fullname" . }}-configs
-            - name: config
-            restartPolicy: OnFailure
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumes:
+          - name: media-dir
+            hostPath:
+              path: /store/plex-files
+              type: Directory
+          - name: metadata-dir
+            hostPath:
+              path: /store/meta
+              type: Directory
+          - name: torrent-dir
+            persistentVolumeClaim:
+              claimName: {{ include "mva.fullname" . }}-torrent-pvc
+          - name: config-yaml
+            configMap:
+              name: {{ include "mva.fullname" . }}-configs
+          - name: config
+          restartPolicy: OnFailure
