@@ -793,6 +793,11 @@ mva_config:
           episodes:
           - 1
           - 99
+        '2':
+          alias: 'Machikado Mazoku S2'
+          episodes:
+          - 1
+          - 99
     Haikyuu!!:
       seasons:
         '4':
