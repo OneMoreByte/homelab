@@ -667,6 +667,16 @@ mva_config:
           - 99
     Kimetsu no Yaiba:
       seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+        '2':
+          alias: 'Kimetsu no Yaiba - Mugen Ressha-hen'
+          episodes:
+          - 1
+          - 99
         '3':
           alias: 'Kimetsu no Yaiba - Yuukaku-hen'
           episodes:
