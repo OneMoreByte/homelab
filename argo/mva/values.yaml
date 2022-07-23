@@ -191,6 +191,11 @@ mva_config:
           - 99
     Dr. Stone:
       seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
         '2':
           alias: Dr. Stone S2
           episodes:
@@ -224,6 +229,11 @@ mva_config:
           - 99
     Enen no Shouboutai:
       seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
         '2':
           alias: Enen no Shouboutai S2
           episodes:
@@ -266,6 +276,11 @@ mva_config:
           - 99
     Isekai Maou to Shoukan Shoujo no Dorei Majutsu:
       seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
         '2':
           alias: Isekai Maou to Shoukan Shoujo no Dorei Majutsu S2
           episodes:
@@ -329,6 +344,11 @@ mva_config:
           - 99
     Megalo Box:
       seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
         '2':
           alias: Nomad - Megalo Box 2
           episodes:
@@ -336,6 +356,26 @@ mva_config:
           - 99
     My Hero Academia:
       seasons:
+        '1':
+          alias: Boku no Hero Academia
+          episodes:
+          - 1
+          - 13
+        '2':
+          alias: Boku no Hero Academia
+          episodes:
+          - 14
+          - 38
+        '3':
+          alias: Boku no Hero Academia
+          episodes:
+          - 39
+          - 63
+        '4':
+          alias: Boku no Hero Academia
+          episodes:
+          - 64
+          - 88
         '5':
           alias: Boku no Hero Academia
           episodes:
@@ -371,6 +411,11 @@ mva_config:
           - 99
     Re Zero kara Hajimeru Isekai Seikatsu:
       seasons:
+        '1':
+          alias: "Re Zero kara Hajimeru Isekai Seikatsu - Director's Cut"
+          episodes:
+          - 1
+          - 13
         '2':
           alias: ''
           episodes:
@@ -406,6 +451,11 @@ mva_config:
           - 99
     Tensei Shitara Slime Datta Ken:
       seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 24
         '2':
           alias: ''
           episodes:
@@ -448,6 +498,11 @@ mva_config:
           - 99
     Yakusoku no Neverland:
       seasons:
+        '1':
+          alias: Yakusoku no Neverland
+          episodes:
+          - 1
+          - 99
         '2':
           alias: Yakusoku no Neverland S2
           episodes:
@@ -462,6 +517,11 @@ mva_config:
           - 99
     Yuru Camp:
       seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
         '2':
           alias: Yuru Camp S2
           episodes:
@@ -476,6 +536,11 @@ mva_config:
           - 99
     Zombieland Saga:
       seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
         '2':
           alias: Zombieland Saga S2
           episodes:
@@ -616,6 +681,21 @@ mva_config:
           - 99
     Shingeki no Kyojin:
       seasons:
+        '1':
+          alias: "Shingeki no Kyojin"
+          episodes:
+          - 1
+          - 99
+        '2':
+          alias: "Shingeki no Kyojin S2"
+          episodes:
+          - 1
+          - 99
+        '3':
+          alias: "Shingeki no Kyojin S3"
+          episodes:
+          - 1
+          - 99
         '4':
           alias: "Shingeki no Kyojin (The Final Season)"
           episodes:
@@ -653,6 +733,11 @@ mva_config:
 
     Tate no Yuusha no Nariagari:
       seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
         '2':
           alias: 'Tate no Yuusha no Nariagari S2'
           episodes:
@@ -670,12 +755,28 @@ mva_config:
     Kaguya-sama wa Kokurasetai:
       seasons:
         '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+        '2':
+          alias: 'Kaguya-sama wa Kokurasetai S2'
+          episodes:
+          - 1
+          - 99
+        '3':
           alias: 'Kaguya-sama wa Kokurasetai S3'
           episodes:
           - 1
           - 99
-
     Kawaii dake ja Nai Shikimori-san:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Machikado Mazoku:
       seasons:
         '1':
           alias: ''
@@ -719,6 +820,11 @@ mva_config:
           - 99
     Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e:
       seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
         '2':
           alias: 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e S2'
           episodes:
