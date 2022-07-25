@@ -267,6 +267,11 @@ mva_config:
           episodes:
           - 1
           - 99
+        '2':
+          alias: 'Hamefura S2'
+          episodes:
+          - 1
+          - 99
     Ijiranaide, Nagatoro-san:
       seasons:
         '1':
