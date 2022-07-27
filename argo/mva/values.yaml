@@ -440,6 +440,11 @@ mva_config:
           episodes:
           - 1
           - 99
+        '2':
+          alias: 'Shadows House S2'
+          episodes:
+          - 1
+          - 99
     Slime Taoshite 300-nen, Shiranai Uchi ni Level Max ni Nattemashita:
       seasons:
         '1':
@@ -834,7 +839,7 @@ mva_config:
     Made in Abyss:
       seasons:
         '2':
-          alias: 'Made in Abyss: Retsujitsu no Ougonkyou'
+          alias: 'Made in Abyss - Retsujitsu no Ougonkyou'
           episodes:
           - 1
           - 99
