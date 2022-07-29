@@ -863,5 +863,5 @@ mva_config:
   seedbox_pass: thatsjustGR8
   seedbox_host: "jsck.cloud.seedboxes.cc"
   seedbox_port: 41062
-  webhook_url: "https://discordapp.com/api/webhooks/879396265878782012/R0PBBlm9btmPL7roXH4y1ebqrMpxeSWaEWGNNzgQe-jAcRTm0tqD-aI05QUlC5fk_rdG" 
+  webhook_url: "https://discord.com/api/webhooks/1002624119642267648/kW3New1lThMUept9isSMblCtuTDWC1ZtMas5sF7Vaawkr2ZhccGgN6TJUD4dZP_c4zdv" 
   rate_limit: 20

@@ -36,6 +36,14 @@ spec:
             mountPath: /config-yaml
           - name: config
             mountPath: /config
+        - name: {{ .Chart.Name }}-cleanup-startup
+          image: busybox:stable
+          # We need to clean up the lock file if it's still there or the pod might not come back right
+          command: ['/bin/sh', '-c'] 
+          args: ['rm -f /config/.config-lock']
+          volumeMounts:
+          - name: config
+            mountPath: /config
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
