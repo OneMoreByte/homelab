@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: aws-route53-creds
+type: Opaque
+data:
+  access-key-id: QUtJQVhTV01VUjJRVEFTWTdRT0c=
+  secret-access-key: b09ZK2xJMjh6MnNuVmFtN2EreVBEVHIwN255NFFETU5vWVAxYm01OA==
