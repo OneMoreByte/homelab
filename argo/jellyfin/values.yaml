@@ -33,7 +33,8 @@ jellyfin:
       primary: true
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure,web
+        traefik.ingress.kubernetes.io/router.middlewares: redirect-http-2-https
       labels: {}
       hosts:
         - host: jelly.jackhil.de

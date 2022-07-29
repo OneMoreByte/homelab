@@ -6,6 +6,7 @@ metadata:
 spec:
   entryPoints:
     - websecure
+    - web
   routes:
     - kind: Rule
       match: Host(`argo.jackhil.de`)
@@ -13,6 +14,8 @@ spec:
       services:
         - name: argocd-server
           port: 80
+      middlewares:
+      - name: traefik-redirect-http-2-https
     - kind: Rule
       match: Host(`argo.jackhil.de`) && Headers(`Content-Type`, `application/grpc`)
       priority: 11
@@ -20,4 +23,5 @@ spec:
         - name: argocd-server
           port: 80
           scheme: h2c
-
+      middlewares:
+      - name: traefik-redirect-http-2-https
