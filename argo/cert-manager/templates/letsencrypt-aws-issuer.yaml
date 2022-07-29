@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-aws-issuer
+spec:
+  acme:
+    email: jack@jackhil.de
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-issuer-account-key
+    solvers:
+    - selector:
+        dnsZones:
+          - "*.jackhil.de"
+          - "*.jsck.network"
+          - "*.totallynothax.net"
+          - "*.pokemonnews.net"
+          - "*.hashbrownassociation.org"
+      dns01:
+        route53:
+          region: us-east-1
+          accessKeyID: AKIAXSWMUR2QTASY7QOG
+          secretAccessKeySecretRef:
+            name: aws-route53-creds
+            key: secret-access-key

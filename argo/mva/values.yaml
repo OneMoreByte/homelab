@@ -151,7 +151,7 @@ flexget_config:
       - Made in Abyss - Retsujitsu no Ougonkyou
       - Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e S2
       - Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4
-      - Hataraku Maou-sama!!
+      - Hataraku Maou-sama S2
       - Shadows House S2
       rtorrent_magnet: /mva
   schedules:
@@ -832,7 +832,7 @@ mva_config:
     Hataraku Maou-sama!:
       seasons:
         '2':
-          alias: 'Hataraku Maou-sama!!'
+          alias: 'Hataraku Maou-sama S2'
           episodes:
           - 1
           - 99

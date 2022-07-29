@@ -1,0 +1,12 @@
+apiVersion: v2
+name: keycloak
+type: application
+version: 0.0.1
+sources:
+  - https://artifacthub.io/packages/helm/k8s-at-home/flood
+  - https://artifacthub.io/packages/helm/k8s-at-home/rtorrent-flood
+dependencies:
+  - name: rtorrent-flood
+    version: 9.3.2
+    repository: "https://k8s-at-home.com/charts/"
+
