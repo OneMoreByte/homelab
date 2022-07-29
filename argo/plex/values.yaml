@@ -69,7 +69,8 @@ plex:
     main:
       enabled: true
       primary: true
-      annotations: {}
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: "true"
       labels: {}
       hosts:
         - host: plex.jackhil.de
