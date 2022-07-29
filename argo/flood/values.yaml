@@ -63,7 +63,7 @@ rtorrent-flood:
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure,web
-        traefik.ingress.kubernetes.io/router.middlewares: redirect-http-2-https
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
       labels: {}
       hosts:
         - host: flood.jackhil.de
