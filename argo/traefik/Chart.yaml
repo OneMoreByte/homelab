@@ -6,6 +6,5 @@ sources:
   - https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart
 dependencies:
   - name: traefik
-    version: 10.14.2
-    appVersion: 2.6.1
+    version: 10.24.0
     repository: "https://helm.traefik.io/traefik"

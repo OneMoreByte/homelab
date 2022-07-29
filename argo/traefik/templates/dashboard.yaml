@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`traefik.localdomain`) || Host(`traefik.jackhil.de`)
+    - match: Host(`traefik.jsck.network`) || Host(`traefik.jackhil.de`)
       kind: Rule
       services:
         - name: api@internal
