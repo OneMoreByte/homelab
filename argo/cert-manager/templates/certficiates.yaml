@@ -89,7 +89,7 @@ metadata:
   namespace: longhorn-system
 spec:
   dnsNames:
-    - "longhorn.jsck.network"
+    - "*.jsck.network"
   secretName: jsck.network-cert
   issuerRef:
     name: letsencrypt-aws-issuer
@@ -104,7 +104,7 @@ metadata:
   namespace: traefik
 spec:
   dnsNames:
-    - "traefik.jsck.network"
+    - "*.jsck.network"
   secretName: jsck.network-cert
   issuerRef:
     name: letsencrypt-aws-issuer
