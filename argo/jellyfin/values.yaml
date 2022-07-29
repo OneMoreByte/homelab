@@ -38,8 +38,10 @@ jellyfin:
           paths:
             - path: /
               pathType: Prefix
-      tls: []
-
+      tls:
+      - hosts:
+          - jelly.jackhil.de
+        secretName: jackhil.de-cert
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
   persistence:

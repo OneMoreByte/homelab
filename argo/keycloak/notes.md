@@ -1,3 +1,5 @@
+
+Note from messing with freeipa:
 ```
 # Download cacert.p12 from freeipa server
 openssl pkcs12 -in cacert.p12 -clcerts -nokeys -out freeipa.crt

@@ -54,7 +54,10 @@ ingress:
         paths:
           - path: /
             pathType: Prefix
-    tls: []
+    tls:
+      - hosts:
+         - flexget.jackhil.de
+        secretName: jackhil.de-cert
 
 
 nodeSelector: {}

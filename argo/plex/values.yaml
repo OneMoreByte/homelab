@@ -76,7 +76,10 @@ plex:
           paths:
             - path: /
               pathType: Prefix
-      tls: []
+      tls:
+      - hosts:
+         - plex.jackhil.de
+        secretName: jackhil.de-cert
 
   # -- Enable devices to be discoverable
   hostNetwork: true
