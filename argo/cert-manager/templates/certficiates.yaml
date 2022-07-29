@@ -1,0 +1,67 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jackhil.de-cert
+spec:
+  dnsNames:
+    - "*.jackhil.de"
+  secretName: jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jsck.network-cert
+spec:
+  dnsNames:
+    - "*.jsck.network"
+  secretName: jsck.network-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: totallynothax-cert
+spec:
+  dnsNames:
+    - "*.totallynothax.net"
+  secretName: totallynothax-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pokemonnews-cert
+spec:
+  dnsNames:
+    - "*.pokemonnews.net"
+  secretName: pokemonnews-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: hashbrownassociation-cert
+spec:
+  dnsNames:
+    - "*.hashbrownassociation.org"
+  secretName: hashbrownassociation-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
