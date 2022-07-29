@@ -60,7 +60,9 @@ rtorrent-flood:
     main:
       enabled: true
       primary: true
-      annotations: {}
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
       labels: {}
       hosts:
         - host: flood.jackhil.de

@@ -1,10 +1,10 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik-dashboard-test
+  name: traefik-dashboard-jscknet
 spec:
   entryPoints:
-    - traefik
+    - websecure
   routes:
     - match: Host(`traefik.jsck.network`) || Host(`traefik.jackhil.de`)
       kind: Rule

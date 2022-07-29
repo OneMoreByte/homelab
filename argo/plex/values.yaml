@@ -71,6 +71,7 @@ plex:
       primary: true
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
       labels: {}
       hosts:
         - host: plex.jackhil.de
