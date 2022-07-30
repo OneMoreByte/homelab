@@ -17,6 +17,8 @@ spec:
       middlewares:
       - name: redirect-http-2-https
         namespace: traefik
+      tls:
+        secretName: jsck.network-cert
     - kind: Rule
       match: Host(`argo.jackhil.de`) && Headers(`Content-Type`, `application/grpc`)
       priority: 11
@@ -27,3 +29,5 @@ spec:
       middlewares:
       - name: redirect-http-2-https
         namespace: traefik
+      tls:
+        secretName: jsck.network-cert
