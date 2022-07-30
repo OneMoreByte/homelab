@@ -13,4 +13,4 @@ spec:
         - name: api@internal
           kind: TraefikService
       middlewares:
-      - name: traefik-redirect-http-2-https@kubernetescrd
+      - name: redirect-http-2-https
