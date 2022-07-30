@@ -62,8 +62,7 @@ rtorrent-flood:
       primary: true
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure,web
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
       labels: {}
       hosts:
         - host: flood.jackhil.de
@@ -74,7 +73,17 @@ rtorrent-flood:
       - hosts:
           - flood.jackhil.de
         secretName: jackhil.de-cert
-
+    ssl-redirect:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
+      labels: {}
+      hosts:
+        - host: flood.jackhil.de
+          paths:
+            - path: /
+              pathType: Prefix
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
   persistence:
