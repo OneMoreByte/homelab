@@ -14,5 +14,5 @@ spec:
           kind: TraefikService
       middlewares:
       - name: redirect-http-2-https
-      tls:
-        secretName: jsck.network-cert
+  tls:
+    secretName: jsck.network-cert
