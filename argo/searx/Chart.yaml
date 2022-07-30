@@ -1,0 +1,10 @@
+apiVersion: v2
+name: searx
+type: application
+version: 0.0.1
+sources:
+  - https://github.com/searx/searx
+dependencies:
+  - name: searx
+    version: 5.5.2
+    repository: "https://k8s-at-home.com/charts/"
