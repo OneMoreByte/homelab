@@ -71,7 +71,7 @@ plex:
       primary: true
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure,web
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
       labels: {}
       hosts:
@@ -83,6 +83,17 @@ plex:
       - hosts:
          - plex.jackhil.de
         secretName: jackhil.de-cert
+    ssl-redirect:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
+      labels: {}
+      hosts:
+        - host: plex.jackhil.de
+          paths:
+            - path: /
+              pathType: Prefix
 
   # -- Enable devices to be discoverable
   hostNetwork: true

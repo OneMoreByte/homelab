@@ -5,6 +5,7 @@ metadata:
 spec:
   entryPoints:
     - websecure
+    - web
   routes:
     - match: Host(`traefik.jsck.network`) || Host(`traefik.jackhil.de`)
       kind: Rule
@@ -12,4 +13,4 @@ spec:
         - name: api@internal
           kind: TraefikService
       middlewares:
-      - name: redirect-http-2-https
+      - name: traefik-redirect-http-2-https@kubernetescrd
