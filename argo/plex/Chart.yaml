@@ -6,5 +6,5 @@ sources:
   - https://artifacthub.io/packages/helm/k8s-at-home/plex
 dependencies:
   - name: plex
-    version: 6.3.3
+    version: 6.4.3
     repository: "https://k8s-at-home.com/charts/"
