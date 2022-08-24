@@ -168,6 +168,7 @@ flexget_config:
       - Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4
       - Hataraku Maou-sama S2
       - Shadows House S2
+      - Lycoris Recoil
       rtorrent_magnet: /mva
   schedules:
   - tasks: '*'
@@ -867,6 +868,13 @@ mva_config:
           - 99
         '2':
           alias: 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e S2'
+          episodes:
+          - 1
+          - 99
+    Lycoris Recoil:
+      seasons:
+        '1':
+          alias: ''
           episodes:
           - 1
           - 99
