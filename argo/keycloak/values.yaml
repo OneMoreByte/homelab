@@ -104,7 +104,11 @@ keycloak:
   args: []
 
   # Additional environment variables for Keycloak
-  extraEnv: ""
+  extraEnv:
+    - name: KEYCLOAK_USER
+      value: admin
+    - name: KEYCLOAK_PASSWORD
+      value: "hoPma7Zn&keVh*cA4*JSX!mT#!YnmM!h"
     # - name: KEYCLOAK_LOGLEVEL
     #   value: DEBUG
     # - name: WILDFLY_LOGLEVEL
@@ -364,7 +368,7 @@ keycloak:
     # PostgreSQL User to create
     postgresqlUsername: keycloak
     # PostgreSQL Password for the new user
-    postgresqlPassword: keycloak
+    postgresqlPassword: rDox@VnM^VV6VwVo6Fa3HmsxBeGUwmMg
     # PostgreSQL Database to create
     postgresqlDatabase: keycloak
     # PostgreSQL network policy configuration
