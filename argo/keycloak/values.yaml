@@ -1,11 +1,10 @@
 
-keycloak:
+keycloakx:
   # This is an example configuration, for production grade configuration see the Keycloak documentation.
   # See https://www.keycloak.org/server/configuration
   # See https://www.keycloak.org/server/all-config
   command:
     - "/opt/keycloak/bin/kc.sh"
-  args:
     - "--verbose"
     - "start"
     - "--auto-build"
@@ -40,13 +39,7 @@ keycloak:
     password: "uS6Bt6*R7fjskBEY@bbrVX6f%3TVvmoz"
     database: keycloak
 
-  secrets:
-    admin-creds:
-      annotations:
-        my-test-annotation: Test secret for {{ include "keycloak.fullname" . }}
-      stringData:
-        user: admin
-        password: secret
+
   ingress:
     # If `true`, an Ingress is created
     enabled: true
