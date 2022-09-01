@@ -31,7 +31,7 @@ keycloak:
 
   database:
     vendor: postgres
-    hostname: keycloak-db-postgresql
+    hostname: keycloak-postgresql
     port: 5432
     username: keycloak
     password: "uS6Bt6*R7fjskBEY@bbrVX6f%3TVvmoz"
@@ -45,10 +45,10 @@ keycloak:
         user: admin
         password: secret
 postgresql:
-  nameOverride: "keycloak-db-postgresql"
   global:
     postgresql:
       auth:
         username: keycloak
         password: "uS6Bt6*R7fjskBEY@bbrVX6f%3TVvmoz"
         database: keycloak
+  
