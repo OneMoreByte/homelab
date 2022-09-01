@@ -176,7 +176,7 @@ metallb:
   speaker:
     enabled: true
     # -- Speaker log level. Must be one of: `all`, `debug`, `info`, `warn`, `error` or `none`
-    logLevel: info
+    logLevel: all
     tolerateMaster: true
     memberlist:
       enabled: true
