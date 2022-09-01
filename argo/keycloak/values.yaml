@@ -109,7 +109,10 @@ keycloak:
       value: admin
     - name: KEYCLOAK_PASSWORD
       value: "hoPma7Zn&keVh*cA4*JSX!mT#!YnmM!h"
-  
+    - name: PROXY_ADDRESS_FORWARDING
+      value: "true"
+    - name: KEYCLOAK_FRONTEND_URL
+      value: https://auth.jackhil.de/auth  
   # - name: KEYCLOAK_LOGLEVEL
   #   value: DEBUG
   # - name: WILDFLY_LOGLEVEL
