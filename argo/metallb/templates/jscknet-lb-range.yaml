@@ -13,7 +13,5 @@ metadata:
   name: jscknet-l2advertisement
   namespace: metallb-system
 spec:
-    ipaddresspools:
+    ipAddressPools:
       - jscknet
-    bindInterfaces:
-      - bond0
