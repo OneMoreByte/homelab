@@ -70,7 +70,7 @@ keycloak:
     # TLS configuration
     tls:
       - hosts:
-          - auth.example.com
+          - auth.jackhil.de
         secretName: jackhil.de-cert
 
 postgresql:
