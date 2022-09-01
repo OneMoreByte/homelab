@@ -34,17 +34,23 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 80
+            - name: peering
+              containerPort: 4001
+              protocol: TCP
+            - name: http-gateway
+              containerPort: 8080
+              protocol: TCP
+            - name: rcp-gateway
+              containerPort: 5001
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /api/v0/id
+              port: rcp-gateway
           readinessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /api/v0/id
+              port: rcp-gateway
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

@@ -123,3 +123,16 @@ spec:
   issuerRef:
     name: letsencrypt-aws-issuer
     kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jackhil.de-cert
+  namespace: keycloak
+spec:
+  dnsNames:
+    - "*.jackhil.de"
+  secretName: jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer

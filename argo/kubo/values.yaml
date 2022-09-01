@@ -36,7 +36,8 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-service:
+services:
+- name: z
   type: ClusterIP
   port: 80
 
