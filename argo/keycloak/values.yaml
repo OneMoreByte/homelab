@@ -5,6 +5,7 @@ keycloak:
   # See https://www.keycloak.org/server/all-config
   command:
     - "/opt/keycloak/bin/kc.sh"
+  args:
     - "--verbose"
     - "start"
     - "--auto-build"
