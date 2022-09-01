@@ -44,6 +44,35 @@ keycloak:
       stringData:
         user: admin
         password: secret
+  ingress:
+    # If `true`, an Ingress is created
+    enabled: true
+    # The name of the Ingress Class associated with this ingress
+    ingressClassName: ""
+    # The Service port targeted by the Ingress
+    servicePort: http
+    # Ingress annotations
+    annotations:
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
+    # Additional Ingress labels
+    labels: {}
+    # List of rules for the Ingress
+    rules:
+      -
+        # Ingress host
+        host: 'auth.jackhil.de'
+        # Paths for the host
+        paths:
+          - path: /
+            pathType: Prefix
+    # TLS configuration
+    tls:
+      - hosts:
+          - auth.example.com
+        secretName: jackhil.de-cert
+
 postgresql:
   global:
     postgresql:
