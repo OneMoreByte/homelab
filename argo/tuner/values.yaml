@@ -2,7 +2,7 @@ nginx:
   serverBlock: |-
     server {
       server_name tuner;
-      listen 80;
+      listen 8080;
 
       #channel by number
 
@@ -27,3 +27,5 @@ nginx:
     - hosts:
         - tuner.jackhil.de
       secretName: jackhil.de-cert
+  containerPorts:
+    http: 8080
