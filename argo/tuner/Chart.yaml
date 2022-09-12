@@ -7,4 +7,5 @@ sources:
 dependencies:
   - name: nginx
     version: 13.2.4
-    repository: "https://charts.bitnami.com/bitnami
+    repository: "https://charts.bitnami.com/bitnami"
+
