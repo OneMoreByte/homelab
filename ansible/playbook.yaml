@@ -6,7 +6,7 @@
 - name: Configure linux hosts
   hosts: linux
   roles:
-    - linux
+  - linux
 
 #- name: Playbook to configure haproxy
 #  hosts: haproxy
@@ -19,11 +19,10 @@
 #    - gluster-client
 #    - k8s
 
-- name: Configure MaaS
-  hosts: maas
+- name: Configure zrepl
+  hosts: zrepl
   roles:
-    - maas
-
+  - zrepl
 
       #- name: Configure storage server
       #  hosts: storage

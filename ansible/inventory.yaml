@@ -10,96 +10,19 @@ cisco_switches:
 
 linux:
   hosts:
-    fateful.localdomain:
-      ansible_user: root
-    192.168.131.3: {}
-    producers.localdomain: {}
-    ditto.localdomain: {}
-    umbreon.localdomain: {}
-    wooloo.localdomain: {}
-    engine.jackhil.de:
-      ansible_user: root
-    wailord-node-0.localdomain:
-      ansible_user: root
-    wailord-node-1.localdomain:
-      ansible_user: root
-    wailord-node-2.localdomain:
-      ansible_user: root
-    wailord-node-3.localdomain:
-      ansible_user: root
-    klefki.localdomain:
-      ansible_user: root
+    fateful.jsck.network:
+      ansible_user: svc
+    producers.jsck.network:
+      ansible_user: svc
+    books.jsck.network:
+      ansible_user: svc
 
-ipaserver:
+zrepl:
   hosts:
-    klefki.jackhil.de:
-
-ipaclients:
-  children:
-    proxmox_systems:
-    physical_systems:
-    vms:
-    lxcs:
-  vars:
-    ipaclient_allow_repair: yes
-    ipaclient_no_dns_lookup: yes
-    #    ansible_python_interpreter: "/usr/bin/python3"
-
-ipacluster:
-  children:
-    ipaserver:
-    ipaclients:
-  vars:
-    ipaadmin_principal: admin
-    ipaadmin_password: "{{ipaadmin_pass}}"
-    ipadm_password: "{{ipaadmin_pass}}"
-    ipaserver_domain: jackhil.de
-    ipaserver_realm: JACKHIL.DE
-
-k8s:
-  hosts:
-    wailord-node-0.localdomain:
-      ansible_user: root
-    wailord-node-1.localdomain:
-      ansible_user: root
-    wailord-node-2.localdomain:
-      ansible_user: root
-    wailord-node-3.localdomain:
-      ansible_user: root    
-
-plexserver: {}
-
-haproxy:
-  hosts:
-    ditto.localdomain:
-      #      vars_files:
-      #        - "host_vars/samuricop.localdomain.yaml"
-
-
-haproxy_endpoint: {}
-
-
-
-unifi: {}
-
-
-
-podman_registry: {}
-
-podman_system: {}
-
-
-
-steamcmd_server: {}
-
-minecraft_server: {}
-
-
-hass_server: {}
-
-
-maas:
-  hosts:
-    192.168.131.3: {}
-  vars:
-    ansible_ssh_pipelining: true
+    fateful.jsck.network:
+      ansible_user: svc
+    producers.jsck.network:
+      ansible_user: svc
+    thefall.jsck.network:
+      ansible_user: jsck
+      

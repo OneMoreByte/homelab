@@ -1,2 +1,1 @@
-zfs_datasets:
-- name: longhorn
+zrepl_name: fateful

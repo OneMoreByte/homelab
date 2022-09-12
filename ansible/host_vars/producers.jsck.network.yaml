@@ -1,10 +1,1 @@
-zfs_datasets:
-- name: plex-files
-- name: plex-files/Anime
-- name: plex-files/Movies
-- name: plex-files/Shows
-- name: roms
-- name: backups
-- name: meta
-- name: torrent
-- name: longhorn
+zrepl_name: producers

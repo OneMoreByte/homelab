@@ -1,0 +1,29 @@
+nginx:
+  serverBlock: |-
+    server {
+      server_name tuner;
+      listen 80;
+
+      #channel by number
+
+      location ~ "/tv/([0-9]{1,2}.[0-9]{1,2})$" {
+        proxy_pass http://192.168.13.102:5004/auto/v$1;
+      }
+
+    }
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-tuner-basicauth@kubernetescrd
+    labels: {}
+    extraHosts:
+      - host: tuner.jackhil.de
+        paths:
+          - path: /
+            pathType: Prefix
+    extraTls:
+    - hosts:
+        - tuner.jackhil.de
+      secretName: jackhil.de-cert
