@@ -11,21 +11,24 @@ nginx:
       }
 
     }
-  ingress:
-    enabled: true
-    annotations:
-      traefik.ingress.kubernetes.io/router.tls: "true"
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      traefik.ingress.kubernetes.io/router.middlewares: traefik-tuner-basicauth@kubernetescrd
-    labels: {}
-    extraHosts:
-      - host: tuner.jackhil.de
-        paths:
-          - path: /
-            pathType: Prefix
-    extraTls:
-    - hosts:
-        - tuner.jackhil.de
-      secretName: jackhil.de-cert
   containerPorts:
     http: 8080
+  service:
+    type: NodePort
+
+ingress:
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-tuner-basicauth@kubernetescrd
+  labels: {}
+  hosts:
+    - host: tuner.jackhil.de
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+  - hosts:
+      - tuner.jackhil.de
+    secretName: jackhil.de-cert
