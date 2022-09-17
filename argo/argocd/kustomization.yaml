@@ -9,7 +9,11 @@ resources:
 - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.4.7
 
 patchesStrategicMerge:
+- overlays/argocd-cm.yaml
+- overlays/argocd-rbac-cm.yaml
+- overlays/argocd-secret.yaml
 - overlays/service.yaml
+
 
 patchesJson6902:
 - path: overlays/deploy-command.yaml
