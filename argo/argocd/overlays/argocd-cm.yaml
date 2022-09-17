@@ -6,7 +6,7 @@ data:
   url: https://argo.jackhil.de
   oidc.config: |
     name: Keycloak
-    issuer: https://auth.jackhil.de/realms/master
+    issuer: https://auth.jackhil.de/auth/realms/master
     clientID: argocd
     clientSecret: $oidc.keycloak.clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]
