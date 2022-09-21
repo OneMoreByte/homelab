@@ -19,8 +19,8 @@ nginx:
     type: NodePort
   extraVolumes:
   - name: media-dir
+    readOnly: true
     hostPath:
-      readOnly: true
       path: /store/roms
       type: Directory
   extraVolumeMounts:
