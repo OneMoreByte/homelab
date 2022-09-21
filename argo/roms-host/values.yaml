@@ -44,3 +44,12 @@ ingress:
   extraVolumeMounts:
   - name: roms-dir
     mountPath: /roms
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - bulk-datastore
