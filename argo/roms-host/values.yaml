@@ -19,13 +19,13 @@ nginx:
     type: NodePort
   extraVolumes:
   - name: media-dir
-    readOnly: true
     hostPath:
       path: /store/roms
       type: Directory
   extraVolumeMounts:
   - name: roms-dir
     mountPath: /roms
+    readOnly: true
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
