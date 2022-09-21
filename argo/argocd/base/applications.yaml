@@ -363,16 +363,16 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: roms-host
+  name: roms-sftp
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/roms-host/
+    path: argo/roms-sftp/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: roms-host
+      releaseName: roms-sftp
       valueFiles:
       - values.yaml
   destination:
