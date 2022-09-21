@@ -1,11 +1,11 @@
 apiVersion: v2
-name: tuner
+name: minio
 type: application
 version: 0.0.1
 sources:
-  - https://artifacthub.io/packages/helm/bitnami/nginx
+  - https://github.com/minio/minio
 dependencies:
-  - name: nginx
+  - name: minio
     version: 13.2.4
-    repository: "https://charts.bitnami.com/bitnami"
+    repository: "https://charts.min.io/"
 

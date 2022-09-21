@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "rom-sftp.fullname" . }}-test-connection"
+  labels:
+    {{- include "rom-sftp.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "rom-sftp.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
