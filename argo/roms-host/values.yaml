@@ -18,7 +18,7 @@ nginx:
   service:
     type: NodePort
   extraVolumes:
-  - name: media-dir
+  - name: roms-dir
     hostPath:
       path: /store/roms
       type: Directory
