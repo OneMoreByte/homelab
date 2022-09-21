@@ -17,24 +17,6 @@ nginx:
     http: 8080
   service:
     type: NodePort
-
-ingress:
-  enabled: true
-  annotations:
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-tuner-basicauth@kubernetescrd
-  labels: {}
-  hosts:
-    - host: roms.jackhil.de
-      paths:
-        - path: /
-          pathType: Prefix
-  tls:
-  - hosts:
-      - roms.jackhil.de
-    secretName: jackhil.de-cert
-
   extraVolumes:
   - name: media-dir
     hostPath:
@@ -53,3 +35,20 @@ ingress:
             operator: In
             values:
             - bulk-datastore
+
+ingress:
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-tuner-basicauth@kubernetescrd
+  labels: {}
+  hosts:
+    - host: roms.jackhil.de
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+  - hosts:
+      - roms.jackhil.de
+    secretName: jackhil.de-cert
