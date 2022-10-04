@@ -169,6 +169,12 @@ flexget_config:
       - Hataraku Maou-sama S2
       - Shadows House S2
       - Lycoris Recoil
+      - Chainsaw Man
+      - Mob Psycho 100 III
+      - Fumetsu no Anata e S2
+      - Tensei shitara Ken Deshita
+      - Urusei Yatsura
+      - "BLEACH: Sennen Kessen-hen"
       rtorrent_magnet: /mva
   schedules:
   - tasks: '*'
