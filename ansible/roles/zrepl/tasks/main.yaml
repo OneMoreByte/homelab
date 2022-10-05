@@ -4,6 +4,7 @@
   ansible.builtin.systemd:
     name: zrepl
     state: stopped
+  ignore_errors: true
 
 - name: add zrepl repo
   become: true

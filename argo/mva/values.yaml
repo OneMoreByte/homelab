@@ -170,11 +170,12 @@ flexget_config:
       - Shadows House S2
       - Lycoris Recoil
       - Chainsaw Man
-      - Mob Psycho 100 III
+      - Mob Psycho 100 S3
       - Fumetsu no Anata e S2
       - Tensei shitara Ken Deshita
       - Urusei Yatsura
-      - "BLEACH: Sennen Kessen-hen"
+#      - "BLEACH: Sennen Kessen-hen"
+      - Do It Yourself!!
       rtorrent_magnet: /mva
   schedules:
   - tasks: '*'
@@ -272,6 +273,11 @@ mva_config:
       seasons:
         '1':
           alias: ''
+          episodes:
+          - 1
+          - 99
+        '2':
+          alias: 'Fumetsu no Anata e S2'
           episodes:
           - 1
           - 99
@@ -878,6 +884,41 @@ mva_config:
           - 1
           - 99
     Lycoris Recoil:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Chainsaw Man:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Mob Psycho 100:
+      seasons:
+        '3':
+          alias: 'Mob Psycho 100 S3'
+          episodes:
+          - 1
+          - 99
+    Tensei shitara Ken Deshita:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Urusei Yatsura:
+      seasons:
+        '1':
+          alias: ''
+          episodes:
+          - 1
+          - 99
+    Do It Yourself!!:
       seasons:
         '1':
           alias: ''
