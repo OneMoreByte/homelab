@@ -53,4 +53,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ include "mva.fullname" . }}-configs
+            name: {{ include "jmusicbot.fullname" . }}-configs
