@@ -86,5 +86,5 @@ bot_config: |
   token = MTAyNzM4NjI4NjU1MTYwMTE2NA.GjSw-l.XFxJdMSsqKoiRNNkaK26VSPV4h6QlbS9ICcaqU
   owner = 194635347739672577
   prefix = "!"
-  game = "Deploying MDE:"
+  game = "MDE from cart"
   stayinchannel = true
