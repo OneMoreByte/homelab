@@ -413,7 +413,12 @@ mva_config:
           alias: Boku no Hero Academia
           episodes:
           - 89
+          - 113
+        '6':
+          alias: Boku no Hero Academia
+          episodes:
           - 114
+          - 127
     Nami yo Kiitekure:
       seasons:
         '1':
