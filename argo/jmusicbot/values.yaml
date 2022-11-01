@@ -87,4 +87,3 @@ bot_config: |
   owner = 194635347739672577
   prefix = "!"
   game = "MDE from cart"
-  stayinchannel = true
