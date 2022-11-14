@@ -5,6 +5,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: mc-router
+  namespace: game-svcs
 roleRef:
   kind: ClusterRole
   name: services-watcher
