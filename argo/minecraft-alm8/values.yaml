@@ -37,7 +37,7 @@ minecraft:
   livenessProbe:
     command:
       - mc-health
-    initialDelaySeconds: 30
+    initialDelaySeconds: 600
     periodSeconds: 5
     failureThreshold: 20
     successThreshold: 1
@@ -45,7 +45,7 @@ minecraft:
   readinessProbe:
     command:
       - mc-health
-    initialDelaySeconds: 30
+    initialDelaySeconds: 600
     periodSeconds: 5
     failureThreshold: 20
     successThreshold: 1
