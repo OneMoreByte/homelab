@@ -28,9 +28,9 @@ grafana:
     #     serviceName: ssl-redirect
     #     servicePort: use-annotation
     tls:
-        - hosts:
-            - auth.jackhil.de
-          secretName: jackhil.de-cert
+      - hosts:
+          - grafana.jackhil.de
+        secretName: jackhil.de-cert
 
 
 #  extraSecretMounts:
