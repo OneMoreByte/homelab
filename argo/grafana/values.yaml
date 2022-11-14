@@ -35,12 +35,6 @@ grafana:
         secretName: jackhil.de-cert
 
 
-#  extraSecretMounts:
-#    - name: keycloak-client-secret
-#      secretName: grafana-keycloak-client-secret
-#      defaultMode: 0440
-#      mountPath: /etc/secrets/grafana-oauth
-#      readOnly: true
   grafana.ini:
     server:
       domain: "grafana.jackhil.de"

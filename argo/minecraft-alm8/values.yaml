@@ -311,7 +311,8 @@ minecraft:
 
   deploymentAnnotations: {}
 
-  serviceAnnotations: {}
+  serviceAnnotations:
+    mc-router.itzg.me/externalServerName: atm8.jackhil.de
 
   rconServiceAnnotations: {}
 
