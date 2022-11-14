@@ -1,54 +1,58 @@
-persistence:
-  type: pvc
-  enabled: true
-  storageClassName: nfs-client
-  accessModes:
-    - ReadWriteOnce
-  size: 10Gi
-  # annotations: {}
-  finalizers:
-    - kubernetes.io/pvc-protection
-  # subPath: ""
-  # existingClaim:
-
-ingress:
-  enabled: true
-  # Values can be templated
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  labels: {}
-  path: /
-  hosts:
-    - grafana.jackhil.de
-  ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
-  extraPaths: []
-  # - path: /*
-  #   backend:
-  #     serviceName: ssl-redirect
-  #     servicePort: use-annotation
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-extraSecretMounts:
-  - name: keycloak-client-secret
-    secretName: grafana-keycloak-client-secret
-    defaultMode: 0440
-    mountPath: /etc/secrets/grafana-oauth
-    readOnly: true
-grafana.ini:
-  server:
-    domain: "grafana.jackhil.de"
-    root_url: "https://grafana.jackhil.de"
-  auth.generic_oauth:
+grafana:
+  persistence:
+    type: pvc
     enabled: true
-    oauth_name: "Login Keycloak"
-    scopes: "openid profile email"
-    allow_sign_up: true
-    client_id: grafana.jackhil.de
-    client_secret: "$__file{/etc/secrets/grafana-oauth/client_secret}"
-    auth_url: "https://auth.jackhil.de/auth/realms/jsckland/protocol/openid-connect/auth"
-    token_url: "https://auth.jackhil.de/auth/realms/jsckland/protocol/openid-connect/token"
-    api_url: "https://auth.jackhil.de/auth/realms/jsckland/protocol/openid-connect/userinfo"
-    role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
+    # annotations: {}
+    finalizers:
+      - kubernetes.io/pvc-protection
+    # subPath: ""
+    # existingClaim:
+
+  ingress:
+    enabled: true
+    # Values can be templated
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    labels: {}
+    path: /
+    hosts:
+      - grafana.jackhil.de
+    ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
+    extraPaths: []
+    # - path: /*
+    #   backend:
+    #     serviceName: ssl-redirect
+    #     servicePort: use-annotation
+    tls:
+        - hosts:
+            - auth.jackhil.de
+          secretName: jackhil.de-cert
+
+
+#  extraSecretMounts:
+#    - name: keycloak-client-secret
+#      secretName: grafana-keycloak-client-secret
+#      defaultMode: 0440
+#      mountPath: /etc/secrets/grafana-oauth
+#      readOnly: true
+  grafana.ini:
+    server:
+      domain: "grafana.jackhil.de"
+      root_url: "https://grafana.jackhil.de"
+    auth.generic_oauth:
+      enabled: true
+      oauth_name: "Login Keycloak"
+      scopes: "openid profile email"
+      allow_sign_up: false
+      client_id: grafana.jackhil.de
+      client_secret: "oz5SS0HZFokUEnARC9rAmQiLAmEFXVPo"
+      auth_url: "https://auth.jackhil.de/auth/realms/master/protocol/openid-connect/auth"
+      token_url: "https://auth.jackhil.de/auth/realms/master/protocol/openid-connect/token"
+      api_url: "https://auth.jackhil.de/auth/realms/master/protocol/openid-connect/userinfo"
+      role_attribute_path: "contains(groups[*], 'GrafanaAdmin') && 'Admin' || contains(groups[*], 'GrafanaEditor') && 'Editor' || 'Viewer'"
+
+

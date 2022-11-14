@@ -1,0 +1,12 @@
+
+apiVersion: v2
+name: factorio
+type: application
+version: 0.0.1
+sources:
+  - https://artifacthub.io/packages/helm/k8s-at-home/factorio
+dependencies:
+  - name: factorio
+    version: 1.2.2
+    repository: "https://k8s-at-home.com/charts/"
+
