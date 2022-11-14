@@ -219,7 +219,7 @@ longhorn:
     #   certificate:
 
   # Configure a pod security policy in the Longhorn namespace to allow privileged pods
-  enablePSP: true
+  enablePSP: false
 
   ## Specify override namespace, specifically this is useful for using longhorn as sub-chart
   ## and its release namespace is not the `longhorn-system`
