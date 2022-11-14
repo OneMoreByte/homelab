@@ -49,7 +49,7 @@ grafana:
       enabled: true
       oauth_name: "Login Keycloak"
       scopes: "openid profile email"
-      allow_sign_up: false
+      allow_sign_up: true
       client_id: grafana
       client_secret: "oz5SS0HZFokUEnARC9rAmQiLAmEFXVPo"
       auth_url: "https://auth.jackhil.de/auth/realms/master/protocol/openid-connect/auth"
