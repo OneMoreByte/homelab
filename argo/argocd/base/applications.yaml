@@ -489,7 +489,8 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: minecraft-router
+  namespace: argocd
 spec:
   project: default
   source:
@@ -503,4 +504,3 @@ spec:
     automated: {}
     syncOptions:
       - CreateNamespace=true
----
