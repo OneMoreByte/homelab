@@ -65,6 +65,7 @@ node-red:
       enabled: true
       mountPath: /data
       accessMode: ReadWriteOnce
+      size: 8Gi
 #    config:
 #      enabled: true
 #      mountPath: /data/config.js
