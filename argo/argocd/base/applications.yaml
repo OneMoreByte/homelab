@@ -504,3 +504,128 @@ spec:
     automated: {}
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: esphome
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/esphome/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: esphome
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: home-automation
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hass
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/hass/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: hass
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: home-automation
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: influxdb
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/influxdb/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: influxdb
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: home-automation
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mqtt
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/mqtt/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: mqtt
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: home-automation
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: node-red
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/node-red/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: node-red
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: home-automation
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

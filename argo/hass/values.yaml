@@ -10,7 +10,7 @@ home-assistant:
     repository: ghcr.io/home-assistant/home-assistant
     # -- image tag
     # @default -- chart.appVersion
-    tag:
+    tag: 2022.11
     # -- image pull policy
     pullPolicy: IfNotPresent
 
@@ -18,7 +18,7 @@ home-assistant:
   # @default -- See below
   env:
     # -- Set the container timezone
-    TZ: UTC
+    TZ: "America/Chicago"
 
   # -- Configures service settings for the chart. Normally this does not need to be modified.
   # @default -- See values.yaml
@@ -33,20 +33,19 @@ home-assistant:
     # @default -- See values.yaml
     main:
       enabled: true
-      primary: true
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
       labels: {}
       hosts:
-        - host: plex.jackhil.de
+        - host: home.jackhil.de
           paths:
             - path: /
               pathType: Prefix
       tls:
       - hosts:
-         - plex.jackhil.de
+         - home.jackhil.de
         secretName: jackhil.de-cert
 
   # -- Enable devices to be discoverable
@@ -63,7 +62,7 @@ home-assistant:
   # @default -- See values.yaml
   persistence:
     config:
-      enabled: false
+      enabled: true
     # -- Configure a hostPathMount to mount a USB device in the container.
     # @default -- See values.yaml
     usb:
@@ -91,16 +90,16 @@ home-assistant:
   #    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
   # @default -- See values.yaml
   postgresql:
-    enabled: false
+    enabled: true
     image:
       repository: bitnami/postgresql
       tag: 14.1.0
     postgresqlUsername: home-assistant
-    postgresqlPassword: home-assistant-pass
+    postgresqlPassword: "7xZ4Zg66lu*DYpHEzyO*YF"
     postgresqlDatabase: home-assistant
     persistence:
       primary:
-        enabled: false
+        enabled: true
         # storageClass: ""
 
   # -- Enable and configure influxdb database subchart under this key.
@@ -163,3 +162,4 @@ home-assistant:
       volumeMounts:
       - name: config
         mountPath: /data/config
+

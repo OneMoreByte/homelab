@@ -10,7 +10,7 @@ node-red:
     repository: nodered/node-red
     # -- image tag
     # @default -- chart.appVersion
-    tag:
+    tag: 2.2.3-12
     # -- image pull policy
     pullPolicy: IfNotPresent
 
@@ -27,7 +27,7 @@ node-red:
     NODE_RED_ENABLE_SAFE_MODE:
     # -- Location of the flows configuration file.
     # If you set `FLOWS: ""` then the flow file can be set via the `flowFile` property in the `settings.js` file.
-    FLOWS: flows.json
+    FLOWS: ""
 
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
@@ -41,11 +41,29 @@ node-red:
     # -- Enable and configure ingress settings for the chart under this key.
     # @default -- See values.yaml
     main:
-      enabled: false
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
+      labels: {}
+      hosts:
+        - host: red.jackhil.de
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+      - hosts:
+         - red.jackhil.de
+        secretName: jackhil.de-cert
+
 
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
   persistence:
     data:
-      enabled: false
+      enabled: true
       mountPath: /data
+#    config:
+#      enabled: true
+#      mountPath: /data/config.js
