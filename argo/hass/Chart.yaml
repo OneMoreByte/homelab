@@ -6,5 +6,5 @@ sources:
   - https://artifacthub.io/packages/helm/k8s-at-home/home-assistant
 dependencies:
   - name: home-assistant
-    version: 6.4.3
+    version: 13.4.2
     repository: "https://k8s-at-home.com/charts/"

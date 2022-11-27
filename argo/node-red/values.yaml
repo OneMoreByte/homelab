@@ -64,6 +64,7 @@ node-red:
     data:
       enabled: true
       mountPath: /data
+      accessMode: ReadWriteOnce
 #    config:
 #      enabled: true
 #      mountPath: /data/config.js
