@@ -415,7 +415,7 @@ influxdb:
     service:
       ## @param influxdb.service.type Kubernetes service type (`ClusterIP`, `NodePort` or `LoadBalancer`)
       ##
-      type: ClusterIP
+      type: LoadBalancer
       ## @param influxdb.service.ports.http InfluxDB&trade; HTTP port
       ## @param influxdb.service.ports.rpc InfluxDB&trade; RPC port
       ##

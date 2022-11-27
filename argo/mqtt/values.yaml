@@ -18,13 +18,13 @@ mosquitto:
   # @default -- See values.yaml
   service:
     main:
+      type: LoadBalancer
       ports:
         http:
           enabled: false
         mqtt:
           enabled: true
           port: 1883
-          type: LoadBalancer
 
   auth:
     # -- By enabling this, `allow_anonymous` gets set to `false` in the mosquitto config.
