@@ -7,6 +7,6 @@ sources:
   - https://artifacthub.io/packages/helm/k8s-at-home/rtorrent-flood
 dependencies:
   - name: rtorrent-flood
-    version: 9.3.2
+    version: 9.4.2
     repository: "https://k8s-at-home.com/charts/"
 
