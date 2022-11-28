@@ -5,7 +5,7 @@ calibre:
     # -- image pull policy
     pullPolicy: IfNotPresent
     # -- image tag
-    tag: 5.37.0
+    tag: 5.44.0
 
   # -- environment variables. See more environment variables in the [calibre-web documentation](https://github.com/linuxserver/docker-calibre-web#parameters).
   # @default -- See below
