@@ -34,82 +34,6 @@ spec:
     syncOptions:
       - CreateNamespace=true
 ---
-
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: jenkins
-  namespace: argocd
-spec:
-  project: default
-  source:
-    path: argo/jenkins/
-    repoURL: git@github.com:OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: jenkins
-      valueFiles:
-      - values.yaml
-  destination:
-    name: wailord.jsck.network
-    namespace: jenkins
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: calibre-web
-  namespace: argocd
-spec:
-  project: default
-  source:
-    path: argo/calibre-web/
-    repoURL: git@github.com:OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: calibre-web
-      valueFiles:
-      - values.yaml
-  destination:
-    name: wailord.jsck.network
-    namespace: calibre-web
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: calibre
-  namespace: argocd
-spec:
-  project: default
-  source:
-    path: argo/calibre/
-    repoURL: git@github.com:OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: calibre
-      valueFiles:
-      - values.yaml
-  destination:
-    name: wailord.jsck.network
-    namespace: calibre-web
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -288,31 +212,6 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: searx
-  namespace: argocd
-spec:
-  project: default
-  source:
-    path: argo/searx/
-    repoURL: git@github.com:OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: searx
-      valueFiles:
-      - values.yaml
-  destination:
-    name: wailord.jsck.network
-    namespace: svcs
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
   name: keycloak
   namespace: argocd
 spec:
@@ -348,31 +247,6 @@ spec:
     targetRevision: "HEAD"
     helm:
       releaseName: tuner
-      valueFiles:
-      - values.yaml
-  destination:
-    name: wailord.jsck.network
-    namespace: svcs
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: roms-sftp
-  namespace: argocd
-spec:
-  project: default
-  source:
-    path: argo/roms-sftp/
-    repoURL: git@github.com:OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: roms-sftp
       valueFiles:
       - values.yaml
   destination:
