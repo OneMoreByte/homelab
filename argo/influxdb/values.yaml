@@ -1030,7 +1030,7 @@ influxdb:
         image:
           registry: docker.io
           repository: bitnami/aws-cli
-          tag: 2.4.7-debian-10-r4
+          tag: 2.7.4-debian-10-r4
           digest: ""
           ## Specify a imagePullPolicy. Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
           ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images
