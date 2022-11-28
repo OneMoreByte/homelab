@@ -6,5 +6,5 @@ sources:
   - https://github.com/metallb/metallb
 dependencies:
   - name: metallb
-    version: 0.13.4
+    version: 0.13.7
     repository: "https://metallb.github.io/metallb"
