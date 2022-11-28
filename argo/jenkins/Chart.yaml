@@ -6,6 +6,6 @@ sources:
   - https://artifacthub.io/packages/helm/jenkinsci/jenkins
 dependencies:
   - name: jenkins
-    version: v3.11.2
+    version: 4.2.15
     appVersion: v2.319.2
     repository: "https://charts.jenkins.io"
