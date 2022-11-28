@@ -96,9 +96,12 @@ home-assistant:
     image:
       repository: bitnami/postgresql
       tag: 15.1.0
-    postgresqlUsername: home-assistant
-    postgresqlPassword: "7xZ4Zg66lu*DYpHEzyO*YF"
-    postgresqlDatabase: home-assistant
+  global:
+    postgresql:
+      auth:
+        username: home-assistant
+        password: "7xZ4Zg66lu*DYpHEzyO*YF"
+        database: home-assistant
     persistence:
       primary:
         enabled: true
