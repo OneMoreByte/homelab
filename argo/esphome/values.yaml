@@ -11,7 +11,7 @@ esphome:
     # -- image pull policy
     pullPolicy: IfNotPresent
     # -- image tag
-    tag: 1.18.0
+    tag: 1.20.4
 
   # -- environment variables.
   # @default -- See below
