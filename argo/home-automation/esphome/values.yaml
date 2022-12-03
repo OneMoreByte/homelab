@@ -60,3 +60,4 @@ esphome:
   persistence:
     config:
       enabled: true
+      size: 16Gi

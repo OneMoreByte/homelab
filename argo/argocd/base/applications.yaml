@@ -42,7 +42,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/flood/
+    path: argo/media-svcs/flood/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -67,7 +67,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/plex/
+    path: argo/media-svcs/plex/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -92,7 +92,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/jellyfin/
+    path: argo/media-svcs/jellyfin/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -117,7 +117,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/mva/
+    path: argo/media-svcs/mva/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -242,7 +242,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/tuner/
+    path: argo/svcs/tuner/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -267,7 +267,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/jmusicbot/
+    path: argo/svcs/jmusicbot/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -292,7 +292,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/factorio/
+    path: argo/game-svcs/factorio/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -317,7 +317,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/grafana/
+    path: argo/svcs/grafana/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -342,7 +342,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/minecraft-alm8/
+    path: argo/game-svcs/minecraft-alm8/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -369,7 +369,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:OneMoreByte/homelab.git'
-    path: argo/minecraft-router
+    path: argo/game-svcs/minecraft-router
     targetRevision: "HEAD"
   destination:
     namespace: game-svcs
@@ -387,7 +387,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/esphome/
+    path: argo/home-automation/esphome/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -412,7 +412,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/hass/
+    path: argo/home-automation/hass/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -437,7 +437,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/influxdb/
+    path: argo/home-automation/influxdb/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -462,7 +462,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/mqtt/
+    path: argo/home-automation/mqtt/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -487,7 +487,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/node-red/
+    path: argo/home-automation/node-red/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
