@@ -10,7 +10,7 @@
       "automerge": true,
       "automergeSchedule": [
         "after 11pm",
-        "before 5am",
+        "before 5am"
       ],
       "automergeType": "pr",
       "platformAutomerge": true
