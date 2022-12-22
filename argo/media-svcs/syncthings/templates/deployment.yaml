@@ -64,4 +64,4 @@ spec:
       volumes:
       - name: syncthing-data
         hostPath:
-          path: "{{ ".Values.hostPath" }}"
+          path: "{{ .Values.hostPath }}"
