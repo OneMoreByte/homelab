@@ -1,9 +1,17 @@
 nginx:
   # This is stolen and roughly modifed from 
   # https://github.com/th33xitus/kiauh/blob/master/resources/fluidd
+  # I also needed this 
+  # https://futurestud.io/tutorials/nginx-how-to-fix-unknown-connection_upgrade-variable
   serverBlock: |-
     upstream big_voron {
       server 192.168.60.133;
+    }
+
+
+    map $http_upgrade $connection_upgrade {  
+        default upgrade;
+        ''      close;
     }
 
     server {
