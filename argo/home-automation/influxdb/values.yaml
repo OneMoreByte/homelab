@@ -763,7 +763,7 @@ influxdb:
     ## @param persistence.accessModes Access mode of data volume
     ##
     accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany
     ## @param persistence.size Size of data volume
     ##
     size: 64Gi
