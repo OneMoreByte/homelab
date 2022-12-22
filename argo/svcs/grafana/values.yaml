@@ -3,7 +3,7 @@ grafana:
     type: pvc
     enabled: true
     accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany
     size: 10Gi
     # annotations: {}
     finalizers:
