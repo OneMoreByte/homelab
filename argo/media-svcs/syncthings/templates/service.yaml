@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "syncthings.fullname" . }}
+  labels:
+    {{- include "syncthings.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: webui
+      protocol: TCP
+      name: webui
+  selector:
+    {{- include "syncthings.selectorLabels" . | nindent 4 }}

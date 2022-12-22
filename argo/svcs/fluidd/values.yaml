@@ -1,0 +1,33 @@
+nginx:
+  serverBlock: |-
+    server {
+      server_name fluidd;
+      listen 8080;
+
+      #channel by number
+
+      location ~ "/tv/([0-9]{1,2}.[0-9]{1,2})$" {
+        proxy_pass http://192.168.60.133:5004/auto/v$1;
+      }
+
+    }
+  containerPorts:
+    http: 8080
+  service:
+    type: NodePort
+
+ingress:
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+  labels: {}
+  hosts:
+    - host: fluidd.jackhil.de
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+  - hosts:
+      - fluidd.jackhil.de
+    secretName: jackhil.de-cert
