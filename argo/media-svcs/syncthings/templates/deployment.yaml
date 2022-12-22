@@ -38,11 +38,11 @@ spec:
           {{- end }}
           livenessProbe:
             httpGet:
-              path: /
+              path: /rest/noauth/health
               port: webui
           readinessProbe:
             httpGet:
-              path: /
+              path: /rest/noauth/health
               port: webui
           volumeMounts:
           - name: syncthing-data
