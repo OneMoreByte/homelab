@@ -70,4 +70,4 @@ spec:
       {{- end }}
       volumes:
       - name: syncthing-data
-        path: {{ include "syncthings.hostPath" . }}
+        path: {{ include ".Values.hostPath" . }}
