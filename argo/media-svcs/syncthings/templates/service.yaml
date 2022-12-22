@@ -1,15 +1,21 @@
+{{- $fullName:= include "syncthings.fullname" . -}}
+{{- $labels:= include "syncthings.labels" . -}}
+{{- $selector:= include "syncthings.selectorLabels" . -}}
+{{- range $name, $svcData := .Values.services}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "syncthings.fullname" . }}
+  name: "{{ $fullName }}-{{ $name }}"
   labels:
-    {{- include "syncthings.labels" . | nindent 4 }}
+    {{- $labels | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ $svcData.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: webui
-      protocol: TCP
-      name: webui
+    - port: {{ $svcData.port }}
+      targetPort: {{ $name }}
+      protocol: {{ $svcData.protocol }}
+      name: {{ $name }}
   selector:
-    {{- include "syncthings.selectorLabels" . | nindent 4 }}
+    {{- $selector | nindent 4 }}
+---
+{{- end }}

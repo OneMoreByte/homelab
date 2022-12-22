@@ -30,9 +30,24 @@ podSecurityContext:
 
 securityContext: {}
 
-service:
-  type: ClusterIP
-  port: 80
+services:
+  webui:
+    port: 8384
+    protocol: TCP
+    type: ClusterIP
+  tcptransfer:
+    port: 22000
+    protocol: TCP
+    type: ClusterIP
+  quictransfer:
+    port: 22000
+    protocol: UDP
+    type: ClusterIP
+  localdiscovery:
+    port: 21027
+    protocol: UDP
+    type: ClusterIP
+
 
 
 

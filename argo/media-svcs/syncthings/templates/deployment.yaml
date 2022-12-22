@@ -31,18 +31,11 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: webui
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
-            - name: tcptransfer
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
-            - name: quictransfer
-              containerPort: {{ .Values.service.port }}
-              protocol: UDP
-            - name: localdiscovery
-              containerPort: {{ .Values.service.port }}
-              protocol: UDP
+          {{- range $name, $svcData := .Values.services}}
+            - name: {{ $name }}
+              containerPort: {{ $svcData.port }}
+              protocol: {{ $svcData.protocol }}
+          {{- end }}
           livenessProbe:
             httpGet:
               path: /
