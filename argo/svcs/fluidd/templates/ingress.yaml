@@ -1,5 +1,5 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "tuner.fullname" . -}}
+{{- $fullName := include "fluidd-redirect.fullname" . -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
@@ -16,7 +16,7 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    {{- include "tuner.labels" . | nindent 4 }}
+    {{- include "fluidd-redirect.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -47,7 +47,7 @@ spec:
             {{- end }}
             backend:
               service:
-                name: tuner-nginx
+                name: fluidd-redirect-nginx
                 port:
                   number: 80
           {{- end }}

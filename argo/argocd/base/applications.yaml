@@ -503,3 +503,54 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: syncthings
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/media-svcs/syncthings
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: syncthings
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: media-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluidd
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/svcs/fluidd
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: fluidd-redirect
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  

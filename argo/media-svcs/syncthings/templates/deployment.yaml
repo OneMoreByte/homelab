@@ -54,6 +54,9 @@ spec:
             httpGet:
               path: /
               port: webui
+          volumeMounts:
+          - name: syncthing-data
+            mountPath: /var/syncthing
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -68,3 +71,6 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+      - name: syncthing-data
+        path: {{ include "syncthings.hostPath" . }}
