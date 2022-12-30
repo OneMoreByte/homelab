@@ -930,6 +930,12 @@ mva_config:
           episodes:
           - 1
           - 99
+    Bocchi the Rock!:
+      seasons:
+        '1':
+          episodes:
+          - 1
+          - 99
   name: producers
   plex_dir: /plex-files/Anime/MKV
   torrent_dir: /mva
