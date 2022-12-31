@@ -55,7 +55,7 @@ pod-gateway:
 
       env:
       - name:  VPN_SERVICE_PROVIDER
-        value: mulvad
+        value: mullvad
       - name:  VPN_TYPE
         value: wireguard
       - name:  VPN_INTERFACE
