@@ -9,10 +9,8 @@ spec:
     - to:
       - ipBlock:
           cidr: 10.233.0.0/16
-    - to:
       - ipBlock:
           cidr: 192.168.0.0/16
-    - to:
       - ipBlock:
           cidr: 169.254.25.10/32
   ingress:
