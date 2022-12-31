@@ -24,7 +24,7 @@ pod-gateway:
     # -- If VPN_BLOCK_OTHER_TRAFFIC is true, allow VPN traffic over this port
     #VPN_TRAFFIC_PORT: *vpn_port
     # -- Traffic to these IPs will be send through the K8S gateway
-    VPN_LOCAL_CIDRS: "10.233.0.0/16 192.168.0.0/16"
+    VPN_LOCAL_CIDRS: "10.233.0.0/16 192.168.0.0/16 169.254.25.10/32"
     # -- IPs not sent to the POD gateway but to the default K8S.
 
 
@@ -112,11 +112,19 @@ pod-gateway:
           - to:
             - ipBlock:
                 cidr: 10.233.0.0/16
+            - ipBlock:
+                cidr: 192.168.0.0/16
+            - ipBlock:
+                cidr: 169.254.25.10/32
         ingress:
         - from:
           # Only allow ingress from K8S
           - ipBlock:
               cidr: 10.233.0.0/16
+          - ipBlock:
+              cidr: 192.168.0.0/16
+          - ipBlock:
+              cidr: 169.254.25.10/32
 
   routed_namespaces:
   - routed-svcs
