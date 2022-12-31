@@ -562,7 +562,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/routed-svcs/gateway
+    path: argo/routed-svcs/gateway-check
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -572,6 +572,31 @@ spec:
   destination:
     name: wailord.jsck.network
     namespace: routed-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gateway
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/routed-svcs-gateway/gateway
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: gateway
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: routed-svcs-gateway
   syncPolicy:
     automated:
       prune: true
