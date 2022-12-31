@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mulvad-creds
+type: Opaque
+data:
+  WIREGUARD_PRIVATE_KEY: MEtDMnBNZ2dpQjNjQSsxY0dBVUlnK3VvTWQrRThwR2MyT2ZOMHk5VkZsVT0=
+  WIREGUARD_ADDRESSES: MTAuNjcuMjEwLjI0MS8zMixmYzAwOmJiYmI6YmJiYjpiYjAxOjo0OmQyZjAvMTI4

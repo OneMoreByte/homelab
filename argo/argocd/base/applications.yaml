@@ -553,4 +553,28 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
-  
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluidd
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/routed-svcs/gateway
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: gateway
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: routed-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
