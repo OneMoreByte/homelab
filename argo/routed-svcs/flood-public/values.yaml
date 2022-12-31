@@ -13,6 +13,8 @@ rtorrent-flood:
     #   - name: config
     #     mountPath: /config
 
+  hostname: flood-public
+
   image:
     # -- image repository
     repository: jesec/rtorrent-flood

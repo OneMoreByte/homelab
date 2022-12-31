@@ -8,7 +8,7 @@ pod-gateway:
       repository: ghcr.io/angelnu/gateway-admision-controller
       tag: v3.7.0
 
-  #DNS: 10.64.0.1
+  DNS: 10.64.0.1
 
   securityContext:
     privileged: true
@@ -42,14 +42,14 @@ pod-gateway:
 
   # -- settings to expose ports, usually through a VPN provider.
   # NOTE: if you change it you will need to manually restart the gateway POD
- # publicPorts:
- # - hostname: flood-rtorrent-flood-bittorrent
- #    IP: 10
- #    ports:
- #    - type: udp
- #      port: 56093
- #    - type: tcp
- #      port: 56093
+  publicPorts:
+  - hostname: flood-public
+    IP: 13
+    ports:
+    - type: udp
+      port: 56093
+    - type: tcp
+      port: 56093
 
   addons:
     vpn:
@@ -101,15 +101,22 @@ pod-gateway:
         enabled: true
         egress:
           - to:
+            # Run any traffic out through the vpn
             - ipBlock:
                 cidr: 0.0.0.0/0
             ports:
             # VPN traffic
             - port: &vpn_port 1637
               protocol: UDP
+            # Unless it's cluster traffic
           - to:
             - ipBlock:
                 cidr: 10.233.0.0/16
+        ingress:
+        - from:
+          # Only allow ingress from K8S
+          - ipBlock:
+              cidr: 10.233.0.0/16
 
   routed_namespaces:
   - routed-svcs
