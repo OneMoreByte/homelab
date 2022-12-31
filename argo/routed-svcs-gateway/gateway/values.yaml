@@ -98,7 +98,7 @@ pod-gateway:
         failureThreshold: 3
 
       networkPolicy:
-        enabled: true
+        enabled: false
         egress:
           - to:
             # Run any traffic out through the vpn
