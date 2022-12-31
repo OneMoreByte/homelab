@@ -108,23 +108,7 @@ pod-gateway:
             # VPN traffic
             - port: &vpn_port 1637
               protocol: UDP
-            # Unless it's cluster traffic
-          - to:
-            - ipBlock:
-                cidr: 10.233.0.0/16
-            - ipBlock:
-                cidr: 192.168.0.0/16
-            - ipBlock:
-                cidr: 169.254.25.10/32
-        ingress:
-        - from:
-          # Only allow ingress from K8S
-          - ipBlock:
-              cidr: 10.233.0.0/16
-          - ipBlock:
-              cidr: 192.168.0.0/16
-          - ipBlock:
-              cidr: 169.254.25.10/32
+
 
   routed_namespaces:
   - routed-svcs
