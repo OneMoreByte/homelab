@@ -10,6 +10,12 @@ pod-gateway:
 
   DNS: 10.64.0.1
 
+  securityContext:
+    privileged: true
+    capabilities:
+      add:
+      - NET_ADMIN
+
   settings:
     # -- If using a VPN, interface name created by it
     VPN_INTERFACE: wg0
@@ -73,6 +79,12 @@ pod-gateway:
       envFrom:
         - secretRef:
             name: mulvad-creds
+
+      securityContext:
+        privileged: true
+        capabilities:
+          add:
+          - NET_ADMIN
 
       livenessProbe:
         exec:
