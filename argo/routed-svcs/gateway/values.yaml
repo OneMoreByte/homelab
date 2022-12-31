@@ -38,6 +38,7 @@ pod-gateway:
     # -- DNS queries to these domains will be resolved by K8S DNS instead of
     # the default (typcally the VPN client changes it)
     DNS_LOCAL_CIDRS: "local"
+    K8S_DNS: "10.64.0.1"
 
   # -- settings to expose ports, usually through a VPN provider.
   # NOTE: if you change it you will need to manually restart the gateway POD
