@@ -71,11 +71,11 @@ pod-gateway:
         value: Amsterdam
 
 # If we need to disable the firewall, this is how
-#        - name:  FIREWALL
-#          value: "off"
-# If we end up having DNS issues we can bypass with this
-#        - name:  DOT
-#          value: "off"
+      - name:  FIREWALL
+        value: "off"
+# If we end up having DNS issues we can bypass with this 
+      - name:  DOT
+        value: "off"
       
       envFrom:
         - secretRef:
