@@ -24,7 +24,7 @@ pod-gateway:
     # -- If VPN_BLOCK_OTHER_TRAFFIC is true, allow VPN traffic over this port
     #VPN_TRAFFIC_PORT: *vpn_port
     # -- Traffic to these IPs will be send through the K8S gateway
-    VPN_LOCAL_CIDRS: "10.233.0.0/16 192.168.0.0/16 169.254.25.10/32"
+    VPN_LOCAL_CIDRS: "10.233.0.0/16 192.168.0.0/16"
     # -- IPs not sent to the POD gateway but to the default K8S.
 
 
@@ -69,8 +69,6 @@ pod-gateway:
         value: wg0
       - name: SERVER_CITIES
         value: Amsterdam
-      - name: DNS_ADDRESS
-        value: 1.1.1.1
 
 # If we need to disable the firewall, this is how
 #        - name:  FIREWALL
@@ -100,7 +98,7 @@ pod-gateway:
         failureThreshold: 3
 
       networkPolicy:
-        enabled: false
+        enabled: true
         egress:
           - to:
             # Run any traffic out through the vpn
