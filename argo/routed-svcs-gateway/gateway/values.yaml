@@ -8,7 +8,7 @@ pod-gateway:
       repository: ghcr.io/angelnu/gateway-admision-controller
       tag: v3.7.0
 
- # DNS: 10.64.0.1
+  DNS: 172.16.0.1
 
   securityContext:
     privileged: true
