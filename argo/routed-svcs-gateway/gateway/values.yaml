@@ -26,7 +26,7 @@ pod-gateway:
     # -- Traffic to these IPs will be send through the K8S gateway
     VPN_LOCAL_CIDRS: "10.233.0.0/16 192.168.0.0/16"
     # -- IPs not sent to the POD gateway but to the default K8S.
-
+    NOT_ROUTED_TO_GATEWAY_CIDRS: "10.233.0.0/16 169.254.0.0/16"
 
     # -- Vxlan ID to use
     VXLAN_ID: 42
