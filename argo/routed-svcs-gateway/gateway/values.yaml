@@ -69,6 +69,8 @@ pod-gateway:
         value: wg0
       - name: SERVER_CITIES
         value: Amsterdam
+      - name: DNS_ADDRESS
+        value: 1.1.1.1
 
 # If we need to disable the firewall, this is how
 #        - name:  FIREWALL
