@@ -67,13 +67,13 @@ rtorrent-flood:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       labels: {}
       hosts:
-        - host: flood.jackhil.de
+        - host: flood-public.jackhil.de
           paths:
             - path: /
               pathType: Prefix
       tls:
       - hosts:
-          - flood.jackhil.de
+          - flood-public.jackhil.de
         secretName: jackhil.de-cert
     ssl-redirect:
       enabled: true
@@ -82,7 +82,7 @@ rtorrent-flood:
         traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
       labels: {}
       hosts:
-        - host: flood.jackhil.de
+        - host: flood-public.jackhil.de
           paths:
             - path: /
               pathType: Prefix
@@ -98,7 +98,7 @@ rtorrent-flood:
     downloads:
       enabled: true
       type: hostPath
-      hostPath: /store/torrent/
+      hostPath: /store/torrent-public/
 
 
   # -- Minimal configuration provided from https://github.com/jesec/rtorrent/blob/master/doc/rtorrent.rc
@@ -116,11 +116,11 @@ rtorrent-flood:
     # or, on top of custom config: import = /etc/rtorrent/rtorrent.rc
 
     method.insert = cfg.basedir,  private|const|string, (cat,(fs.homedir),"/.local/share/rtorrent/")
-    method.insert = cfg.download, private|const|string, (cat,"/store/torrent/", "download/")
-    method.insert = cfg.logs,     private|const|string, (cat,"/store/torrent/","log/")
+    method.insert = cfg.download, private|const|string, (cat,"/store/torrent-public/", "download/")
+    method.insert = cfg.logs,     private|const|string, (cat,"/store/torrent-public/","log/")
     method.insert = cfg.logfile,  private|const|string, (cat,(cfg.logs),"rtorrent-",(system.time),".log")
     method.insert = cfg.session,  private|const|string, (cat,(cfg.basedir),".session/")
-    method.insert = cfg.watch,    private|const|string, (cat,"/store/torrent/","watch/")
+    method.insert = cfg.watch,    private|const|string, (cat,"/store/torrent-public/","watch/")
 
 
     # Create directories

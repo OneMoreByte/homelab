@@ -7,6 +7,17 @@ I wouldn't copy this if the reader is not myself reviewing how I did things. I d
 
 
 ## ZFS pool creation
+
+Get the drives. You can do it like this:
+
+```
+fdisk -l
+# Then use that info here
+ls -la /dev/disk/by-id/
+```
+
+In the past (Aug 2022) this is what I ran to create the pools:
+
 producers zfs hdd
 ```
 zpool create -f store \

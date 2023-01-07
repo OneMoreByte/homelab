@@ -933,6 +933,7 @@ mva_config:
     Bocchi the Rock!:
       seasons:
         '1':
+          alisa: ''
           episodes:
           - 1
           - 99
