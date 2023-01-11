@@ -149,7 +149,7 @@ rtorrent-flood:
     fs.mkdir = (cat,(cfg.watch),"/mva")
 
     # Drop to "$(cfg.watch)/start" to add torrent and start downloading
-    schedule2 = watch_mva, 10, 10, ((load.start_verbose, (cat, (cfg.watch), "start/*.torrent,d.custom1.set=/home/user/torrents/complete")))
+    schedule2 = watch_mva, 10, 10, ((load.start_verbose, (cat, (cfg.watch), "mva/*.torrent,d.custom1.set=/store/torrent-public/complete")))
     # Listening port for incoming peer traffic
     network.port_range.set = 56093-56093
 
