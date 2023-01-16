@@ -64,9 +64,9 @@ spec:
               port: http
           volumeMounts:
           - name: public-torrent-dir
-            mountPath: /torrent/public
+            mountPath: /torrents/public
           - name: private-torrent-dir
-            mountPath: /torrent/private
+            mountPath: /torrents/private
           - name: media-dir
             mountPath: /store/plex-files
           - name: config-yaml
