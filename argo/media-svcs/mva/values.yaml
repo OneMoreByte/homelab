@@ -98,16 +98,16 @@ flexget_config:
     plex_base_dir: "/store/plex-files"
     torrent_base_dir: "/torrents"
     plex_dirs:
-      anime: '{? plex_base_dir ?}/Anime/MKV'
-      shows: '{? plex_base_dir ?}/Shows/MKV'
-      movies: '{? plex_base_dir ?}/Movies/MKV'
+      anime: '/store/plex-files/Anime/MKV'
+      shows: '/store/plex-files/Shows/MKV'
+      movies: '/store/plex-files/Movies/MKV'
     torrent_dirs:
       public:
         watch_dir: "/torrents/public/watch/mva"
         complete_dir: "/torrents/public/complete"
       private:
         watch_dir: "/torrents/private/watch"
-        complete_dir: "/torrents/private/downloads/auto"
+        complete_dir: "/torrents/private/download/auto"
     discord_webhook: 'https://discord.com/api/webhooks/1002624119642267648/kW3New1lThMUept9isSMblCtuTDWC1ZtMas5sF7Vaawkr2ZhccGgN6TJUD4dZP_c4zdv'
     thetvdb:
       username: jsck
