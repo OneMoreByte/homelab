@@ -148,19 +148,20 @@ flexget_config:
     subsplease_add:
       rss: '{? rss_feeds["subsplease"] ?}'
       thetvdb_lookup: yes
-      configure_series:
-        from:
-          my_anime_list:
-            username: jsck
-            status:
-              - watching
-              - plan_to_watch
-            type: tv
       series:
+        - "High Card"
+        - "Mobile Suit Gundam - The Witch from Mercury"
+        - "Fumetsu no Anata e S2"
+        - "Urusei Yatsura"
         - "Vinland Saga S2"
         - "Bofuri"
         - "Kyokou Suiri"
+        - "Bungou Stray Dogs"
+        - "Isekai Nonbiri Nouka"
+        - "NieR Automata Ver1.1a"
+        - "Trigun Stampede"
         - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4"
+        - "Maou Gakuin no Futekigousha S2"
       notify:
         entries:
           message: |
@@ -188,6 +189,7 @@ flexget_config:
 
 
     morethantv_copy:
+      no_entries_ok: yes
       disable:
         - seen
       thetvdb_lookup: yes
@@ -201,14 +203,15 @@ flexget_config:
       notify:
         entries:
           message: |
-            Copying {{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id| default(series_id) }} to:
-            ```{? plex_dirs['shows'] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
+            Copying {{tvdb_series_name | default(series_name) | replace("/", "")}} - {{ tvdb_series_id| default(series_id) }} to:
+            ```{? plex_dirs['shows'] ?}/{{ tvdb_series_name | default(series_name) | replace("/", "")}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
           <<: *discord_webhook_show
       copy:
-        to: '{? plex_dirs["shows"] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}'
-        rename: '{{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
+        to: '{? plex_dirs["shows"] ?}/{{ tvdb_series_name | default(series_name) | replace("/", "")}}/Season {{tvdb_season | default(series_season) | pad(2)}}'
+        rename: '{{tvdb_series_name | default(series_name) | replace("/", "") }} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
 
     subsplease_move:
+      no_entries_ok: yes
       disable:
         - seen
       thetvdb_lookup: yes
@@ -234,12 +237,12 @@ flexget_config:
       notify:
         entries:
           message: |
-            Moving {{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id| default(series_id) }} to:
-            ```{? plex_dirs['anime'] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
+            Moving {{tvdb_series_name | default(series_name) | replace("/", "")}} - {{ tvdb_series_id| default(series_id) }} to:
+            ```{? plex_dirs['anime'] ?}/{{ tvdb_series_name | default(series_name) | replace("/", "")}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
           <<: *discord_webhook_show
       move:
-        to: '{? plex_dirs["anime"] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}'
-        rename: '{{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
+        to: '{? plex_dirs["anime"] ?}/{{ tvdb_series_name | default(series_name) | replace("/", "")}}/Season {{tvdb_season | default(series_season) | pad(2)}}'
+        rename: '{{tvdb_series_name | default(series_name) | replace("/", "")}} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
 
 
 
