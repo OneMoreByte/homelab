@@ -62,13 +62,6 @@ spec:
             httpGet:
               path: /
               port: http
-          env:
-            - name: FG_LOG_LEVEL
-              value: verbose
-            - name: PUID
-              value: '11337'
-            - name: PGID
-              value: '11337'
           volumeMounts:
           - name: public-torrent-dir
             mountPath: /torrent/public
@@ -80,6 +73,8 @@ spec:
             mountPath: /config-yaml
           - name: config
             mountPath: /config
+          command: ["flexget"]
+          args: ['-c', '/config/config.yml', '--loglevel', 'verbose', 'daemon', 'start', '--autoreload-config']
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
