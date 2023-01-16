@@ -156,6 +156,11 @@ flexget_config:
               - watching
               - plan_to_watch
             type: tv
+      series:
+        - "Vinland Saga S2"
+        - "Bofuri"
+        - "Kyokou Suiri"
+        - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4"
       notify:
         entries:
           message: |
