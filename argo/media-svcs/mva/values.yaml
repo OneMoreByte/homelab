@@ -103,8 +103,8 @@ flexget_config:
       movies: '{? plex_base_dir ?}/Movies/MKV'
     torrent_dirs:
       public:
-        watch_dir: "/torrents/public/watch/mva"
-        complete_dir: "/torrents/public/complete"
+        watch_dir: "/torrents/public/watch"
+        complete_dir: "/torrents/public/completed"
       private:
         watch_dir: "/torrents/private/watch"
         complete_dir: "/torrents/private/downloads/auto"
@@ -146,7 +146,7 @@ flexget_config:
 
   tasks:
     subsplease_add:
-      rss: '{? rss_feeds["subplease"] ?}'
+      rss: '{? rss_feeds["subsplease"] ?}'
       thetvdb_lookup: yes
       configure_series:
         from:
