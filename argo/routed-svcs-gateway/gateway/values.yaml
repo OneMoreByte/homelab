@@ -70,7 +70,7 @@ pod-gateway:
       - name: SERVER_CITIES
         value: Amsterdam
       - name: FIREWALL_VPN_INPUT_PORTS
-        value: 51820
+        value: 56093
 
 # If we need to disable the firewall, this is how
       - name:  FIREWALL
