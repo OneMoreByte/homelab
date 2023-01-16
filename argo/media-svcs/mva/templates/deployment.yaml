@@ -66,9 +66,9 @@ spec:
             - name: FG_LOG_LEVEL
               value: verbose
             - name: PUID
-              value: 11337
+              value: '11337'
             - name: PGID
-              value: 11337
+              value: '11337'
           volumeMounts:
           - name: public-torrent-dir
             mountPath: /torrent/public
