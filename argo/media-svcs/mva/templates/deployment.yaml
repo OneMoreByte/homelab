@@ -62,17 +62,24 @@ spec:
             httpGet:
               path: /
               port: http
+          env:
+            - name: FG_LOG_LEVEL
+              value: verbose
+            - name: PUID
+              value: 11337
+            - name: PGID
+              value: 11337
           volumeMounts:
-          - name: torrent-dir
-            mountPath: /mva
+          - name: public-torrent-dir
+            mountPath: /torrent/public
+          - name: private-torrent-dir
+            mountPath: /torrent/private
+          - name: media-dir
+            mountPath: /store/plex-files
           - name: config-yaml
             mountPath: /config-yaml
           - name: config
             mountPath: /config
-          - name: data
-            mountPath: /data  
-          command: ["flexget"]
-          args: ['daemon', 'start']
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -88,15 +95,25 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        - name: torrent-dir
-          persistentVolumeClaim:
-            claimName: {{ include "mva.fullname" . }}-torrent-pvc
         - name: config-yaml
           configMap:
             name: {{ include "mva.fullname" . }}-configs
         - name: config
           persistentVolumeClaim:
             claimName: {{ include "mva.fullname" . }}-config-pvc
-        - name: data
-          persistentVolumeClaim:
-            claimName: {{ include "mva.fullname" . }}-data-pvc
+        - name: public-torrent-dir
+          hostPath:
+            path: /store/torrent-public
+            type: Directory
+        - name: private-torrent-dir
+          hostPath:
+            path: /store/torrent
+            type: Directory
+        - name: media-dir
+          hostPath:
+            path: /store/plex-files
+            type: Directory
+        - name: metadata-dir
+          hostPath:
+            path: /store/meta
+            type: Directory

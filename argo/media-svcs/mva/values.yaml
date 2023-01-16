@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: docker.io/jsckh/mva
+  repository: wiserain/flexget:3.3.17
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -87,11 +87,158 @@ affinity:
           - bulk-datastore
 
 
+
 flexget_config:
   web_server:
     bind: 0.0.0.0
     port: 3000
     web_ui: yes
+
+  variables:
+    plex_base_dir: "/store/plex-files"
+    torrent_base_dir: "/torrents"
+    plex_dirs:
+      anime: '{? plex_base_dir ?}/Anime/MKV'
+      shows: '{? plex_base_dir ?}/Shows/MKV'
+      movies: '{? plex_base_dir ?}/Movies/MKV'
+    torrent_dirs:
+      public:
+        watch_dir: "/torrents/public/watch/mva"
+        complete_dir: "/torrents/public/complete"
+      private:
+        watch_dir: "/torrents/private/watch"
+        complete_dir: "/torrents/private/downloads/auto"
+    discord_webhook: 'https://discord.com/api/webhooks/1002624119642267648/kW3New1lThMUept9isSMblCtuTDWC1ZtMas5sF7Vaawkr2ZhccGgN6TJUD4dZP_c4zdv'
+    thetvdb:
+      username: jsck
+      account_id: FR1WAS9R0Q3ECOMX
+      api_key: 8ba8af3cdada63b2594be6a6e298428f
+    rss_feeds:
+      subsplease: 'https://subsplease.org/rss/?r=1080'
+      morethantv: 'https://www.morethantv.me/feeds.php?feed=torrents_all&user=35591&auth=bc57fffbec10ab271ff94df35bcb3399&passkey=met6q0xshpuo0nlitxoyciaz7b8me85r&authkey=f78acf3c0b53b84db57eeebabfeb4dc2'
+
+
+  templates:
+    anchors:
+      _discord_webhook_show: &discord_webhook_show
+        via:
+          - discord:
+              web_hook_url: '{? discord_webhook ?}'
+              username: 'mva'
+              embeds:
+              - title: "{{series_name}}"
+                description: ""
+                url: "{{tvdb_url}}"
+                color: 0x00FFFF
+                author:
+                  name: "mva"
+                  url: "https://github.com/onemorebyte/homelab"
+                  icon_url: "https://divedigital.id/wp-content/uploads/2022/07/1-Anya-Forger-HEH-Face.jpg"
+                fields:
+                  - name: "Episode Name:"
+                    value: "{{tvdb_ep_name|default('Unknown episode')}}"
+                    inline: True
+                  - name: "Episode Number"
+                    value: "{{tvdb_episode | default(series_episode) | default('<:CatShrug:757101278659739780>') }}"
+                image:
+                  url: "{{tvdb_ep_image | default('https://i.imgflip.com/j69nf.jpg')}}"
+
+
+  tasks:
+    subsplease_add:
+      rss: '{? rss_feeds["subplease"] ?}'
+      thetvdb_lookup: yes
+      configure_series:
+        from:
+          my_anime_list:
+            username: jsck
+            status:
+              - watching
+              - plan_to_watch
+            type: tv
+      notify:
+        entries:
+          message: |
+            Grabbing torrent for {{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id| default(series_id) }} to:
+            ```{? plex_dirs['anime'] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
+          <<: *discord_webhook_show
+      rtorrent_magnet: '{? torrent_dirs["public"]["complete_dir"] ?}'
+
+
+    morethantv_add:
+      rss: '{? rss_feeds["morethantv"] ?}'
+      configure_series:
+        from:
+          thetvdb_list:
+            username: '{? thetvdb["username"] ?}'
+            account_id: '{? thetvdb["account_id"] ?}'
+            api_key: '{? thetvdb["api_key"] ?}'
+      notify:
+        entries:
+          message: |
+            Grabbing torrent for {{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id| default(series_id) }} to:
+            ```{? plex_dirs['anime'] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
+          <<: *discord_webhook_show
+      rtorrent_magnet: '{? torrent_dirs["public"]["watch_dir"] ?}/morethantv'
+
+
+    morethantv_copy:
+      disable:
+        - seen
+      thetvdb_lookup: yes
+      filesystem: 
+        path: '{? torrent_dirs["private"]["complete_dir"] ?}/morethantv/'
+        retrieve: files
+      metainfo_series: yes
+      parsing:
+        series: guessit
+      accept_all: yes
+      notify:
+        entries:
+          message: |
+            Copying {{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id| default(series_id) }} to:
+            ```{? plex_dirs['shows'] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
+          <<: *discord_webhook_show
+      copy:
+        to: '{? plex_dirs["shows"] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}'
+        rename: '{{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
+
+    subsplease_move:
+      disable:
+        - seen
+      thetvdb_lookup: yes
+      filesystem: 
+        path: '{? torrent_dirs["public"]["complete_dir"] ?}'
+        retrieve: files
+      manipulate:
+      # Subsplease sometimes has v2 if their automation fucks up
+        - title:
+            replace:
+              regexp: '- (\d+)v\d'
+              format: '- \1'
+      # the lookup scripts really don't like when we use 
+        - title:
+            replace:
+              regexp: ' S(\d+) - '
+              format: ' - s\1e'
+
+      metainfo_series: yes
+      parsing:
+        series: guessit
+      accept_all: yes
+      notify:
+        entries:
+          message: |
+            Moving {{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id| default(series_id) }} to:
+            ```{? plex_dirs['anime'] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
+          <<: *discord_webhook_show
+      move:
+        to: '{? plex_dirs["anime"] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}'
+        rename: '{{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
+
+
+
+flexget_config_old:
   tasks:
     subsplease_add:
       rss: 'https://subsplease.org/rss/?r=1080'
@@ -176,774 +323,4 @@ flexget_config:
       - Urusei Yatsura
 #      - "BLEACH: Sennen Kessen-hen"
       - Do It Yourself!!
-      rtorrent_magnet: /mva
-  schedules:
-  - tasks: '*'
-    interval:
-      minutes: 10
 
-mva_config:
-  anime:
-    86 - Eighty Six:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Akudama Drive:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Appare-Ranman!:
-      seasons:
-        '1':
-          alias: appare ranman
-          episodes:
-          - 1
-          - 99
-    Deca-Dence:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Dr. Stone:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: Dr. Stone S2
-          episodes:
-          - 1
-          - 99
-    Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka:
-      seasons:
-        '3':
-          alias: Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S3
-          episodes:
-          - 1
-          - 99
-        '4':
-          alias: Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4
-          episodes:
-          - 1
-          - 99
-    Edens Zero:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Eizouken ni wa Te wo Dasu na!:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Enen no Shouboutai:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: Enen no Shouboutai S2
-          episodes:
-          - 1
-          - 99
-    Full Dive:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Fumetsu no Anata e:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: 'Fumetsu no Anata e S2'
-          episodes:
-          - 1
-          - 99
-    Gleipnir:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Hamefura:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: 'Hamefura S2'
-          episodes:
-          - 1
-          - 99
-    Ijiranaide, Nagatoro-san:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Isekai Maou to Shoukan Shoujo no Dorei Majutsu:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: Isekai Maou to Shoukan Shoujo no Dorei Majutsu S2
-          episodes:
-          - 1
-          - 99
-    Itai no wa Iya nano de Bougyoryoku ni Kyokufuri Shitai to Omoimasu:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Jujutsu Kaisen:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Kabukicho Sherlock:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Kumo desu ga, Nani ka:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Kyokou Suiri:
-      seasons:
-        '1':
-          alias: appare ranman
-          episodes:
-          - 1
-          - 99
-    Maou Gakuin no Futekigousha:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Mars Red:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Mashiro no Oto:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Megalo Box:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: Nomad - Megalo Box 2
-          episodes:
-          - 1
-          - 99
-    My Hero Academia:
-      seasons:
-        '1':
-          alias: Boku no Hero Academia
-          episodes:
-          - 1
-          - 13
-        '2':
-          alias: Boku no Hero Academia
-          episodes:
-          - 14
-          - 38
-        '3':
-          alias: Boku no Hero Academia
-          episodes:
-          - 39
-          - 63
-        '4':
-          alias: Boku no Hero Academia
-          episodes:
-          - 64
-          - 88
-        '5':
-          alias: Boku no Hero Academia
-          episodes:
-          - 89
-          - 113
-        '6':
-          alias: Boku no Hero Academia
-          episodes:
-          - 114
-          - 127
-    Nami yo Kiitekure:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    No Guns Life:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Odd Taxi:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Plunderer:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Re Zero kara Hajimeru Isekai Seikatsu:
-      seasons:
-        '1':
-          alias: "Re Zero kara Hajimeru Isekai Seikatsu - Director's Cut"
-          episodes:
-          - 1
-          - 13
-        '2':
-          alias: ''
-          episodes:
-          - 26
-          - 99
-    SSSS.Dynazenon:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Shadows House:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: 'Shadows House S2'
-          episodes:
-          - 1
-          - 99
-    Slime Taoshite 300-nen, Shiranai Uchi ni Level Max ni Nattemashita:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Somali to Mori no Kamisama:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Tensei Shitara Slime Datta Ken:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 24
-        '2':
-          alias: ''
-          episodes:
-          - 25
-          - 99
-    The God of High School:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Tokyo Revengers:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Tower of God:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Vivy - Fluorite Eye's Song:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Wonder Egg Priority:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Yakusoku no Neverland:
-      seasons:
-        '1':
-          alias: Yakusoku no Neverland
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: Yakusoku no Neverland S2
-          episodes:
-          - 1
-          - 99
-    Yesterday wo Utatte:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Yuru Camp:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: Yuru Camp S2
-          episodes:
-          - 1
-          - 99
-    Zashiki Warashi no Tatami-chan:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Zombieland Saga:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: Zombieland Saga S2
-          episodes:
-          - 1
-          - 99
-    Miss Kobayashi's Dragon Maid:
-      seasons:
-        '2':
-          alias: Kobayashi-san Chi no Maid Dragon S2
-          episodes:
-          - 1
-          - 26
-    Tantei wa Mou, Shindeiru.:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Sonny Boy:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Vanitas no Karte:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Jahy-sama wa Kujikenai!:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Kaizoku Oujo:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Heion Sedai no Idaten-tachi:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Shinigami Bocchan to Kuro Maid:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Tsuki ga Michibiku Isekai Douchuu:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Sekai Saikou no Ansatsusha, Isekai Kizoku ni Tensei suru:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Takt Op. Destiny:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Platinum End:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Saihate no Paladin:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Sakugan:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Shin no Nakama:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Ousama Ranking:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Komi-san wa, Comyushou desu.:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Kimetsu no Yaiba:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: 'Kimetsu no Yaiba - Mugen Ressha-hen'
-          episodes:
-          - 1
-          - 99
-        '3':
-          alias: 'Kimetsu no Yaiba - Yuukaku-hen'
-          episodes:
-          - 1
-          - 99
-    JoJo's Bizarre Adventure:
-      seasons:
-        '4':
-          alias: "JoJo's Bizarre Adventure - Golden Wind"
-          episodes:
-          - 1
-          - 99
-    Shingeki no Kyojin:
-      seasons:
-        '1':
-          alias: "Shingeki no Kyojin"
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: "Shingeki no Kyojin S2"
-          episodes:
-          - 1
-          - 99
-        '3':
-          alias: "Shingeki no Kyojin S3"
-          episodes:
-          - 1
-          - 99
-        '4':
-          alias: "Shingeki no Kyojin (The Final Season)"
-          episodes:
-          - 1
-          - 99
-    Sono Bisque Doll wa Koi wo Suru:
-      seasons:
-        '1':
-          alias: 'Sono Bisque Doll wa Koi wo Suru'
-          episodes:
-          - 1
-          - 99
-    Genjitsu Shugi Yuusha no Oukoku Saikenki:
-      seasons:
-        '1':
-          alias: 'Genjitsu Shugi Yuusha no Oukoku Saikenki'
-          episodes:
-          - 1
-          - 99
-    Spy x Family:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-
-    Tomodachi Game:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-
-    Tate no Yuusha no Nariagari:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: 'Tate no Yuusha no Nariagari S2'
-          episodes:
-          - 1
-          - 99
-
-    Kono Healer, Mendokusai:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-
-    Kaguya-sama wa Kokurasetai:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: 'Kaguya-sama wa Kokurasetai S2'
-          episodes:
-          - 1
-          - 99
-        '3':
-          alias: 'Kaguya-sama wa Kokurasetai S3'
-          episodes:
-          - 1
-          - 99
-    Kawaii dake ja Nai Shikimori-san:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Machikado Mazoku:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: 'Machikado Mazoku S2'
-          episodes:
-          - 1
-          - 99
-    Haikyuu!!:
-      seasons:
-        '4':
-          alias: 'Haikyuu!! To The Top'
-          episodes:
-          - 1
-          - 99
-    Birdie Wing - Golf Girls' Story:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Overlord:
-      seasons:
-        '4':
-          alias: 'Overlord IV'
-          episodes:
-          - 1
-          - 99
-    Hataraku Maou-sama!:
-      seasons:
-        '2':
-          alias: 'Hataraku Maou-sama S2'
-          episodes:
-          - 1
-          - 99
-    Made in Abyss:
-      seasons:
-        '2':
-          alias: 'Made in Abyss - Retsujitsu no Ougonkyou'
-          episodes:
-          - 1
-          - 99
-    Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-        '2':
-          alias: 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e S2'
-          episodes:
-          - 1
-          - 99
-    Lycoris Recoil:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Chainsaw Man:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Mob Psycho 100:
-      seasons:
-        '3':
-          alias: 'Mob Psycho 100 S3'
-          episodes:
-          - 1
-          - 99
-    Tensei Shitara Ken Deshita :
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Urusei Yatsura (2022):
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Do It Yourself!!:
-      seasons:
-        '1':
-          alias: ''
-          episodes:
-          - 1
-          - 99
-    Bocchi the Rock!:
-      seasons:
-        '1':
-          alisa: ''
-          episodes:
-          - 1
-          - 99
-  name: producers
-  plex_dir: /plex-files/Anime/MKV
-  torrent_dir: /mva
-  backup_dir: /metadata
-  seedbox_user: jsck
-  seedbox_pass: thatsjustGR8
-  seedbox_host: "jsck.cloud.seedboxes.cc"
-  seedbox_port: 41062
-  webhook_url: "https://discord.com/api/webhooks/1002624119642267648/kW3New1lThMUept9isSMblCtuTDWC1ZtMas5sF7Vaawkr2ZhccGgN6TJUD4dZP_c4zdv" 
-  rate_limit: 20

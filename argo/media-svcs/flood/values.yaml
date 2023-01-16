@@ -119,6 +119,7 @@ rtorrent-flood:
     method.insert = cfg.logfile,  private|const|string, (cat,(cfg.logs),"rtorrent-",(system.time),".log")
     method.insert = cfg.session,  private|const|string, (cat,(cfg.basedir),".session/")
     method.insert = cfg.watch,    private|const|string, (cat,"/store/torrent/","watch/")
+    method.insert = cfg.complete,    private|const|string, (cat,"/store/torrent/","complete/")
 
 
     # Create directories
@@ -131,12 +132,23 @@ rtorrent-flood:
     fs.mkdir = (cat,(cfg.watch))
     fs.mkdir = (cat,(cfg.watch),"/load")
     fs.mkdir = (cat,(cfg.watch),"/start")
+    fs.mkdir = (cat,(cfg.watch),"/morethantv")
 
+    fs.mkdir = (cat,(cfg.complete))
+    fs.mkdir = (cat,(cfg.complete),"/morethantv")
+
+  
     # Drop to "$(cfg.watch)/load" to add torrent
     schedule2 = watch_load, 11, 10, ((load.verbose, (cat, (cfg.watch), "load/*.torrent")))
 
     # Drop to "$(cfg.watch)/start" to add torrent and start downloading
     schedule2 = watch_start, 10, 10, ((load.start_verbose, (cat, (cfg.watch), "start/*.torrent")))
+
+    schedule2 = watch_morethantv, 10, 10, ((load.start_verbose, (cat, (cfg.watch), "morethantv/*.torrent), "d.custom1.set='morethantv,auto'", (cat, "d.custom3.set=", (cfg.complete), "morethantv/"))
+
+    method.insert = d.data_path, simple, "if=(d.is_multi_file), (cat,(d.directory),/), (cat,(d.directory),/,(d.name))"
+    method.insert = d.move_to_complete, simple, "d.directory.set=$argument.1=; execute=mkdir,-p,$argument.1=; execute=mv,-u,$argument.0=,$argument.1=; d.save_full_session="
+    method.set_key = event.download.finished,move_complete,"d.move_to_complete=$d.data_path=,$d.custom1="
 
     # Listening port for incoming peer traffic
      network.port_range.set = 6881-6881

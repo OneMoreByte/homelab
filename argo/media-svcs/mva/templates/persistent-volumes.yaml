@@ -9,27 +9,3 @@ spec:
   resources:
     requests:
       storage: 5Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ include "mva.fullname" . }}-data-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-#  storageClassName: fast
-  resources:
-    requests:
-      storage: 5Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ include "mva.fullname" . }}-torrent-pvc
-spec:
-  accessModes:
-    - ReadWriteMany
-#  storageClassName: fast
-  resources:
-    requests:
-      storage: 5Gi
