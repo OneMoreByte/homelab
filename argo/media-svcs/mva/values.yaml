@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: wiserain/flexget:3.3.17
+  repository: docker.io/wiserain/flexget
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
