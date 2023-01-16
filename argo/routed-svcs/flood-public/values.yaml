@@ -47,11 +47,11 @@ rtorrent-flood:
         http:
           port: 3000
     bittorrent:
-      enabled: false
-      type: LoadBalancer
+      enabled: true
+      type: ClusterIP
       ports:
         bittorrent:
-          enabled: false
+          enabled: true
           port: 56093
           protocol: TCP
           targetPort: 56093
