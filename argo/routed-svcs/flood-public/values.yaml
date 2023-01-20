@@ -146,7 +146,7 @@ rtorrent-flood:
     method.insert = d.get_finished_dir,simple,"/store/torrent-public/complete"
 
     # Bind event "torrent has finished" to action "move to new directory based on label"
-    method.set_key = event.download.finished,move_complete,"d.directory.set=$d.get_finished_dir=;execute=mkdir,-p,$d.get_finished_dir=;execute=rsync,-av,$d.base_path=,$d.get_finished_dir="
+    method.set_key = event.download.finished,move_complete,"d.directory.set=$d.get_finished_dir=;execute=mkdir,-p,$d.get_finished_dir=;execute=cp,$d.base_path=,$d.get_finished_dir="
 
     # Distributed Hash Table and Peer EXchange
     # Enable tracker-less torrents but vulnerable to passive sniffing
