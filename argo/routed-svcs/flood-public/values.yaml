@@ -172,9 +172,9 @@ rtorrent-flood:
     trackers.numwant.set = 80
 
     group.seeding.ratio.enable=
-    group2.seeding.ratio.min.set=200
-    group2.seeding.ratio.max.set=300
-    group2.seeding.ratio.upload.set=2G
+    group2.seeding.ratio.min.set=150
+    group2.seeding.ratio.max.set=200
+    group2.seeding.ratio.upload.set=1G
 
     method.set = group.seeding.ratio.command, "d.close= ; d.erase="
 
