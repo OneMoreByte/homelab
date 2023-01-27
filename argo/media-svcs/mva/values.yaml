@@ -179,6 +179,10 @@ flexget_config:
             username: '{? thetvdb["username"] ?}'
             account_id: '{? thetvdb["account_id"] ?}'
             api_key: '{? thetvdb["api_key"] ?}'
+      series:
+      - Game Changer
+      - The Last of Us
+      - Poker Face 
       notify:
         entries:
           message: |

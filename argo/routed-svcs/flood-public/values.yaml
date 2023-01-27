@@ -142,6 +142,12 @@ rtorrent-flood:
     # Listening port for incoming peer traffic
     network.port_range.set = 56093-56093
     
+
+    method.insert = d.data_path, simple,\
+        "if=(d.is_multi_file),\
+            (cat, (d.directory), /),\
+            (cat, (d.directory), /, (d.name))"
+
     # Add new method to get finished dir (called get_finished_dir)
     method.insert = d.get_finished_dir,simple,"/store/torrent-public/complete"
 
@@ -176,7 +182,7 @@ rtorrent-flood:
     group2.seeding.ratio.max.set=200
     group2.seeding.ratio.upload.set=1G
 
-    method.set = group.seeding.ratio.command, "d.close= ; d.erase="
+    method.set = group.seeding.ratio.command, "d.close= ; d.erase= ; execute=rm,-f,$d.data_path="
 
     #protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 
