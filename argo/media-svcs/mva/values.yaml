@@ -248,6 +248,13 @@ flexget_config:
         to: '{? plex_dirs["anime"] ?}/{{ tvdb_series_name | default(series_name) | replace("/", "")}}/Season {{tvdb_season | default(series_season) | pad(2)}}'
         rename: '{{tvdb_series_name | default(series_name) | replace("/", "")}} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
 
+  schedules:
+    - tasks: 'subsplease-*'
+      interval:
+        minutes: 30
+    - tasks: 'morethantv-*'
+      interval:
+        minutes: 5
 
 
 flexget_config_old:
