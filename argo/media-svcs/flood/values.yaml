@@ -144,7 +144,7 @@ rtorrent-flood:
     # Drop to "$(cfg.watch)/start" to add torrent and start downloading
     schedule2 = watch_start, 10, 10, ((load.start_verbose, (cat, (cfg.watch), "start/*.torrent")))
 
-    schedule2 = watch_morethantv, 10, 10, ((load.start_verbose, (cat, (cfg.watch), "morethantv/*.torrent), "d.custom1.set='morethantv,auto'", (cat, "d.custom3.set=", (cfg.complete), "morethantv/"))
+    #schedule2 = watch_morethantv, 10, 10, ((load.start_verbose, (cat, (cfg.watch), "morethantv/*.torrent), "d.custom1.set='morethantv,auto'", (cat, "d.custom3.set=", (cfg.complete), "morethantv/"))
 
     # Add new method to get finished dir (called get_finished_dir)
     method.insert = d.get_finished_dir,simple,"cat=[folder]finished/,$d.custom3="
