@@ -50,9 +50,9 @@ rtorrent-flood:
       ports:
         bittorrent:
           enabled: true
-          port: 6881
+          port: 60881
           protocol: TCP
-          targetPort: 6881
+          targetPort: 60881
 
   ingress:
     # -- Enable and configure ingress settings for the chart under this key.
@@ -153,7 +153,7 @@ rtorrent-flood:
     method.set_key = event.download.finished,move_complete,"d.directory.set=$d.get_finished_dir=;execute=mkdir,-p,$d.get_finished_dir=;execute=mv,-u,$d.base_path=,$d.get_finished_dir="
 
     # Listening port for incoming peer traffic
-     network.port_range.set = 6881-6881
+    network.port_range.set = 60881-60881
 
     # Distributed Hash Table and Peer EXchange
     # Enable tracker-less torrents but vulnerable to passive sniffing
