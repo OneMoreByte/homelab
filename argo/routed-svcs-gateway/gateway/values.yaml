@@ -6,7 +6,7 @@ pod-gateway:
   webhook:
     image:
       repository: ghcr.io/angelnu/gateway-admision-controller
-      tag: v3.7.0
+      tag: v3.8.0
 
   DNS: 172.16.0.1
 
