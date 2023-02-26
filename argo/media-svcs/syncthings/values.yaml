@@ -99,3 +99,4 @@ affinity:
 
 
 hostPath: /store/backups/syncthings
+hostPathRoms: /store/roms

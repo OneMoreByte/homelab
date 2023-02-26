@@ -69,4 +69,4 @@ spec:
           path: "{{ .Values.hostPath }}"
       - name: roms-data
         hostPath:
-          path: "{{ .Values.hostPath }}"
+          path: "{{ .Values.hostPathRoms }}"
