@@ -47,6 +47,8 @@ spec:
           volumeMounts:
           - name: syncthing-data
             mountPath: /var/syncthing
+          - name: roms-data
+            mountPath: /store/roms
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -63,5 +65,8 @@ spec:
       {{- end }}
       volumes:
       - name: syncthing-data
+        hostPath:
+          path: "{{ .Values.hostPath }}"
+      - name: roms-data
         hostPath:
           path: "{{ .Values.hostPath }}"
