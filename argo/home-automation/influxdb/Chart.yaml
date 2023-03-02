@@ -6,5 +6,5 @@ sources:
   - https://staging.artifacthub.io/packages/helm/bitnami/influxdb
 dependencies:
   - name: influxdb
-    version: 5.4.16
+    version: 5.4.17
     repository: "https://charts.bitnami.com/bitnami"
