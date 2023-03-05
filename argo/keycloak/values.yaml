@@ -89,7 +89,7 @@ keycloakx:
 
   extraVolumeMounts: |
     - name: theme
-      mountPath: /opt/bitnami/keycloak/themes/
+      mountPath: /opt/keycloak/themes/custom-theme
 
   extraVolumes: |
     - name: theme
