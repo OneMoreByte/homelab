@@ -1,21 +1,5 @@
 
 keycloakx:
-  initContainers:
-    - name: theme-provider
-      image: image/alpine:latest
-      imagePullPolicy: Always
-      command:
-        - sh
-      args:
-        - -c
-        - |
-          echo "Getting theme..."
-          curl https://github.com/OneMoreByte/keycloak-homelab-theme/releases/latest/download/standalone-keycloak-theme.jar -o /tmp/standalone-keycloak-theme.jar
-          echo "Copying theme..."
-          cp -R /tmp/standalone-keycloak-theme.jar /theme
-      volumeMounts:
-        - name: theme
-          mountPath: /theme
   # This is an example configuration, for production grade configuration see the Keycloak documentation.
   # See https://www.keycloak.org/server/configuration
   # See https://www.keycloak.org/server/all-config
@@ -86,6 +70,23 @@ keycloakx:
         secretName: jackhil.de-cert
   autoscaling:
     enabled: true
+
+  extraInitContainers:
+    - name: theme-provider
+      image: image/alpine:latest
+      imagePullPolicy: Always
+      command:
+        - sh
+      args:
+        - -c
+        - |
+          echo "Getting theme..."
+          curl https://github.com/OneMoreByte/keycloak-homelab-theme/releases/latest/download/standalone-keycloak-theme.jar -o /tmp/standalone-keycloak-theme.jar
+          echo "Copying theme..."
+          cp -R /tmp/standalone-keycloak-theme.jar /theme
+      volumeMounts:
+        - name: theme
+          mountPath: /theme
 
   extraVolumeMounts: |
     - name: theme
