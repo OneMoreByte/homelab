@@ -80,10 +80,9 @@ keycloakx:
       args:
         - -c
         - |
+          cd /theme
           echo "Getting theme..."
-          curl https://github.com/OneMoreByte/keycloak-homelab-theme/releases/latest/download/standalone-keycloak-theme.jar -o /tmp/standalone-keycloak-theme.jar
-          echo "Copying theme..."
-          cp -R /tmp/standalone-keycloak-theme.jar /theme
+          wget https://github.com/OneMoreByte/keycloak-homelab-theme/releases/latest/download/standalone-keycloak-theme.jar
       volumeMounts:
         - name: theme
           mountPath: /theme
