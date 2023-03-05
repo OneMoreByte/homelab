@@ -80,7 +80,8 @@ keycloakx:
       args:
         - -c
         - |
-          cd /theme
+          mkdir -p /theme/providers
+          cd /theme/providers
           echo "Getting theme..."
           wget https://github.com/OneMoreByte/keycloak-homelab-theme/releases/latest/download/standalone-keycloak-theme.jar
       volumeMounts:
