@@ -48,6 +48,40 @@ zpool create -f store \
     zfs set relatime=on store
 ```
 
+create an encryption key
+```
+dd if=/dev/random of=/path/to/key bs=1 count=32
+```
+
+create volumes
+```
+zfs create -o encryption=on -o keyformat=raw -o keylocation=file:///path/to/key store/example
+```
+
+
+create this service for loading keys on boot in `/etc/systemd/system/zfs-load-key.service`
+```
+[Unit]
+Description=Load all ZFS encryption keys
+DefaultDependencies=no
+Before=zfs-mount.service
+After=zfs-import.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/zfs load-key -a
+
+[Install]
+WantedBy=zfs-mount.service
+```
+
+and enable
+
+```
+systemctl enable zfs-load-key
+```
+
 ## Run non-Kubernetes installing ansible
 
 ansible-galaxy install githubixx.ansible_role_wireguard
