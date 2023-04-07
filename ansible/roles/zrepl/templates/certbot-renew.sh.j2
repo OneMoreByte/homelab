@@ -13,4 +13,4 @@ fi
 
 
 # Renew if we can
-certbot renew
+certbot renew --renew-hook "systemctl restart zrepl"

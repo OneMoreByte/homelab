@@ -1,0 +1,88 @@
+---
+
+
+image:
+  repository: docker.io/kizaing/kavita
+  tag: 0.7.1
+  pullPolicy: IfNotPresent
+
+env:
+  TZ: America/Chicago
+
+# -- Configures service settings for the chart.
+# @default -- See values.yaml
+service:
+  main:
+    ports:
+      http:
+        port: 5000
+
+
+ingress:
+    main:
+      enabled: true
+      primary: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      labels: {}
+      hosts:
+        - host: kavita.jackhil.de
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+      - hosts:
+          - kavita.jackhil.de
+        secretName: jackhil.de-cert
+    ssl-redirect:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
+      labels: {}
+      hosts:
+        - host: kavita.jackhil.de
+          paths:
+            - path: /
+              pathType: Prefix
+
+
+
+podSecurityContext:
+  runAsUser: 11337
+  runAsGroup: 11337
+  fsGroup: 11337
+
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - bulk-datastore
+
+
+persistence:
+    config:
+      enabled: true
+      mountPath: /kavita/config
+    books:
+        enabled: true
+        type: hostPath
+        hostPath: /store/text-media/books
+    textbooks:
+        enabled: true
+        type: hostPath
+        hostPath: /store/text-media/textbooks
+    manga:
+        enabled: true
+        type: hostPath
+        hostPath: /store/text-media/manga
+    comics:
+        enabled: true
+        type: hostPath
+        hostPath: /store/text-media/comics
