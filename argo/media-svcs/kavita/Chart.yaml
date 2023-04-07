@@ -1,12 +1,12 @@
 
 apiVersion: v2
-name: jellyfin
+name: kavita
 type: application
 version: 0.0.1
 sources:
   - https://github.com/bjw-s/helm-charts
   - https://github.com/Kareadita/Kavita
 dependencies:
-- name: common
-  version: 1.3.1
+- name: app-template
+  version: 1.3.2
   repository: https://bjw-s.github.io/helm-charts/
