@@ -162,6 +162,14 @@ flexget_config:
         - "Trigun Stampede"
         - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4"
         - "Maou Gakuin no Futekigousha S2"
+        - Kono Subarashii Sekai ni Bakuen wo!
+        - Dr. Stone S3
+        - 'Kimetsu no Yaiba – Katanakaji no Sato-hen'
+        - Jigokuraku
+        - Mahoutsukai no Yome Season S2
+        - Kaminaki Sekai no Kamisama Katsudou
+        - Mashle
+        - Edens Zero
       notify:
         entries:
           message: |
