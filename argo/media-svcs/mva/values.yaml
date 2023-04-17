@@ -151,22 +151,22 @@ flexget_config:
       series:
         - "High Card"
         - "Mobile Suit Gundam - The Witch from Mercury"
-        - "Fumetsu no Anata e S2"
+        - "Fumetsu no Anata e"
         - "Urusei Yatsura (2022)"
-        - "Vinland Saga S2"
-        - "Bofuri S2"
+        - "Vinland Saga"
+        - "Bofuri"
         - "Kyokou Suiri"
         - "Bungou Stray Dogs"
         - "Isekai Nonbiri Nouka"
         - "NieR Automata Ver1.1a"
         - "Trigun Stampede"
         - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4"
-        - "Maou Gakuin no Futekigousha S2"
+        - "Maou Gakuin no Futekigousha"
         - Kono Subarashii Sekai ni Bakuen wo!
         - Dr. Stone S3
         - 'Kimetsu no Yaiba – Katanakaji no Sato-hen'
         - Jigokuraku
-        - Mahoutsukai no Yome Season S2
+        - Mahoutsukai no Yome Season
         - Kaminaki Sekai no Kamisama Katsudou
         - Mashle
         - Edens Zero
@@ -214,17 +214,17 @@ flexget_config:
       series:
         - "High Card"
         - "Mobile Suit Gundam - The Witch from Mercury"
-        - "Fumetsu no Anata e S2"
+        - "Fumetsu no Anata e"
         - "Urusei Yatsura (2022)"
-        - "Vinland Saga S2"
-        - "Bofuri S2"
+        - "Vinland Saga"
+        - "Bofuri"
         - "Kyokou Suiri"
         - "Bungou Stray Dogs"
         - "Isekai Nonbiri Nouka"
         - "NieR Automata Ver1.1a"
         - "Trigun Stampede"
-        - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4"
-        - "Maou Gakuin no Futekigousha S2"
+        - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka"
+        - "Maou Gakuin no Futekigousha"
         - Kono Subarashii Sekai ni Bakuen wo!
         - Dr. Stone S3
         - 'Kimetsu no Yaiba – Katanakaji no Sato-hen':
@@ -233,7 +233,7 @@ flexget_config:
               tvdb_season: 4
               series_season: 4
         - Jigokuraku
-        - Mahoutsukai no Yome Season S2
+        - Mahoutsukai no Yome
         - Kaminaki Sekai no Kamisama Katsudou
         - Mashle
         - Edens Zero
@@ -273,26 +273,26 @@ flexget_config:
       series:
         - "High Card"
         - "Mobile Suit Gundam - The Witch from Mercury"
-        - "Fumetsu no Anata e S2"
+        - "Fumetsu no Anata e"
         - "Urusei Yatsura (2022)"
-        - "Vinland Saga S2"
-        - "Bofuri S2"
+        - "Vinland Saga"
+        - "Bofuri"
         - "Kyokou Suiri"
         - "Bungou Stray Dogs"
         - "Isekai Nonbiri Nouka"
         - "NieR Automata Ver1.1a"
         - "Trigun Stampede"
         - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4"
-        - "Maou Gakuin no Futekigousha S2"
+        - "Maou Gakuin no Futekigousha"
         - Kono Subarashii Sekai ni Bakuen wo!
-        - Dr. Stone S3
+        - Dr. Stone
         - 'Kimetsu no Yaiba - Katanakaji no Sato-hen':
             exact: true
             set:
               tvdb_season: 4
               series_season: 4
         - Jigokuraku
-        - Mahoutsukai no Yome Season S2
+        - Mahoutsukai no Yome
         - Kaminaki Sekai no Kamisama Katsudou
         - Mashle
         - Edens Zero
