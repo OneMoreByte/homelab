@@ -170,6 +170,7 @@ flexget_config:
         - Kaminaki Sekai no Kamisama Katsudou
         - Mashle
         - Edens Zero
+        - 'Ousama Ranking: Yuuki no Takarabako'
       notify:
         entries:
           message: |
@@ -277,6 +278,7 @@ flexget_config:
           - Kaminaki Sekai no Kamisama Katsudou
           - Mashle
           - Edens Zero
+          - 'Ousama Ranking: Yuuki no Takarabako'
       notify:
         entries:
           message: |
