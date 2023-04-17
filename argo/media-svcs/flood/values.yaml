@@ -147,10 +147,10 @@ rtorrent-flood:
     #schedule2 = watch_morethantv, 10, 10, ((load.start_verbose, (cat, (cfg.watch), "morethantv/*.torrent), "d.custom1.set='morethantv,auto'", (cat, "d.custom3.set=", (cfg.complete), "morethantv/"))
 
     # Add new method to get finished dir (called get_finished_dir)
-    method.insert = d.get_finished_dir,simple,"cat=[folder]finished/,$d.custom3="
+    # method.insert = d.get_finished_dir,simple,"cat=[folder]finished/,$d.custom3="
 
     # Bind event "torrent has finished" to action "move to new directory based on label"
-    method.set_key = event.download.finished,move_complete,"d.directory.set=$d.get_finished_dir=;execute=mkdir,-p,$d.get_finished_dir=;execute=mv,-u,$d.base_path=,$d.get_finished_dir="
+    # method.set_key = event.download.finished,move_complete,"d.directory.set=$d.get_finished_dir=;execute=mkdir,-p,$d.get_finished_dir=;execute=mv,-u,$d.base_path=,$d.get_finished_dir="
 
     # Listening port for incoming peer traffic
     network.port_range.set = 60881-60881
