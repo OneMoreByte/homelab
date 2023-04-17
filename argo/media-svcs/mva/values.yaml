@@ -286,7 +286,7 @@ flexget_config:
         - "Maou Gakuin no Futekigousha S2"
         - Kono Subarashii Sekai ni Bakuen wo!
         - Dr. Stone S3
-        - 'Kimetsu no Yaiba – Katanakaji no Sato-hen':
+        - 'Kimetsu no Yaiba - Katanakaji no Sato-hen':
             exact: true
             set:
               tvdb_season: 4
