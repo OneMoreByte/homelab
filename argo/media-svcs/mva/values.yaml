@@ -261,16 +261,16 @@ flexget_config:
             replace:
               regexp: '- (\d+)v\d'
               format: '- \1'
-      # the lookup scripts really don't like when we use 
-        - title:
-            replace:
-              regexp: ' S(\d+) - '
-              format: ' - s\1e'
       # The unique demon slayer season names are confusing for the little bot
         - title:
             replace:
               regexp: '- Katanakaji no Sato-hen'
               format: 'S4'
+      # the lookup scripts really don't like when names have season numbers in the name
+        - title:
+            replace:
+              regexp: ' S(\d+) - '
+              format: ' - s\1e'
 
       metainfo_series: yes
       parsing:
