@@ -286,11 +286,7 @@ flexget_config:
         - "Maou Gakuin no Futekigousha"
         - Kono Subarashii Sekai ni Bakuen wo!
         - Dr. Stone
-        - 'Kimetsu no Yaiba - Katanakaji no Sato-hen':
-            exact: true
-            set:
-              tvdb_season: 4
-              series_season: 4
+        - Kimetsu no Yaiba
         - Jigokuraku
         - Mahoutsukai no Yome
         - Kaminaki Sekai no Kamisama Katsudou
