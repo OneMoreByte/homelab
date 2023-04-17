@@ -266,6 +266,11 @@ flexget_config:
             replace:
               regexp: ' S(\d+) - '
               format: ' - s\1e'
+      # The unique demon slayer season names are confusing for the little bot
+        - title:
+            replace:
+              regexp: '- Katanakaji no Sato-hen'
+              format: 'S4'
 
       metainfo_series: yes
       parsing:
