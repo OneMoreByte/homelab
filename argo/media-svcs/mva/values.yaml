@@ -249,7 +249,6 @@ flexget_config:
 
     subsplease_move:
       no_entries_ok: yes
-      tracking: no
       disable:
         - seen
       thetvdb_lookup: yes
@@ -277,27 +276,31 @@ flexget_config:
       parsing:
         series: guessit
       series:
-        - "High Card"
-        - "Mobile Suit Gundam - The Witch from Mercury"
-        - "Fumetsu no Anata e"
-        - "Urusei Yatsura (2022)"
-        - "Vinland Saga"
-        - "Bofuri"
-        - "Kyokou Suiri"
-        - "Bungou Stray Dogs"
-        - "Isekai Nonbiri Nouka"
-        - "NieR Automata Ver1.1a"
-        - "Trigun Stampede"
-        - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4"
-        - "Maou Gakuin no Futekigousha"
-        - Kono Subarashii Sekai ni Bakuen wo!
-        - Dr. Stone
-        - Kimetsu no Yaiba
-        - Jigokuraku
-        - Mahoutsukai no Yome
-        - Kaminaki Sekai no Kamisama Katsudou
-        - Mashle
-        - Edens Zero
+        settings:
+          subsplease:
+            tracking: no
+        subsplease:
+          - "High Card"
+          - "Mobile Suit Gundam - The Witch from Mercury"
+          - "Fumetsu no Anata e"
+          - "Urusei Yatsura (2022)"
+          - "Vinland Saga"
+          - "Bofuri"
+          - "Kyokou Suiri"
+          - "Bungou Stray Dogs"
+          - "Isekai Nonbiri Nouka"
+          - "NieR Automata Ver1.1a"
+          - "Trigun Stampede"
+          - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4"
+          - "Maou Gakuin no Futekigousha"
+          - Kono Subarashii Sekai ni Bakuen wo!
+          - Dr. Stone
+          - Kimetsu no Yaiba
+          - Jigokuraku
+          - Mahoutsukai no Yome
+          - Kaminaki Sekai no Kamisama Katsudou
+          - Mashle
+          - Edens Zero
       notify:
         entries:
           message: |
