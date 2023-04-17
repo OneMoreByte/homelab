@@ -230,6 +230,7 @@ flexget_config:
         - 'Kimetsu no Yaiba – Katanakaji no Sato-hen':
             exact: true
             set:
+              tvdb_season: 4
               series_season: 4
         - Jigokuraku
         - Mahoutsukai no Yome Season S2
