@@ -160,13 +160,13 @@ flexget_config:
         - "Isekai Nonbiri Nouka"
         - "NieR Automata Ver1.1a"
         - "Trigun Stampede"
-        - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4"
+        - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka"
         - "Maou Gakuin no Futekigousha"
         - Kono Subarashii Sekai ni Bakuen wo!
-        - Dr. Stone S3
-        - 'Kimetsu no Yaiba – Katanakaji no Sato-hen'
+        - Dr. Stone
+        - Kimetsu no Yaiba
         - Jigokuraku
-        - Mahoutsukai no Yome Season
+        - Mahoutsukai no Yome
         - Kaminaki Sekai no Kamisama Katsudou
         - Mashle
         - Edens Zero
@@ -212,31 +212,7 @@ flexget_config:
       parsing:
         series: guessit
       series:
-        - "High Card"
-        - "Mobile Suit Gundam - The Witch from Mercury"
-        - "Fumetsu no Anata e"
-        - "Urusei Yatsura (2022)"
-        - "Vinland Saga"
-        - "Bofuri"
-        - "Kyokou Suiri"
-        - "Bungou Stray Dogs"
-        - "Isekai Nonbiri Nouka"
-        - "NieR Automata Ver1.1a"
-        - "Trigun Stampede"
-        - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka"
-        - "Maou Gakuin no Futekigousha"
-        - Kono Subarashii Sekai ni Bakuen wo!
-        - Dr. Stone S3
-        - 'Kimetsu no Yaiba – Katanakaji no Sato-hen':
-            exact: true
-            set:
-              tvdb_season: 4
-              series_season: 4
-        - Jigokuraku
-        - Mahoutsukai no Yome
-        - Kaminaki Sekai no Kamisama Katsudou
-        - Mashle
-        - Edens Zero
+        - The Mandalorian
       notify:
         entries:
           message: |
@@ -291,7 +267,7 @@ flexget_config:
           - "Isekai Nonbiri Nouka"
           - "NieR Automata Ver1.1a"
           - "Trigun Stampede"
-          - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka S4"
+          - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka"
           - "Maou Gakuin no Futekigousha"
           - Kono Subarashii Sekai ni Bakuen wo!
           - Dr. Stone
