@@ -227,7 +227,10 @@ flexget_config:
         - "Maou Gakuin no Futekigousha S2"
         - Kono Subarashii Sekai ni Bakuen wo!
         - Dr. Stone S3
-        - 'Kimetsu no Yaiba – Katanakaji no Sato-hen'
+        - 'Kimetsu no Yaiba – Katanakaji no Sato-hen':
+            exact: true
+            set:
+              series_season: 4
         - Jigokuraku
         - Mahoutsukai no Yome Season S2
         - Kaminaki Sekai no Kamisama Katsudou
