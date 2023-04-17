@@ -249,6 +249,7 @@ flexget_config:
 
     subsplease_move:
       no_entries_ok: yes
+      tracking: no
       disable:
         - seen
       thetvdb_lookup: yes
