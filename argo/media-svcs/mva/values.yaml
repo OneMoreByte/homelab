@@ -148,6 +148,22 @@ flexget_config:
     subsplease_add:
       rss: '{? rss_feeds["subsplease"] ?}'
       thetvdb_lookup: yes
+      manipulate:
+      # Subsplease sometimes has v2 if their automation fucks up
+        - title:
+            replace:
+              regexp: '- (\d+)v\d'
+              format: '- \1'
+      # The unique demon slayer season names are confusing for the little bot
+        - title:
+            replace:
+              regexp: '- Katanakaji no Sato-hen'
+              format: 'S4'
+      # the lookup scripts really don't like when names have season numbers in the name
+        - title:
+            replace:
+              regexp: ' S(\d+) - '
+              format: ' - s\1e'   
       series:
         - "High Card"
         - "Mobile Suit Gundam - The Witch from Mercury"
