@@ -146,6 +146,7 @@ flexget_config:
 
   tasks:
     subsplease_add:
+      seen: local
       rss: '{? rss_feeds["subsplease"] ?}'
       thetvdb_lookup: yes
       manipulate:
@@ -241,9 +242,9 @@ flexget_config:
         rename: '{{tvdb_series_name | default(series_name) | replace("/", "") }} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
 
     subsplease_move:
+      seen: local
+      tracking: no
       no_entries_ok: yes
-      disable:
-        - seen
       thetvdb_lookup: yes
       filesystem: 
         path: '{? torrent_dirs["public"]["complete_dir"] ?}'
