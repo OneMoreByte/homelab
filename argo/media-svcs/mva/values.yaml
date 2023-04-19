@@ -243,7 +243,6 @@ flexget_config:
 
     subsplease_move:
       seen: local
-      tracking: no
       no_entries_ok: yes
       thetvdb_lookup: yes
       filesystem: 
