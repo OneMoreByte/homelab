@@ -146,6 +146,7 @@ flexget_config:
 
   tasks:
     subsplease_add:
+      seen: local
       rss: '{? rss_feeds["subsplease"] ?}'
       thetvdb_lookup: yes
       manipulate:
@@ -165,34 +166,28 @@ flexget_config:
               regexp: ' S(\d+) - '
               format: ' - s\1e'   
       series:
-        settings:
-          subsplease:
-            best_quality:
-              on_lower: do_nothing
-            seen: local
-        subsplease:
-          - "High Card"
-          - "Mobile Suit Gundam - The Witch from Mercury"
-          - "Fumetsu no Anata e"
-          - "Urusei Yatsura (2022)"
-          - "Vinland Saga"
-          - "Bofuri"
-          - "Kyokou Suiri"
-          - "Bungou Stray Dogs"
-          - "Isekai Nonbiri Nouka"
-          - "NieR Automata Ver1.1a"
-          - "Trigun Stampede"
-          - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka"
-          - "Maou Gakuin no Futekigousha"
-          - Kono Subarashii Sekai ni Bakuen wo!
-          - Dr. Stone
-          - Kimetsu no Yaiba
-          - Jigokuraku
-          - Mahoutsukai no Yome
-          - Kaminaki Sekai no Kamisama Katsudou
-          - Mashle
-          - Edens Zero
-          - 'Ousama Ranking: Yuuki no Takarabako'
+        - "High Card"
+        - "Mobile Suit Gundam - The Witch from Mercury"
+        - "Fumetsu no Anata e"
+        - "Urusei Yatsura (2022)"
+        - "Vinland Saga"
+        - "Bofuri"
+        - "Kyokou Suiri"
+        - "Bungou Stray Dogs"
+        - "Isekai Nonbiri Nouka"
+        - "NieR Automata Ver1.1a"
+        - "Trigun Stampede"
+        - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka"
+        - "Maou Gakuin no Futekigousha"
+        - Kono Subarashii Sekai ni Bakuen wo!
+        - Dr. Stone
+        - Kimetsu no Yaiba
+        - Jigokuraku
+        - Mahoutsukai no Yome
+        - Kaminaki Sekai no Kamisama Katsudou
+        - Mashle
+        - Edens Zero
+        - 'Ousama Ranking: Yuuki no Takarabako'
       notify:
         entries:
           message: |
@@ -247,6 +242,8 @@ flexget_config:
         rename: '{{tvdb_series_name | default(series_name) | replace("/", "") }} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
 
     subsplease_move:
+      disable:
+      - seen
       no_entries_ok: yes
       thetvdb_lookup: yes
       filesystem: 
@@ -276,9 +273,8 @@ flexget_config:
         settings:
           subsplease:
             tracking: no
-            best_quality:
-              on_lower: do_nothing
-            seen: local
+            set:
+              downloaded: False
         subsplease:
           - "High Card"
           - "Mobile Suit Gundam - The Witch from Mercury"
