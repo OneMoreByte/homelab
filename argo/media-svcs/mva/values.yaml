@@ -297,6 +297,7 @@ flexget_config:
           - Mashle
           - Edens Zero
           - 'Ousama Ranking: Yuuki no Takarabako'
+      accept_all: yes
       notify:
         entries:
           message: |
