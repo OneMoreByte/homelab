@@ -242,7 +242,9 @@ flexget_config:
         rename: '{{tvdb_series_name | default(series_name) | replace("/", "") }} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
 
     subsplease_move:
-      seen: local
+      disable:
+      - seen
+      - tracking
       no_entries_ok: yes
       thetvdb_lookup: yes
       filesystem: 
