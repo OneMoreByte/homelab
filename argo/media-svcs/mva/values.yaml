@@ -272,7 +272,7 @@ flexget_config:
       series:
         settings:
           subsplease:
-            tracking: no
+            tracking: False
             set:
               downloaded: False
         subsplease:
