@@ -1,3 +1,5 @@
+namespaceOverride: "home-automation"
+
 frigate:
   # Default values for frigate.
   # This is a YAML-formatted file.
