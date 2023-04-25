@@ -202,7 +202,9 @@ frigate:
     #   gpu.intel.com/i915: 1
 
   # -- Set Security Context
-  securityContext: {}
+  securityContext:
+    securityContext:
+    privileged: true
     # capabilities:
     #   drop:
     #   - ALL
