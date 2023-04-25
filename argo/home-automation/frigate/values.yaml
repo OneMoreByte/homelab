@@ -31,7 +31,7 @@ frigate:
 
   coral:
     # -- enables the use of a Coral device
-    enabled: true
+    enabled: false
     # -- path on the host to which to mount the Coral device
     hostPath: /dev/apex_0
 
@@ -44,18 +44,16 @@ frigate:
       runtimeClassName:
 
   # -- declare extra volumes to use for Frigate
-  extraVolumes: []
+  extraVolumes:
+    - name: coral
+      hostPath:
+        path: /dev/apex_0
   # -- declare additional volume mounts
-  extraVolumeMounts: []
-
+  extraVolumeMounts:
+    - mountPath: /dev/apex_0
+      name: coral
   # -- amount of shared memory to use for caching
   shmSize: 1Gi
-
-  # nameOverride -- Overrides the name of resources
-  nameOverride: ""
-
-  # fullnameOverride -- Overrides the Full Name of resources
-  fullnameOverride: ""
 
   # -- frigate configuration - see [Docs](https://docs.frigate.video/configuration/index) for more info
   config: |
