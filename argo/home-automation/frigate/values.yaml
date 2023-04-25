@@ -21,10 +21,8 @@ frigate:
   env:
  #   - FRIGATE_MQTT_USER:
  #   - FRIGATE_MQTT_PASSWORD:
-    - name: FRIGATE_RSTP_USERNAME
-      value: "frigate"
-    - name: FRIGATE_RTSP_PASSWORD
-      value: "WQKkhV4abrAJt7dK"
+    FRIGATE_RSTP_USERNAME: "frigate"
+    FRIGATE_RTSP_PASSWORD: "WQKkhV4abrAJt7dK"
 
   # -- set environment variables from Secret(s)
   envFromSecrets: []
