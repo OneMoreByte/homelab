@@ -79,9 +79,7 @@ frigate:
     detectors:
       coral:
         type: edgetpu
-        device: usb
-      cpu1:
-        type: cpu
+        device: pcie
     cameras:
       garage1:
         ffmpeg:
