@@ -80,21 +80,20 @@ frigate:
       coral:
         type: edgetpu
         device: pci
-    cameras:
-      garage1:
-        ffmpeg:
-          inputs:
-            - path: rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=1
-        roles:
-          - detect
-
-        detect:
-          width: 2592
-          height: 2944
     go2rtc:
       streams:
         garage1:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=1
+    cameras:
+      garage1:
+        ffmpeg:
+          inputs:
+            - path: rtsp://127.0.0.1:8554/garage1?video=copy
+              roles:
+                - detect
+        detect:
+          width: 2592
+          height: 2944
     objects:
       # Optional: list of objects to track from labelmap.txt (default: shown below)
       track:
