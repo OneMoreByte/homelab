@@ -657,7 +657,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: frigate
+  name: frigate-hass
   namespace: argocd
 spec:
   project: default
