@@ -85,8 +85,8 @@ frigate:
         ffmpeg:
           inputs:
             - path: rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=1
-          roles:
-            - detect
+        roles:
+          - detect
 
         detect:
           width: 2592
