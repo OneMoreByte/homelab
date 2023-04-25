@@ -657,12 +657,12 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: frigate-hass
+  name: frigate
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/home-automation/frigate
+    path: argo/home-automation/friage/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -671,7 +671,7 @@ spec:
       - values.yaml
   destination:
     name: wailord.jsck.network
-  namespace: home-automation
+    namespace: home-automation
   syncPolicy:
     automated:
       prune: true
