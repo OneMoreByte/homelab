@@ -662,7 +662,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/home-automation/friage/
+    path: argo/home-automation/frigate/
     repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
