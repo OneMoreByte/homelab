@@ -1,5 +1,5 @@
 apiVersion: v2
-name: frigate
+name: frigate-hass
 type: application
 version: 0.0.1
 sources:
