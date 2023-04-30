@@ -39,7 +39,7 @@ traefik-forward-auth:
           name: keycloak-oidc
           key: client_secret
     # https only?
-    cookieSecure: true
+    cookieSecure: false
     domain: 
     authHost:
     whitelist: []
@@ -51,7 +51,6 @@ traefik-forward-auth:
     #   -----END
     # or caSecretName: < name of the secret >
     # To use system trusted CAs
-    useSystemCA: true
     extraConfig: ""
     userCookieName: "_forward_auth_name"
     enableRBAC: false
