@@ -98,13 +98,13 @@ longhorn:
 
   ingress:
     ## Set to true to enable ingress record generation
-    enabled: false
+    enabled: true
 
     ## Add ingressClassName to the Ingress
     ## Can replace the kubernetes.io/ingress.class annotation on v1.18+
     ingressClassName: ~
 
-    host: sslip.io
+    host: longhorn.jsck.network
 
     ## Set this to true in order to enable TLS on the ingress record
     ## A side effect of this will be that the backend service will be connected at port 443
@@ -122,6 +122,10 @@ longhorn:
     ##
     ## If tls is set to true, annotation ingress.kubernetes.io/secure-backends: "true" will automatically be set
     annotations:
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
+      
     #  kubernetes.io/ingress.class: nginx
     #  kubernetes.io/tls-acme: true
 
