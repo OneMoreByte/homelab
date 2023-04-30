@@ -84,6 +84,8 @@ frigate:
       streams:
         garage1:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=1
+        garage1-high:
+          - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=0
     cameras:
       garage1:
         ffmpeg:
@@ -91,9 +93,17 @@ frigate:
             - path: rtsp://127.0.0.1:8554/garage1?video=copy
               roles:
                 - detect
+            - path: rtsp://127.0.0.1:8554/garage1-high?video=copy
+              roles:
+                - record
         detect:
           width: 704
           height: 480
+        motion:
+          mask:
+            - 704,480,704,63,626,51,385,69,259,78,87,131,0,177,0,480
+        snapshots:
+          enabled: True
     objects:
       # Optional: list of objects to track from labelmap.txt (default: shown below)
       track:
