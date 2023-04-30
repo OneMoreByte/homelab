@@ -102,6 +102,11 @@ frigate:
         motion:
           mask:
            - 704,0,704,63,626,51,385,69,231,82,90,129,0,167,0,0
+        zones:
+          driveway:
+            coordinates: 0,480,594,480,639,370,661,198,654,107,583,54,460,59,369,71,241,128,0,250
+          front_door:
+            coordinates: 271,79,362,70,397,81,0,252,0,166
         snapshots:
           enabled: True
     objects:
