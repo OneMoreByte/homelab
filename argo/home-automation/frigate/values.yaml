@@ -92,8 +92,8 @@ frigate:
               roles:
                 - detect
         detect:
-          width: 2592
-          height: 2944
+          width: 704
+          height: 480
     objects:
       # Optional: list of objects to track from labelmap.txt (default: shown below)
       track:
