@@ -108,10 +108,10 @@ longhorn:
 
     ## Set this to true in order to enable TLS on the ingress record
     ## A side effect of this will be that the backend service will be connected at port 443
-    tls: false
+    tls: true
 
     ## If TLS is set to true, you must declare what secret will store the key/certificate for TLS
-    tlsSecret: longhorn.local-tls
+    tlsSecret: jsck.network-cert
 
     ## Ingress annotations done as key:value pairs
     ## If you're using kube-lego, you will want to add:
@@ -124,8 +124,8 @@ longhorn:
     annotations:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
-      
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth-middleware@kubernetescrd
+
     #  kubernetes.io/ingress.class: nginx
     #  kubernetes.io/tls-acme: true
 
