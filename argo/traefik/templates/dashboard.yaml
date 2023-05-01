@@ -11,6 +11,8 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
+      middlewares:
+      - name: forward-auth-middleware
   tls:
     secretName: jsck.network-cert
 

@@ -162,29 +162,25 @@ frigate:
 
   ingress:
     # -- Enables the use of an Ingress Controller to front the Service and can provide HTTPS
-    enabled: false
+    enabled: true
 
     # -- annotations to configure your Ingress. See your Ingress Controller's Docs for more info.
-    annotations: {}
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
-      # For NGINX INC, these may be neccessary
-      # nginx.org/proxy-read-timeout: "3600"
-      # nginx.org/proxy-send-timeout: "3600"
-      # nginx.org/websocket-services: "<release_name>-frigate" # TODO: can this be automated?
+    annotations:
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth-middleware@kubernetescrd
 
     # -- list of hosts and their paths that ingress controller should repsond to.
     hosts:
-      - host: chart.example.local
+      - host: frigate.jsck.network
         paths:
           - '/'
 
     # -- list of TLS configurations
-    tls: []
-    #  - secretName: chart-example-tls
-    #    hosts:
-    #      - chart-example.local
-
+    tls:
+      - hosts:
+         - frigate.jsck.network
+        secretName: jsck.network-cert
   persistence:
     data:
       # -- Enables persistence for the data directory
