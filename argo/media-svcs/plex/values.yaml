@@ -9,7 +9,7 @@ plex:
     # -- image repository
     repository: docker.io/plexinc/pms-docker
     # -- image tag
-    tag: 1.32.0.6918-6f393eda1
+    tag: 1.32.0.6973-a787c5a8e
     # -- image pull policy
     pullPolicy: IfNotPresent
 
