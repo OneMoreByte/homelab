@@ -15,12 +15,12 @@ patchesStrategicMerge:
 - overlays/service.yaml
 
 
-patchesJson6902:
-- path: overlays/deploy-command.yaml
-  target:
-    group: apps
-    kind: Deployment
-    name: argocd-server
-    version: v1
+#patchesJson6902:
+#- path: overlays/deploy-command.yaml
+#  target:
+#    group: apps
+#    kind: Deployment
+#    name: argocd-server
+#    version: v1
 
 namespace: argocd
