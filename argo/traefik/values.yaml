@@ -11,6 +11,71 @@ traefik:
       enabled: true
       allowCrossNamespace: true
 
+  envFrom:
+  # TRAEFIK_METRICS_INFLUXDB2_TOKEN
+  - secretRef: 
+
+  metrics: {}
+#    influxdb2:
+#      org: "traefik"
+#      bucket: ""
+#      addEntryPointsLabels: true
+#      addRoutersLabels: true
+#      addServicesLabels: true
+
+  #experimental:
+  #  v3:
+  #    enabled: true
+  #  plugins:
+  #    enabled: true
+  #  kubernetesGateway:
+  #    enabled: true
+  #    gateway:
+  #      enabled: true
+
+  tracing: {}
+    # instana:
+    #   localAgentHost: 127.0.0.1
+    #   localAgentPort: 42699
+    #   logLevel: info
+    #   enableAutoProfile: true
+    # datadog:
+    #   localAgentHostPort: 127.0.0.1:8126
+    #   debug: false
+    #   globalTag: ""
+    #   prioritySampling: false
+    # jaeger:
+    #   samplingServerURL: http://localhost:5778/sampling
+    #   samplingType: const
+    #   samplingParam: 1.0
+    #   localAgentHostPort: 127.0.0.1:6831
+    #   gen128Bit: false
+    #   propagation: jaeger
+    #   traceContextHeaderName: uber-trace-id
+    #   disableAttemptReconnecting: true
+    #   collector:
+    #      endpoint: ""
+    #      user: ""
+    #      password: ""
+    # zipkin:
+    #   httpEndpoint: http://localhost:9411/api/v2/spans
+    #   sameSpan: false
+    #   id128Bit: true
+    #   sampleRate: 1.0
+    # haystack:
+    #   localAgentHost: 127.0.0.1
+    #   localAgentPort: 35000
+    #   globalTag: ""
+    #   traceIDHeaderName: ""
+    #   parentIDHeaderName: ""
+    #   spanIDHeaderName: ""
+    #   baggagePrefixHeaderName: ""
+    # elastic:
+    #   serverURL: http://localhost:8200
+    #   secretToken: ""
+    #   serviceEnvironment: ""
+
+
 traefik-forward-auth:
   replicaCount: 1
 
