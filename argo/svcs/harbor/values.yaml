@@ -8,8 +8,8 @@ harbor:
       certSource: secret
 
       secret:
-        secretName: "jsck.network-cert"
-        notarySecretName: "jsck.network-cert"
+        secretName: "harbor.jsck.network-cert"
+        notarySecretName: "harbor.jsck.network-cert"
     ingress:
       hosts:
         core: core.harbor.jsck.network

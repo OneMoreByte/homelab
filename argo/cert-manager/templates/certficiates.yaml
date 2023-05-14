@@ -11,7 +11,6 @@ spec:
     kind: ClusterIssuer
 
 ---
-
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -25,7 +24,6 @@ spec:
     kind: ClusterIssuer
 
 ---
-
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -39,7 +37,6 @@ spec:
     kind: ClusterIssuer
 
 ---
-
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -53,7 +50,6 @@ spec:
     kind: ClusterIssuer
 
 ---
-
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -81,7 +77,6 @@ spec:
     kind: ClusterIssuer
 
 ---
-
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -96,7 +91,6 @@ spec:
     kind: ClusterIssuer
 
 ---
-
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -127,6 +121,21 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
+  name: harbor.jsck.network-cert
+  namespace: svcs
+spec:
+  dnsNames:
+    - "*.harbor.jsck.network"
+  secretName: harbor.jsck.network-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+---
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
   name: jackhil.de-cert
   namespace: keycloak
 spec:
@@ -137,7 +146,6 @@ spec:
     name: letsencrypt-aws-issuer
     kind: ClusterIssuer
 ---
-
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
