@@ -6,13 +6,13 @@ resources:
 - base/applications.yaml
 - base/ingress.yaml
 - base/wailord-cluster.yaml
-- base/argo-cmd-params-cm.yaml
+- base/argocd-cmd-params-cm.yaml
 - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.2
 
-patchesStrategicMerge:
-- overlays/argocd-cm.yaml
-- overlays/argocd-rbac-cm.yaml
-- overlays/argocd-secret.yaml
-- overlays/service.yaml
 
 namespace: argocd
+patches:
+- path: overlays/argocd-cm.yaml
+- path: overlays/argocd-rbac-cm.yaml
+- path: overlays/argocd-secret.yaml
+- path: overlays/service.yaml
