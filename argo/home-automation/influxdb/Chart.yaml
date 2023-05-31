@@ -4,7 +4,11 @@ type: application
 version: 0.0.1
 sources:
   - https://staging.artifacthub.io/packages/helm/bitnami/influxdb
+  - https://github.com/OneMoreByte/influxdb-secret-controller
 dependencies:
   - name: influxdb
     version: 5.6.1
     repository: "https://charts.bitnami.com/bitnami"
+  - name: infuxdb-secret-controller
+    version: 1.0.3
+    repository: https://onemorebyte.github.io/helm-charts/

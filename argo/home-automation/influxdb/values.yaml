@@ -771,21 +771,7 @@ influxdb:
     ##
     annotations: {}
 
-  ## Pod Service Account
-  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
-  ## @param serviceAccount.create Specifies whether a ServiceAccount should be created
-  ## @param serviceAccount.name Name of the service account to use. If not set and create is true, a name is generated using the fullname template.
-  ## @param serviceAccount.automountServiceAccountToken Automount service account token for the server service account
-  ## @param serviceAccount.annotations Annotations for service account. Evaluated as a template. Only used if `create` is `true`.
-  ##
-  serviceAccount:
-    ## DEPRECATED: serviceAccount.enabled - Use serviceAccount.create instead
-    ##
-    #enabled: false
-    create: true
-    name: ""
-    automountServiceAccountToken: true
-    annotations: {}
+
 
   ## Pod Security Policy
   ## ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/
@@ -1044,3 +1030,86 @@ influxdb:
           ##   - myRegistryKeySecretName
           ##
           pullSecrets: []
+
+
+infuxdb-secret-controller:
+  image:
+    repository: ghcr.io/onemorebyte/influxdb-secret-controller
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  serviceAccount:
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    #name: ""
+
+  # Enable debug mode. This will make the logging more verbose 
+  debug: true
+  token_secrets:
+  #  - name: home-assistant-sensor-token
+  #    org: hone-assistant
+  #    namespace: home-assistant
+  #    permissions: write
+  #    bucket: sensors
+  - name: traefik-metrics-token
+    org: traefik
+    namespace: traefik
+    permissions: write
+  #  - name: grafana-readonly-token
+  #    org: traefik
+  #    namespace: grafana
+  #    permissions: read
+
+  env:
+  ## These must be set. It's better to use secrets to set these
+  # - name: INFLUXDB_TOKEN
+  #    value: xxxxxx
+  - name: INFLUXDB_URI
+    value: "https://influxdb.jsck.network"
+  - name: INFLUXDB_TOKEN
+    valueFrom:
+        secretKeyRef:
+          name: influxdb
+          key: admin-user-token
+
+
+  envFromSecrets: []
+
+
+  podAnnotations: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}

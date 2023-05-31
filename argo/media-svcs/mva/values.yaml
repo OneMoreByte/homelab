@@ -188,6 +188,7 @@ flexget_config:
         - Mashle
         - Edens Zero
         - 'Ousama Ranking: Yuuki no Takarabako'
+        - Tondemo Skill de Isekai Hourou Meshi
       notify:
         entries:
           message: |
@@ -297,6 +298,7 @@ flexget_config:
           - Mashle
           - Edens Zero
           - 'Ousama Ranking: Yuuki no Takarabako'
+          - Tondemo Skill de Isekai Hourou Meshi
       accept_all: yes
       notify:
         entries:
