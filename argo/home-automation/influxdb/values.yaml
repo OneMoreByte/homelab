@@ -1047,7 +1047,7 @@ infuxdb-secret-controller:
     annotations: {}
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
-    #name: ""
+    # name: "influxdb-token-sa"
 
   # Enable debug mode. This will make the logging more verbose 
   debug: true
@@ -1074,9 +1074,9 @@ infuxdb-secret-controller:
     value: "https://influxdb.jsck.network"
   - name: INFLUXDB_TOKEN
     valueFrom:
-        secretKeyRef:
-          name: influxdb
-          key: admin-user-token
+      secretKeyRef:
+        name: influxdb
+        key: admin-user-token
 
 
   envFromSecrets: []

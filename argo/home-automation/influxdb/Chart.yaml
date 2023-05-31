@@ -10,5 +10,5 @@ dependencies:
     version: 5.6.1
     repository: "https://charts.bitnami.com/bitnami"
   - name: infuxdb-secret-controller
-    version: 1.0.3
+    version: 1.0.6
     repository: https://onemorebyte.github.io/helm-charts/
