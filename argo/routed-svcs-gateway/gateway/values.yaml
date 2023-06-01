@@ -58,7 +58,7 @@ pod-gateway:
       gluetun:
         image:
           repository: docker.io/qmcgaw/gluetun
-          tag: v3.34.2
+          tag: v3.34.3
 
       env:
       - name:  VPN_SERVICE_PROVIDER
