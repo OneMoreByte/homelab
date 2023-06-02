@@ -8,5 +8,5 @@ sources:
   - https://github.com/Kareadita/Kavita
 dependencies:
 - name: app-template
-  version: 1.5.0
+  version: 1.5.1
   repository: https://bjw-s.github.io/helm-charts/
