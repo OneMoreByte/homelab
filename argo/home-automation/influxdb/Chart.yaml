@@ -10,5 +10,5 @@ dependencies:
     version: 2.1.1
     repository: "https://helm.influxdata.com/"
   - name: infuxdb-secret-controller
-    version: 1.0.14
+    version: 1.0.15
     repository: https://helm.jsck.network
