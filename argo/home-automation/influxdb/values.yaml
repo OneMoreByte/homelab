@@ -203,7 +203,7 @@ infuxdb-secret-controller:
     repository: ghcr.io/onemorebyte/influxdb-secret-controller
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "0.1.10"
+    tag: "0.1.11"
 
   nameOverride: ""
   fullnameOverride: ""
