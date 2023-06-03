@@ -1042,6 +1042,10 @@ infuxdb-secret-controller:
   nameOverride: ""
   fullnameOverride: ""
 
+  job:
+    hook: "post-upgrade"
+    weight: "1"
+
   serviceAccount:
     # Annotations to add to the service account
     annotations: {}
