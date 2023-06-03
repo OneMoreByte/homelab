@@ -6,9 +6,9 @@ sources:
   - https://staging.artifacthub.io/packages/helm/bitnami/influxdb
   - https://github.com/OneMoreByte/influxdb-secret-controller
 dependencies:
-  - name: influxdb
-    version: 5.6.1
-    repository: "https://charts.bitnami.com/bitnami"
+  - name: influxdb2
+    version: 2.1.1
+    repository: "https://helm.influxdata.com/"
   - name: infuxdb-secret-controller
     version: 1.0.10
     repository: https://helm.jsck.network
