@@ -245,8 +245,8 @@ infuxdb-secret-controller:
   - name: INFLUXDB_TOKEN
     valueFrom:
       secretKeyRef:
-        name: influxdb
-        key: admin-user-token
+        name: influxdb-influxdb2-auth
+        key: admin-token
 
 
   envFromSecrets: []
