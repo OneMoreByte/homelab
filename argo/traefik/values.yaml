@@ -11,27 +11,29 @@ traefik:
       enabled: true
       allowCrossNamespace: true
 
-  envFrom:
-  # TRAEFIK_METRICS_INFLUXDB2_TOKEN
-  - secretRef: 
+  env:
+  - name: TRAEFIK_METRICS_INFLUXDB2_TOKEN
+    secretKeyRef:
+      name: traefik-metrics-token
+      key: "token" 
 
-  metrics: {}
-#    influxdb2:
-#      org: "traefik"
-#      bucket: ""
-#      addEntryPointsLabels: true
-#      addRoutersLabels: true
-#      addServicesLabels: true
+  metrics:
+    influxdb2:
+      org: "traefik"
+      #bucket: ""
+      addEntryPointsLabels: true
+      addRoutersLabels: true
+      addServicesLabels: true
 
-  #experimental:
-  #  v3:
-  #    enabled: true
-  #  plugins:
-  #    enabled: true
-  #  kubernetesGateway:
-  #    enabled: true
-  #    gateway:
-  #      enabled: true
+  experimental:
+    v3:
+      enabled: true
+    plugins:
+      enabled: true
+    kubernetesGateway:
+      enabled: true
+      gateway:
+        enabled: true
 
   tracing: {}
     # instana:
