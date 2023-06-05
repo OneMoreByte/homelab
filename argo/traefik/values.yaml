@@ -20,9 +20,10 @@ traefik:
 
   metrics:
     influxdb2:
+      address: "https://influxdb.jsck.network"
       org: "traefik"
       bucket: "traefik"
-      token: "MWFG8rCJNbmRAlllE0Yr-XHbLmQZrogtgLrYDIYuOVw-8uX_ojUwYD21iP2xlLJzI41a5ngVjMHu0P62Z3gZjg=="
+      token: "{{env 'TRAEFIK_METRICS_INFLUXDB2_TOKEN'}}"
       addEntryPointsLabels: true
       addRoutersLabels: true
       addServicesLabels: true
