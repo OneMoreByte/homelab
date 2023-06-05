@@ -22,6 +22,7 @@ traefik:
     influxdb2:
       org: "traefik"
       bucket: "traefik"
+      token: "{{env 'TRAEFIK_METRICS_INFLUXDB2_TOKEN'}}"
       addEntryPointsLabels: true
       addRoutersLabels: true
       addServicesLabels: true
