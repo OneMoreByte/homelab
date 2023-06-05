@@ -229,6 +229,7 @@ infuxdb-secret-controller:
   #    bucket: sensors
   - name: traefik-metrics-token
     org: traefik
+    bucket: traefik
     namespace: traefik
     permissions: write
   - name: grafana-traefik-readonly-token
