@@ -16,12 +16,12 @@ traefik:
     valueFrom:
       secretKeyRef:
         name: traefik-metrics-token
-        key: "token" 
+        key: "token"
 
   metrics:
     influxdb2:
       org: "traefik"
-      #bucket: ""
+      bucket: "traefik"
       addEntryPointsLabels: true
       addRoutersLabels: true
       addServicesLabels: true
