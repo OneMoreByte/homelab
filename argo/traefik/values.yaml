@@ -13,9 +13,10 @@ traefik:
 
   env:
   - name: TRAEFIK_METRICS_INFLUXDB2_TOKEN
-    secretKeyRef:
-      name: traefik-metrics-token
-      key: "token" 
+    valueFrom:
+      secretKeyRef:
+        name: traefik-metrics-token
+        key: "token" 
 
   metrics:
     influxdb2:
