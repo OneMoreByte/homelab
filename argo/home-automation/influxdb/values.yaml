@@ -231,10 +231,10 @@ infuxdb-secret-controller:
     org: traefik
     namespace: traefik
     permissions: write
-  #  - name: grafana-readonly-token
-  #    org: traefik
-  #    namespace: grafana
-  #    permissions: read
+  - name: grafana-traefik-readonly-token
+    org: traefik
+    namespace: svcs
+    permissions: read
 
   env:
   ## These must be set. It's better to use secrets to set these
