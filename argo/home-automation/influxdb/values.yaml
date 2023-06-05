@@ -107,7 +107,7 @@ influxdb2:
     ## The password and token are obtained from an existing secret. The expected
     ## keys are `admin-password` and `admin-token`.
     ## If set, the password and token values above are ignored.
-    # existingSecret: influxdb-auth
+    existingSecret: influxdb-admin-auth
 
   ## Persist data to a persistent volume
   ##
