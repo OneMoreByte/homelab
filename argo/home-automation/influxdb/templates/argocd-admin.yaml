@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  admin-password: Yk1IblR3UzJaSWVJQzlucjIzbmlUbGRjV0dEb2dvY3U=
+  admin-token: YmtlUHd3aDk3WW52dFJKVjNLbVowZlBNQXY1NTBUeEs=
+kind: Secret
+metadata:
+  name: influxdb-admin-auth
+type: Opaque
