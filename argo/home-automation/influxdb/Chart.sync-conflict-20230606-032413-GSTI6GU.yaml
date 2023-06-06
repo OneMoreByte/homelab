@@ -1,0 +1,10 @@
+apiVersion: v2
+name: influxdb
+type: application
+version: 0.0.1
+sources:
+  - https://staging.artifacthub.io/packages/helm/bitnami/influxdb
+dependencies:
+  - name: influxdb
+    version: 5.5.2
+    repository: "https://charts.bitnami.com/bitnami"

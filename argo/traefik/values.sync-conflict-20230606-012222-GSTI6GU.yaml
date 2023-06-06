@@ -1,0 +1,144 @@
+traefik:
+  additionalArguments:
+#    - "--entryPoints.web.proxyProtocol.trustedIps=127.0.0.1/32,192.168.1.243/32"
+#    - "--entryPoints.websecure.proxyProtocol.trustedIps=127.0.0.1/32,192.168.1.243/32"
+#    - "--providers.kubernetescrd.allowCrossNamespace=true"
+  providers:
+    kubernetesIngress:
+      publishedService:
+        enabled: true
+    kubernetesCRD:
+      enabled: true
+      allowCrossNamespace: true
+
+  envFrom:
+  # TRAEFIK_METRICS_INFLUXDB2_TOKEN
+  - secretRef: 
+
+  metrics: {}
+#    influxdb2:
+#      org: "traefik"
+#      bucket: ""
+#      addEntryPointsLabels: true
+#      addRoutersLabels: true
+#      addServicesLabels: true
+
+  #experimental:
+  #  v3:
+  #    enabled: true
+  #  plugins:
+  #    enabled: true
+  #  kubernetesGateway:
+  #    enabled: true
+  #    gateway:
+  #      enabled: true
+
+  tracing: {}
+    # instana:
+    #   localAgentHost: 127.0.0.1
+    #   localAgentPort: 42699
+    #   logLevel: info
+    #   enableAutoProfile: true
+    # datadog:
+    #   localAgentHostPort: 127.0.0.1:8126
+    #   debug: false
+    #   globalTag: ""
+    #   prioritySampling: false
+    # jaeger:
+    #   samplingServerURL: http://localhost:5778/sampling
+    #   samplingType: const
+    #   samplingParam: 1.0
+    #   localAgentHostPort: 127.0.0.1:6831
+    #   gen128Bit: false
+    #   propagation: jaeger
+    #   traceContextHeaderName: uber-trace-id
+    #   disableAttemptReconnecting: true
+    #   collector:
+    #      endpoint: ""
+    #      user: ""
+    #      password: ""
+    # zipkin:
+    #   httpEndpoint: http://localhost:9411/api/v2/spans
+    #   sameSpan: false
+    #   id128Bit: true
+    #   sampleRate: 1.0
+    # haystack:
+    #   localAgentHost: 127.0.0.1
+    #   localAgentPort: 35000
+    #   globalTag: ""
+    #   traceIDHeaderName: ""
+    #   parentIDHeaderName: ""
+    #   spanIDHeaderName: ""
+    #   baggagePrefixHeaderName: ""
+    # elastic:
+    #   serverURL: http://localhost:8200
+    #   secretToken: ""
+    #   serviceEnvironment: ""
+
+
+traefik-forward-auth:
+  replicaCount: 1
+
+  image:
+    repository: mesosphere/traefik-forward-auth
+    tag: 3.1.0
+    pullPolicy: IfNotPresent
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  service:
+    type: ClusterIP
+    port: 4181
+
+  traefikForwardAuth:
+    # If set to false, do not install the TFA deployment.
+    # TFA will refuse to start up if the OIDC provider is not ready.
+    # This chart option allows us to stage TFA to the cluster and then
+    # later update it with proper OIDC provider information.
+    enabled: true
+    clientId: traefik-forward-auth
+    clientSecret:
+      valueFrom:
+        secretKeyRef:
+          name: keycloak-oidc
+          key: client_secret
+    # https only?
+    cookieSecure: false
+    domain: 
+    authHost:
+    whitelist: []
+    oidcUri: "https://auth.jackhil.de/auth/realms/master"
+    # If undefined use the Kubernetes root CA certificate
+    # caCertificate: |
+    #   -----BEGIN
+    #   ...
+    #   -----END
+    # or caSecretName: < name of the secret >
+    # To use system trusted CAs
+    extraConfig: ""
+    userCookieName: "_forward_auth_name"
+    enableRBAC: false
+    enableImpersonation: false
+    rbacPassThroughPaths: []
+
+  ingress:
+    enabled: false
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    paths:
+      - /
+    hosts:
+      - chart-example.local
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+  clusterStorage:
+    enabled: false
+    cacheTTL: 60
+    namespace: ""
+
+  addonsInitializer: "mesosphere/kubeaddons-addon-initializer:v0.5.1"

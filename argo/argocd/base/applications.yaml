@@ -703,3 +703,22 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jaeger
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:OneMoreByte/homelab.git'
+    path: metrics/jaeger
+    targetRevision: "HEAD"
+  destination:
+    namespace: metrics
+    name: wailord.jsck.network
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+---
