@@ -713,7 +713,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:OneMoreByte/homelab.git'
-    path: metrics/jaeger/
+    path: argo/metrics/jaeger/
     targetRevision: "HEAD"
   destination:
     namespace: metrics
