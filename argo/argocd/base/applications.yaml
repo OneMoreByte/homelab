@@ -713,10 +713,10 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:OneMoreByte/homelab.git'
-    path: argo/metrics/jaeger/
+    path: argo/observability/jaeger/
     targetRevision: "HEAD"
   destination:
-    namespace: metrics
+    namespace: observability
     name: wailord.jsck.network
   syncPolicy:
     automated:
