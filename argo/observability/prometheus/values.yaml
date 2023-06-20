@@ -1081,7 +1081,7 @@ prometheus:
 
         - job_name: 'router-metrics'
           static_configs:
-          - targets: ['192.168.13.1:9100']                  
+          - targets: ['192.168.13.1:9100']
 
   # adds additional scrape configs to prometheus.yml
   # must be a string so you have to add a | after extraScrapeConfigs:

@@ -1,0 +1,12 @@
+apiVersion: v2
+name: elastic
+type: application
+version: 0.0.1
+sources:
+  - https://github.com/elastic/elasticsearch
+dependencies:
+  - name: elasticsearch
+    version: 8.5.1
+    repository: "https://helm.elastic.co"
+
+

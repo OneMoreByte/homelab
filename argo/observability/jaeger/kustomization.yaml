@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
 - https://github.com/jaegertracing/jaeger-operator/releases/download/v1.45.0/jaeger-operator.yaml
-
+- base/deployment.yaml
