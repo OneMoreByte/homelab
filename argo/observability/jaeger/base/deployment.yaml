@@ -17,7 +17,6 @@ spec:
         server-urls: https://elasticsearch-master:9200
         tls:
           ca: /es/certificates/ca.crt
-    secretName: elasticsearch-master-credentials
     env:
       - name: ES_USERNAME
         valueFrom:
