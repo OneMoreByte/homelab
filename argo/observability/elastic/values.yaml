@@ -250,20 +250,22 @@ elasticsearch:
   # Enabling this will publicly expose your Elasticsearch instance.
   # Only enable this if you have security enabled on your cluster
   ingress:
-    enabled: false
-    annotations: {}
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     className: "nginx"
     pathtype: ImplementationSpecific
     hosts:
-      - host: chart-example.local
+      - host: elastic.jsck.network
         paths:
           - path: /
-    tls: []
-    #  - secretName: chart-example-tls
-    #    hosts:
-    #      - chart-example.local
+    tls:
+      - secretName: jsck.network-certs
+        hosts:
+          - elastic.jsck.network
 
   nameOverride: ""
   fullnameOverride: ""
