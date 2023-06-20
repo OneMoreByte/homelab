@@ -40,24 +40,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: elastic
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: 'git@github.com:OneMoreByte/homelab.git'
-    path: argo/observability/elastic/
-    targetRevision: "HEAD"
-  destination:
-    namespace: observability
-    name: wailord.jsck.network
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true

@@ -12,20 +12,17 @@ spec:
         memory: 128Mi
   storage:
     type: elasticsearch
-    options:
-      es:
-        server-urls: https://elastic.jsck.network
-  env:
-    - name: ES_USERNAME
-      valueFrom:
-        secretKeyRef:
-          name: elasticsearch-master-credentials
-          key: username
-    - name: ES_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: elasticsearch-master-credentials
-          key: password
+    elasticsearch:
+      nodeCount: 3
+      storage:
+        size: 32Gi
+      resources:
+        requests:
+          cpu: 200m
+          memory: 4Gi
+        limits:
+          memory: 4Gi
+      redundancyPolicy: MultipleRedundancy
   ingress:
     tls:
       - hosts:
