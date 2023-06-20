@@ -12,17 +12,21 @@ spec:
         memory: 128Mi
   storage:
     type: elasticsearch
-    elasticsearch:
-      nodeCount: 3
-      storage:
-        size: 32Gi
-      resources:
-        requests:
-          cpu: 200m
-          memory: 4Gi
-        limits:
-          memory: 4Gi
-      redundancyPolicy: MultipleRedundancy
+    options:
+      es:
+        server-urls: https://elasticsearch-es-http:9200
+        index-prefix: wailord
+        tls:
+          ca: /es/certificates/ca.crt
+    secretName: jaeger-secret
+  volumeMounts:
+    - name: certificates
+      mountPath: /es/certificates/
+      readOnly: true
+  volumes:
+    - name: certificates
+      secret:
+        secretName: elasticsearch-es-remote-ca
   ingress:
     tls:
       - hosts:
