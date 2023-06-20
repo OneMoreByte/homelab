@@ -184,7 +184,7 @@ elasticsearch:
   # If you experience slow pod startups you probably want to set this to `false`.
   enableServiceLinks: true
 
-  protocol: https
+  protocol: http
   httpPort: 9200
   transportPort: 9300
 
@@ -250,7 +250,7 @@ elasticsearch:
   # Enabling this will publicly expose your Elasticsearch instance.
   # Only enable this if you have security enabled on your cluster
   ingress:
-    enabled: true
+    enabled: false
     annotations:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
