@@ -1,0 +1,70 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: factorio
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/game-svcs/factorio/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: factorio
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: game-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minecraft-alm8
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/game-svcs/minecraft-alm8/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: minecraft-alm8
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: game-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+# NOTE TO SELF. The below is a kustomize install. You want to copy the one above this comment instead.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minecraft-router
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:OneMoreByte/homelab.git'
+    path: argo/game-svcs/minecraft-router
+    targetRevision: "HEAD"
+  destination:
+    namespace: game-svcs
+    name: wailord.jsck.network
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true

@@ -3,7 +3,18 @@ kind: Kustomization
 
 resources:
 - base/repository.yaml
-- base/applications.yaml
+- base/applications/argocd.yaml
+- base/applications/cert-manager.yaml
+- base/applications/game-svcs.yaml
+- base/applications/home-automation.yaml
+- base/applications/keycloak.yaml
+- base/applications/longhorn.yaml
+- base/applications/media-svcs.yaml
+- base/applications/metallb.yaml
+- base/applications/observability.yaml
+- base/applications/routed-svcs.yaml
+- base/applications/svcs.yaml
+- base/applications/traefik.yaml
 - base/ingress.yaml
 - base/wailord-cluster.yaml
 
