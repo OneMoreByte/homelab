@@ -11,6 +11,10 @@ traefik:
       enabled: true
       allowCrossNamespace: true
 
+  deployment:
+    annotations:
+      "sidecar.jaegertracing.io/inject": "true"
+
   env:
   - name: TRAEFIK_METRICS_INFLUXDB2_TOKEN
     valueFrom:
@@ -38,7 +42,7 @@ traefik:
       gateway:
         enabled: false
 
-  tracing: {}
+  tracing:
     # instana:
     #   localAgentHost: 127.0.0.1
     #   localAgentPort: 42699
@@ -49,15 +53,15 @@ traefik:
     #   debug: false
     #   globalTag: ""
     #   prioritySampling: false
-    # jaeger:
-    #   samplingServerURL: http://localhost:5778/sampling
-    #   samplingType: const
-    #   samplingParam: 1.0
-    #   localAgentHostPort: 127.0.0.1:6831
-    #   gen128Bit: false
-    #   propagation: jaeger
-    #   traceContextHeaderName: uber-trace-id
-    #   disableAttemptReconnecting: true
+    jaeger:
+      samplingServerURL: http://localhost:5778/sampling
+      samplingType: const
+      samplingParam: 1.0
+      localAgentHostPort: 127.0.0.1:6831
+      gen128Bit: false
+      propagation: jaeger
+      traceContextHeaderName: uber-trace-id
+      disableAttemptReconnecting: true
     #   collector:
     #      endpoint: ""
     #      user: ""
