@@ -14,7 +14,28 @@ spec:
     type: elasticsearch
     options:
       es:
-        server-urls: http://elasticsearch-master:9200
+        server-urls: https://elasticsearch-master:9200
+        tls:
+          ca: /es/certificates/ca.crt
+  env:
+    - name: ES_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: elasticsearch-master-credentials
+          key: username
+    - name: ES_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: elasticsearch-master-credentials
+          key: password
+  volumeMounts:
+    - name: certificates
+      mountPath: /es/certificates/
+      readOnly: true
+  volumes:
+    - name: certificates
+      secret:
+        secretName: elasticsearch-master-certs
   ingress:
     tls:
       - hosts:
