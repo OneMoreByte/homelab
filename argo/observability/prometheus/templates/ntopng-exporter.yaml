@@ -12,7 +12,6 @@ spec:
   strategy: {}
   template:
     metadata:
-
       labels:
         app: ntopng-exporter
     spec:
@@ -21,7 +20,7 @@ spec:
           name: ntopng-exporter
           resources: {}
           volumeMounts:
-            - mountPath: /config 
+            - mountPath: /config
               name: config
           ports:
             - containerPort: 3001
@@ -30,7 +29,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: ntopng-exporter
+            name: ntopng-exporter-config
 ---
 apiVersion: v1
 kind: Service
@@ -51,7 +50,7 @@ kind: ConfigMap
 metadata:
   name: ntopng-exporter-config
   labels:
-    app: ntopng-exporter  
+    app: ntopng-exporter
 data:
   ntopng-exporter.yaml: |
     ntopng:
