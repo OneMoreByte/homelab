@@ -1083,6 +1083,10 @@ prometheus:
           static_configs:
           - targets: ['192.168.13.1:9100']
 
+        - job_name: 'ntopng-metrics'
+          static_configs:
+          - targets: ['ntopng-exporter:3001']
+
   # adds additional scrape configs to prometheus.yml
   # must be a string so you have to add a | after extraScrapeConfigs:
   # example adds prometheus-blackbox-exporter scrape config
