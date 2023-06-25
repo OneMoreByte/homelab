@@ -17,7 +17,7 @@ minecraft:
   resources:
     requests:
       memory: 16Gi
-      cpu: 4.0
+      cpu: 4
 
   # upgrade strategy type (e.g. Recreate or RollingUpdate)
   strategyType: Recreate
@@ -124,7 +124,7 @@ minecraft:
     # A comma-separated list of player names to whitelist.
     whitelist:
     # A comma-separated list of player names who should be admins.
-    ops:
+    ops: OneMoreByte
     # A server icon URL for server listings. Auto-scaled and transcoded.
     icon:
     # Max connected players.
@@ -162,7 +162,7 @@ minecraft:
     # One of: creative, survival, adventure, spectator
     gameMode: survival
     # Message of the Day
-    motd: ""
+    motd: "wack"
     # If true, enable player-vs-player damage.
     pvp: true
     # One of: DEFAULT, FLAT, LARGEBIOMES, AMPLIFIED, CUSTOMIZED
