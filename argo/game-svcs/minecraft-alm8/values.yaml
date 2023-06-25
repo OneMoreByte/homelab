@@ -100,7 +100,7 @@ minecraft:
     # This can be one of "VANILLA", "FORGE", "SPIGOT", "BUKKIT", "PAPER", "FTBA", "SPONGEVANILLA", "CURSEFORGE"
     type: "FORGE"
     # If type is set to FORGE, this sets the version; this is ignored if forgeInstallerUrl is set
-    forgeVersion: 43.1.47
+    forgeVersion: 43.2.14
     # If type is set to SPONGEVANILLA, this sets the version
     spongeVersion:
     # If type is set to FORGE, this sets the URL to download the Forge installer
