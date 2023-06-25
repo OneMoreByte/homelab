@@ -16,8 +16,8 @@ minecraft:
   ##
   resources:
     requests:
-      memory: 8Gi
-      cpu: 2.0
+      memory: 16Gi
+      cpu: 4.0
 
   # upgrade strategy type (e.g. Recreate or RollingUpdate)
   strategyType: Recreate
@@ -176,7 +176,7 @@ minecraft:
     # force re-download of server file
     forceReDownload: false
     # If set, the modpack at this URL will be downloaded at startup
-    downloadModpackUrl: https://mediafilez.forgecdn.net/files/4083/528/Server-Files-1.0.1.zip
+    downloadModpackUrl: https://mediafilez.forgecdn.net/files/4599/101/Server-Files-1.0.21b.zip
     # If true, old versions of downloaded mods will be replaced with new ones from downloadModpackUrl
     removeOldMods: false
     # A list of VanillaTweaks Share Codes to download. (https://vanillatweaks.net/share#wUq1iz => "wUq1iz")
@@ -191,7 +191,7 @@ minecraft:
     # Check accounts against Minecraft account service.
     onlineMode: true
     # If you adjust this, you may need to adjust resources.requests above to match.
-    memory: 8G
+    memory: 16G
     # General JVM options to be passed to the Minecraft server invocation
     jvmOpts: ""
     # Options like -X that need to proceed general JVM options
@@ -302,7 +302,7 @@ minecraft:
     dataDir:
       # Set this to false if you don't care to persist state between restarts.
       enabled: true
-      Size: 32Gi
+      Size: 64Gi
       # existingClaim: nil
       ## specify a subpath in the volume where the data is. Useful when sharing volumes with other apps.
       # subPath: /path/to/dataDir
