@@ -54,6 +54,8 @@ grafana:
     server:
       domain: "grafana.jackhil.de"
       root_url: "https://grafana.jackhil.de"
+    auth:
+      oauth_allow_insecure_email_lookup: true
     auth.generic_oauth:
       enabled: true
       oauth_name: "Login Keycloak"
