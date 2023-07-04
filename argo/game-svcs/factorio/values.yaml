@@ -4,7 +4,7 @@ factorio:
     repository: factoriotools/factorio
     # -- image tag
     # @default -- chart.appVersion
-    tag: 1.1.86
+    tag: 1.1.87
     # -- image pull policy
     pullPolicy: IfNotPresent
 
