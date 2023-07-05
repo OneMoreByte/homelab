@@ -18,7 +18,7 @@ resources:
 - base/ingress.yaml
 - base/wailord-cluster.yaml
 
-- https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.6
+- https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.7
 
 
 namespace: argocd
