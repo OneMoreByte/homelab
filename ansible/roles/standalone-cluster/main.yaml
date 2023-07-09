@@ -1,0 +1,12 @@
+
+- name: Install k3s
+  vars:
+    k3s_state: installed
+    k3s_build_cluster: false
+  roles:
+     - role: xanmanning.k3s
+- name: Check for pre-existing cluster secret in vault
+
+- name: Add cluster secret to vault
+
+- name: 
