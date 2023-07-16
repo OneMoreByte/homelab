@@ -238,7 +238,15 @@ frigate:
   tolerations: []
 
   # -- Set Pod affinity rules
-  affinity: {}
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - bulk-datastore
 
   # -- Set additonal pod Annotations
   podAnnotations: {}

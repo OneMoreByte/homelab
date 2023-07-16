@@ -102,31 +102,6 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: node-red
-  namespace: argocd
-spec:
-  project: default
-  source:
-    path: argo/home-automation/node-red/
-    repoURL: git@github.com:OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: node-red
-      valueFiles:
-      - values.yaml
-  destination:
-    name: wailord.jsck.network
-    namespace: home-automation
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
   name: frigate
   namespace: argocd
 spec:
