@@ -98,28 +98,3 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: harbor
-  namespace: argocd
-spec:
-  project: default
-  source:
-    path: argo/svcs/harbor/
-    repoURL: git@github.com:OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: harbor
-      valueFiles:
-      - values.yaml
-  destination:
-    name: wailord.jsck.network
-    namespace: svcs
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
