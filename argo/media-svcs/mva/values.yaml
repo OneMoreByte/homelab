@@ -189,6 +189,7 @@ flexget_config:
         - Edens Zero
         - 'Ousama Ranking: Yuuki no Takarabako'
         - Tondemo Skill de Isekai Hourou Meshi
+        - Jujutsu Kaisen
       notify:
         entries:
           message: |
@@ -299,6 +300,7 @@ flexget_config:
           - Edens Zero
           - 'Ousama Ranking: Yuuki no Takarabako'
           - Tondemo Skill de Isekai Hourou Meshi
+          - Jujutsu Kaisen
       accept_all: yes
       notify:
         entries:
