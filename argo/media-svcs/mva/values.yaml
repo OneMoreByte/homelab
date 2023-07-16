@@ -190,6 +190,18 @@ flexget_config:
         - 'Ousama Ranking: Yuuki no Takarabako'
         - Tondemo Skill de Isekai Hourou Meshi
         - Jujutsu Kaisen
+        - Jidou Hanbaiki ni Umarekawatta Ore wa Meikyuu wo Samayou
+        - Hataraku Maou-sama
+        - Undead Girl Murder Farce
+        - Dark Gathering
+        - AI no Idenshi
+        - Nanatsu no Maken ga Shihai suru
+        - Helck
+        - Zom 100 – Zombie ni Naru made ni Shitai 100 no Koto
+        - Lv1 Maou to One Room Yuusha
+        - Eiyuu Kyoushitsu
+        - Shinigami Bocchan to Kuro Maid
+        - Okashi na Tensei
       notify:
         entries:
           message: |
@@ -301,6 +313,18 @@ flexget_config:
           - 'Ousama Ranking: Yuuki no Takarabako'
           - Tondemo Skill de Isekai Hourou Meshi
           - Jujutsu Kaisen
+          - Jidou Hanbaiki ni Umarekawatta Ore wa Meikyuu wo Samayou
+          - Hataraku Maou-sama
+          - Undead Girl Murder Farce
+          - Dark Gathering
+          - AI no Idenshi
+          - Nanatsu no Maken ga Shihai suru
+          - Helck
+          - Zom 100 – Zombie ni Naru made ni Shitai 100 no Koto
+          - Lv1 Maou to One Room Yuusha
+          - Eiyuu Kyoushitsu
+          - Shinigami Bocchan to Kuro Maid
+          - Okashi na Tensei
       accept_all: yes
       notify:
         entries:
