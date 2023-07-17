@@ -70,7 +70,6 @@ data:
       - lagg0.50
       - lagg0.60
       - pppoe1
-      - tun_wg0
 
     metric:
       localSubnetsOnly: []
