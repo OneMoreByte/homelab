@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - base/repository.yaml
 - base/applications/argocd.yaml
+- base/applications/kube-system.yaml
 - base/applications/cert-manager.yaml
 - base/applications/game-svcs.yaml
 - base/applications/home-automation.yaml
