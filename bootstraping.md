@@ -2,9 +2,7 @@
 
 I wouldn't copy this if the reader is not myself reviewing how I did things. I don't think I'm doing this right.
 
-
 ## Setup Router and Switch
-
 
 ## ZFS pool creation
 
@@ -19,6 +17,7 @@ ls -la /dev/disk/by-id/
 In the past (Aug 2022) this is what I ran to create the pools:
 
 producers zfs hdd
+
 ```
 zpool create -f store \
     -o ashift=12 \
@@ -37,6 +36,7 @@ zpool create -f store \
 ```
 
 fateful zfs ssds
+
 ```
 zpool create -f store \
     -o ashift=12 \
@@ -49,17 +49,19 @@ zpool create -f store \
 ```
 
 create an encryption key
+
 ```
 dd if=/dev/random of=/path/to/key bs=1 count=32
 ```
 
 create volumes
+
 ```
 zfs create -o encryption=on -o keyformat=raw -o keylocation=file:///path/to/key store/example
 ```
 
-
 create this service for loading keys on boot in `/etc/systemd/system/zfs-load-key.service`
+
 ```
 [Unit]
 Description=Load all ZFS encryption keys
@@ -86,23 +88,23 @@ systemctl enable zfs-load-key
 
 ansible-galaxy install githubixx.ansible_role_wireguard
 
-
-
-
 ## Install Kubernetes with kubespray
 
 Label storage node:
+
 ```
 kubectl label node producers app=bulk-datastore
 ```
 
 Bookstrap argo so it can deploy all the apps in this repo:
+
 ```
 kubectl create ns argocd
 kubectl create -k ./argocd
 ```
 
 Set up longhorn UI
+
 ```
 USER=<USERNAME_HERE>; PASSWORD=<PASSWORD_HERE>; echo "${USER}:$(openssl passwd -stdin -apr1 <<< ${PASSWORD})" >> auth
 kubectl -n longhorn-system create secret generic basic-auth --from-file=auth
@@ -137,3 +139,11 @@ spec:
             port:
               number: 80
 ```
+
+# Installing standalone clusters.
+
+Some requirements:
+
+- Requires that main cluster is up (uses argo and sealed secrets)
+- Requires kubeseal installed on machine
+- Requires a roles is downloaded ``
