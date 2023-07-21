@@ -1,0 +1,12 @@
+---
+apiVersion: v2
+name: sealed-secrets-controller
+type: application
+version: 0.0.1
+sources:
+  - https://artifacthub.io/packages/helm/bitnami-labs/sealed-secrets
+  - https://github.com/bitnami-labs/sealed-secrets
+dependencies:
+  - name: sealed-secrets
+    version: 2.11.0
+    repository: "https://bitnami-labs.github.io/sealed-secrets"

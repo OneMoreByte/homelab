@@ -26,3 +26,11 @@ zrepl:
     thefall.jsck.network:
       ansible_user: jsck
       
+
+
+standalone_cluster:
+  hosts:
+    thefall.jsck.network:
+      ansible_user: jsck
+#    theroom.jsck.network:
+#      ansible_user: svc

@@ -1,0 +1,17 @@
+- name: test
+  ansible.builtin.debug:
+    msg:  reeee
+
+- name: Install k3s
+  become: true
+  vars:
+    k3s_state: installed
+    k3s_build_cluster: false
+  ansible.builtin.import_role:
+    name: xanmanning.k3s
+
+#- name: Check for pre-existing cluster secret in vault
+
+#- name: Add cluster secret to vault
+
+#- name: 
