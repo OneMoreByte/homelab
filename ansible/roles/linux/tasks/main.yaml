@@ -2,6 +2,7 @@
   ansible.builtin.shell: infocmp alacritty
   ignore_errors: true
   register: infocmp_alacritty
+  changed_when: False
 
 - name: Get term info file for alacritty
   get_url:
@@ -13,3 +14,27 @@
   become: true
   ansible.builtin.shell: "tic -xe alacritty,alacritty-direct /tmp/alacritty.info"
   when: infocmp_alacritty.rc != 0
+
+- name: Install comfort packages [Debian]
+  ansible.builtin.apt:
+    name:
+      - neovim
+      - jq
+      - curl
+      - htop
+      - git
+    state: present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  become: true
+
+- name: Install comfort packages [RHEL like]
+  ansible.builtin.dnf:
+    name:
+      - neovim
+      - jq
+      - curl
+      - htop
+      - git
+    state: present
+  when: ansible_os_family == "RedHat"
+  become: true

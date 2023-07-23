@@ -16,6 +16,10 @@ linux:
       ansible_user: svc
     books.jsck.network:
       ansible_user: svc
+    thefall.jsck.network:
+      ansible_user: jsck
+    theroom.jsck.network:
+      ansible_user: svc
 
 zrepl:
   hosts:
@@ -26,11 +30,18 @@ zrepl:
     thefall.jsck.network:
       ansible_user: jsck
       
-
+wailord:
+  hosts:
+    fateful.jsck.network:
+      ansible_user: svc
+    producers.jsck.network:
+      ansible_user: svc
+    books.jsck.network:
+      ansible_user: svc
 
 standalone_cluster:
   hosts:
     thefall.jsck.network:
       ansible_user: jsck
-#    theroom.jsck.network:
-#      ansible_user: svc
+    theroom.jsck.network:
+      ansible_user: svc
