@@ -19,7 +19,7 @@ resources:
 - base/applications/traefik.yaml
 - base/ingress.yaml
 - base/wailord-cluster.yaml
-- https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.8
+- https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.9
 - base/standalone_clusters/theroom.jsck.network.yaml
 - base/standalone_clusters/thefall.jsck.network.yaml
 
