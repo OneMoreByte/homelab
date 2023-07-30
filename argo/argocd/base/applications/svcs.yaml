@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     path: argo/svcs/tuner/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: tuner
@@ -33,7 +33,7 @@ spec:
   project: default
   source:
     path: argo/svcs/jmusicbot/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: jmusicbot
@@ -58,7 +58,7 @@ spec:
   project: default
   source:
     path: argo/svcs/grafana/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: grafana
@@ -83,7 +83,7 @@ spec:
   project: default
   source:
     path: argo/svcs/fluidd
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: fluidd-redirect

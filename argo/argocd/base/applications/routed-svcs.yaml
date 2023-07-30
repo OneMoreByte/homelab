@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     path: argo/routed-svcs/gateway-check
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: gateway
@@ -33,7 +33,7 @@ spec:
   project: default
   source:
     path: argo/routed-svcs-gateway/gateway
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: gateway
@@ -58,7 +58,7 @@ spec:
   project: default
   source:
     path: argo/routed-svcs/flood-public
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: flood-public

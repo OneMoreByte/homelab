@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     path: argo/media-svcs/flood/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: flood
@@ -33,7 +33,7 @@ spec:
   project: default
   source:
     path: argo/media-svcs/plex/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: plex
@@ -58,7 +58,7 @@ spec:
   project: default
   source:
     path: argo/media-svcs/jellyfin/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: jellyfin
@@ -83,7 +83,7 @@ spec:
   project: default
   source:
     path: argo/media-svcs/mva/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: mva
@@ -108,7 +108,7 @@ spec:
   project: default
   source:
     path: argo/media-svcs/syncthings
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: syncthings
@@ -133,7 +133,7 @@ spec:
   project: default
   source:
     path: argo/media-svcs/kavita
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: kavita

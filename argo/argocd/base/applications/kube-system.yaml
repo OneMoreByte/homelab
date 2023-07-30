@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:OneMoreByte/homelab.git'
+    repoURL: 'https://github.com/OneMoreByte/homelab.git'
     path: argo/kube-system/sealed-secrets-controller
     targetRevision: "HEAD"
   destination:

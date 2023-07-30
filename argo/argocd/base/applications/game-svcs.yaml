@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     path: argo/game-svcs/factorio/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: factorio
@@ -33,7 +33,7 @@ spec:
   project: default
   source:
     path: argo/game-svcs/minecraft-alm8/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: minecraft-alm8
@@ -58,7 +58,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:OneMoreByte/homelab.git'
+    repoURL: 'https://github.com/OneMoreByte/homelab.git'
     path: argo/game-svcs/minecraft-router
     targetRevision: "HEAD"
   destination:

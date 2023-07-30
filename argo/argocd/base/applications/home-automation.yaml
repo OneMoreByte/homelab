@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     path: argo/home-automation/esphome/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: esphome
@@ -33,7 +33,7 @@ spec:
   project: default
   source:
     path: argo/home-automation/hass/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: hass
@@ -58,7 +58,7 @@ spec:
   project: default
   source:
     path: argo/home-automation/influxdb/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: influxdb
@@ -83,7 +83,7 @@ spec:
   project: default
   source:
     path: argo/home-automation/mqtt/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: mqtt
@@ -108,7 +108,7 @@ spec:
   project: default
   source:
     path: argo/home-automation/frigate/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: frigate
