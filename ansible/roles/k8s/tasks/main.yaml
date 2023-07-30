@@ -3,8 +3,6 @@
   ansible.builtin.dnf:
     name:
       - tar
-      - runc
-      - cri-tools
     state: latest
 
 
