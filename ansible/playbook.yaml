@@ -12,11 +12,10 @@
 #  roles:
 #    - haproxy
 
-#- name: Configure k8s nodes
-#  hosts: k8s
-#  roles:
-#    - gluster-client
-#    - k8s
+- name: Configure k8s nodes
+  hosts: wailord
+  roles:
+    - k8s
 
 #- name: Configure zrepl
 #  hosts: zrepl

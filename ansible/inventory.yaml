@@ -16,6 +16,10 @@ linux:
       ansible_user: svc
     books.jsck.network:
       ansible_user: svc
+    twisted-pair-1.jsck.network:
+      ansible_user: svc
+    twisted-pair-2.jsck.network:
+      ansible_user: svc
     thefall.jsck.network:
       ansible_user: jsck
     theroom.jsck.network:
@@ -37,6 +41,10 @@ wailord:
     producers.jsck.network:
       ansible_user: svc
     books.jsck.network:
+      ansible_user: svc
+    twisted-pair-1.jsck.network:
+      ansible_user: svc
+    twisted-pair-2.jsck.network:
       ansible_user: svc
 
 standalone_cluster:
