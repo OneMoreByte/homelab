@@ -23,29 +23,3 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: jellyfin-test
-  namespace: argocd
-spec:
-  project: default
-  source:
-    path: argo/media-svcs/jellyfin/
-    repoURL: git@github.com:OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: jellyfin
-      valueFiles:
-      - values.yaml
-  destination:
-    name: theroom.jsck.network
-    namespace: media-svcs
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
