@@ -17,6 +17,7 @@ resources:
 - base/applications/routed-svcs.yaml
 - base/applications/svcs.yaml
 - base/applications/traefik.yaml
+- base/applications/theroom.yaml
 - base/ingress.yaml
 - base/wailord-cluster.yaml
 - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.9

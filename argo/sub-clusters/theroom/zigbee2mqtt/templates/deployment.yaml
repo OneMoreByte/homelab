@@ -33,6 +33,18 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - mountPath: /run/udev
+              name: udev
+            - mountPath: /dev/ttyACM0
+              name: ttyacm0
+            - mountPath: /app/data
+              name: data
+          securityContext:
+            privileged: true
+          env:
+          - name: "TZ"
+            value: "America/Chicago"
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -47,6 +59,16 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: ttyacm0
+          hostPath:
+            path: /dev/ttyACM0
+        - name: udev
+          hostPath:
+            path: /run/udev
+        - name: data
+          hostPath:
+            path: /mnt/k8s/zigbee2mqtt/
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
