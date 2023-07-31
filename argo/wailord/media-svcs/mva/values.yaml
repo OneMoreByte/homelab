@@ -89,7 +89,7 @@ affinity:
 
 
 flexget_config: |
-  variables: variables.yaml
+  variables: variables.yml
  
   web_server:
     bind: 0.0.0.0
