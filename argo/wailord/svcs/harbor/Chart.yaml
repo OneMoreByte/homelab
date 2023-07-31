@@ -7,6 +7,6 @@ sources:
   - https://github.com/goharbor/harbor-helm
 dependencies:
   - name: harbor
-    version: 1.12.2
+    version: 1.12.3
     repository: "https://helm.goharbor.io"
 
