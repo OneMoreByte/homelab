@@ -59,7 +59,7 @@ spec:
       volumes:
         - name: ttyacm0
           hostPath:
-            path: /dev/ttyACM0
+            path: /dev/ttyAMA0
         - name: udev
           hostPath:
             path: /run/udev
