@@ -89,41 +89,19 @@ affinity:
 
 
 flexget_config:
+  variables: variables.yml
+ 
   web_server:
     bind: 0.0.0.0
     port: 3000
     web_ui: yes
-
-  variables:
-    plex_base_dir: "/store/plex-files"
-    torrent_base_dir: "/torrents"
-    plex_dirs:
-      anime: '/store/plex-files/Anime/MKV'
-      shows: '/store/plex-files/Shows/MKV'
-      movies: '/store/plex-files/Movies/MKV'
-    torrent_dirs:
-      public:
-        watch_dir: "/torrents/public/watch/mva"
-        complete_dir: "/torrents/public/complete"
-      private:
-        watch_dir: "/torrents/private/watch"
-        complete_dir: "/torrents/private/download/auto"
-    discord_webhook: 'https://discord.com/api/webhooks/1002624119642267648/kW3New1lThMUept9isSMblCtuTDWC1ZtMas5sF7Vaawkr2ZhccGgN6TJUD4dZP_c4zdv'
-    thetvdb:
-      username: jsck
-      account_id: FR1WAS9R0Q3ECOMX
-      api_key: 8ba8af3cdada63b2594be6a6e298428f
-    rss_feeds:
-      subsplease: 'https://subsplease.org/rss/?r=1080'
-      morethantv: 'https://www.morethantv.me/feeds.php?feed=torrents_all&user=35591&auth=bc57fffbec10ab271ff94df35bcb3399&passkey=met6q0xshpuo0nlitxoyciaz7b8me85r&authkey=f78acf3c0b53b84db57eeebabfeb4dc2'
-
 
   templates:
     anchors:
       _discord_webhook_show: &discord_webhook_show
         via:
           - discord:
-              web_hook_url: '{? discord_webhook ?}'
+              web_hook_url: '{? secrets.discord_webhook ?}'
               username: 'mva'
               embeds:
               - title: "{{series_name}}"
@@ -142,30 +120,8 @@ flexget_config:
                     value: "{{tvdb_episode | default(series_episode) | default('<:CatShrug:757101278659739780>') }}"
                 image:
                   url: "{{tvdb_ep_image | default('https://i.imgflip.com/j69nf.jpg')}}"
-
-
-  tasks:
-    subsplease_add:
-      seen: local
-      rss: '{? rss_feeds["subsplease"] ?}'
-      thetvdb_lookup: yes
-      manipulate:
-      # Subsplease sometimes has v2 if their automation fucks up
-        - title:
-            replace:
-              regexp: '- (\d+)v\d'
-              format: '- \1'
-      # The unique demon slayer season names are confusing for the little bot
-        - title:
-            replace:
-              regexp: '- Katanakaji no Sato-hen'
-              format: 'S4'
-      # the lookup scripts really don't like when names have season numbers in the name
-        - title:
-            replace:
-              regexp: ' S(\d+) - '
-              format: ' - s\1e'   
-      series:
+      
+      _anime: &anime
         - "High Card"
         - "Mobile Suit Gundam - The Witch from Mercury"
         - "Fumetsu no Anata e"
@@ -202,6 +158,36 @@ flexget_config:
         - Eiyuu Kyoushitsu
         - Shinigami Bocchan to Kuro Maid
         - Okashi na Tensei
+
+      _morethantv: &morethantv
+        - Game Changer
+        - The Last of Us
+        - Poker Face
+
+
+  tasks:
+    subsplease_add:
+      seen: local
+      rss: '{? secrets.rss_feeds["subsplease"] ?}'
+      thetvdb_lookup: yes
+      manipulate:
+      # Subsplease sometimes has v2 if their automation fucks up
+        - title:
+            replace:
+              regexp: '- (\d+)v\d'
+              format: '- \1'
+      # The unique demon slayer season names are confusing for the little bot
+        - title:
+            replace:
+              regexp: '- Katanakaji no Sato-hen'
+              format: 'S4'
+      # the lookup scripts really don't like when names have season numbers in the name
+        - title:
+            replace:
+              regexp: ' S(\d+) - '
+              format: ' - s\1e'   
+      series:
+        <<: *anime
       notify:
         entries:
           message: |
@@ -220,9 +206,7 @@ flexget_config:
             account_id: '{? thetvdb["account_id"] ?}'
             api_key: '{? thetvdb["api_key"] ?}'
       series:
-      - Game Changer
-      - The Last of Us
-      - Poker Face 
+        <<: *morethantv
       notify:
         entries:
           message: |
@@ -244,7 +228,7 @@ flexget_config:
       parsing:
         series: guessit
       series:
-        - The Mandalorian
+        <<: *morethantv
       notify:
         entries:
           message: |
@@ -289,42 +273,7 @@ flexget_config:
             tracking: false
             parse_only: yes
         subsplease:
-          - "High Card"
-          - "Mobile Suit Gundam - The Witch from Mercury"
-          - "Fumetsu no Anata e"
-          - "Urusei Yatsura (2022)"
-          - "Vinland Saga"
-          - "Bofuri"
-          - "Kyokou Suiri"
-          - "Bungou Stray Dogs"
-          - "Isekai Nonbiri Nouka"
-          - "NieR Automata Ver1.1a"
-          - "Trigun Stampede"
-          - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka"
-          - "Maou Gakuin no Futekigousha"
-          - Kono Subarashii Sekai ni Bakuen wo!
-          - Dr. Stone
-          - Kimetsu no Yaiba
-          - Jigokuraku
-          - Mahoutsukai no Yome
-          - Kaminaki Sekai no Kamisama Katsudou
-          - Mashle
-          - Edens Zero
-          - 'Ousama Ranking: Yuuki no Takarabako'
-          - Tondemo Skill de Isekai Hourou Meshi
-          - Jujutsu Kaisen
-          - Jidou Hanbaiki ni Umarekawatta Ore wa Meikyuu wo Samayou
-          - Hataraku Maou-sama
-          - Undead Girl Murder Farce
-          - Dark Gathering
-          - AI no Idenshi
-          - Nanatsu no Maken ga Shihai suru
-          - Helck
-          - Zom 100 – Zombie ni Naru made ni Shitai 100 no Koto
-          - Lv1 Maou to One Room Yuusha
-          - Eiyuu Kyoushitsu
-          - Shinigami Bocchan to Kuro Maid
-          - Okashi na Tensei
+          <<: *anime
       accept_all: yes
       notify:
         entries:

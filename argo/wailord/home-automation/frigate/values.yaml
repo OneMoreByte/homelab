@@ -21,13 +21,12 @@ frigate:
   env:
  #   - FRIGATE_MQTT_USER:
  #   - FRIGATE_MQTT_PASSWORD:
-    FRIGATE_RSTP_USERNAME: "frigate"
-    FRIGATE_RTSP_PASSWORD: "WQKkhV4abrAJt7dK"
+
 
   # -- set environment variables from Secret(s)
-  envFromSecrets: []
+  envFromSecrets:
     # secrets are required before `helm install`
-    # - frigate-rstp-credentials
+    - frigate-rstp-credentials
 
   coral:
     # -- enables the use of a Coral device

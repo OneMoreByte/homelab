@@ -18,16 +18,18 @@ keycloakx:
   extraEnv: |
     - name: KC_PROXY
       value: "passthrough"
-    - name: KEYCLOAK_ADMIN
-      value: admin
-    - name: KEYCLOAK_ADMIN_PASSWORD
-      value: "hoPma7Zn&keVh*cA4*JSX!mT#!YnmM!h"
     - name: JAVA_OPTS_APPEND
       value: >-
         -XX:+UseContainerSupport
         -XX:MaxRAMPercentage=50.0
         -Djava.awt.headless=true
         -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless
+  
+  extraEnvFrom: |
+    - secretRef:
+        name: keycloak-admin-user
+
+  
   dbchecker:
     enabled: true
 
@@ -36,8 +38,10 @@ keycloakx:
     hostname: keycloak-postgresql
     port: 5432
     username: keycloak
-    password: "uS6Bt6*R7fjskBEY@bbrVX6f%3TVvmoz"
+    # password: "uS6Bt6*R7fjskBEY@bbrVX6f%3TVvmoz" Old password...
     database: keycloak
+    existingSecret: keycloak-db-secret
+    existingSecretKey: "password"
 
 
   ingress:
@@ -99,6 +103,8 @@ postgresql:
   global:
     postgresql:
       auth:
+        existingSecret: db-secret
+        secretKeys:
+          userPasswordKey: password
         username: keycloak
-        password: "uS6Bt6*R7fjskBEY@bbrVX6f%3TVvmoz"
         database: keycloak

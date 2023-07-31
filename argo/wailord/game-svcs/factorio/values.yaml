@@ -73,7 +73,7 @@ factorio:
       # -- lets the game know if you want to load the latest save
       load_latest_save: true
       # -- factorio.com token
-      token: "256a223676703585b1e8e28409a5ad"
+      token: "256a223676703585b1e8e28409a5ad" # I invalidated this...
       # -- factorio.com password
       username: "jsck"
 

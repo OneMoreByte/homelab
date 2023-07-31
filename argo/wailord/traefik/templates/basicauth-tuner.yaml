@@ -1,0 +1,25 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: tuner-basicauth
+spec:
+  basicAuth:
+    secret: tuner-authsecret
+
+
+---
+
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: tuner-authsecret
+  namespace: argocd
+spec:
+  encryptedData:
+    users: AgCTEe+Vc6kKoVW4E8AvuwRFY3vB/nbVjOsFimiPKedCpHkz3Qr/KUweCt77mZz7W+pudNuoJjWv88CFkhEiZTQrrs6+9+uANSHUKBoDKE3PU0i+JoqQv/5NCBbx1BgoMgxeO6pe4vvZ6ihsgy01tmvazvv7kK1aqVWuoCFANNYbEsB3qR9AjJEH7sD5dRPzKBy2+9CfQE1KRA9mxzugpLS/d8KYRVKg5xaTa4gQQp7ECYuntDYx/tjsYANKEPdxhdGYdnRWtDH6aKd4xROItp3sZfhnpnBQ16o2XiiL1PslBEwFetNDfCQQgIdu8z4KXkJ2gO5+4ZpitVI75Bu7JT1DTqjz+ou6RUayt8KwjDWz87TYHlTCXEW/GhkUSXrn3F3b5peoH5vViA2GgawtVtqTlEp+jwiiBiXw03PGPU1JVRGzFQxtKWgbxZKG5ry+F7Yqxn8jGo51tRTS0YaGSNHvC43dvSjjue+o4vtxz+b0HnPDVyMXQ29RsNX4SYKzpL7qQ49kBKFM66d5s9HxsLooH2UkbgQMn+UtypP+2QKCiS3G95AxsQSP4/FI4X1R1PGIqLw5240hK/v3oRGcj9HqcOTqaPG86jod+fuJUGuL2i5xIkw6Y4Qh5FKKaxWe72V8C7uhZFcJ4mf+LcwtNSqPm4ZzGjeZQkn5q4xWggVI0//89ndcRWN6ir7dUjUMtlCMeNpBrfA6oOuwsB0XaNzixu1aMubbXBNfL4uJgH47aB9Jx936RiWzt48=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: tuner-authsecret
+      namespace: argocd

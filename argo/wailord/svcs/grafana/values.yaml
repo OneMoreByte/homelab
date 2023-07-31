@@ -50,6 +50,10 @@ grafana:
         secretName: jackhil.de-cert
 
 
+  envFromSecrets:
+    - name: "grafana-client-secret"
+      optional: true
+
   grafana.ini:
     server:
       domain: "grafana.jackhil.de"
@@ -62,7 +66,6 @@ grafana:
       scopes: "openid profile email"
       allow_sign_up: true
       client_id: grafana
-      client_secret: "oz5SS0HZFokUEnARC9rAmQiLAmEFXVPo"
       auth_url: "https://auth.jackhil.de/auth/realms/master/protocol/openid-connect/auth"
       token_url: "https://auth.jackhil.de/auth/realms/master/protocol/openid-connect/token"
       api_url: "https://auth.jackhil.de/auth/realms/master/protocol/openid-connect/userinfo"

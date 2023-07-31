@@ -36,6 +36,7 @@ spec:
           volumeMounts:
           - name: config
             mountPath: /jmb/config
+            readOnly: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -52,5 +53,5 @@ spec:
       {{- end }}
       volumes:
         - name: config
-          configMap:
-            name: {{ include "jmusicbot.fullname" . }}-configs
+          secret:
+            secretName: jmusicbot-config

@@ -19,6 +19,7 @@ resources:
 - base/applications/traefik.yaml
 - base/applications/theroom.yaml
 - base/ingress.yaml
+- base/argo-client-secret.yaml
 - base/clusters/wailord.yaml
 - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.9
 - base/clusters/theroom.jsck.network.yaml
@@ -30,6 +31,5 @@ namespace: argocd
 patches:
 - path: overlays/argocd-cm.yaml
 - path: overlays/argocd-rbac-cm.yaml
-- path: overlays/argocd-secret.yaml
 - path: overlays/service.yaml
 - path: overlays/argocd-cmd-params-cm.yaml
