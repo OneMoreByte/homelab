@@ -33,7 +33,7 @@ spec:
           volumeMounts:
             - mountPath: /run/udev
               name: udev
-            - mountPath: /dev/ttyACM0
+            - mountPath: /dev
               name: ttyacm0
             - mountPath: /app/data
               name: data
@@ -59,7 +59,7 @@ spec:
       volumes:
         - name: ttyacm0
           hostPath:
-            path: /dev/ttyAMA0
+            path: /dev
         - name: udev
           hostPath:
             path: /run/udev
