@@ -2,21 +2,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: keycloak
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/cert-manager/
+    path: argo/wailord/keycloak/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: cert-manager
+      releaseName: keycloak
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: cert-manager
+    namespace: keycloak
   syncPolicy:
     automated:
       prune: true

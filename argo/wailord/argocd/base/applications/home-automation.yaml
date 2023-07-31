@@ -2,21 +2,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: flood
+  name: esphome
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/media-svcs/flood/
+    path: argo/wailord/home-automation/esphome/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: flood
+      releaseName: esphome
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: media-svcs
+    namespace: home-automation
   syncPolicy:
     automated:
       prune: true
@@ -27,21 +27,21 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: plex
+  name: hass
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/media-svcs/plex/
+    path: argo/wailord/home-automation/hass/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: plex
+      releaseName: hass
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: media-svcs
+    namespace: home-automation
   syncPolicy:
     automated:
       prune: true
@@ -52,21 +52,21 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: jellyfin
+  name: influxdb
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/media-svcs/jellyfin/
+    path: argo/wailord/home-automation/influxdb/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: jellyfin
+      releaseName: influxdb
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: media-svcs
+    namespace: home-automation
   syncPolicy:
     automated:
       prune: true
@@ -77,21 +77,21 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mva
+  name: mqtt
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/media-svcs/mva/
+    path: argo/wailord/home-automation/mqtt/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: mva
+      releaseName: mqtt
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: media-svcs
+    namespace: home-automation
   syncPolicy:
     automated:
       prune: true
@@ -102,46 +102,21 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: syncthings
+  name: frigate
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/media-svcs/syncthings
+    path: argo/wailord/home-automation/frigate/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: syncthings
+      releaseName: frigate
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: media-svcs
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: kavita
-  namespace: argocd
-spec:
-  project: default
-  source:
-    path: argo/media-svcs/kavita
-    repoURL: https://github.com/OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: kavita
-      valueFiles:
-      - values.yaml
-  destination:
-    name: wailord.jsck.network
-    namespace: media-svcs
+    namespace: home-automation
   syncPolicy:
     automated:
       prune: true

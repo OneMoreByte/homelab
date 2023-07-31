@@ -2,15 +2,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: traefik
+  name: sealed-secrets-controller
 spec:
   project: default
   source:
     repoURL: 'https://github.com/OneMoreByte/homelab.git'
-    path: argo/traefik
+    path: argo/wailord/kube-system/sealed-secrets-controller
     targetRevision: "HEAD"
   destination:
-    namespace: traefik
+    namespace: kube-system
     name: wailord.jsck.network
   syncPolicy:
     automated: {}

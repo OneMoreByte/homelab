@@ -7,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/game-svcs/factorio/
+    path: argo/wailord/game-svcs/factorio/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -32,7 +32,7 @@ metadata:
 spec:
   project: default
   source:
-    path: argo/game-svcs/minecraft-alm8/
+    path: argo/wailord/game-svcs/minecraft-alm8/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
@@ -59,7 +59,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/OneMoreByte/homelab.git'
-    path: argo/game-svcs/minecraft-router
+    path: argo/wailord/game-svcs/minecraft-router
     targetRevision: "HEAD"
   destination:
     namespace: game-svcs

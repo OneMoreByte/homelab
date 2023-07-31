@@ -2,62 +2,74 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: jaeger
+  name: gateway-check
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/OneMoreByte/homelab.git'
-    path: argo/observability/jaeger/
+    path: argo/wailord/routed-svcs/gateway-check
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
+    helm:
+      releaseName: gateway
+      valueFiles:
+      - values.yaml
   destination:
-    namespace: observability
     name: wailord.jsck.network
+    namespace: routed-svcs
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true
+    - CreateNamespace=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: gateway
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/OneMoreByte/homelab.git'
-    path: argo/observability/prometheus/
+    path: argo/wailord/routed-svcs-gateway/gateway
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
+    helm:
+      releaseName: gateway
+      valueFiles:
+      - values.yaml
   destination:
-    namespace: observability
     name: wailord.jsck.network
+    namespace: routed-svcs-gateway
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true
+    - CreateNamespace=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: elasticsearch
+  name: flood-public
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/OneMoreByte/homelab.git'
-    path: argo/observability/elasticsearch/
+    path: argo/wailord/routed-svcs/flood-public
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
+    helm:
+      releaseName: flood-public
+      valueFiles:
+      - values.yaml
   destination:
-    namespace: observability
     name: wailord.jsck.network
+    namespace: routed-svcs
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true
+    - CreateNamespace=true

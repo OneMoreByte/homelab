@@ -2,21 +2,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: esphome
+  name: tuner
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/home-automation/esphome/
+    path: argo/wailord/svcs/tuner/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: esphome
+      releaseName: tuner
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: home-automation
+    namespace: svcs
   syncPolicy:
     automated:
       prune: true
@@ -27,21 +27,21 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hass
+  name: jmusicbot
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/home-automation/hass/
+    path: argo/wailord/svcs/jmusicbot/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: hass
+      releaseName: jmusicbot
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: home-automation
+    namespace: svcs
   syncPolicy:
     automated:
       prune: true
@@ -52,21 +52,46 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: influxdb
+  name: grafana
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/home-automation/influxdb/
+    path: argo/wailord/svcs/grafana/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: influxdb
+      releaseName: grafana
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: home-automation
+    namespace: svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluidd
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/svcs/fluidd
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: fluidd-redirect
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: svcs
   syncPolicy:
     automated:
       prune: true
@@ -74,49 +99,24 @@ spec:
     syncOptions:
     - CreateNamespace=true
 ---
-apiVersion: argoproj.io/v1alpha1
 kind: Application
+apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: mqtt
+  name: harbor
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/home-automation/mqtt/
-    repoURL: https://github.com/OneMoreByte/homelab.git
+    path: argo/wailord/svcs/harbor/
+    repoURL: git@github.com:OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: mqtt
+      releaseName: harbor
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: home-automation
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: frigate
-  namespace: argocd
-spec:
-  project: default
-  source:
-    path: argo/home-automation/frigate/
-    repoURL: https://github.com/OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: frigate
-      valueFiles:
-      - values.yaml
-  destination:
-    name: wailord.jsck.network
-    namespace: home-automation
+    namespace: svcs
   syncPolicy:
     automated:
       prune: true

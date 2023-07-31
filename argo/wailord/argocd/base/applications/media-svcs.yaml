@@ -2,21 +2,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tuner
+  name: flood
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/svcs/tuner/
+    path: argo/wailord/media-svcs/flood/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: tuner
+      releaseName: flood
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: svcs
+    namespace: media-svcs
   syncPolicy:
     automated:
       prune: true
@@ -27,21 +27,21 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: jmusicbot
+  name: plex
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/svcs/jmusicbot/
+    path: argo/wailord/media-svcs/plex/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: jmusicbot
+      releaseName: plex
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: svcs
+    namespace: media-svcs
   syncPolicy:
     automated:
       prune: true
@@ -52,46 +52,21 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana
+  name: jellyfin
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/svcs/grafana/
+    path: argo/wailord/media-svcs/jellyfin/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: grafana
+      releaseName: jellyfin
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: svcs
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: false
-    syncOptions:
-    - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: fluidd
-  namespace: argocd
-spec:
-  project: default
-  source:
-    path: argo/svcs/fluidd
-    repoURL: https://github.com/OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: fluidd-redirect
-      valueFiles:
-      - values.yaml
-  destination:
-    name: wailord.jsck.network
-    namespace: svcs
+    namespace: media-svcs
   syncPolicy:
     automated:
       prune: true
@@ -99,24 +74,74 @@ spec:
     syncOptions:
     - CreateNamespace=true
 ---
-kind: Application
 apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: harbor
+  name: mva
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/svcs/harbor/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    path: argo/wailord/media-svcs/mva/
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: harbor
+      releaseName: mva
       valueFiles:
       - values.yaml
   destination:
     name: wailord.jsck.network
-    namespace: svcs
+    namespace: media-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: syncthings
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/media-svcs/syncthings
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: syncthings
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: media-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kavita
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/media-svcs/kavita
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: kavita
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: media-svcs
   syncPolicy:
     automated:
       prune: true

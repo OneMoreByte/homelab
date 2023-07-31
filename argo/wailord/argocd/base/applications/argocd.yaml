@@ -2,15 +2,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sealed-secrets-controller
+  name: argocd
 spec:
   project: default
   source:
     repoURL: 'https://github.com/OneMoreByte/homelab.git'
-    path: argo/kube-system/sealed-secrets-controller
+    path: argo/wailord/argocd
     targetRevision: "HEAD"
   destination:
-    namespace: kube-system
+    namespace: argocd
     name: wailord.jsck.network
   syncPolicy:
     automated: {}

@@ -2,15 +2,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: traefik
 spec:
   project: default
   source:
     repoURL: 'https://github.com/OneMoreByte/homelab.git'
-    path: argo/argocd
+    path: argo/wailord/traefik
     targetRevision: "HEAD"
   destination:
-    namespace: argocd
+    namespace: traefik
     name: wailord.jsck.network
   syncPolicy:
     automated: {}

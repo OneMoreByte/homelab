@@ -2,21 +2,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: zigbee2mqtt
+  name: metallb
   namespace: argocd
 spec:
   project: default
   source:
-    path: argo/standalone_clusters/theroom/zigbee2mqtt/
+    path: argo/wailord/metallb/
     repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
-      releaseName: zigbee2mqtt
+      releaseName: metallb
       valueFiles:
       - values.yaml
   destination:
-    name: theroom.jsck.network
-    namespace: svcs
+    name: wailord.jsck.network
+    namespace: metallb-system
   syncPolicy:
     automated:
       prune: true
