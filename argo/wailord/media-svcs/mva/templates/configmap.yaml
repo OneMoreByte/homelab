@@ -5,4 +5,4 @@ metadata:
 data:
   # Config for flexget
   config.yml: | 
-    {{ toYaml .Values.flexget_config | nindent 4 }}
+    {{ .Values.flexget_config | nindent 4 }}
