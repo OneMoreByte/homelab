@@ -103,7 +103,7 @@ postgresql:
   global:
     postgresql:
       auth:
-        existingSecret: db-secret
+        existingSecret: keycloak-db-secret
         secretKeys:
           userPasswordKey: password
         username: keycloak
