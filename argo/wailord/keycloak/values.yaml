@@ -105,6 +105,8 @@ postgresql:
       auth:
         existingSecret: keycloak-db-secret
         secretKeys:
+          adminPasswordKey: postgres_password
           userPasswordKey: password
+          replicationPasswordKey: replication_password
         username: keycloak
         database: keycloak
