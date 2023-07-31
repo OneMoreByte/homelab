@@ -186,8 +186,7 @@ flexget_config: |
             replace:
               regexp: ' S(\d+) - '
               format: ' - s\1e'   
-      series:
-        <<: *anime
+      series: *anime
       notify:
         entries:
           message: |
@@ -205,8 +204,7 @@ flexget_config: |
             username: '{? thetvdb["username"] ?}'
             account_id: '{? thetvdb["account_id"] ?}'
             api_key: '{? thetvdb["api_key"] ?}'
-      series:
-        <<: *morethantv
+      series: *morethantv
       notify:
         entries:
           message: |
@@ -227,8 +225,7 @@ flexget_config: |
       metainfo_series: yes
       parsing:
         series: guessit
-      series:
-        <<: *morethantv
+      series: *morethantv
       notify:
         entries:
           message: |
@@ -272,8 +269,7 @@ flexget_config: |
           subsplease:
             tracking: false
             parse_only: yes
-        subsplease:
-          <<: *anime
+        subsplease: *anime
       accept_all: yes
       notify:
         entries:
