@@ -97,7 +97,7 @@ spec:
             name: {{ include "mva.fullname" . }}-configs
         - name: variables-yaml
           secret:
-            name: flexget-secrets
+            secretName: flexget-secrets
         - name: config
           persistentVolumeClaim:
             claimName: {{ include "mva.fullname" . }}-config-pvc
