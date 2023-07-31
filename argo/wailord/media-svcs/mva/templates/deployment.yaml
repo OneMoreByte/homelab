@@ -34,6 +34,8 @@ spec:
           volumeMounts:
           - name: config-yaml
             mountPath: /config-yaml
+          - name: variables-yaml
+            mountPath: /variables-yaml
           - name: config
             mountPath: /config
         - name: {{ .Chart.Name }}-cleanup-startup
