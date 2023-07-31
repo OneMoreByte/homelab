@@ -101,7 +101,7 @@ flexget_config: |
       _discord_webhook_show: &discord_webhook_show
         via:
           - discord:
-              web_hook_url: '{? secrets.discord_webhook ?}'
+              web_hook_url: '{? discord_webhook ?}'
               username: 'mva'
               embeds:
               - title: "{{series_name}}"
@@ -168,7 +168,7 @@ flexget_config: |
   tasks:
     subsplease_add:
       seen: local
-      rss: '{? secrets.rss_feeds["subsplease"] ?}'
+      rss: '{? rss_feeds["subsplease"] ?}'
       thetvdb_lookup: yes
       manipulate:
       # Subsplease sometimes has v2 if their automation fucks up
