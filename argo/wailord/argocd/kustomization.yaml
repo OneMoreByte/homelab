@@ -21,7 +21,7 @@ resources:
 - base/ingress.yaml
 - base/argo-client-secret.yaml
 - base/clusters/wailord.yaml
-- https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.7.10
+- https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.8.0
 - base/clusters/theroom.jsck.network.yaml
 - base/clusters/thefall.jsck.network.yaml
 
