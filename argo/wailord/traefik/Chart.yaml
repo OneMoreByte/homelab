@@ -9,5 +9,5 @@ dependencies:
     version: 23.2.0
     repository: "https://helm.traefik.io/traefik"
   - name: traefik-forward-auth
-    version: 0.3.9
+    version: 0.3.10
     repository: "https://mesosphere.github.io/charts/staging"
