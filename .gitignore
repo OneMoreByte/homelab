@@ -5,3 +5,4 @@ __pycache__
 crash.log
 venv
 tmp
+.syncthing*
