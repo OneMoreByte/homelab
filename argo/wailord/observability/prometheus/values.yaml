@@ -49,7 +49,7 @@ prometheus:
       ##
       image:
         repository: quay.io/prometheus-operator/prometheus-config-reloader
-        tag: v0.67.1
+        tag: v0.68.0
         # When digest is set to a non-empty value, images will be pulled by digest (regardless of tag value).
         digest: ""
         pullPolicy: IfNotPresent
