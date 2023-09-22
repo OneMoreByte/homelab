@@ -1,15 +1,16 @@
 app-template:
   controllers:
     main:
+      enabled: true
       strategy: Recreate
       containers:
         main:
-          image:
-            repository: linuxserver/jackett
-            pullPolicy: IfNotPresent
           env:
             TZ: America/Chicago
-
+  image:
+    repository: linuxserver/jackett
+    tag: "0.21.866"
+    pullPolicy: IfNotPresent
   # -- Configures service settings for the chart.
   service:
     main:
