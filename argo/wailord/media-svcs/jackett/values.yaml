@@ -29,7 +29,7 @@ app-template:
               pathType: Prefix
               service:
                 name: main
-                port: http
+                port: 9117
 
 
   # -- Configure persistence settings for the chart under this key.
