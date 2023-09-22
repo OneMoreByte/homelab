@@ -21,6 +21,10 @@ app-template:
   ingress:
     # -- Enable and configure ingress settings for the chart under this key.
     main:
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
       enabled: true
       hosts:
         - host: jackett.jackhil.de
@@ -30,7 +34,10 @@ app-template:
               service:
                 name: main
                 port: 9117
-
+      tls:
+      - hosts:
+         - jackett.jackhil.de
+        secretName: jackhil.de-cert
 
   # -- Configure persistence settings for the chart under this key.
   persistence:
