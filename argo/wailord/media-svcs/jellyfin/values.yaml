@@ -9,7 +9,7 @@ jellyfin:
     # -- image repository
     repository: jellyfin/jellyfin
     # -- image tag
-    tag: 10.8.10
+    tag: 10.8.11
     # -- image pull policy
     pullPolicy: IfNotPresent
 
