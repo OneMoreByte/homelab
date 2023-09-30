@@ -197,13 +197,24 @@ flexget_config: |
 
 
     morethantv_add:
-      rss: '{? rss_feeds["morethantv"] ?}'
-      configure_series:
-        from:
-          thetvdb_list:
-            username: '{? thetvdb["username"] ?}'
-            account_id: '{? thetvdb["account_id"] ?}'
-            api_key: '{? thetvdb["api_key"] ?}'
+      discovershows:
+        discover:
+          what:
+            - next_series_episodes: yes
+          from:
+            - torznab:
+                website: {{ jackett.morethantv_torznab }}
+                apikey: {{ jackett.apikey }}
+                searcher: tv
+        accept_all: yes
+        quality: 1080p+
+        duplicates:
+          field: imdb_id
+          action: reject
+        sort_by:
+          - quality
+          - torrent_availability
+          - torrent_seeds
       series: *morethantv
       notify:
         entries:
