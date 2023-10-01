@@ -72,10 +72,10 @@ spec:
           - name: media-dir
             mountPath: /store/plex-files
           - name: config-yaml
-            mountPath: /config
+            mountPath: /config/config.yml
             subPath: config.yml
           - name: variables-yaml
-            mountPath: /config
+            mountPath: /config/variables.yml
             subPath: variables.yml
           - name: config
             mountPath: /config
