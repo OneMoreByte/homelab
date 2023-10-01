@@ -224,6 +224,7 @@ flexget_config: |
               searcher: tv
       accept_all: yes
       metainfo_series: yes
+      thetvdb_lookup: yes
       quality: 1080p+
       duplicates:
         field: imdb_id
