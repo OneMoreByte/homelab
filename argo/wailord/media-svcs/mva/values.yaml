@@ -225,7 +225,7 @@ flexget_config: |
       accept_all: yes
       metainfo_series: yes
       thetvdb_lookup: yes
-      quality: 1080p+
+      quality: 1080p
       duplicates:
         field: imdb_id
         action: reject
@@ -242,9 +242,9 @@ flexget_config: |
         entries:
           message: |
             Grabbing torrent for {{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id| default(series_id) }} to:
-            ```{? plex_dirs['anime'] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
+            ```{? plex_dirs['shows'] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
           <<: *discord_webhook_show
-      rtorrent_magnet: '{? torrent_dirs["private"]["watch_dir"] ?}/morethantv/'
+      download: '{? torrent_dirs["private"]["watch_dir"] ?}/morethantv/'
 
 
     morethantv_copy:
