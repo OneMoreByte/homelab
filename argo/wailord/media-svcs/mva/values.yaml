@@ -254,7 +254,7 @@ flexget_config: |
         - seen
       thetvdb_lookup: yes
       filesystem: 
-        path: '/torrents/complete/morethantv/'
+        path: '/torrents/private/complete/morethantv/'
         retrieve: files
       metainfo_series: yes
       parsing:
