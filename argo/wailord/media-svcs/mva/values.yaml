@@ -44,33 +44,21 @@ resources:
 
 
 ingress:
-  main:
-    enabled: true
-    primary: true
-    annotations:
-      traefik.ingress.kubernetes.io/router.tls: "true"
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure,web
-    labels: {}
-    hosts:
-      - host: flexget.jackhil.de
-        paths:
-          - path: /
-            pathType: Prefix
-    tls:
-      - hosts:
-         - flexget.jackhil.de
-        secretName: jackhil.de-cert
-  ssl-redirect:
-    enabled: true
-    annotations:
-      traefik.ingress.kubernetes.io/router.entrypoints: web
-      traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
-    labels: {}
-    hosts:
-      - host: flexget.jackhil.de
-        paths:
-          - path: /
-            pathType: Prefix
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure,web
+  labels: {}
+  hosts:
+    - host: flexget.jackhil.de
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - flexget.jackhil.de
+      secretName: jackhil.de-cert
+
 
 nodeSelector: {}
 
