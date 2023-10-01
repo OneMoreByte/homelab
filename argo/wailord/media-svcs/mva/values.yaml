@@ -151,6 +151,13 @@ flexget_config: |
         - Game Changer
         - The Last of Us
         - Poker Face
+        - The Continental
+        - Krapopolis
+        - Disenchantment
+        - 'Star Trek: Lower Decks'
+        - Loki
+        - Scott Pilgrim Takes Off
+        - Rick and Morty
 
 
   tasks:
