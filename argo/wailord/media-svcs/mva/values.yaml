@@ -214,13 +214,16 @@ flexget_config: |
       priority: 2
       discover:
         what:
-          - next_series_episodes: yes
+        - next_series_episodes:
+            from_start: yes
+            backfill: yes
         from:
           - torznab:
               website: "{? jackett['morethantv_torznab'] ?}"
               apikey: "{? jackett['api_key'] ?}"
               searcher: tv
       accept_all: yes
+      metainfo_series: yes
       quality: 1080p+
       duplicates:
         field: imdb_id
@@ -229,7 +232,11 @@ flexget_config: |
         - quality
         - torrent_availability
         - torrent_seeds
-      series: *morethantv
+      series:
+        settings:
+          morethantv:
+            identified_by: ep
+        morethantv:  *morethantv
       notify:
         entries:
           message: |
