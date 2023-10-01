@@ -248,7 +248,7 @@ flexget_config: |
       download: '{? torrent_dirs["private"]["watch_dir"] ?}/morethantv/'
 
 
-    morethantv_copy:
+    morethantv_move:
       no_entries_ok: yes
       disable:
         - seen
@@ -269,10 +269,10 @@ flexget_config: |
       notify:
         entries:
           message: |
-            Copying {{tvdb_series_name | default(series_name) | replace("/", "")}} - {{ tvdb_series_id| default(series_id) }} to:
+            Moving {{tvdb_series_name | default(series_name) | replace("/", "")}} - {{ tvdb_series_id| default(series_id) }} to:
             ```{? plex_dirs['shows'] ?}/{{ tvdb_series_name | default(series_name) | replace("/", "")}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
           <<: *discord_webhook_show
-      copy:
+      move:
         to: '{? plex_dirs["shows"] ?}/{{ tvdb_series_name | default(series_name) | replace("/", "")}}/Season {{tvdb_season | default(series_season) | pad(2)}}'
         rename: '{{tvdb_series_name | default(series_name) | replace("/", "") }} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
 
