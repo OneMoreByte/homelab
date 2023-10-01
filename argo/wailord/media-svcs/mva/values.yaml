@@ -200,7 +200,8 @@ flexget_config: |
       priority: 1
       seen: local
       filesystem:
-        path: "{{ plex_dirs['shows'] }}"
+        path:
+        - "{{ plex_dirs['shows'] }}"
         recursive: 2
         retrieve: files
         regexp: '.*\.(avi|mkv|mp4)$'
@@ -208,7 +209,8 @@ flexget_config: |
       configure_series:
         from:
           filesystem:
-            path: "{{ plex_dirs['shows'] }}"
+            path:
+            - "{{ plex_dirs['shows'] }}"
             retrieve: dirs
 
 
