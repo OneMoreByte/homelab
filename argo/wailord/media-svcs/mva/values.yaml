@@ -196,15 +196,32 @@ flexget_config: |
       rtorrent_magnet: '{? torrent_dirs["public"]["watch_dir"] ?}'
 
 
+    morethantv_find:
+      priority: 1
+      seen: local
+      filesystem:
+        path: {{ plex_dirs['shows'] }}
+        recursive: 2
+        retrieve: files
+        regexp: '.*\.(avi|mkv|mp4)$'
+      accept_all: yes
+      configure_series:
+        from:
+          filesystem:
+            path: {{ plex_dirs['shows'] }}
+            retrieve: dirs
+
+
     morethantv_add:
+      priority: 2
       discovershows:
         discover:
           what:
             - next_series_episodes: yes
           from:
             - torznab:
-                website: {{ jackett.morethantv_torznab }}
-                apikey: {{ jackett.apikey }}
+                website: {{ jackett['morethantv_torznab'] }}
+                apikey: {{ jackett['api_key'] }}
                 searcher: tv
         accept_all: yes
         quality: 1080p+
@@ -236,7 +253,13 @@ flexget_config: |
       metainfo_series: yes
       parsing:
         series: guessit
-      series: *morethantv
+      series:
+        settings:
+          morethantv:
+            tracking: false
+            parse_only: yes
+        morethantv: *morethantv
+      accept_all: yes
       notify:
         entries:
           message: |
@@ -298,4 +321,4 @@ flexget_config: |
         minutes: 30
     - tasks: 'morethantv_*'
       interval:
-        minutes: 5
+        minutes: 30
