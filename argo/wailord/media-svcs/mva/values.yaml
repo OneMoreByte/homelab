@@ -160,6 +160,7 @@ flexget_config: |
         - Rick and Morty
         - 'Adventure Time Fionna and Cake'
         - Futurama
+        - Make Some Noise
 
 
   tasks:
