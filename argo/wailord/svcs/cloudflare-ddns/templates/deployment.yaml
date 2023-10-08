@@ -54,5 +54,4 @@ spec:
       volumes:
         - name: config
           secret:
-            defaultMode: 420
             secretName: cloudflare-ddns-config
