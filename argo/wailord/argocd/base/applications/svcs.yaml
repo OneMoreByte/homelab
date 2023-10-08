@@ -108,7 +108,7 @@ spec:
   project: default
   source:
     path: argo/wailord/svcs/harbor/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: harbor
@@ -133,7 +133,7 @@ spec:
   project: default
   source:
     path: argo/wailord/svcs/cloudflare-ddns/
-    repoURL: git@github.com:OneMoreByte/homelab.git
+    repoURL: https://github.com/OneMoreByte/homelab.git
     targetRevision: "HEAD"
     helm:
       releaseName: cloudflare-ddns
