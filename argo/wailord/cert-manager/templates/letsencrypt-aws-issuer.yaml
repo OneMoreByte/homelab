@@ -15,8 +15,6 @@ spec:
             - "*.jsck.network"
             - "*.harbor.jsck.network"
             - "*.totallynothax.net"
-            - "*.pokemonnews.net"
-            - "*.hashbrownassociation.org"
         dns01:
           route53:
             region: us-east-1
@@ -24,3 +22,13 @@ spec:
             secretAccessKeySecretRef:
               name: aws-route53-creds
               key: secret-access-key
+    - selector:
+          dnsZones:
+            - "*.jsck.network"
+            - "*.harbor.jsck.network"
+            - "*.totallynothax.net"
+      dns01:
+        cloudflare:
+          apiTokenSecretRef:
+            name: cloudflare-api-token-secret
+            key: api-token
