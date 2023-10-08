@@ -22,13 +22,13 @@ spec:
             secretAccessKeySecretRef:
               name: aws-route53-creds
               key: secret-access-key
-    - selector:
-          dnsZones:
-            - "*.jsck.network"
-            - "*.harbor.jsck.network"
-            - "*.totallynothax.net"
-      dns01:
-        cloudflare:
-          apiTokenSecretRef:
-            name: cloudflare-api-token-secret
-            key: api-token
+      - selector:
+            dnsZones:
+              - "*.jsck.network"
+              - "*.harbor.jsck.network"
+              - "*.totallynothax.net"
+        dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-api-token-secret
+              key: api-token
