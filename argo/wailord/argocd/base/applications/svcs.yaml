@@ -123,3 +123,28 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+---
+kind: Application
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: cloudflare-ddns
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/svcs/cloudflare-ddns/
+    repoURL: git@github.com:OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: cloudflare-ddns
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

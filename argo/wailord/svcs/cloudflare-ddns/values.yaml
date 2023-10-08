@@ -1,0 +1,21 @@
+app-template:
+  controllers:
+    main:
+      enabled: true
+      strategy: Recreate
+      containers:
+        main:
+          env:
+            CONFIG_PATH: /config
+
+  image:
+    repository: timothyjmiller/cloudflare-ddns
+    tag: "latest"
+    pullPolicy: Always
+
+
+  persistence:
+    config:
+      enabled: true
+      type: secret
+      name: cloudflare-ddns-config
