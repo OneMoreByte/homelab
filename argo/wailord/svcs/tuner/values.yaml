@@ -7,7 +7,7 @@ nginx:
       #channel by number
 
       location ~ "/tv/([0-9]{1,2}.[0-9]{1,2})$" {
-        proxy_pass http://192.168.13.102:5004/auto/v$1;
+        proxy_pass http://192.168.13.155:5004/auto/v$1;
       }
 
     }
