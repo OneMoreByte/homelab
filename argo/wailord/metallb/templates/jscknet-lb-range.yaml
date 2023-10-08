@@ -5,13 +5,20 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-    - 192.168.13.129-192.168.13.200
+    - 192.168.42.0/24
 ---
-apiVersion: metallb.io/v1beta1
-kind: L2Advertisement
+apiVersion: metallb.io/v1beta2
+kind: BGPPeer
 metadata:
-  name: jscknet-l2advertisement
+  name: udm
   namespace: metallb-system
 spec:
-    ipAddressPools:
-      - jscknet
+  myASN: 65513
+  peerASN: 65511
+  peerAddress: 192.168.13.1
+---
+apiVersion: metallb.io/v1beta1
+kind: BGPAdvertisement
+metadata:
+  name: advert
+  namespace: metallb-system
