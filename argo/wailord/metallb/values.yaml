@@ -174,7 +174,7 @@ metallb:
   # speaker contains configuration specific to the MetalLB speaker
   # daemonset.
   speaker:
-    enabled: false
+    enabled: trie
     # -- Speaker log level. Must be one of: `all`, `debug`, `info`, `warn`, `error` or `none`
     logLevel: all
     tolerateMaster: true
