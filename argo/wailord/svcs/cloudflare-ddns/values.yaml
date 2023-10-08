@@ -7,7 +7,11 @@ app-template:
         main:
           env:
             CONFIG_PATH: /config
-
+  service:
+    main:
+      ports:
+        http:
+          port: 9999
   image:
     repository: timothyjmiller/cloudflare-ddns
     tag: "latest"
