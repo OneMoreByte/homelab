@@ -40,32 +40,6 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: pokemonnews-cert
-spec:
-  dnsNames:
-    - "*.pokemonnews.net"
-  secretName: pokemonnews-cert
-  issuerRef:
-    name: letsencrypt-aws-issuer
-    kind: ClusterIssuer
-
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: hashbrownassociation-cert
-spec:
-  dnsNames:
-    - "*.hashbrownassociation.org"
-  secretName: hashbrownassociation-cert
-  issuerRef:
-    name: letsencrypt-aws-issuer
-    kind: ClusterIssuer
-
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
   name: jackhil.de-cert
   namespace: media-svcs
 spec:
