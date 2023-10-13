@@ -21,7 +21,7 @@ rtorrent-flood:
     # -- image tag
     tag: master
     # -- image pull policy
-    pullPolicy: always
+    pullPolicy: Always
 
   # -- environment variables. See [image docs](https://github.com/jesec/flood#configuration) for more details.
   # @default -- See below
