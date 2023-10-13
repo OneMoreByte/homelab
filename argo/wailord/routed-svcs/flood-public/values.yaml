@@ -19,9 +19,9 @@ rtorrent-flood:
     # -- image repository
     repository: jesec/rtorrent-flood
     # -- image tag
-    tag: latest@sha256:8af341d6e72f77f3013a097d19501b5992341e89ac468d5c10852a8e2bc91049
+    tag: master
     # -- image pull policy
-    pullPolicy: IfNotPresent
+    pullPolicy: always
 
   # -- environment variables. See [image docs](https://github.com/jesec/flood#configuration) for more details.
   # @default -- See below
