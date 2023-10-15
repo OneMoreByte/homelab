@@ -159,3 +159,16 @@ spec:
   issuerRef:
     name: letsencrypt-aws-issuer
     kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jsck.network-cert
+  namespace: auth
+spec:
+  dnsNames:
+    - "*.jsck.network"
+  secretName: jsck.network-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
