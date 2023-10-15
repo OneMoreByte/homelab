@@ -130,8 +130,8 @@ authentik:
   envValueFrom:
     AUTHENTIK_POSTGRESQL__PASSWORD:
       secretKeyRef:
-        key: password
-        name: authentik-secret
+        key: postgresql-password
+        name: authentik-postgresql
     AUTHENTIK_SECRET_KEY:
       secretKeyRef:
         key: secret_key
@@ -271,24 +271,6 @@ authentik:
     containerSecurityContext: {}
   postgresql:
     enabled: true
-    global:
-      postgresql:
-        auth:
-          existingSecret: authentik-secret
-          secretKeys:
-            adminPasswordKey: postgres_password
-            userPasswordKey: password
-            replicationPasswordKey: replication_password
-          username: authentik
-          database: authentik
-    auth:
-      existingSecret: authentik-secret
-      secretKeys:
-        adminPasswordKey: postgres_password
-        userPasswordKey: password
-        replicationPasswordKey: replication_password
-      username: authentik
-      database: authentik
   redis:
     # -- enable the bundled bitnami redis chart
     enabled: true
