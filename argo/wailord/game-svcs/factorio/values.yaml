@@ -224,7 +224,7 @@ factorio-server-charts:
   ## @param server_settings.maximum_segment_size_peer_count Minimum network messages segment count
   server_settings:
     # Your Instance Name
-    name: Factorio
+    name: Jsck's Factorio Server
     # Your Instance Description
     description: "one of the factorio servers of all time"
     tags: []
