@@ -9,7 +9,7 @@ spec:
     - host: "*.jackhil.de"
         http:
         paths:
-            - path: /outpost.goauthentik.io/
+          - path: /outpost.goauthentik.io/
             pathType: Prefix
             backend:
             service:
@@ -33,7 +33,7 @@ spec:
     - host: "*.jsck.network"
         http:
         paths:
-            - path: /outpost.goauthentik.io/
+          - path: /outpost.goauthentik.io/
             pathType: Prefix
             backend:
             service:
