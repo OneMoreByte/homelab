@@ -13,9 +13,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: authentik
+                name: ak-outpost-traefik-outpost
                 port:
-                  number: 80
+                  number: 9000
   tls:
     - hosts:
         - grafana.jackhil.de
@@ -37,9 +37,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: authentik
+                name: ak-outpost-traefik-outpost
                 port:
-                  number: 80
+                  number: 900
   tls:
     - hosts:
         - grafana.jackhil.de
