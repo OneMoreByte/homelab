@@ -4,7 +4,7 @@ metadata:
   name: forward-auth-middleware
 spec:
   forwardAuth:
-    address: https://auth.jackhil.de/outpost.goauthentik.io/auth/traefik
+    address: http://authentik.auth.svc.cluster.local/outpost.goauthentik.io/auth/traefik
     trustForwardHeader: true
     authResponseHeaders:
       - X-authentik-username
