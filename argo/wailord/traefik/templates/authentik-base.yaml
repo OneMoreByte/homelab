@@ -12,10 +12,10 @@ spec:
           - path: /outpost.goauthentik.io/
             pathType: Prefix
             backend:
-            service:
-              name: authentik
-              port:
-                number: 80
+              service:
+                name: authentik
+                port:
+                  number: 80
   tls:
     - hosts:
         - grafana.jackhil.de
@@ -36,10 +36,10 @@ spec:
           - path: /outpost.goauthentik.io/
             pathType: Prefix
             backend:
-            service:
-              name: authentik
-              port:
-                number: 80
+              service:
+                name: authentik
+                port:
+                  number: 80
   tls:
     - hosts:
         - grafana.jackhil.de
