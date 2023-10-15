@@ -281,6 +281,14 @@ authentik:
             replicationPasswordKey: replication_password
           username: authentik
           database: authentik
+    auth:
+      existingSecret: authentik-secret
+      secretKeys:
+        adminPasswordKey: postgres_password
+        userPasswordKey: password
+        replicationPasswordKey: replication_password
+      username: authentik
+      database: authentik
   redis:
     # -- enable the bundled bitnami redis chart
     enabled: true
