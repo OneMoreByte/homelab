@@ -59,16 +59,18 @@ grafana:
       domain: "grafana.jackhil.de"
       root_url: "https://grafana.jackhil.de"
     auth:
+      signout_redirect_url: https://auth.jackhil.de/application/o/grafana/end-session/
       oauth_allow_insecure_email_lookup: false
+      oauth_auto_login: true
     auth.generic_oauth:
+      name: authentik
       enabled: true
-      oauth_name: "Login Keycloak"
       scopes: "openid profile email"
       allow_sign_up: true
-      client_id: grafana
-      auth_url: "https://auth.jackhil.de/auth/realms/master/protocol/openid-connect/auth"
-      token_url: "https://auth.jackhil.de/auth/realms/master/protocol/openid-connect/token"
-      api_url: "https://auth.jackhil.de/auth/realms/master/protocol/openid-connect/userinfo"
+      client_id: vfPErIqqibt3omrfM2fHY3UJFN6pRPoBvIQpDiZb
+      auth_url: "https://auth.jackhil.de/application/o/authorize/"
+      token_url: "https://auth.jackhil.de/application/o/token/"
+      api_url: "https://auth.jackhil.de/application/o/userinfo/"
       role_attribute_path: "contains(groups[*], 'GrafanaAdmin') && 'Admin' || contains(groups[*], 'GrafanaEditor') && 'Editor' || 'Viewer'"
 
 
