@@ -7,19 +7,19 @@ metadata:
 spec:
   rules:
     - host: "*.jackhil.de"
-        http:
+      http:
         paths:
           - path: /outpost.goauthentik.io/
             pathType: Prefix
             backend:
             service:
-                name: authentik
-                port:
+              name: authentik
+              port:
                 number: 80
   tls:
     - hosts:
         - grafana.jackhil.de
-        secretName: jackhil.de-cert
+      secretName: jackhil.de-cert
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -31,16 +31,16 @@ metadata:
 spec:
   rules:
     - host: "*.jsck.network"
-        http:
+      http:
         paths:
           - path: /outpost.goauthentik.io/
             pathType: Prefix
             backend:
             service:
-                name: authentik
-                port:
+              name: authentik
+              port:
                 number: 80
   tls:
     - hosts:
         - grafana.jackhil.de
-        secretName: jsck.network-cert
+      secretName: jsck.network-cert
