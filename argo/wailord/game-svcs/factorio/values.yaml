@@ -184,7 +184,7 @@ factorio-server-charts:
     #   password: <password in base64>
     #
     # accountSecret: account-secret
-    accountSecret: 'factorio-account-secret'
+    accountSecret: 'factorio-secrets'
     # Your factorio.com login credentials. Required for games with visibility public
     username: ''
     password: ''
@@ -197,7 +197,7 @@ factorio-server-charts:
     # password required to log into the factorio server
     game_password: ''
     # Existing Secret containing a `game_password` data entry
-    passwordSecret: 'factorio-game-password'
+    passwordSecret: 'factorio-secrets'
 
   ## @param server_settings.name Factorio server name
   ## @param server_settings.description Factorio server description
