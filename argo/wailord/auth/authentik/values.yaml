@@ -246,13 +246,13 @@ authentik:
 
   prometheus:
     serviceMonitor:
-      create: true
+      create: false
       interval: 30s
       scrapeTimeout: 3s
       # -- labels additional on ServiceMonitor
       labels: {}
     rules:
-      create: true
+      create: false
       # -- labels additional on PrometheusRule
       labels: {}
 
