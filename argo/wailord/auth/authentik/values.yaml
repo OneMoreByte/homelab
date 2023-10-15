@@ -45,16 +45,18 @@ authentik:
   additionalContainers: {}
 
   ingress:
-    enabled: false
-    ingressClassName: ""
+    enabled: true
     annotations: {}
     labels: {}
     hosts:
-      - host: authentik.domain.tld
+      - host: auth.jackhil.de
         paths:
           - path: "/"
             pathType: Prefix
-    tls: []
+    tls:
+      - hosts:
+          - auth.jackhil.de
+        secretName: jackhil.de-cert
 
   # -- Annotations to add to the server and worker deployments
   annotations: {}
