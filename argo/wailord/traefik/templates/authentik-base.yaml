@@ -8,17 +8,17 @@ spec:
   - host: "*.jackhil.de"
     http:
       paths:
-      - path: /outpost.goauthentik.io/
-        pathType: Prefix
-        backend:
-          service:
-            name: authentik
-            port:
-              number: 80
-  tls:
-    - hosts:
-        - grafana.jackhil.de
-    secretName: jackhil.de-cert  
+        - path: /outpost.goauthentik.io/
+            pathType: Prefix
+            backend:
+            service:
+                name: authentik
+                port:
+                number: 80
+    tls:
+        - hosts:
+            - grafana.jackhil.de
+          secretName: jackhil.de-cert  
 
 ---
 
@@ -32,14 +32,14 @@ spec:
   - host: "*.jsck.network"
     http:
       paths:
-      - path: /outpost.goauthentik.io/
-        pathType: Prefix
-        backend:
-          service:
-            name: authentik
-            port:
-              number: 80
-  tls:
-    - hosts:
-        - grafana.jackhil.de
-    secretName: jsck.network-cert  
+        - path: /outpost.goauthentik.io/
+            pathType: Prefix
+            backend:
+            service:
+                name: authentik
+                port:
+                number: 80
+    tls:
+        - hosts:
+            - grafana.jackhil.de
+          secretName: jsck.network-cert  
