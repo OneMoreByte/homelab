@@ -1,0 +1,10 @@
+apiVersion: v2
+name: authentik
+type: application
+version: 0.0.1
+sources:
+  - https://goauthentik.io/docs/installation/kubernetes
+dependencies:
+  - name: authentik
+    version: 2023.8.3
+    repository: "https://charts.goauthentik.io"
