@@ -5,20 +5,21 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
   name: authentik-jsck.network
 spec:
-  - host: "*.jackhil.de"
-    http:
-      paths:
-        - path: /outpost.goauthentik.io/
-          pathType: Prefix
-          backend:
-          service:
-            name: authentik
-            port:
-            number: 80
-    tls:
-      - hosts:
-          - grafana.jackhil.de
-        secretName: jackhil.de-cert
+  rules:
+    - host: "*.jackhil.de"
+        http:
+        paths:
+            - path: /outpost.goauthentik.io/
+            pathType: Prefix
+            backend:
+            service:
+                name: authentik
+                port:
+                number: 80
+        tls:
+        - hosts:
+            - grafana.jackhil.de
+            secretName: jackhil.de-cert
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -28,17 +29,18 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
   name: authentik-jackhil.de
 spec:
-  - host: "*.jsck.network"
-    http:
-      paths:
-        - path: /outpost.goauthentik.io/
-          pathType: Prefix
-          backend:
-          service:
-            name: authentik
-            port:
-            number: 80
-    tls:
-      - hosts:
-          - grafana.jackhil.de
-        secretName: jsck.network-cert
+  rules:
+    - host: "*.jsck.network"
+        http:
+        paths:
+            - path: /outpost.goauthentik.io/
+            pathType: Prefix
+            backend:
+            service:
+                name: authentik
+                port:
+                number: 80
+        tls:
+        - hosts:
+            - grafana.jackhil.de
+            secretName: jsck.network-cert
