@@ -12,13 +12,11 @@ app-template:
       containers:
         main:
           image:
-            # -- image repository
-            repository: docker.io/jesec/rtorrent-flood
+            repository: jesec/rtorrent-flood
             # -- image tag
-            tag: master
+            tag: latest@sha256:8af341d6e72f77f3013a097d19501b5992341e89ac468d5c10852a8e2bc91049
             # -- image pull policy
-            pullPolicy: Always
-          # -- environment variables. See [image docs](https://github.com/jesec/flood#configuration) for more details.
+            pullPolicy: IfNotPresent
           # @default -- See below
           env:
             # -- Set the container timezone
