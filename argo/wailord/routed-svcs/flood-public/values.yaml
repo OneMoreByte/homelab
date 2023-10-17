@@ -115,10 +115,18 @@ app-template:
       type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 8Gi
+      advancedMounts:
+        main:
+          main:
+            - path: "/rtorrent-home/"
 
     downloads:
       enabled: true
       type: hostPath
+      advancedMounts:
+        main:
+          main:
+            - path: "/store/torrent-public/"
       hostPath: /store/torrent-public/
 
     rtorrent-flood-config:
