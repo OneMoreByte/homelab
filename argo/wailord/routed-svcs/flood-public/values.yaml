@@ -32,7 +32,7 @@ app-template:
             # -- Set the container timezone
             TZ: UTC
             # -- Folder where Flood stores it's configuration
-            HOME: "/config"
+            HOME: "/rtorrent-home"
             # -- The host that Flood should listen for web connections on
             FLOOD_OPTION_HOST: "0.0.0.0"
             # -- The port that Flood should listen for web connections on
@@ -110,7 +110,7 @@ app-template:
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
   persistence:
-    config:
+    rtorrent-home:
       enabled: true
       type: persistentVolumeClaim
       accessMode: ReadWriteOnce
@@ -129,7 +129,7 @@ app-template:
       advancedMounts:
         main:
           main:
-            - path: "/config/.rtorrent.rc"
+            - path: "/rtorrent-home/.rtorrent.rc"
               subPath: ".rtorrent.rc"
 
   # -- Minimal configuration provided from https://github.com/jesec/rtorrent/blob/master/doc/rtorrent.rc
