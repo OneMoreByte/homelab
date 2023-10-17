@@ -1,12 +1,9 @@
 apiVersion: v2
 name: flood-public
 type: application
-version: 0.0.1
-sources:
-  - https://artifacthub.io/packages/helm/k8s-at-home/flood
-  - https://artifacthub.io/packages/helm/k8s-at-home/rtorrent-flood
+version: 0.0.2
+sources: []
 dependencies:
-  - name: rtorrent-flood
-    version: 9.4.2
-    repository: "https://k8s-at-home.com/charts/"
-
+  - name: app-template
+    version: 2.0.3
+    repository: "https://bjw-s.github.io/helm-charts"
