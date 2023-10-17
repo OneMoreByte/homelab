@@ -156,10 +156,10 @@ app-template:
               values:
               - bulk-datastore
 
-  podSecurityContext:
-    runAsUser: 11337
-    runAsGroup: 11337
-    fsGroup: 11337
+    podSecurityContext:
+      runAsUser: 11337
+      runAsGroup: 11337
+      fsGroup: 11337
 
 config: |
   #############################################################################
