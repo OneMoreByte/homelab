@@ -123,11 +123,14 @@ app-template:
 
     rtorrent-flood-config:
       enabled: true
-      mountPath: "/config/.rtorrent.rc"
-      subPath: ".rtorrent.rc"
+
       type: "configMap"
       name: 'rtorrent-config'
-
+      advancedMounts:
+        main:
+          main:
+            - path: "/config/.rtorrent.rc"
+              subPath: ".rtorrent.rc"
 
   # -- Minimal configuration provided from https://github.com/jesec/rtorrent/blob/master/doc/rtorrent.rc
   # @default -- string
