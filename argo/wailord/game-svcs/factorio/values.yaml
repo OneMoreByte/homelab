@@ -26,7 +26,7 @@ factorio-server-charts:
     ## Container image pull policy
     pullPolicy: Always
     ## Overrides the image tag whose default is the chart appVersion.
-    tag: "1.1.91"
+    tag: "1.1.93"
     ## You should set an fix version, i.e.:
     # tag: "1.1.37"
 
