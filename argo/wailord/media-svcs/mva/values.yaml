@@ -167,6 +167,7 @@ flexget_config: |
         - 'Adventure Time Fionna and Cake'
         - Futurama
         - Make Some Noise
+        - Kitchen Nightmares US
 
 
   tasks:
