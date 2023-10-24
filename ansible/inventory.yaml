@@ -53,3 +53,8 @@ standalone_cluster:
       ansible_user: jsck
     theroom.jsck.network:
       ansible_user: svc
+
+nfs_servers:
+  hosts:
+    producers.jsck.network:
+      ansible_user: svc

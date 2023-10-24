@@ -38,3 +38,9 @@
 #  roles:
 #  - role: ipaserver
 #    state: present
+
+- name: setup network storage
+  hosts: nfs_servers
+  become: true
+  roles:
+    - { role: geerlingguy.nfs }

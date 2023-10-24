@@ -47,10 +47,15 @@ frigate:
     - name: coral
       hostPath:
         path: /dev/apex_0
+    - name: recording-storage
+      hostPath:
+        path: /store/frigate
   # -- declare additional volume mounts
   extraVolumeMounts:
     - mountPath: /dev/apex_0
       name: coral
+    - mountPath: /media/frigate
+      name: recording-storage
   # -- amount of shared memory to use for caching
   shmSize: 1Gi
 
@@ -75,6 +80,12 @@ frigate:
       #password: '{FRIGATE_MQTT_PASSWORD}'
       # Optional: interval in seconds for publishing stats (default: shown below)
       stats_interval: 60
+    record:
+      enabled: True
+      events:
+        retain:
+          days: 7
+          mode: all
     detectors:
       coral:
         type: edgetpu
@@ -106,8 +117,10 @@ frigate:
             coordinates: 0,480,594,480,639,370,661,198,654,107,583,54,460,59,369,71,241,128,0,250
           front_door:
             coordinates: 271,79,362,70,397,81,0,252,0,166
-        snapshots:
-          enabled: True
+    snapshots:
+      enabled: True
+      retain:
+        default: 60
     objects:
       # Optional: list of objects to track from labelmap.txt (default: shown below)
       track:
@@ -220,8 +233,8 @@ frigate:
 
   # -- Set Security Context
   securityContext:
-    securityContext:
     privileged: true
+    fsGroup: 11337
     # capabilities:
     #   drop:
     #   - ALL
