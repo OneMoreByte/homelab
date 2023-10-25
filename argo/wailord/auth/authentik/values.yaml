@@ -278,6 +278,7 @@ authentik:
     # -- server containerSecurityContext
     containerSecurityContext: {}
   postgresql:
+    enabled: true
     global:
       postgresql:
         auth:
