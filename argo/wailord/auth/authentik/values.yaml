@@ -278,7 +278,10 @@ authentik:
     # -- server containerSecurityContext
     containerSecurityContext: {}
   postgresql:
-    enabled: true
+    global:
+      postgresql:
+        auth:
+          existingSecret: authentik-postgresql
   redis:
     # -- enable the bundled bitnami redis chart
     enabled: true
