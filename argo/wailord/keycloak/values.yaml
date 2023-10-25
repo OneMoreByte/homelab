@@ -16,6 +16,8 @@ keycloakx:
     - "--spi-events-listener-jboss-logging-error-level=warn"
 
   extraEnv: |
+    - name: PROXY_ADDRESS_FORWARDING
+      value: "true"
     - name: KC_PROXY
       value: "passthrough"
     - name: JAVA_OPTS_APPEND
