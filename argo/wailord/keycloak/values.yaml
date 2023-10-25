@@ -50,7 +50,7 @@ keycloakx:
     # The name of the Ingress Class associated with this ingress
     ingressClassName: ""
     # The Service port targeted by the Ingress
-    servicePort: http
+    servicePort: https
     # Ingress annotations
     annotations:
       traefik.ingress.kubernetes.io/router.tls: "true"
