@@ -14,6 +14,7 @@ keycloakx:
     - "--hostname-strict-https=false"
     - "--spi-events-listener-jboss-logging-success-level=info"
     - "--spi-events-listener-jboss-logging-error-level=warn"
+    - "--proxy edge"
 
   extraEnv: |
     - name: PROXY_ADDRESS_FORWARDING
