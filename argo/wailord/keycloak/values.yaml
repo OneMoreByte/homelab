@@ -62,7 +62,7 @@ keycloakx:
     rules:
       -
         # Ingress host
-        host: 'h.jackhil.de'
+        host: 'auth.jackhil.de'
         # Paths for the host
         paths:
           - path: /

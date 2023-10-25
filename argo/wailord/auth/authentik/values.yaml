@@ -49,20 +49,20 @@ authentik:
     annotations: {}
     labels: {}
     hosts:
-      - host: auth.jackhil.de
+      - host: h.jackhil.de
         paths:
           - path: "/"
             pathType: Prefix
-      - host: auth.jsck.network
+      - host: h.jsck.network
         paths:
           - path: "/"
             pathType: Prefix
     tls:
       - hosts:
-          - auth.jackhil.de
+          - h.jackhil.de
         secretName: jackhil.de-cert
       - hosts:
-          - auth.jsck.network
+          - h.jsck.network
         secretName: jsck.network-cert
   # -- Annotations to add to the server and worker deployments
   annotations: {}
