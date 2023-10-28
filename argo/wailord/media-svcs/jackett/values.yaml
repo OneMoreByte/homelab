@@ -9,7 +9,7 @@ app-template:
             TZ: America/Chicago
   image:
     repository: linuxserver/jackett
-    tag: "0.21.1085"
+    tag: "0.21.1096"
     pullPolicy: IfNotPresent
   # -- Configures service settings for the chart.
   service:
