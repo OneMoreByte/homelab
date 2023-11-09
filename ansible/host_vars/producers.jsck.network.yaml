@@ -1,5 +1,5 @@
 zrepl_name: producers
 
 nfs_exports:
-  - "/store/nfs/windows 192.168.13.0/24(rw,sync,no_subtree_check)"
-  - "/store/nfs/shared 192.168.13.0/24(rw,sync,no_subtree_check)"
+  - "/store/nfs/windows 192.168.13.0/24(rw,async,no_subtree_check)"
+  - "/store/nfs/shared 192.168.13.0/24(rw,async,no_subtree_check)"

@@ -84,7 +84,7 @@ frigate:
       enabled: True
       events:
         retain:
-          days: 7
+          default: 7
           mode: all
     detectors:
       coral:
