@@ -70,7 +70,7 @@ minecraft:
       image: busybox
       command: ["sleep", "36000"]
       volumeMounts:
-        - datadir:
+        - name: datadir
           mountPath: /datadir
           readOnly: true
 
