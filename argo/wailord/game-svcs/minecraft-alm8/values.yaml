@@ -65,14 +65,14 @@ minecraft:
   #       - name: nfs
   #         mountPath: /mnt/volume
   #         readOnly: true
-  initContainers:
-    - name: hold-up
-      image: busybox
-      command: ["sleep", "36000"]
-      volumeMounts:
-        - name: datadir
-          mountPath: /datadir
-          readOnly: true
+  # initContainers:
+  #  - name: hold-up
+  #    image: busybox
+  #    command: ["sleep", "36000"]
+  #    volumeMounts:
+  #      - name: datadir
+  #        mountPath: /datadir
+  #        readOnly: true
 
 
   # sidecarContainers:
