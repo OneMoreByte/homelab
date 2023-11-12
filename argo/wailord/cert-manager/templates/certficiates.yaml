@@ -82,7 +82,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: minio.console.jsck.network-cert
-  namespace: traefik
+  namespace: svcs
 spec:
   dnsNames:
     - "minio.console.jsck.network"
