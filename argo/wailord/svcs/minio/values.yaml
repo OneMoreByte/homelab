@@ -13,7 +13,7 @@ minio:
 
   persistence:
     enabled: true
-    existingClaim: minio-hostpath
+    existingClaim: minio-hostpath-pvc
 
   ingress:
     enabled: true
