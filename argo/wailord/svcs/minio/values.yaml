@@ -44,6 +44,29 @@ minio:
     fsGroup: 11337
     # fsGroupChangePolicy: "OnRootMismatch"
 
-  users: []
+  buckets:
+    - name: longhorn-backup
+      policy: none
+      versioning: true
+
+  policies:
+    - name: longhorn-backup-readwrite
+      statements:
+        - effect: Allow
+          resources:
+            - 'arn:aws:s3:::longhorn-backup'
+          actions:
+            - "s3:AbortMultipartUpload"
+            - "s3:GetObject"
+            - "s3:DeleteObject"
+            - "s3:PutObject"
+            - "s3:ListMultipartUploadParts"
+
+  users: 
+    - accessKey: longhorn
+      existingSecret: longhorn-user-secret
+      existingSecretKey: password
+      policy: longhorn-backup-readwrite
+      
 
   svcaccts: []
