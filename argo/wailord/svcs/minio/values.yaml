@@ -1,0 +1,49 @@
+minio:
+  mode: standalone
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - bulk-datastore
+
+  persistence:
+    enabled: true
+    existingClaim: minio-hostpath
+
+  ingress:
+    enabled: true
+    annotations: {}
+    path: /
+    hosts:
+      - minio.jsck.network
+    tls:
+      - secretName: jsck.network-cert
+        hosts:
+          - minio.jsck.network
+
+  consoleIngress:
+    enabled: true
+    annotations: {}
+    path: /
+    hosts:
+      - console.minio.jsck.network
+    tls:
+      - secretName: minio.console.jsck.network-cert
+        hosts:
+          - console.minio.jsck.network
+
+  securityContext:
+    enabled: true
+    runAsUser: 11337
+    runAsGroup: 11337
+    fsGroup: 11337
+    # fsGroupChangePolicy: "OnRootMismatch"
+
+  users: []
+
+  svcaccts: []

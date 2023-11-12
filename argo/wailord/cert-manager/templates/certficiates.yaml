@@ -77,7 +77,19 @@ spec:
   issuerRef:
     name: letsencrypt-aws-issuer
     kind: ClusterIssuer
-
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: minio.console.jsck.network-cert
+  namespace: traefik
+spec:
+  dnsNames:
+    - "minio.console.jsck.network"
+  secretName: jsck.network-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate

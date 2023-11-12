@@ -123,3 +123,28 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+---
+kind: Application
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: minio
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/svcs/minio/
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: minio
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

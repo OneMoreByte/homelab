@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-hostpath-pvc
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      size: 2Ti
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-hostpath-pv
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Ti
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/store/minio"
