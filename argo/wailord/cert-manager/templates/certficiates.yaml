@@ -86,7 +86,7 @@ metadata:
 spec:
   dnsNames:
     - "minio.console.jsck.network"
-  secretName: jsck.network-cert
+  secretName: minio.console.jsck.network-cert
   issuerRef:
     name: letsencrypt-aws-issuer
     kind: ClusterIssuer
