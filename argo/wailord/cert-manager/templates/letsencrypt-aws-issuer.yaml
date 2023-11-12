@@ -10,12 +10,13 @@ spec:
       name: letsencrypt-issuer-account-key
     solvers:
       - selector:
-            dnsZones:
-              - "*.jackhil.de"
-              - "*.jsck.network"
-              - "*.harbor.jsck.network"
-              - "*.totallynothax.net"
-              - "*.science.team"
+          dnsZones:
+            - "*.jackhil.de"
+            - "console.minio.jsck.network"
+            - "*.jsck.network"
+            - "*.harbor.jsck.network"
+            - "*.totallynothax.net"
+            - "*.science.team"
         dns01:
           cloudflare:
             apiTokenSecretRef:
