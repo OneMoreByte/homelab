@@ -33,7 +33,7 @@ minio:
     hosts:
       - console.minio.jsck.network
     tls:
-      - secretName: minio.console.jsck.network-cert
+      - secretName: console.minio.jsck.network-cert
         hosts:
           - console.minio.jsck.network
 
@@ -54,13 +54,9 @@ minio:
       statements:
         - effect: Allow
           resources:
-            - 'arn:aws:s3:::longhorn-backup'
+            - 'arn:aws:s3:::longhorn-backup/*'
           actions:
-            - "s3:AbortMultipartUpload"
-            - "s3:GetObject"
-            - "s3:DeleteObject"
-            - "s3:PutObject"
-            - "s3:ListMultipartUploadParts"
+            - "s3:*"
 
   users: 
     - accessKey: longhorn
