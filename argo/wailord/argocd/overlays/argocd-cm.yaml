@@ -7,7 +7,7 @@ data:
   oidc.config: |
     name: Keycloak
     issuer: https://auth.jackhil.de/application/o/argocd/
-    clientID: tSWDHj097L1IQ8o8aMRkwss8f1UakEoe8jkn4102
+    clientID: argocd
     clientSecret: $argo-client-secret:oidc.keycloak.clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]
     skipAudienceCheckWhenTokenHasNoAudience: true

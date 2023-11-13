@@ -64,5 +64,18 @@ minio:
       existingSecretKey: password
       policy: longhorn-backup-readwrite
       
-
   svcaccts: []
+
+  oidc:
+    enabled: false
+    configUrl: "https://auth.jackhil.de/auth/realms/master/.well-known/openid-configuration"
+    clientId: "minio"
+    existingClientSecretName: "minio-client-secret"
+    existingClientSecretKey: "client-secret"
+    claimName: "policy"
+    scopes: "openid,profile,email"
+    redirectUri: "https://console.minio.jsck.network/oauth_callback"
+    # Can leave empty
+    claimPrefix: ""
+    comment: ""
+
