@@ -180,11 +180,11 @@ frigate:
     ## set the LoadBalancer service type to internal only.
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
     ##
-    annotations: {}
-    labels: {}
+    # annotations: {}
+    # labels: {}
 
     # -- Set specific IP address for LoadBalancer. `service.type` must be set to `LoadBalancer`
-    loadBalancerIP:
+    # loadBalancerIP:
 
     # loadBalancerSourceRanges: []
     ## Set the externalTrafficPolicy in the Service to either Cluster or Local
@@ -209,7 +209,7 @@ frigate:
     # -- list of TLS configurations
     tls:
       - hosts:
-         - frigate.jsck.network
+          - frigate.jsck.network
         secretName: jsck.network-cert
   persistence:
     data:
@@ -272,11 +272,12 @@ frigate:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
-        - matchExpressions:
-          - key: app
-            operator: In
-            values:
-            - bulk-datastore
+          - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - bulk-datastore
 
   # -- Set additonal pod Annotations
   podAnnotations: {}
+
