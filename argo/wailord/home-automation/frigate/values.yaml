@@ -196,9 +196,9 @@ frigate:
 
     # -- annotations to configure your Ingress. See your Ingress Controller's Docs for more info.
     annotations:
-      traefik.ingress.kubernetes.io/router.tls: "true"
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      # traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth-middleware@kubernetescrd
+      #traefik.ingress.kubernetes.io/router.tls: "true"
+      #traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth-middleware@kubernetescrd
 
     # -- list of hosts and their paths that ingress controller should repsond to.
     hosts:
