@@ -15,6 +15,25 @@ nextcloud:
       usernameKey: username
       passwordKey: password
       secretName: nextcloud-admin-user
+    configs:
+      ingress.config.php: |-
+        <?php
+        $CONFIG = array (
+          'overwritewebroot' => '/',
+          'overwritehost' => 'nextcloud.jackhil.de',
+          'overwrite.cli.url' => 'https://nextcloud.jackhil.de',
+          'overwriteprotocol' => 'https',
+        );
+      trustedproxy.config.php: |-
+        <?php
+        $CONFIG = array (
+          'trusted_proxies' => '10.233.0.0/16',
+        );
+
+
+
+  internalDatabase:
+    enabled: false
 
   externalDatabase:
     enabled: true
