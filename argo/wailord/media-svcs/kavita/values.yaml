@@ -79,7 +79,14 @@ app-template:
       enabled: false
     kavita-config:
       enabled: true
-      mountPath: /kavita/config
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 8Gi
+      advancedMounts:
+        main:
+          main:
+            - path: /kavita/config
+              readOnly: false
     books:
       enabled: true
       type: hostPath
