@@ -25,7 +25,6 @@ nextcloud:
         <?php
         $CONFIG = array (
           'overwritewebroot' => '/',
-        traefik.ingress.kubernetes.io/router.middlewares'overwrite.cli.url' => 'https://nextcloud.jackhil.de',
           'overwrite.cli.url' => 'https://nextcloud.jackhil.de',
           'overwriteprotocol' => 'https',
         );
