@@ -1,7 +1,9 @@
 nextcloud:
   ingress:
     annotations:
-      traefik.ingress.kubernetes.io/routers.middlewares: 'nextcloud-redirectregex@kubernetescrd'
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/routers.middlewares: 'traefik-redirect-http-2-https@kubernetescrd,nextcloud-redirectregex@kubernetescrd'
     enabled: true
     path: /
     pathType: Prefix
@@ -9,6 +11,10 @@ nextcloud:
       - secretName: jackhil.de-cert
         hosts:
           - nextcloud.jackhil.de
+
+  phpClientHttpsFix:
+    enabled: true
+    protocol: https
 
   nextcloud:
     host: nextcloud.jackhil.de
@@ -24,6 +30,7 @@ nextcloud:
       ingress.config.php: |-
         <?php
         $CONFIG = array (
+          'overwritehost' => 'nextcloud.jackhil.de',
           'overwritewebroot' => '/',
           'overwrite.cli.url' => 'https://nextcloud.jackhil.de',
           'overwriteprotocol' => 'https',
@@ -34,8 +41,6 @@ nextcloud:
           'trusted_proxies' => '10.0.0.0/8',
                                '192.168.0.0/16',
         );
-
-
 
   internalDatabase:
     enabled: false
