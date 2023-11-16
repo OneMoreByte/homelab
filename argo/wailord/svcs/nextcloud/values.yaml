@@ -8,15 +8,15 @@ nextcloud:
         hosts:
           - nextcloud.jackhil.de
 
-  nextcloud:
-    host: nextcloud.jackhil.de
-    existingSecret:
-      enabled: true
-      usernameKey: username
-      passwordKey: password
-      secretName: nextcloud-admin-user
+    nextcloud:
+      host: nextcloud.jackhil.de
+      existingSecret:
+        enabled: true
+        usernameKey: username
+        passwordKey: password
+        secretName: nextcloud-admin-user
 
-    mariadb:
+     mariadb:
       enabled: true
       auth:
         username: nextcloud
@@ -28,7 +28,7 @@ nextcloud:
           enabled: true
           accessMode: ReadWriteOnce
           size: 8Gi
- 
+
     redis:
       enabled: true
       auth:
