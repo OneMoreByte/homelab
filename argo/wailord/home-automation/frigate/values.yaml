@@ -96,6 +96,10 @@ frigate:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=1
         garage1-high:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=0
+        backdoor1:
+          - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=1
+        backdoor1-high:
+          - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0
     cameras:
       garage1:
         ffmpeg:
@@ -117,6 +121,20 @@ frigate:
             coordinates: 0,480,594,480,639,370,661,198,654,107,583,54,460,59,369,71,241,128,0,250
           front_door:
             coordinates: 271,79,362,70,397,81,0,252,0,166
+      backdoor1:
+        ffmpeg:
+          inputs:
+            - path: rtsp://127.0.0.1:8554/backdoor1?video=copy
+              roles:
+                - detect
+            - path: rtsp://127.0.0.1:8554/backdoor1-high?video=copy
+              roles:
+                - record
+        detect:
+          width: 704
+          height: 480
+        motion: {}
+        zones: {}
     snapshots:
       enabled: True
       retain:
