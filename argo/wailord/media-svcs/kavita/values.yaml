@@ -26,7 +26,6 @@ app-template:
   ingress:
       main:
         enabled: true
-        primary: true
         annotations:
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -36,6 +35,9 @@ app-template:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: kavita
+                  port: 5000
         tls:
         - hosts:
             - kavita.jackhil.de
@@ -51,7 +53,9 @@ app-template:
             paths:
               - path: /
                 pathType: Prefix
-
+                service:
+                  name: kavita
+                  port: 5000
 
 
   podSecurityContext:
