@@ -16,7 +16,7 @@ nextcloud:
         passwordKey: password
         secretName: nextcloud-admin-user
 
-     mariadb:
+    mariadb:
       enabled: true
       auth:
         username: nextcloud
@@ -44,4 +44,3 @@ nextcloud:
     serviceMonitor:
       enabled: true
       namespace: "observability"
-
