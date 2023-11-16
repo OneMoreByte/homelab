@@ -8,39 +8,39 @@ nextcloud:
         hosts:
           - nextcloud.jackhil.de
 
-    nextcloud:
-      host: nextcloud.jackhil.de
-      existingSecret:
+  nextcloud:
+    host: nextcloud.jackhil.de
+    existingSecret:
+      enabled: true
+      usernameKey: username
+      passwordKey: password
+      secretName: nextcloud-admin-user
+
+  mariadb:
+    enabled: true
+    auth:
+      username: nextcloud
+      database: nextcloud
+      existingSecret: nextcloud-db-user
+    architecture: Standalone
+    primary:
+      persistence:
         enabled: true
-        usernameKey: username
-        passwordKey: password
-        secretName: nextcloud-admin-user
+        accessMode: ReadWriteOnce
+        size: 8Gi
 
-    mariadb:
+  redis:
+    enabled: true
+    auth:
       enabled: true
-      auth:
-        username: nextcloud
-        database: nextcloud
-        existingSecret: nextcloud-db-user
-      architecture: Standalone
-      primary:
-        persistence:
-          enabled: true
-          accessMode: ReadWriteOnce
-          size: 8Gi
+      existingSecret: nextcloud-redis-password
+      existingSecretPasswordKey: password
 
-    redis:
-      enabled: true
-      auth:
-        enabled: true
-        existingSecret: nextcloud-redis-password
-        existingSecretPasswordKey: password
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 256Gi
 
-    persistence:
-      enabled: true
-      accessMode: ReadWriteOnce
-      size: 256Gi
-
-    serviceMonitor:
-      enabled: true
-      namespace: "observability"
+  serviceMonitor:
+    enabled: true
+    namespace: "observability"
