@@ -67,7 +67,7 @@ minio:
   svcaccts: []
 
   oidc:
-    enabled: false
+    enabled: true
     configUrl: "https://auth.jackhil.de/auth/realms/master/.well-known/openid-configuration"
     clientId: "minio"
     existingClientSecretName: "minio-client-secret"
