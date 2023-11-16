@@ -42,6 +42,22 @@ nextcloud:
                                '192.168.0.0/16',
         );
 
+    defaultConfigs:
+      # To protect /var/www/html/config
+      .htaccess: true
+      # Redis default configuration
+      redis.config.php: true
+      # Apache configuration for rewrite urls
+      apache-pretty-urls.config.php: false
+      # Define APCu as local cache
+      apcu.config.php: true
+      # Apps directory configs
+      apps.config.php: true
+      # Used for auto configure database
+      autoconfig.php: true
+      # SMTP default configuration
+      smtp.config.php: true
+
   internalDatabase:
     enabled: false
 
