@@ -18,11 +18,11 @@ grafana:
     type: pvc
     enabled: true
     accessModes:
-      - ReadWriteMany
+      - ReadWriteOnce
     size: 10Gi
     # annotations: {}
-    finalizers:
-      - kubernetes.io/pvc-protection
+    #finalizers:
+    #  - kubernetes.io/pvc-protection
     # subPath: ""
     # existingClaim:
 
