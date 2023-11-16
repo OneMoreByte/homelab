@@ -1,7 +1,7 @@
 nextcloud:
   ingress:
     annotations:
-      traefik.ingress.kubernetes.io/router.middlewares: 'nextcloud-redirectregex@kubernetescrd'
+      traefik.ingress.kubernetes.io/routers.middlewares: 'nextcloud-redirectregex@kubernetescrd'
     enabled: true
     path: /
     pathType: Prefix
@@ -22,7 +22,7 @@ nextcloud:
         <?php
         $CONFIG = array (
           'overwritewebroot' => '/',
-          'overwritehost' => 'nextcloud.jackhil.de',
+          'overwrite.cli.url' => 'https://nextcloud.jackhil.de',
           'overwrite.cli.url' => 'https://nextcloud.jackhil.de',
           'overwriteprotocol' => 'https',
         );
