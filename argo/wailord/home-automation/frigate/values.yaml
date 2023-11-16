@@ -239,7 +239,10 @@ frigate:
       skipuninstall: false
 
   # -- Set resource limits/requests for the Pod(s)
-  resources: {}
+  resources:
+    requests:
+      cpu: 200m
+      memory: 128Mi
     # limits:
     #   cpu: 100m
     #   memory: 128Mi
@@ -252,7 +255,7 @@ frigate:
   # -- Set Security Context
   securityContext:
     privileged: true
-    fsGroup: 11337
+    #fsGroup: 11337
     # capabilities:
     #   drop:
     #   - ALL
