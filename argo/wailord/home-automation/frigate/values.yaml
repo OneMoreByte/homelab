@@ -18,7 +18,7 @@ frigate:
   imagePullSecrets: []
 
   # -- additional ENV variables to set. Prefix with FRIGATE_ to target Frigate configuration values
-  env:
+  env: []
  #   - FRIGATE_MQTT_USER:
  #   - FRIGATE_MQTT_PASSWORD:
 
@@ -169,7 +169,7 @@ frigate:
 
   service:
     # -- Type of Service to use
-    type: ClusterIP
+    type: LoadBalancer
     # -- Port the Service should communicate on
     port: 5000
     ## Specify the nodePort value for the LoadBalancer and NodePort service types.
@@ -198,7 +198,7 @@ frigate:
     annotations:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth-middleware@kubernetescrd
+      # traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth-middleware@kubernetescrd
 
     # -- list of hosts and their paths that ingress controller should repsond to.
     hosts:
