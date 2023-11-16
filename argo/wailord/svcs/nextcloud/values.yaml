@@ -22,7 +22,7 @@ nextcloud:
       username: nextcloud
       database: nextcloud
       existingSecret: nextcloud-db-user
-    architecture: Standalone
+    architecture: standalone
     primary:
       persistence:
         enabled: true
