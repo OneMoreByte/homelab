@@ -42,20 +42,20 @@ app-template:
         - hosts:
             - kavita.jackhil.de
           secretName: jackhil.de-cert
-  ssl-redirect:
-    enabled: true
-    annotations:
-      traefik.ingress.kubernetes.io/router.entrypoints: web
-      traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
-    labels: {}
-    hosts:
-      - host: kavita.jackhil.de
-        paths:
-          - path: /
-            pathType: Prefix
-            service:
-              name: kavita
-              port: 5000
+    ssl-redirect:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
+      labels: {}
+      hosts:
+        - host: kavita.jackhil.de
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                name: kavita
+                port: 5000
 
   defaultPodOptions:
     podSecurityContext:
@@ -76,6 +76,8 @@ app-template:
 
   persistence:
     config:
+      enabled: false
+    kavita-config:
       enabled: true
       mountPath: /kavita/config
     books:
