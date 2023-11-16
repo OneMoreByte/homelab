@@ -1,5 +1,7 @@
 nextcloud:
   ingress:
+    annotations:
+      traefik.ingress.kubernetes.io/router.middlewares: 'nextcloud-redirectregex@kubernetescrd'
     enabled: true
     path: /
     pathType: Prefix
