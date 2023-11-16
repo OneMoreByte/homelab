@@ -17,12 +17,15 @@ nextcloud:
       usernameKey: username
       passwordKey: password
       secretName: nextcloud-admin-user
+      smtpUsernameKey: smtp-username
+      smtpPasswordKey: smtp-password
+      smtpHostKey: smtp-hostname
     configs:
       ingress.config.php: |-
         <?php
         $CONFIG = array (
           'overwritewebroot' => '/',
-          'overwrite.cli.url' => 'https://nextcloud.jackhil.de',
+        traefik.ingress.kubernetes.io/router.middlewares'overwrite.cli.url' => 'https://nextcloud.jackhil.de',
           'overwrite.cli.url' => 'https://nextcloud.jackhil.de',
           'overwriteprotocol' => 'https',
         );
