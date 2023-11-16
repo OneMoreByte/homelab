@@ -16,6 +16,16 @@ nextcloud:
       passwordKey: password
       secretName: nextcloud-admin-user
 
+  externalDatabase:
+    enabled: true
+    type: mysql
+    existingSecret:
+      secretName: nextcloud-db-user
+      usernameKey: db-username
+      passwordKey: mariadb-password
+      hostKey: db-hostname
+      databaseKey: db-database
+
   mariadb:
     enabled: true
     auth:

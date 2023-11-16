@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  mariadb-password: d1UqTUB4Q1pEZ2JjQmNlUTRUWDN1elBX
+  mariadb-repliation-password: RVlrWFQ3aDZKdkRDSlBvdXBGZ0s4XjVK
+  mariadb-root-password: cTNuI3JLJW12TUdeV0RjaHl3NTlzNSVe
+  db-hostname: Cg==
+  db-database: bmV4dGNsb3VkCg==
+  db-username: bmV4dGNsb3VkCg==
+kind: Secret
+metadata:
+  creationTimestamp: "2023-11-16T01:59:39Z"
+  name: nextcloud-db-user
+  namespace: svcs
+  ownerReferences:
+    - apiVersion: bitnami.com/v1alpha1
+      controller: true
+      kind: SealedSecret
+      name: nextcloud-db-user
+      uid: c5c2c661-0a5e-4932-85f1-d8da2e2ec786
+  resourceVersion: "214889272"
+  uid: 87d708c7-0dc6-4058-8330-f840c340103a
+type: Opaque
