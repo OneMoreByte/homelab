@@ -8,6 +8,7 @@ keycloakx:
     - "--verbose"
     - "start"
     - "--auto-build"
+    - "--optimized"
     - "--http-enabled=true"
     - "--http-port=8080"
     - "--hostname-strict=false"
