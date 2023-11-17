@@ -57,7 +57,6 @@ spec:
             user => "${ES_ES_USER}"
             password => "${ES_ES_PASSWORD}"
             ssl_certificate_authorities => "${ES_ES_SSL_CERTIFICATE_AUTHORITY}"
-            index => "keycloak-%{+yyyy.MM.dd}"
           }
         }
   services:
