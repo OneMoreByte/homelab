@@ -67,5 +67,5 @@ spec:
           ports:
           - port: 12201
             name: "gelf"
-            protocol: TCP
+            protocol: UDP
 
