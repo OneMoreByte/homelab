@@ -21,6 +21,8 @@ keycloakx:
     - '--hostname-debug=true'
 
   extraEnv: |
+    - name: KC_HEALTH_ENABLED
+      value: "true"
     - name: PROXY_ADDRESS_FORWARDING
       value: "true"
     - name: KC_PROXY
