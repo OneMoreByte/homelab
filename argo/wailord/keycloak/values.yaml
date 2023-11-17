@@ -13,7 +13,7 @@ keycloakx:
     - "--hostname-strict-https=false"
     - "--spi-events-listener-jboss-logging-success-level=info"
     - "--spi-events-listener-jboss-logging-error-level=warn"
-    - "--proxy edge"
+    #- "--proxy edge"
    # - '--log="gelf"'
     - '--log-gelf-host=logstash-ls-beats.observability.svc.cluster.local'
     - '--log-gelf-port=12201'
