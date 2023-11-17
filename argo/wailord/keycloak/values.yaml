@@ -15,6 +15,9 @@ keycloakx:
     - "--spi-events-listener-jboss-logging-success-level=info"
     - "--spi-events-listener-jboss-logging-error-level=warn"
     - "--proxy edge"
+    - '--log="console,gelf"'
+    - '--log-gelf-host=logstash-es.observability.svc.cluster.local'
+    - '--log-gelf-port=12201'
 
   extraEnv: |
     - name: PROXY_ADDRESS_FORWARDING
