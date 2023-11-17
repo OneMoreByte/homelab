@@ -22,9 +22,11 @@ keycloakx:
 
   extraEnv: |
     - name: KC_HOSTNAME_URL
-      value: https://auth.jackhil.de
+      value: https://auth.jackhil.de/auth
     - name: KC_HOSTNAME_ADMIN_URL
-      value: https://auth.jackhil.de
+      value: https://auth.jackhil.de/auth
+    - name:  KC_HTTP_RELATIVE_PATH
+      value: /auth
     - name: KC_HEALTH_ENABLED
       value: "true"
     - name: PROXY_ADDRESS_FORWARDING
