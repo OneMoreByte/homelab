@@ -52,7 +52,6 @@ spec:
           }
         }
         output {
-          stdout {}
           elasticsearch {
             hosts => [ "${ES_ES_HOSTS}" ]
             user => "${ES_ES_USER}"
