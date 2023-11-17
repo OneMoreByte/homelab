@@ -18,6 +18,7 @@ spec:
         resources:
           requests:
             storage: 32Gi
+
 ---
 apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
@@ -28,6 +29,7 @@ spec:
   count: 1
   elasticsearchRef:
     name: elasticsearch
+
 ---
 
 
@@ -52,10 +54,10 @@ spec:
         output {
           stdout {}
           elasticsearch {
-            hosts => [ "${QS_ES_HOSTS}" ]
-            user => "${QS_ES_USER}"
-            password => "${QS_ES_PASSWORD}"
-            ssl_certificate_authorities => "${QS_ES_SSL_CERTIFICATE_AUTHORITY}"
+            hosts => [ "${ES_ES_HOSTS}" ]
+            user => "${ES_ES_USER}"
+            password => "${ES_ES_PASSWORD}"
+            ssl_certificate_authorities => "${ES_ES_SSL_CERTIFICATE_AUTHORITY}"
           }
         }
   services:
