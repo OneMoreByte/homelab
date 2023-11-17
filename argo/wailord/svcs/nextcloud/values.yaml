@@ -57,7 +57,15 @@ nextcloud:
       autoconfig.php: true
       # SMTP default configuration
       smtp.config.php: true
-
+    mail:
+      enabled: true
+      fromAddress: nextcloud
+      domain: mail.jsck.network
+      smtp:
+        host: smtp.mailgun.com
+        secure: ssl
+        port: 587
+        authtype: LOGIN
   internalDatabase:
     enabled: false
 
