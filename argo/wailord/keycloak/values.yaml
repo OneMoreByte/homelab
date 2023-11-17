@@ -29,7 +29,7 @@ keycloakx:
     - name: PROXY_ADDRESS_FORWARDING
       value: "true"
     - name: KC_PROXY
-      value: "reencrypt"
+      value: "passthrough"
     - name: JAVA_OPTS_APPEND
       value: >-
         -XX:+UseContainerSupport
