@@ -133,8 +133,12 @@ frigate:
         detect:
           width: 704
           height: 480
-        motion: {}
-        zones: {}
+        motion:
+          mask:
+            - 0,480,704,480,704,216,704,57,577,0,124,51,364,50,220,43,121,52,0,72,0,212
+        zones:
+          backdoor:
+            coordinates: 361,52,451,0,570,0,704,47,704,480,0,480,0,77,124,51
     snapshots:
       enabled: True
       retain:
@@ -196,8 +200,6 @@ frigate:
 
     # -- annotations to configure your Ingress. See your Ingress Controller's Docs for more info.
     annotations:
-      #traefik.ingress.kubernetes.io/router.tls: "true"
-      #traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth-middleware@kubernetescrd
 
     # -- list of hosts and their paths that ingress controller should repsond to.
