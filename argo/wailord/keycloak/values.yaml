@@ -16,7 +16,7 @@ keycloakx:
     - "--spi-events-listener-jboss-logging-error-level=warn"
     - "--proxy edge"
     - '--log="console,gelf"'
-    - '--log-gelf-host=logstash-es.observability.svc.cluster.local'
+    - '--log-gelf-host=logstash-ls-beats.observability.svc.cluster.local'
     - '--log-gelf-port=12201'
 
   extraEnv: |
