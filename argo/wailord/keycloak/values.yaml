@@ -32,6 +32,15 @@ keycloakx:
     - secretRef:
         name: keycloak-admin-user
 
+  image:
+    # The Keycloak image repository
+    repository: quay.io/keycloak/keycloak
+    # Overrides the Keycloak image tag whose default is the chart appVersion
+    tag: "22.0.5"
+    # Overrides the Keycloak image tag with a specific digest
+    digest: ""
+    # The Keycloak image pull policy
+    pullPolicy: IfNotPresent
   
   dbchecker:
     enabled: true
