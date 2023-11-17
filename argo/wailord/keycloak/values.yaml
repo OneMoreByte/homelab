@@ -18,6 +18,7 @@ keycloakx:
     - '--log="console,gelf"'
     - '--log-gelf-host=logstash-ls-beats.observability.svc.cluster.local'
     - '--log-gelf-port=12201'
+    - '--hostname-debug=true'
 
   extraEnv: |
     - name: PROXY_ADDRESS_FORWARDING
