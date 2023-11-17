@@ -21,6 +21,10 @@ keycloakx:
     - '--hostname-debug=true'
 
   extraEnv: |
+    - name: KC_HOSTNAME_URL
+      value: https://auth.jackhil.de
+    - name: KC_HOSTNAME_ADMIN_URL
+      value: https://auth.jackhil.de
     - name: KC_HEALTH_ENABLED
       value: "true"
     - name: PROXY_ADDRESS_FORWARDING
