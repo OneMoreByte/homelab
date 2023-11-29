@@ -45,7 +45,7 @@ keycloakx:
     # The Keycloak image repository
     repository: quay.io/keycloak/keycloak
     # Overrides the Keycloak image tag whose default is the chart appVersion
-    tag: "22.0.5"
+    tag: "23.0.1"
     # Overrides the Keycloak image tag with a specific digest
     digest: ""
     # The Keycloak image pull policy
