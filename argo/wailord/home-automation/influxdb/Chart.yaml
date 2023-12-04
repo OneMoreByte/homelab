@@ -7,7 +7,7 @@ sources:
   - https://github.com/OneMoreByte/influxdb-secret-controller
 dependencies:
   - name: influxdb2
-    version: 2.1.1
+    version: 2.1.2
     repository: "https://helm.influxdata.com/"
   - name: infuxdb-secret-controller
     version: 1.1.3
