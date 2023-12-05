@@ -9,7 +9,7 @@ app-template:
         main:
           image:
             repository: jvmilazz0/kavita
-            tag: 0.7.10
+            tag: 0.7.11
             pullPolicy: IfNotPresent
           env:
             TZ: America/Chicago
