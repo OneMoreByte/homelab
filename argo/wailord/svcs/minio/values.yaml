@@ -1,0 +1,84 @@
+minio:
+  mode: standalone
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - bulk-datastore
+
+  persistence:
+    enabled: true
+    existingClaim: minio-hostpath-pvc
+
+  ingress:
+    enabled: true
+    annotations: {}
+    path: /
+    hosts:
+      - minio.jsck.network
+    tls:
+      - secretName: jsck.network-cert
+        hosts:
+          - minio.jsck.network
+
+  consoleIngress:
+    enabled: true
+    annotations: {}
+    path: /
+    hosts:
+      - console.minio.jsck.network
+    tls:
+      - secretName: console.minio.jsck.network-cert
+        hosts:
+          - console.minio.jsck.network
+
+  securityContext:
+    enabled: true
+    runAsUser: 11337
+    runAsGroup: 11337
+    fsGroup: 11337
+    # fsGroupChangePolicy: "OnRootMismatch"
+
+  buckets:
+    - name: longhorn-backup
+      policy: none
+      versioning: true
+
+  policies:
+    - name: longhorn-backup-readwrite
+      statements:
+        - effect: Allow
+          resources:
+            - 'arn:aws:s3:::longhorn-backup/*'
+          actions:
+            - "s3:*"
+
+  users: 
+    - accessKey: longhorn
+      existingSecret: longhorn-user-secret
+      existingSecretKey: password
+      policy: longhorn-backup-readwrite
+      
+  svcaccts: []
+
+  environment:
+    MINIO_BROWSER_REDIRECT_URL: "https://console.minio.jsck.network"
+
+  oidc:
+    enabled: true
+    configUrl: "https://auth.jackhil.de/auth/realms/master/.well-known/openid-configuration"
+    clientId: "minio"
+    existingClientSecretName: "minio-client-secret"
+    existingClientSecretKey: "client-secret"
+    claimName: "policy"
+    scopes: "openid,profile,email,preferred_username"
+    redirectUri: "https://console.minio.jsck.network/oauth_callback"
+    # Can leave empty
+    claimPrefix: ""
+    comment: ""
+

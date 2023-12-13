@@ -1,0 +1,11 @@
+apiVersion: v2
+name: frigate-hass
+type: application
+version: 0.0.1
+sources:
+  - https://docs.frigate.video/frigate/installation/
+  - https://github.com/blakeblackshear/blakeshome-charts/tree/master/charts/frigate
+dependencies:
+  - name: frigate
+    version: 7.1.0
+    repository: "https://blakeblackshear.github.io/blakeshome-charts/"

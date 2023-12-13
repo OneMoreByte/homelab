@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mva.fullname" . }}
+  labels:
+    {{- include "mva.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "mva.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mva.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "mva.serviceAccountName" . }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        #- name: {{ .Chart.Name }}-init-links
+        #  image: busybox:stable
+        #  # We need the yaml files in the root of /config, but we need to store some stateful 
+        #  # db stuff for flexget in there too.
+        #  command: ['/bin/sh', '-c'] 
+        #  args: ['cd /config-yaml; for f in *; do rm -f /config/$f; ln -s /config-yaml/$f /config/$f; done; cd /variables-yaml; for f in *; do rm -f /config/$f; ln -s /variables-yaml/$f /config/$f; done']
+        #  volumeMounts:
+        #  - name: config-yaml
+        #    mountPath: /config-yaml
+        #  - name: variables-yaml
+        #    mountPath: /variables-yaml
+        #  - name: config
+        #    mountPath: /config
+        - name: {{ .Chart.Name }}-cleanup-startup
+          image: busybox:stable
+          # We need to clean up the lock file if it's still there or the pod might not come back right
+          command: ['/bin/sh', '-c'] 
+          args: ['rm -f /config/.config-lock']
+          volumeMounts:
+          - name: config
+            mountPath: /config
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+          - name: public-torrent-dir
+            mountPath: /torrents/public
+          - name: private-torrent-dir
+            mountPath: /torrents/private
+          - name: media-dir
+            mountPath: /store/plex-files
+          - name: config-yaml
+            mountPath: /config/config.yml
+            subPath: config.yml
+          - name: variables-yaml
+            mountPath: /config/variables.yml
+            subPath: variables.yml
+          - name: config
+            mountPath: /config
+          command: ["flexget"]
+          args: ['-c', '/config/config.yml', '--loglevel', 'verbose', 'daemon', 'start', '--autoreload-config']
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: config-yaml
+          configMap:
+            name: {{ include "mva.fullname" . }}-configs
+        - name: variables-yaml
+          secret:
+            secretName: flexget-secrets
+        - name: config
+          persistentVolumeClaim:
+            claimName: {{ include "mva.fullname" . }}-config-pvc
+        - name: public-torrent-dir
+          hostPath:
+            path: /store/torrent-public
+            type: Directory
+        - name: private-torrent-dir
+          hostPath:
+            path: /store/torrent
+            type: Directory
+        - name: media-dir
+          hostPath:
+            path: /store/plex-files
+            type: Directory
+        - name: metadata-dir
+          hostPath:
+            path: /store/meta
+            type: Directory

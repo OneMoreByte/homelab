@@ -1,0 +1,70 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elasticsearch
+spec:
+  version: 8.11.1
+  nodeSets:
+  - name: default
+    count: 3
+    config:
+      node.store.allow_mmap: false
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data # Do not change this name unless you set up a volume mount for the data path.
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 32Gi
+
+---
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana-ui
+spec:
+  version: 8.11.1
+  count: 1
+  elasticsearchRef:
+    name: elasticsearch
+
+---
+
+
+apiVersion: logstash.k8s.elastic.co/v1alpha1
+kind: Logstash
+metadata:
+  name: logstash
+spec:
+  version: 8.11.1
+  count: 1
+  elasticsearchRefs:
+    - clusterName: es
+      name: elasticsearch
+  pipelines:
+    - pipeline.id: keycloak
+      config.string: |
+        input {
+          gelf {
+            port => 12201
+          }
+        }
+        output {
+          elasticsearch {
+            hosts => [ "${ES_ES_HOSTS}" ]
+            user => "${ES_ES_USER}"
+            password => "${ES_ES_PASSWORD}"
+            ssl_certificate_authorities => "${ES_ES_SSL_CERTIFICATE_AUTHORITY}"
+          }
+        }
+  services:
+    - name: beats
+      service:
+        spec:
+          ports:
+          - port: 12201
+            name: "gelf"
+            protocol: UDP
+

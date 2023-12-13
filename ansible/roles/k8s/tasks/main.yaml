@@ -1,0 +1,37 @@
+- name: Install needed packages for kubespray
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - tar
+    state: latest
+
+
+- name: ensure resolved config directory exists
+  become: true
+  file:
+    path: /etc/systemd/resolved.conf.d/
+    recurse: true
+    state: directory
+
+
+- name: Create dns workaround
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/systemd/resolved.conf.d/dns_servers.conf
+    content: "{{ lookup('template', 'dns-override.conf.j2') }}"
+  register: dns_workaround
+
+
+- name: Restart dns service
+  become: true
+  ansible.builtin.systemd:
+    name: systemd-resolved
+    state: restarted
+  when: dns_workaround.changed
+
+- name: Disable firewald
+  become: true
+  ansible.builtin.systemd:
+    name: firewalld
+    state: stopped
+    enabled: false

@@ -1,0 +1,175 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tuner
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/svcs/tuner/
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: tuner
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jmusicbot
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/svcs/jmusicbot/
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: jmusicbot
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/svcs/grafana/
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: grafana
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluidd
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/svcs/fluidd
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: fluidd-redirect
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+kind: Application
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: cloudflare-ddns
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/svcs/cloudflare-ddns/
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: cloudflare-ddns
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+kind: Application
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: minio
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/svcs/minio/
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: minio
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+kind: Application
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: nextcloud
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/svcs/nextcloud/
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: nextcloud
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

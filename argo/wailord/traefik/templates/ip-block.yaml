@@ -1,0 +1,10 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: ip-block
+  namespace: traefik
+spec:
+  ipWhiteList:
+    sourceRange: []
+    #   - 192.168.43.203
+    #   - 172.28.0.1/32

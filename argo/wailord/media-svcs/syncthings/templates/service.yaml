@@ -1,0 +1,21 @@
+{{- $fullName:= include "syncthings.fullname" . -}}
+{{- $labels:= include "syncthings.labels" . -}}
+{{- $selector:= include "syncthings.selectorLabels" . -}}
+{{- range $name, $svcData := .Values.services}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ $fullName }}-{{ $name }}"
+  labels:
+    {{- $labels | nindent 4 }}
+spec:
+  type: {{ $svcData.type }}
+  ports:
+    - port: {{ $svcData.port }}
+      targetPort: {{ $name }}
+      protocol: {{ $svcData.protocol }}
+      name: {{ $name }}
+  selector:
+    {{- $selector | nindent 4 }}
+---
+{{- end }}

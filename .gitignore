@@ -1,3 +1,9 @@
 .terraform
 terraform.tfstate.backup
 .terraform.lock.hcl
+__pycache__
+crash.log
+venv
+tmp
+.syncthing*
+realm.json

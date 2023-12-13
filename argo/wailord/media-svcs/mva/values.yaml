@@ -1,0 +1,340 @@
+# Default values for mva.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: docker.io/wiserain/flexget
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+podSecurityContext:
+  runAsUser: 11337
+  runAsGroup: 11337
+  fsGroup: 11337
+
+service:
+  type: ClusterIP
+  port: 3000
+
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+
+ingress:
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure,web
+  labels: {}
+  hosts:
+    - host: flexget.jackhil.de
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - flexget.jackhil.de
+      secretName: jackhil.de-cert
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - bulk-datastore
+
+
+
+flexget_config: |
+  variables: variables.yml
+ 
+  web_server:
+    bind: 0.0.0.0
+    port: 3000
+    web_ui: yes
+
+  templates:
+    anchors:
+      _discord_webhook_show: &discord_webhook_show
+        via:
+          - discord:
+              web_hook_url: '{? discord_webhook ?}'
+              username: 'mva'
+              embeds:
+              - title: "{{series_name}}"
+                description: ""
+                url: "{{tvdb_url}}"
+                color: 0x00FFFF
+                author:
+                  name: "mva"
+                  url: "https://github.com/onemorebyte/homelab"
+                  icon_url: "https://divedigital.id/wp-content/uploads/2022/07/1-Anya-Forger-HEH-Face.jpg"
+                fields:
+                  - name: "Episode Name:"
+                    value: "{{tvdb_ep_name|default('Unknown episode')}}"
+                    inline: True
+                  - name: "Episode Number"
+                    value: "{{tvdb_episode | default(series_episode) | default('<:CatShrug:757101278659739780>') }}"
+                image:
+                  url: "{{tvdb_ep_image | default('https://i.imgflip.com/j69nf.jpg')}}"
+      
+      _anime: &anime
+        - "High Card"
+        - "Mobile Suit Gundam - The Witch from Mercury"
+        - "Fumetsu no Anata e"
+        - "Urusei Yatsura (2022)"
+        - "Vinland Saga"
+        - "Bofuri"
+        - "Kyokou Suiri"
+        - "Bungou Stray Dogs"
+        - "Isekai Nonbiri Nouka"
+        - "NieR Automata Ver1.1a"
+        - "Trigun Stampede"
+        - "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka"
+        - "Maou Gakuin no Futekigousha"
+        - Kono Subarashii Sekai ni Bakuen wo!
+        - Dr. Stone
+        - Kimetsu no Yaiba
+        - Jigokuraku
+        - Mahoutsukai no Yome
+        - Kaminaki Sekai no Kamisama Katsudou
+        - Mashle
+        - Edens Zero
+        - 'Ousama Ranking: Yuuki no Takarabako'
+        - Tondemo Skill de Isekai Hourou Meshi
+        - Jujutsu Kaisen
+        - Jidou Hanbaiki ni Umarekawatta Ore wa Meikyuu wo Samayou
+        - Hataraku Maou-sama
+        - Undead Girl Murder Farce
+        - Dark Gathering
+        - AI no Idenshi
+        - Nanatsu no Maken ga Shihai suru
+        - Helck
+        - Zom 100 – Zombie ni Naru made ni Shitai 100 no Koto
+        - Lv1 Maou to One Room Yuusha
+        - Eiyuu Kyoushitsu
+        - Shinigami Bocchan to Kuro Maid
+        - Okashi na Tensei
+        - Tate no Yuusha no Nariagari
+        - Spy x Family
+        - Sousou no Frieren
+        - Goblin Slayer
+        - Saihate no Paladin
+        - Undead Unluck
+
+      _morethantv: &morethantv
+        - Game Changer
+        - The Last of Us
+        - Poker Face
+        - The Continental
+        - Krapopolis
+        - Disenchantment
+        - 'Star Trek: Lower Decks'
+        - Loki
+        - Scott Pilgrim Takes Off
+        - Rick and Morty
+        - 'Adventure Time Fionna and Cake'
+        - Futurama
+        - Make Some Noise
+        - Kitchen Nightmares US
+        - Slow Horses
+        - Fargo
+
+
+  tasks:
+    subsplease_add:
+      seen: local
+      rss: '{? rss_feeds["subsplease"] ?}'
+      thetvdb_lookup: yes
+      manipulate:
+      # Subsplease sometimes has v2 if their automation fucks up
+        - title:
+            replace:
+              regexp: '- (\d+)v\d'
+              format: '- \1'
+      # The unique demon slayer season names are confusing for the little bot
+        - title:
+            replace:
+              regexp: '- Katanakaji no Sato-hen'
+              format: 'S4'
+      # the lookup scripts really don't like when names have season numbers in the name
+        - title:
+            replace:
+              regexp: ' S(\d+) - '
+              format: ' - s\1e'   
+      series: *anime
+      notify:
+        entries:
+          message: |
+            Grabbing torrent for {{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id| default(series_id) }} to:
+            ```{? plex_dirs['anime'] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
+          <<: *discord_webhook_show
+      rtorrent_magnet: '{? torrent_dirs["public"]["watch_dir"] ?}'
+
+
+    morethantv_find:
+      priority: 1
+      seen: local
+      filesystem:
+        path:
+        - "{? plex_dirs['shows'] ?}"
+        recursive: yes
+        retrieve: files
+        regexp: '.*\.(avi|mkv|mp4)$'
+      accept_all: yes
+      configure_series:
+        from:
+          filesystem:
+            path:
+            - "{? plex_dirs['shows'] ?}"
+            retrieve: dirs
+
+
+    morethantv_add:
+      priority: 2
+      discover:
+        what:
+        - next_series_episodes:
+            from_start: yes
+            backfill: yes
+        from:
+          - torznab:
+              website: "{? jackett['morethantv_torznab'] ?}"
+              apikey: "{? jackett['api_key'] ?}"
+              searcher: tv
+      accept_all: yes
+      metainfo_series: yes
+      thetvdb_lookup: yes
+      quality: 1080p
+      duplicates:
+        field: imdb_id
+        action: reject
+      sort_by:
+        - quality
+        - torrent_availability
+        - torrent_seeds
+      series:
+        settings:
+          morethantv:
+            identified_by: ep
+        morethantv:  *morethantv
+      notify:
+        entries:
+          message: |
+            Grabbing torrent for {{tvdb_series_name | default(series_name)}} - {{ tvdb_series_id| default(series_id) }} to:
+            ```{? plex_dirs['shows'] ?}/{{ tvdb_series_name | default(series_name)}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
+          <<: *discord_webhook_show
+      download: '{? torrent_dirs["private"]["watch_dir"] ?}/morethantv/'
+
+
+    morethantv_move:
+      no_entries_ok: yes
+      disable:
+        - seen
+      thetvdb_lookup: yes
+      filesystem: 
+        path: '/torrents/private/complete/morethantv/'
+        retrieve: files
+      metainfo_series: yes
+      parsing:
+        series: guessit
+      series:
+        settings:
+          morethantv:
+            tracking: false
+            parse_only: yes
+        morethantv: *morethantv
+      accept_all: yes
+      notify:
+        entries:
+          message: |
+            Moving {{tvdb_series_name | default(series_name) | replace("/", "")}} - {{ tvdb_series_id| default(series_id) }} to:
+            ```{? plex_dirs['shows'] ?}/{{ tvdb_series_name | default(series_name) | replace("/", "")}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
+          <<: *discord_webhook_show
+      move:
+        to: '{? plex_dirs["shows"] ?}/{{ tvdb_series_name | default(series_name) | replace("/", "")}}/Season {{tvdb_season | default(series_season) | pad(2)}}'
+        rename: '{{tvdb_series_name | default(series_name) | replace("/", "") }} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
+
+    subsplease_move:
+      disable:
+      - seen
+      no_entries_ok: yes
+      thetvdb_lookup: yes
+      filesystem: 
+        path: '{? torrent_dirs["public"]["complete_dir"] ?}'
+        retrieve: files
+      manipulate:
+      # Subsplease sometimes has v2 if their automation fucks up
+        - title:
+            replace:
+              regexp: '- (\d+)v\d'
+              format: '- \1'
+      # The unique demon slayer season names are confusing for the little bot
+        - title:
+            replace:
+              regexp: '- Katanakaji no Sato-hen'
+              format: 'S4'
+      # the lookup scripts really don't like when names have season numbers in the name
+        - title:
+            replace:
+              regexp: ' S(\d+) - '
+              format: ' - s\1e'
+
+      metainfo_series: yes
+      parsing:
+        series: guessit
+      series:
+        settings:
+          subsplease:
+            tracking: false
+            parse_only: yes
+        subsplease: *anime
+      accept_all: yes
+      notify:
+        entries:
+          message: |
+            Moving {{tvdb_series_name | default(series_name) | replace("/", "")}} - {{ tvdb_series_id| default(series_id) }} to:
+            ```{? plex_dirs['anime'] ?}/{{ tvdb_series_name | default(series_name) | replace("/", "")}}/Season {{tvdb_season | default(series_season) | pad(2)}}```
+          <<: *discord_webhook_show
+      move:
+        to: '{? plex_dirs["anime"] ?}/{{ tvdb_series_name | default(series_name) | replace("/", "")}}/Season {{tvdb_season | default(series_season) | pad(2)}}'
+        rename: '{{tvdb_series_name | default(series_name) | replace("/", "")}} - {{ tvdb_series_id | default(series_id) | pad(2)}}{{ location|pathext }}'
+
+  schedules:
+    - tasks: 'subsplease_*'
+      interval:
+        minutes: 30
+    - tasks: 'morethantv_*'
+      interval:
+        minutes: 30

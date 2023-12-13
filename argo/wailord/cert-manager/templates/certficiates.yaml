@@ -1,0 +1,186 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jackhil.de-cert
+spec:
+  dnsNames:
+    - "*.jackhil.de"
+  secretName: jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jsck.network-cert
+spec:
+  dnsNames:
+    - "*.jsck.network"
+  secretName: jsck.network-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: totallynothax-cert
+spec:
+  dnsNames:
+    - "*.totallynothax.net"
+  secretName: totallynothax-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jackhil.de-cert
+  namespace: media-svcs
+spec:
+  dnsNames:
+    - "*.jackhil.de"
+  secretName: jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jsck.network-cert
+  namespace: longhorn-system
+spec:
+  dnsNames:
+    - "*.jsck.network"
+  secretName: jsck.network-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jsck.network-cert
+  namespace: traefik
+spec:
+  dnsNames:
+    - "*.jsck.network"
+  secretName: jsck.network-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: console.minio.jsck.network-cert
+  namespace: svcs
+spec:
+  dnsNames:
+    - "console.minio.jsck.network"
+  secretName: console.minio.jsck.network-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jackhil.de-cert
+  namespace: svcs
+spec:
+  dnsNames:
+    - "*.jackhil.de"
+  secretName: jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: harbor.jsck.network-cert
+  namespace: svcs
+spec:
+  dnsNames:
+    - "*.harbor.jsck.network"
+  secretName: harbor.jsck.network-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+---
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jackhil.de-cert
+  namespace: keycloak
+spec:
+  dnsNames:
+    - "*.jackhil.de"
+  secretName: jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jsck.network-cert
+  namespace: home-automation
+spec:
+  dnsNames:
+    - "*.jsck.network"
+  secretName: jsck.network-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jackhil.de-cert
+  namespace: home-automation
+spec:
+  dnsNames:
+    - "*.jackhil.de"
+  secretName: jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jackhil.de-cert
+  namespace: auth
+spec:
+  dnsNames:
+    - "*.jackhil.de"
+  secretName: jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jsck.network-cert
+  namespace: auth
+spec:
+  dnsNames:
+    - "*.jsck.network"
+  secretName: jsck.network-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer

@@ -1,0 +1,10 @@
+apiVersion: v2
+name: jellyfin
+type: application
+version: 0.0.1
+sources:
+  - https://artifacthub.io/packages/helm/k8s-at-home/jellyfin
+dependencies:
+  - name: jellyfin
+    version: 9.5.3
+    repository: "https://k8s-at-home.com/charts/"

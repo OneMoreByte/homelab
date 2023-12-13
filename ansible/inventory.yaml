@@ -1,0 +1,60 @@
+cisco_switches:
+  hosts:
+    samuraicop.localdomain: {}
+  vars:
+    ansible_network_os: ios
+    ansible_connection: network_cli
+    cli:
+      timeout: 45
+    ansible_persistent_log_messages: True
+
+linux:
+  hosts:
+    fateful.jsck.network:
+      ansible_user: svc
+    producers.jsck.network:
+      ansible_user: svc
+    books.jsck.network:
+      ansible_user: svc
+    twisted-pair-1.jsck.network:
+      ansible_user: svc
+    twisted-pair-2.jsck.network:
+      ansible_user: svc
+    thefall.jsck.network:
+      ansible_user: jsck
+    theroom.jsck.network:
+      ansible_user: svc
+
+zrepl:
+  hosts:
+    fateful.jsck.network:
+      ansible_user: svc
+    producers.jsck.network:
+      ansible_user: svc
+    thefall.jsck.network:
+      ansible_user: jsck
+      
+wailord:
+  hosts:
+    fateful.jsck.network:
+      ansible_user: svc
+    producers.jsck.network:
+      ansible_user: svc
+    books.jsck.network:
+      ansible_user: svc
+    twisted-pair-1.jsck.network:
+      ansible_user: svc
+    twisted-pair-2.jsck.network:
+      ansible_user: svc
+
+standalone_cluster:
+  hosts:
+    thefall.jsck.network:
+      ansible_user: jsck
+    theroom.jsck.network:
+      ansible_user: svc
+
+nfs_servers:
+  hosts:
+    producers.jsck.network:
+      ansible_user: svc

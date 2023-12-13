@@ -1,0 +1,15 @@
+jobs:
+- name: sink
+  type: sink
+  serve:
+      type: tls
+      listen: ":9898"
+      ca: /etc/ssl/certs/ca-certificates.crt
+      cert: /etc/letsencrypt/live/fateful.jsck.network/fullchain.pem
+      key:  /etc/letsencrypt/live/fateful.jsck.network/privkey.pem
+      client_cns:
+        - "producers.jsck.network"
+  recv:
+    placeholder:
+      encryption: off
+  root_fs: "store/zrepl"

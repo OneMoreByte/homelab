@@ -1,0 +1,134 @@
+
+keycloakx:
+  # This is an example configuration, for production grade configuration see the Keycloak documentation.
+  # See https://www.keycloak.org/server/configuration
+  # See https://www.keycloak.org/server/all-config
+  command:
+    - "/opt/keycloak/bin/kc.sh"
+    - "--verbose"
+    - "start"
+    - "--http-enabled=true"
+    - "--http-port=8080"
+    - "--hostname-strict=false"
+    - "--hostname-strict-https=false"
+    - "--spi-events-listener-jboss-logging-success-level=info"
+    - "--spi-events-listener-jboss-logging-error-level=warn"
+    #- "--proxy edge"
+    - '--log=gelf'
+    - '--log-gelf-host=logstash-ls-beats.observability.svc.cluster.local'
+    - '--log-gelf-port=12201'
+    - '--hostname-debug=true'
+
+  extraEnv: |
+    - name: KC_HOSTNAME_URL
+      value: https://auth.jackhil.de/auth
+    - name: KC_HOSTNAME_ADMIN_URL
+      value: https://auth.jackhil.de/auth
+    - name: KC_HEALTH_ENABLED
+      value: "true"
+    - name: PROXY_ADDRESS_FORWARDING
+      value: "true"
+    - name: KC_PROXY
+      value: "passthrough"
+    - name: JAVA_OPTS_APPEND
+      value: >-
+        -XX:+UseContainerSupport
+        -XX:MaxRAMPercentage=50.0
+        -Djava.awt.headless=true
+        -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless
+  
+  extraEnvFrom: |
+    - secretRef:
+        name: keycloak-admin-user
+
+  image:
+    # The Keycloak image repository
+    repository: quay.io/keycloak/keycloak
+    # Overrides the Keycloak image tag whose default is the chart appVersion
+    tag: "22.0.5"
+    # Overrides the Keycloak image tag with a specific digest
+    digest: ""
+    # The Keycloak image pull policy
+    pullPolicy: IfNotPresent
+  
+  dbchecker:
+    enabled: true
+
+  database:
+    vendor: postgres
+    hostname: keycloak-postgresql
+    port: 5432
+    username: keycloak
+    # password: "uS6Bt6*R7fjskBEY@bbrVX6f%3TVvmoz" Old password...
+    database: keycloak
+    existingSecret: keycloak-db-secret
+    existingSecretKey: "password"
+
+
+  ingress:
+    # If `true`, an Ingress is created
+    enabled: true
+    # The name of the Ingress Class associated with this ingress
+    ingressClassName: ""
+    # The Service port targeted by the Ingress
+    servicePort: http
+    # Ingress annotations
+    annotations:
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
+      ingress.kubernetes.io/whitelist-x-forwarded-for: "true"
+    # Additional Ingress labels
+    labels: {}
+    # List of rules for the Ingress
+    rules:
+      -
+        # Ingress host
+        host: 'auth.jackhil.de'
+        # Paths for the host
+        paths:
+          - path: /
+            pathType: Prefix
+    # TLS configuration
+    tls:
+      - hosts:
+          - auth.jackhil.de
+        secretName: jackhil.de-cert
+  autoscaling:
+    enabled: true
+
+  extraInitContainers: |
+    - name: theme-provider
+      image: image/alpine:latest
+      imagePullPolicy: Always
+      command:
+        - sh
+      args:
+        - -c
+        - |
+          cd /theme
+          echo "Getting theme..."
+          wget https://github.com/OneMoreByte/keycloak-homelab-theme/releases/latest/download/standalone-keycloak-theme.jar
+      volumeMounts:
+        - name: theme
+          mountPath: /theme
+
+  extraVolumeMounts: |
+    - name: theme
+      mountPath: /opt/keycloak/providers
+
+  extraVolumes: |
+    - name: theme
+      emptyDir: {}
+
+postgresql:
+  global:
+    postgresql:
+      auth:
+        existingSecret: keycloak-db-secret
+        secretKeys:
+          adminPasswordKey: postgres_password
+          userPasswordKey: password
+          replicationPasswordKey: replication_password
+        username: keycloak
+        database: keycloak

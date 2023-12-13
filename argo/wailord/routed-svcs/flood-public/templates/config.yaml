@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rtorrent-config
+data:
+  .rtorrent.rc: |
+    {{- .Values.config | nindent 4 }}

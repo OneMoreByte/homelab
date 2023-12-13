@@ -1,0 +1,78 @@
+jobs:
+- name: backup_data_to_zfs_rent
+  type: push
+  connect:
+    type: tls
+    address: "thefall.jsck.network:9898"
+    # using root ca because certs are letsecnrypt
+    ca: /etc/ssl/certs/ca-certificates.crt
+    cert: /etc/letsencrypt/live/producers.jsck.network/fullchain.pem
+    key:  /etc/letsencrypt/live/producers.jsck.network/privkey.pem
+    server_cn: "thefall.jsck.network"
+  filesystems: {
+    "store<": false,
+    "store/plex-files<": true,
+    "store/meta": true,
+    "store/backups<": true
+  }
+  snapshotting:
+    type: periodic
+    prefix: zrepl_
+    interval: 10m
+  send:
+    encrypted: true
+    compressed: true
+  pruning:
+    keep_sender:
+    - type: not_replicated
+    - type: grid
+    # fade-out scheme for snapshots starting with `zrepl_`
+    # - keep all created in the last hour
+    # - then destroy snapshots such that we keep 24 each 1 hour apart
+    # - then destroy snapshots such that we keep 30 each 1 day apart
+    # - then destroy all older snapshots
+      grid: 1x1h(keep=all) | 24x1h | 30x1d
+      regex: "^zrepl_"
+    keep_receiver:
+    - type: grid
+    # fade-out scheme for snapshots starting with `zrepl_`
+    # - keep all created in the last hour
+    # - then destroy snapshots such that we keep 24 each 1 hour apart
+    # - then destroy snapshots such that we keep 30 each 1 day apart
+    # - then destroy snapshots such that we keep 6 each 30 days apart
+    # - then destroy all older snapshots
+      grid: 1x1h(keep=all) | 24x1h | 30x1d | 6x30d
+      regex: "^zrepl_"
+
+- name: backup_metadata_to_fateful
+  type: push
+  connect:
+    type: tls
+    address: "fateful.jsck.network:9898"
+    # using root ca because certs are letsecnrypt
+    ca: /etc/ssl/certs/ca-certificates.crt
+    cert: /etc/letsencrypt/live/producers.jsck.network/fullchain.pem
+    key:  /etc/letsencrypt/live/producers.jsck.network/privkey.pem
+    server_cn: "fateful.jsck.network"
+  filesystems: {
+    "store<": false,
+    "store/meta": true,
+    "store/backups<": true
+  }
+  send:
+    encrypted: true
+    compressed: true
+  snapshotting:
+    type: periodic
+    prefix: zrepl_
+    interval: 10m
+  pruning:
+    keep_sender:
+    - type: not_replicated
+    - type: grid
+      grid: 1x1h(keep=all) | 24x1h | 30x1d
+      regex: "^zrepl_"
+    keep_receiver:
+    - type: grid
+      grid: 1x1h(keep=all) | 24x1h | 30x1d | 6x30d
+      regex: "^zrepl_"

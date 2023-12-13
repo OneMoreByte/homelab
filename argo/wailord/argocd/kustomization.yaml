@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+
+resources:
+- base/repository.yaml
+- base/applications/argocd.yaml
+- base/applications/kube-system.yaml
+- base/applications/cert-manager.yaml
+- base/applications/game-svcs.yaml
+- base/applications/home-automation.yaml
+- base/applications/keycloak.yaml
+- base/applications/longhorn.yaml
+- base/applications/media-svcs.yaml
+- base/applications/metallb.yaml
+- base/applications/observability.yaml
+- base/applications/routed-svcs.yaml
+- base/applications/svcs.yaml
+- base/applications/traefik.yaml
+- base/applications/theroom.yaml
+- base/ingress.yaml
+- base/argo-client-secret.yaml
+- base/clusters/wailord.yaml
+- https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.9.3
+- base/clusters/theroom.jsck.network.yaml
+- base/clusters/thefall.jsck.network.yaml
+
+
+
+namespace: argocd
+patches:
+- path: overlays/argocd-cm.yaml
+- path: overlays/argocd-rbac-cm.yaml
+- path: overlays/service.yaml
+- path: overlays/argocd-cmd-params-cm.yaml

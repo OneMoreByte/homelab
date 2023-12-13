@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Use venv we create with ansible
+source /opt/certbot/bin/activate
+
+HOSTNAME="{{ zrepl_name }}"
+# Try to add domain to certbot if it hasn't been put in yet.
+
+if [ ! -d "/etc/letsencrypt/live/${HOSTNAME}.jsck.network" ]; then
+    echo "registering '${HOSTNAME}.jsck.network'"
+    certbot certonly --non-interactive --agree-tos -m jack@jackhil.de --dns-route53 -d "${HOSTNAME}.jsck.network"
+fi
+
+
+# Renew if we can
+certbot renew --renew-hook "systemctl restart zrepl"

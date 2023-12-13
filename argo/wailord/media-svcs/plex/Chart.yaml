@@ -1,0 +1,10 @@
+apiVersion: v2
+name: plex
+type: application
+version: 0.0.1
+sources:
+  - https://artifacthub.io/packages/helm/k8s-at-home/plex
+dependencies:
+  - name: plex
+    version: 6.4.3
+    repository: "https://k8s-at-home.com/charts/"
