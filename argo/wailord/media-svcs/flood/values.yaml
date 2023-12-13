@@ -17,7 +17,7 @@ rtorrent-flood:
     # -- image repository
     repository: jesec/rtorrent-flood
     # -- image tag
-    tag: latest@sha256:e6f4aa35da9cd1ba2862aca50fc99dbeb8f969c218b4d37e2a8e6489251ccb84
+    tag: latest@sha256:94380ecaeae1ae1f9eb9e03336fe78fbc19b6c98915a6b6736426a626bac9f18
     # -- image pull policy
     pullPolicy: IfNotPresent
 
