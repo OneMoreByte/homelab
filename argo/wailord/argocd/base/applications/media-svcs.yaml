@@ -198,3 +198,54 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sonarr
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/media-svcs/sonarr
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: sonarr
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: media-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: radarr
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argo/wailord/media-svcs/radarr
+    repoURL: https://github.com/OneMoreByte/homelab.git
+    targetRevision: "HEAD"
+    helm:
+      releaseName: radarr
+      valueFiles:
+      - values.yaml
+  destination:
+    name: wailord.jsck.network
+    namespace: media-svcs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+
