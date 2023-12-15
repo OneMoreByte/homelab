@@ -13,7 +13,7 @@ app-template:
             pullPolicy: IfNotPresent
           podSecurityContext:
             fsGroup: 11337
-  defaultPodOption:
+  defaultPodOptions:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
