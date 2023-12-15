@@ -11,10 +11,6 @@ app-template:
             repository: hotio/radarr
             tag: "release-5.1.3.8246"
             pullPolicy: IfNotPresent
-          podSecurityContext:
-            runAsUser: 11337
-            runAsGroup: 11337
-            fsGroup: 11337
   defaultPodOptions:
     affinity:
       nodeAffinity:
@@ -25,6 +21,10 @@ app-template:
               operator: In
               values:
               - bulk-datastore
+    podSecurityContext:
+      runAsUser: 11337
+      runAsGroup: 11337
+      fsGroup: 11337
 
   # -- Configures service settings for the chart.
   service:
