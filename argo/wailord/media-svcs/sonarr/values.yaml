@@ -45,4 +45,8 @@ app-template:
       enabled: true
       accessMode: ReadWriteOnce
       size: 16Gi
+    media:
+      enabled: true
+      type: hostPath
+      hostPath: /store/plex-files/
 
