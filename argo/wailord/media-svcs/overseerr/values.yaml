@@ -46,4 +46,8 @@ app-template:
       enabled: true
       accessMode: ReadWriteOnce
       size: 16Gi
-      mountPath: /app/config
+      advancedMounts:
+        main:
+          main:
+            - path: /app/config
+
