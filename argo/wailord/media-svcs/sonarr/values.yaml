@@ -12,6 +12,8 @@ app-template:
             tag: "release-3.0.10.1567"
             pullPolicy: IfNotPresent
           podSecurityContext:
+            runAsUser: 11337
+            runAsGroup: 11337
             fsGroup: 11337
 
   defaultPodOptions:
