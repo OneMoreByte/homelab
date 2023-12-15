@@ -21,7 +21,7 @@ app-template:
               operator: In
               values:
               - bulk-datastore
-    podSecurityContext:
+    securityContext:
       runAsUser: 11337
       runAsGroup: 11337
       fsGroup: 11337
