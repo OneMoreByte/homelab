@@ -11,6 +11,21 @@ app-template:
             repository: hotio/sonarr
             tag: "release-3.0.10.1567"
             pullPolicy: IfNotPresent
+          podSecurityContext:
+            fsGroup: 11337
+
+  defaultPodOptions:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - bulk-datastore
+
+
   # -- Configures service settings for the chart.
   service:
     main:
