@@ -7,7 +7,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
-        repoURL: https://github.com/argoproj/argo-cd.git
+        repoURL: https://github.com/OneMoreByte/homelab.git
         revision: HEAD
         directories:
           - path: argo/theroom/*/*/values.yaml
@@ -43,7 +43,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
-        repoURL: https://github.com/argoproj/argo-cd.git
+        repoURL: https://github.com/OneMoreByte/homelab.git
         revision: HEAD
         directories:
           - path: argo/theroom/*/*/kustomization.yaml
