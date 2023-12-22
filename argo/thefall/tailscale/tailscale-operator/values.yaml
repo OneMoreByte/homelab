@@ -1,0 +1,8 @@
+tailscale-operator:
+  oauth: {}
+
+  proxyConfig:
+    defaultTags: "tag:k8s,tag:wailord"
+
+  apiServerProxyConfig:
+    mode: "true"
