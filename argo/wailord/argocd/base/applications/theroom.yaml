@@ -13,7 +13,7 @@ spec:
           - path: argo/theroom/*/*/values.yaml
   template:
     metadata:
-      name: 'theroom-{{ .path.basename }}'
+      name: 'theroom-{{ index .path.segments 3}}'
     spec:
       project: default
       source:
@@ -49,7 +49,7 @@ spec:
           - path: argo/theroom/*/*/kustomization.yaml
   template:
     metadata:
-      name: 'theroom-{{ .path.basename }}'
+      name: 'theroom-{{ index .path.segments 3}}'
     spec:
       project: default
       source:
