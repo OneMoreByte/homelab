@@ -12,25 +12,25 @@ spec:
         files:
           - path: argo/theroom/*/*/values.yaml
         values:
-          base_dir: 'argo/theroom/{{ path[2] }}/{{ path[3] }}'
-          app_name: '{{ path[3] }}'
-          namespace: '{{ path[2] }}'
+          base_dir: "argo/theroom/{{ path[2] }}/{{ path[3] }}"
+          app_name: "{{ path[3] }}"
+          namespace: "{{ path[2] }}"
   template:
     metadata:
-      name: 'theroom-{{ values.app_name }}'
+      name: "theroom-{{ values.app_name }}"
     spec:
       project: default
       source:
-        path: '{{ values.base_dir }}'
+        path: "{{ values.base_dir }}"
         repoURL: https://github.com/OneMoreByte/homelab.git
         targetRevision: "HEAD"
         helm:
-          releaseName: '{{ values.app_name }}'
+          releaseName: "{{ values.app_name }}"
           valueFiles:
           - values.yaml
       destination:
         name: theroom.jsck.network
-        namespace: '{{ values.namespace }}'
+        namespace: "{{ values.namespace }}"
       syncPolicy:
         automated:
           prune: true
@@ -52,21 +52,21 @@ spec:
         files:
           - path: argo/theroom/*/*/kustomization.yaml
         values:
-          base_dir: 'argo/theroom/{{ path[2] }}/{{ path[3] }}'
-          app_name: '{{ path[3] }}'
-          namespace: '{{ path[2] }}'
+          base_dir: "argo/theroom/{{ path[2] }}/{{ path[3] }}"
+          app_name: "{{ path[3] }}"
+          namespace: "{{ path[2] }}"
   template:
     metadata:
-      name: 'theroom-{{ values.app_name }}'
+      name: "theroom-{{ values.app_name }}"
     spec:
       project: default
       source:
-        path: '{{ values.base_dir }}'
+        path: "{{ values.base_dir }}"
         repoURL: https://github.com/OneMoreByte/homelab.git
         targetRevision: "HEAD"
       destination:
         name: theroom.jsck.network
-        namespace: '{{ values.namespace }}' 
+        namespace: "{{ values.namespace }}" 
       syncPolicy:
         automated:
           prune: true
