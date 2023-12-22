@@ -12,9 +12,9 @@ spec:
         files:
           - path: argo/theroom/*/*/values.yaml
         values:
-          base_dir: 'argo/theroom/{{ index .path.segments 2 }}/{{ index .path.segments 3}}'
-          app_name: '{{ index .path.segments 3}}'
-          namespace: '{{ index .path.segments 2 }}'
+          base_dir: 'argo/theroom/{{ path[2] }}/{{ path[3] }}'
+          app_name: '{{ path[3] }}'
+          namespace: '{{ path[2] }}'
   template:
     metadata:
       name: 'theroom-{{ values.app_name }}'
@@ -52,9 +52,9 @@ spec:
         files:
           - path: argo/theroom/*/*/kustomization.yaml
         values:
-          base_dir: 'argo/theroom/{{ index .path.segments 2 }}/{{ index .path.segments 3}}'
-          app_name: '{{ index .path.segments 3}}'
-          namespace: '{{ index .path.segments 2 }}'
+          base_dir: 'argo/theroom/{{ path[2] }}/{{ path[3] }}'
+          app_name: '{{ path[3] }}'
+          namespace: '{{ path[2] }}'
   template:
     metadata:
       name: 'theroom-{{ values.app_name }}'
