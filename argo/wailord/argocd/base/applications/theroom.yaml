@@ -10,7 +10,7 @@ spec:
         repoURL: https://github.com/argoproj/argo-cd.git
         revision: HEAD
         directories:
-          - path: argo/theroom/*/*
+          - path: argo/theroom/*/*/values.yaml
   template:
     metadata:
       name: 'theroom-{{ .path.basename }}'
