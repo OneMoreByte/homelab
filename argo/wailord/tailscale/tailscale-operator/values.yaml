@@ -1,6 +1,8 @@
 tailscale-operator:
   oauth: {}
 
+  operatorConfig:
+    hostname: "wailord"
   proxyConfig:
     defaultTags: "tag:k8s,tag:wailord"
 
