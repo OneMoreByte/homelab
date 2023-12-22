@@ -3,8 +3,6 @@ kind: ApplicationSet
 metadata:
   name: theroom-helm-appset
 spec:
-  goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
         repoURL: https://github.com/OneMoreByte/homelab.git
@@ -43,8 +41,6 @@ kind: ApplicationSet
 metadata:
   name: theroom-kustomize-appset
 spec:
-  goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
         repoURL: https://github.com/OneMoreByte/homelab.git
