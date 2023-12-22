@@ -21,6 +21,7 @@ spec:
                 key: TS_AUTHKEY
                 optional: true
           securityContext:
+            privileged: true
             capabilities:
               add:
               - NET_ADMIN
