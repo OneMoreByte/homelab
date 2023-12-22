@@ -10,6 +10,6 @@ rules:
   # Create can not be restricted to a resource name.
   verbs: ["create"]
 - apiGroups: [""] # "" indicates the core API group
-  resourceNames: ["argo-tailscale-auth"]
+  resourceNames: ["argo-tailscale-state-controller-ss", "argo-tailscale-state-controller", "argo-tailscale-state-server"]
   resources: ["secrets"]
   verbs: ["get", "update", "patch"]

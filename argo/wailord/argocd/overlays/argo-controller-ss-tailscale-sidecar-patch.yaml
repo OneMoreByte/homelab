@@ -11,7 +11,7 @@ spec:
           image: "ghcr.io/tailscale/tailscale:latest"
           env:
           - name: TS_KUBE_SECRET
-            value: "argo-tailscale-auth"
+            value: "argo-tailscale-state-controller-ss"
           - name: TS_USERSPACE
             value: "false"
           - name: TS_AUTHKEY
