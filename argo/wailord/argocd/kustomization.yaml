@@ -17,6 +17,7 @@ resources:
 - base/applications/routed-svcs.yaml
 - base/applications/svcs.yaml
 - base/applications/traefik.yaml
+- base/applications/tailscale.yaml
 - base/applications/theroom.yaml
 - base/ingress.yaml
 - base/argo-client-secret.yaml
