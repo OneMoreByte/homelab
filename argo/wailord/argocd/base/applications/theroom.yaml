@@ -9,24 +9,28 @@ spec:
     - git:
         repoURL: https://github.com/OneMoreByte/homelab.git
         revision: HEAD
-        directories:
+        files:
           - path: argo/theroom/*/*/values.yaml
+        values:
+          base_dir: 'argo/theroom/{{ index .path.segments 2 }}/{{ index .path.segments 3}}'
+          app_name: '{{ index .path.segments 3}}'
+          namespace: '{{ index .path.segments 2 }}'
   template:
     metadata:
-      name: 'theroom-{{ index .path.segments 3}}'
+      name: 'theroom-{{ values.app_name }}'
     spec:
       project: default
       source:
-        path: 'argo/theroom/{{ index .path.segments 2 }}/{{ index .path.segments 3}}'
+        path: '{{ values.base_dir }}'
         repoURL: https://github.com/OneMoreByte/homelab.git
         targetRevision: "HEAD"
         helm:
-          releaseName: '{{ .index .path.segments 3 }}'
+          releaseName: '{{ values.app_name }}'
           valueFiles:
           - values.yaml
       destination:
         name: theroom.jsck.network
-        namespace: '{{ index .path.segments 2 }}'
+        namespace: '{{ values.namespace }}'
       syncPolicy:
         automated:
           prune: true
@@ -45,20 +49,24 @@ spec:
     - git:
         repoURL: https://github.com/OneMoreByte/homelab.git
         revision: HEAD
-        directories:
+        files:
           - path: argo/theroom/*/*/kustomization.yaml
+        values:
+          base_dir: 'argo/theroom/{{ index .path.segments 2 }}/{{ index .path.segments 3}}'
+          app_name: '{{ index .path.segments 3}}'
+          namespace: '{{ index .path.segments 2 }}'
   template:
     metadata:
-      name: 'theroom-{{ index .path.segments 3}}'
+      name: 'theroom-{{ values.app_name }}'
     spec:
       project: default
       source:
-        path: 'argo/theroom/{{ index .path.segments 2 }}/{{ index .path.segments 3}}'
+        path: '{{ values.base_dir }}'
         repoURL: https://github.com/OneMoreByte/homelab.git
         targetRevision: "HEAD"
       destination:
         name: theroom.jsck.network
-        namespace: '{{ index .path.segments 2 }}'
+        namespace: '{{ values.namespace }}' 
       syncPolicy:
         automated:
           prune: true
