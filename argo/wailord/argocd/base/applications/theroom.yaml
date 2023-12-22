@@ -1,26 +1,67 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: theroom-helm-appset
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/argoproj/argo-cd.git
+        revision: HEAD
+        directories:
+          - path: argo/theroom/*/*
+  template:
+    metadata:
+      name: 'theroom-{{ .path.basename }}'
+    spec:
+      project: default
+      source:
+        path: 'argo/theroom/{{ index .path.segments 2 }}/{{ index .path.segments 3}}'
+        repoURL: https://github.com/OneMoreByte/homelab.git
+        targetRevision: "HEAD"
+        helm:
+          releaseName: '{{ .index .path.segments 3 }}'
+          valueFiles:
+          - values.yaml
+      destination:
+        name: theroom.jsck.network
+        namespace: '{{ index .path.segments 2 }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
 ---
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: zigbee2mqtt
-  namespace: argocd
+  name: theroom-kustomize-appset
 spec:
-  project: default
-  source:
-    path: argo/theroom/svcs/zigbee2mqtt/
-    repoURL: https://github.com/OneMoreByte/homelab.git
-    targetRevision: "HEAD"
-    helm:
-      releaseName: zigbee2mqtt
-      valueFiles:
-      - values.yaml
-  destination:
-    name: theroom.jsck.network
-    namespace: svcs
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
-
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/argoproj/argo-cd.git
+        revision: HEAD
+        directories:
+          - path: argo/theroom/*/*/kustomization.yaml
+  template:
+    metadata:
+      name: 'theroom-{{ .path.basename }}'
+    spec:
+      project: default
+      source:
+        path: 'argo/theroom/{{ index .path.segments 2 }}/{{ index .path.segments 3}}'
+        repoURL: https://github.com/OneMoreByte/homelab.git
+        targetRevision: "HEAD"
+      destination:
+        name: theroom.jsck.network
+        namespace: '{{ index .path.segments 2 }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
