@@ -1,0 +1,7 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: operator-oauth
+stringData:
+  clientId: kECjFv2CNTRL
+  clientSecret: tskey-client-kECjFv2CNTRL-BKGkvUSeN3QJntUVCbZU4QEW2XpSp9Wb
