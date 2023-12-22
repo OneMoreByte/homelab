@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: argo-tailscale-auth
+  namespace: argocd
+spec:
+  encryptedData:
+    TS_AUTHKEY: AgA8yXAzDnV4FzGNvmFmunB1RAAHPHALPqUgJumuwbM0T2lBTSsKHYQGlySn8mGO51nBZ4y+mOYwYPqxoYwGQ+HKIsyJHhfTgLiP38We7LGVd3/OoJ8ai/eAiZIfNViJuRIEEc8ch+JKKcsYboPJX63LvYZTVHFb/cZJQTZYJNBqs0mYWhoC4GWqUUQonX/PcbiJQm4QuM+X8O2awYFBWXWynkQM3ZC4RRm8RojOs/ybLy7dH406bK7xeU21AcubuXGhMn2rC9BY5ZmrrA0QnxaGbOsaEOouLg53srf5OdrWPWJ4nVjHegXLS/CnXBZJNQwp3gl+9aV2HONu/X6SdWxxugviZkxARM0Le8A7yw8MIEvMrvHibbnp7cw4kw5ozlZQOqeyUk0GWHvm5qZa1ylSBQbwQr9XrzyDejwtqHol9nI1QVNMy/WLcK/12vA2Xax+90Wt6+feHB1m/BF4FXC/rzJUPSYOx+mu6YcbqDie7HMOt9rYd0SYMH6k95uti+vSGtwO8b3tYMPUarj6Wq3WDZjTuQEAl3GZer1/DUfvlXY1j0XOgadt03pwAVqjOFUR0/gx1uSHnAax14fm5z6i1bJF4UpF64ccEykNEuojbUW3uoH29EHgL4lebKUsXQ3cdVOh4wG5cmJhsSTIm9Y8PFo/dLPGXl50yBfVMt1eekcUMRmcaW1Tk2vbClOtOOA6pLGumspgfs3umJau9raA80nyKl/zjuS4UsAy0l86JFebKkiLx6yWY2BaafkY27hI5vdy3DNGIhg=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: argo-tailscale-auth
+      namespace: argocd

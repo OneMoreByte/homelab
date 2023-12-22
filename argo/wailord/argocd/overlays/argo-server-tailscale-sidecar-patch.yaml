@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+spec:
+  template:
+    spec:
+      containers:
+        - name: ts-sidecar
+          imagePullPolicy: Always
+          image: "ghcr.io/tailscale/tailscale:latest"
+          env:
+          - name: TS_KUBE_SECRET
+            value: "argo-tailscale-auth"
+          - name: TS_USERSPACE
+            value: "false"
+          - name: TS_AUTHKEY
+            valueFrom:
+              secretKeyRef:
+                name: argo-tailscale-auth
+                key: TS_AUTHKEY
+                optional: true
+          securityContext:
+            capabilities:
+              add:
+              - NET_ADMIN

@@ -25,6 +25,9 @@ resources:
 - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.9.3
 - base/clusters/theroom.jsck.network.yaml
 - base/clusters/thefall.jsck.network.yaml
+- base/tailscale/argo-tailscale-auth.yaml
+- base/tailscale/ts-rolebindings.yaml
+- base/tailscale/ts-role.yaml
 
 
 
@@ -34,3 +37,6 @@ patches:
 - path: overlays/argocd-rbac-cm.yaml
 - path: overlays/service.yaml
 - path: overlays/argocd-cmd-params-cm.yaml
+- path: overlays/argo-tailscale-sidecar-patch.yaml
+- path: overlays/argo-controller-ss-tailscale-sidecar-patch.yaml
+- path: overlays/argo-server-tailscale-sidecar-patch.yaml
