@@ -28,6 +28,8 @@ resources:
 - base/tailscale/argo-tailscale-auth.yaml
 - base/tailscale/ts-rolebindings.yaml
 - base/tailscale/ts-role.yaml
+- base/clusters/thefall.fawn-mamba.ts.net.yaml
+- base/applications/thefall.yaml
 
 
 
