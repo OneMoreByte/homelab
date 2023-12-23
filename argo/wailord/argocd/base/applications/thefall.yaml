@@ -1,0 +1,71 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: thefall-helm-appset
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/OneMoreByte/homelab.git
+        revision: HEAD
+        files:
+          - path: argo/thefall/*/*/values.yaml
+        values:
+          base_dir: "argo/thefall/{{ path[2] }}/{{ path[3] }}"
+          app_name: "{{ path[3] }}"
+          namespace: "{{ path[2] }}"
+  template:
+    metadata:
+      name: "thefall-{{ values.app_name }}"
+    spec:
+      project: default
+      source:
+        path: "{{ values.base_dir }}"
+        repoURL: https://github.com/OneMoreByte/homelab.git
+        targetRevision: "HEAD"
+        helm:
+          releaseName: "{{ values.app_name }}"
+          valueFiles:
+          - values.yaml
+      destination:
+        name: thefall.fawn-mamba.ts.net
+        namespace: "{{ values.namespace }}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: thefall-kustomize-appset
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/OneMoreByte/homelab.git
+        revision: HEAD
+        files:
+          - path: argo/thefall/*/*/kustomization.yaml
+        values:
+          base_dir: "argo/thefall/{{ path[2] }}/{{ path[3] }}"
+          app_name: "{{ path[3] }}"
+          namespace: "{{ path[2] }}"
+  template:
+    metadata:
+      name: "thefall-{{ values.app_name }}"
+    spec:
+      project: default
+      source:
+        path: "{{ values.base_dir }}"
+        repoURL: https://github.com/OneMoreByte/homelab.git
+        targetRevision: "HEAD"
+      destination:
+        name: thefall.fawn-mamba.ts.net
+        namespace: "{{ values.namespace }}" 
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
