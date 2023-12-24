@@ -66,6 +66,9 @@
     "tagOwners": {
         "tag:k8s-operator": [],
         "tag:k8s":          ["tag:k8s-operator"],
+        "tag:wailord": [],
+        "tag:thefall": [],
+        "tag:theroom": [],
     },
 }
 
