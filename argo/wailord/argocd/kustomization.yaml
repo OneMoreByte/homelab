@@ -30,6 +30,7 @@ resources:
 - base/tailscale/ts-role.yaml
 - base/clusters/thefall.fawn-mamba.ts.net.yaml
 - base/applications/thefall.yaml
+- base/applications/tail-test.yaml
 
 
 
