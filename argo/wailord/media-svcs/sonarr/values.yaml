@@ -66,4 +66,8 @@ app-template:
       enabled: true
       type: hostPath
       hostPath: /store/plex-files/
+    torrent:
+      enabled: true
+      type: hostPath
+      hostPath: /store/torrent/
 
