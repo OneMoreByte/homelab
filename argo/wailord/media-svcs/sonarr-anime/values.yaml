@@ -10,7 +10,7 @@ app-template:
             PUID: 11337
             PGID: 11337
           image:
-            repository: hotio/sonarr-anime
+            repository: hotio/sonarr
             tag: "release-3.0.10.1567"
             pullPolicy: IfNotPresent
   defaultPodOptions:
