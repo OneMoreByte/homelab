@@ -4,20 +4,6 @@ kind: Kustomization
 
 resources:
 - base/repository.yaml
-- base/applications/argocd.yaml
-- base/applications/kube-system.yaml
-- base/applications/cert-manager.yaml
-- base/applications/game-svcs.yaml
-- base/applications/home-automation.yaml
-- base/applications/keycloak.yaml
-- base/applications/longhorn.yaml
-- base/applications/media-svcs.yaml
-- base/applications/metallb.yaml
-- base/applications/observability.yaml
-- base/applications/routed-svcs.yaml
-- base/applications/svcs.yaml
-- base/applications/traefik.yaml
-- base/applications/tailscale.yaml
 - base/applications/theroom.yaml
 - base/ingress.yaml
 - base/argo-client-secret.yaml
@@ -30,8 +16,8 @@ resources:
 - base/tailscale/ts-role.yaml
 - base/clusters/thefall.fawn-mamba.ts.net.yaml
 - base/applications/thefall.yaml
-- base/applications/tail-test.yaml
-- base/applications/nvidia-device-plugin.yaml
+- base/applications/wailord.yaml
+
 
 
 
