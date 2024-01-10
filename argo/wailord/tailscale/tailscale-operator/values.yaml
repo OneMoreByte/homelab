@@ -7,9 +7,6 @@ tailscale-operator:
       tag: test3
     hostname: "wailord"
   proxyConfig:
-    image:
-      repo: ghcr.io/onemorebyte/tailscale
-      tag: test3
     defaultTags: "tag:k8s,tag:wailord"
 
   apiServerProxyConfig:
