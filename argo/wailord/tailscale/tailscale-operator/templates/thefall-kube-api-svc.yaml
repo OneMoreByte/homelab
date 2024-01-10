@@ -5,5 +5,4 @@ metadata:
     tailscale.com/tailnet-fqdn: thefall.fawn-mamba.ts.net
   name: thefall-kube-api
 spec:
-  externalName: placeholder
   type: ExternalName
