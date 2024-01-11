@@ -4,12 +4,12 @@ tailscale-operator:
   operatorConfig:
     image:
       repo: ghcr.io/onemorebyte/tailscale
-      tag: test-operator5
+      tag: test-operator6
     hostname: "wailord"
   proxyConfig:
     image:
       repo: ghcr.io/onemorebyte/tailscale
-      tag: test-client5
+      tag: test-client6
     defaultTags: "tag:k8s,tag:wailord"
 
   apiServerProxyConfig:
