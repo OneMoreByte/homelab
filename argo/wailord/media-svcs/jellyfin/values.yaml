@@ -4,20 +4,51 @@
 # This chart inherits from our common library chart. You can check the default values/options here:
 # https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
 #
-jellyfin:
-  image:
-    # -- image repository
-    repository: jellyfin/jellyfin
-    # -- image tag
-    tag: 10.8.13
-    # -- image pull policy
-    pullPolicy: IfNotPresent
+app-template:
+  controllers:
+    main:
+      enabled: true
+      strategy: Recreate
+      containers:
+        main:
+          image:
+            # -- image repository
+            repository: jellyfin/jellyfin
+            # -- image tag
+            tag: 10.8.13
+            # -- image pull policy
+            pullPolicy: IfNotPresent
 
-  # -- environment variables. See [image docs](https://jellyfin.org/docs/general/administration/configuration.html) for more details.
-  # @default -- See below
-  env:
-    # -- Set the container timezone
-    TZ: America/Chicago
+          # -- environment variables. See [image docs](https://jellyfin.org/docs/general/administration/configuration.html) for more details.
+          # @default -- See below
+          env:
+            # -- Set the container timezone
+            TZ: America/Chicago
+
+  defaultPodOptions:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - bulk-datastore
+    hostNetwork: true
+    securityContext:
+      #  runAsUser: 11337
+      #runAsGroup: 11337
+      fsGroup: 11337
+      # Hardware acceleration using an Intel iGPU w/ QuickSync
+      # These IDs below should be matched to your `video` and `render` group on the host
+      # To obtain those IDs run the following grep statement on the host:
+      # $ cat /etc/group | grep "video\|render"
+      # video:x:44:
+      # render:x:109:
+      supplementalGroups:
+      - 998  # Render
+      - 39   # Video
 
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
@@ -30,7 +61,6 @@ jellyfin:
   ingress:
     main:
       enabled: true
-      primary: true
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -60,56 +90,18 @@ jellyfin:
   persistence:
     config:
       enabled: true
-      mountPath: /config
+      accessMode: ReadWriteOnce
+      size: 16Gi
 
     # Cache does NOT contain temporary transcoding data.
     cache:
       enabled: true
-      mountPath: /cache
+      accessMode: ReadWriteOnce
+      size: 16Gi
 
     media:
       enabled: true
-      mountPath: /store/plex-files
       type: hostPath
       hostPath: /store/plex-files
 
 
-
-  # -- Configure the Security Context for the Pod
-  podSecurityContext:
-    runAsUser: 11337
-    runAsGroup: 11337
-    fsGroup: 11337
-    # Hardware acceleration using an Intel iGPU w/ QuickSync
-    # These IDs below should be matched to your `video` and `render` group on the host
-    # To obtain those IDs run the following grep statement on the host:
-    # $ cat /etc/group | grep "video\|render"
-    # video:x:44:
-    # render:x:109:
-    supplementalGroups:
-    - 998  # Render
-    - 39   # Video
-
-
-  # resources:
-  #   requests:
-  #     # Hardware acceleration using an Intel iGPU w/ QuickSync and
-  #     # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
-  #     gpu.intel.com/i915: 1
-  #     cpu: 200m
-  #     memory: 256Mi
-  #   limits:
-  #     # Hardware acceleration using an Intel iGPU w/ QuickSync and
-  #     # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
-  #     gpu.intel.com/i915: 1
-  #     memory: 4096Mi
-
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: app
-            operator: In
-            values:
-            - bulk-datastore

@@ -4,43 +4,71 @@
 # This chart inherits from our common library chart. You can check the default values/options here:
 # https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
 #
-plex:
-  image:
-    # -- image repository
-    repository: docker.io/plexinc/pms-docker
-    # -- image tag
-    tag: 1.32.6.7557-1cf77d501
-    # -- image pull policy
-    pullPolicy: IfNotPresent
-
-  # -- environment variables. See [plex docs](https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/) for more details.
-  # **NOTE:** Plex preference options are camelCase and CASE SENSITIVE!
-  # You can do horrible things to your Plex configuration if you are not careful
-  # @default -- See below
-  env:
-    # -- Set the container timezone
-    TZ: America/Chicago
-    HOSTNAME: producers
-    PLEX_UID: 11337
-    PLEX_GID: 11337
-    CHANGE_CONFIG_DIR_OWNERSHIP: false
-    # ADVERTISE_IP:
-    # ALLOWED_NETWORKS:
-    PLEX_CLAIM: claim-8zwd13n8SRF6TNxhR2EY
-    PLEX_PREFERENCE_1: "FriendlyName=producers"
-    # PLEX_PREFERENCE_2: "EnableIPv6=0"
-    # PLEX_PREFERENCE_3: "logDebug=0"
-    # PLEX_PREFERENCE_4: "DisableTLSv1_0=1"
-    # PLEX_PREFERENCE_5: "LanNetworksBandwidth=xxx.xxx.xxx.0/18\,xxx.xxx.xxx.0/24\,xxx.xxx.xxx.0/24"
-    # PLEX_PREFERENCE_6: "TranscoderQuality=2"
-    # PLEX_PREFERENCE_7: "TreatWanIpAsLocal=0"
-    # PLEX_PREFERENCE_8: "TranscoderH264BackgroundPreset=fast"
+app-template:
+  controllers:
+    main:
+      enabled: true
+      strategy: Recreate
+      containers:
+        main:
+          env:
+            # -- Set the container timezone
+            TZ: America/Chicago
+            HOSTNAME: producers
+            PLEX_UID: 11337
+            PLEX_GID: 11337
+            CHANGE_CONFIG_DIR_OWNERSHIP: false
+            # ADVERTISE_IP:
+            # ALLOWED_NETWORKS:
+            PLEX_CLAIM: claim-8zwd13n8SRF6TNxhR2EY
+            PLEX_PREFERENCE_1: "FriendlyName=producers"
+            # PLEX_PREFERENCE_2: "EnableIPv6=0"
+            # PLEX_PREFERENCE_3: "logDebug=0"
+            # PLEX_PREFERENCE_4: "DisableTLSv1_0=1"
+            # PLEX_PREFERENCE_5: "LanNetworksBandwidth=xxx.xxx.xxx.0/18\,xxx.xxx.xxx.0/24\,xxx.xxx.xxx.0/24"
+            # PLEX_PREFERENCE_6: "TranscoderQuality=2"
+            # PLEX_PREFERENCE_7: "TreatWanIpAsLocal=0"
+            # PLEX_PREFERENCE_8: "TranscoderH264BackgroundPreset=fast"
+          image:
+            # -- image repository
+            repository: docker.io/plexinc/pms-docker
+            # -- image tag
+            tag: 1.32.8.7639-fb6452ebf
+            # -- image pull policy
+            pullPolicy: IfNotPresent
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+  defaultPodOptions:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - bulk-datastore
+    hostNetwork: true
+    securityContext:
+      #  runAsUser: 11337
+      #runAsGroup: 11337
+      fsGroup: 11337
+      # Hardware acceleration using an Intel iGPU w/ QuickSync
+      # These IDs below should be matched to your `video` and `render` group on the host
+      # To obtain those IDs run the following grep statement on the host:
+      # $ cat /etc/group | grep "video\|render"
+      # video:x:44:
+      # render:x:109:
+      supplementalGroups:
+      - 998  # Render
+      - 39   # Video
 
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
   service:
     main:
-      primary: true
+      enabled: true
       type: LoadBalancer
       ports:
         http:
@@ -69,7 +97,6 @@ plex:
   ingress:
     main:
       enabled: true
-      primary: true
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -97,62 +124,23 @@ plex:
               pathType: Prefix
 
   # -- Enable devices to be discoverable
-  hostNetwork: true
+ 
 
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
   persistence:
     config:
       enabled: true
-      mountPath: /config
+      accessMode: ReadWriteOnce
+      size: 32Gi
 
     media:
       enabled: true
-      mountPath: /store/plex-files
       type: hostPath
       hostPath: /store/plex-files
 
     transcode:
       enabled: false
-      mountPath: /transcode
+      accessMode: ReadWriteOnce
+      size: 64Gi
 
-  # -- Configure the Security Context for the Pod
-  podSecurityContext:
-    # runAsUser: 11337
-    # runAsGroup: 11337
-    fsGroup: 11337
-    # Hardware acceleration using an Intel iGPU w/ QuickSync
-    # These IDs below should be matched to your `video` and `render` group on the host
-    # To obtain those IDs run the following grep statement on the host:
-    # $ cat /etc/group | grep "video\|render"
-    # video:x:44:
-    # render:x:109:
-    supplementalGroups:
-    - 998  # Render
-    - 39   # Video
-
-  # -- Configure the resource requests and/or limits for the Pod
-  resources:
-    limits:
-      nvidia.com/gpu: 1
-    # requests:
-    #   # Hardware acceleration using an Intel iGPU w/ QuickSync and
-    #   # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
-    #   gpu.intel.com/i915: 1
-    #   cpu: 200m
-    #   memory: 256Mi
-    # limits:
-    #   # Hardware acceleration using an Intel iGPU w/ QuickSync and
-    #   # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
-    #   gpu.intel.com/i915: 1
-    #   memory: 4096Mi
-
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: app
-            operator: In
-            values:
-            - bulk-datastore
