@@ -106,7 +106,7 @@ plex:
       enabled: true
       mountPath: /config
 
-  media:
+    media:
       enabled: true
       mountPath: /store/plex-files
       type: hostPath
