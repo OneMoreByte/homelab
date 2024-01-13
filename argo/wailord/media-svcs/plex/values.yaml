@@ -74,6 +74,7 @@ app-template:
         http:
           port: 32400
     dnla-tcp:
+      controller: main
       enabled: true
       type: NodePort
       ports:
@@ -84,6 +85,7 @@ app-template:
           targetPort: 32469
       externalTrafficPolicy: Local
     dnla-udp:
+      controller: main
       enabled: true
       type: NodePort
       ports:
