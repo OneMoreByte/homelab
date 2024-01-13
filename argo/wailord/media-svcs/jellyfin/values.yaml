@@ -61,15 +61,11 @@ jellyfin:
     config:
       enabled: true
       mountPath: /config
-      type: hostPath
-      hostPath: /store/k8s-hostpath/jellyfin-config
 
     # Cache does NOT contain temporary transcoding data.
     cache:
       enabled: true
       mountPath: /cache
-      type: hostPath
-      hostPath: /store/k8s-hostpath/jellyfin-cache
 
     media:
       enabled: true

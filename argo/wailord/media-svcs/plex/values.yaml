@@ -105,9 +105,8 @@ plex:
     config:
       enabled: true
       mountPath: /config
-      type: hostPath
-      hostPath: /store/k8s-hostpath/plex-config
-    media:
+
+  media:
       enabled: true
       mountPath: /store/plex-files
       type: hostPath
