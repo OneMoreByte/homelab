@@ -6,6 +6,6 @@ sources:
   - https://github.com/minio/minio
 dependencies:
   - name: minio
-    version: 5.0.14
+    version: 5.0.15
     repository: "https://charts.min.io/"
 
