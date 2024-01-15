@@ -1,0 +1,7 @@
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: "nice-net-pool"
+spec:
+  cidrs:
+    - cidr: "192.168.42.0/24"
