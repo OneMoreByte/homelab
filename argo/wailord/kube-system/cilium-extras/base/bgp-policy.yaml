@@ -11,3 +11,6 @@ spec: # CiliumBGPPeeringPolicySpec
       neighbors:
         - peerAddress: "192.168.13.1/32"
           peerASN: 65511
+      serviceSelector:
+        matchExpressions:
+          - { key: somekey, operator: NotIn, values: ["never-used-value"] }
