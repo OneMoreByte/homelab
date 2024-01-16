@@ -6,16 +6,8 @@ spec: # CiliumBGPPeeringPolicySpec
   nodeSelector:
     matchLabels:
       bgp-policy: a
-  virtualRouters: # []CiliumBGPVirtualRouter
+  virtualRouters:
     - localASN: 65513
-      exportPodCIDR: true
-      neighbors: # []CiliumBGPNeighbor
-        - peerAddress: "192.168.13.1/24"
+      neighbors:
+        - peerAddress: "192.168.13.1/32"
           peerASN: 65511
-          eBGPMultihopTTL: 10
-          connectRetryTimeSeconds: 120
-          holdTimeSeconds: 90
-          keepAliveTimeSeconds: 30
-          gracefulRestart:
-            enabled: true
-            restartTimeSeconds: 120
