@@ -11,7 +11,18 @@ app-template:
             repository: ghcr.io/hotio/unpackerr
             tag: "release-0.12.0"
             pullPolicy: IfNotPresent
+          probes:
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false
   # -- Configures service settings for the chart.
+
+  service:
+    main:
+      enabled: false
 
   # -- Configure persistence settings for the chart under this key.
   persistence:
