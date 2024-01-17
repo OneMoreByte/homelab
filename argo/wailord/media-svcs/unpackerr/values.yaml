@@ -13,11 +13,14 @@ app-template:
             pullPolicy: IfNotPresent
           probes:
             liveness:
-              enabled: false
+              enabled: true
+
             readiness:
-              enabled: false
+              enabled: true
+
             startup:
-              enabled: false
+              enabled: true
+
   # -- Configures service settings for the chart.
 
   defaultPodOptions:
@@ -36,15 +39,16 @@ app-template:
       fsGroup: 11337
   service:
     main:
-      enabled: false
+      ports:
+        http:
+          port: 5656
 
   # -- Configure persistence settings for the chart under this key.
   persistence:
     config:
       enabled: true
-      accessMode: ReadWriteOnce
-      size: 16Gi
-      mountPath: /config
+      type: secret
+      name: unpackerr-config
 
     data:
       enabled: true
@@ -54,3 +58,8 @@ app-template:
         main:
           main:
             - path: /data
+
+    store:
+      enabled: true
+      type: hostPath
+      hostPath: /store/torrent/download
