@@ -20,6 +20,20 @@ app-template:
               enabled: false
   # -- Configures service settings for the chart.
 
+  defaultPodOptions:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - bulk-datastore
+    securityContext:
+      #  runAsUser: 11337
+      #runAsGroup: 11337
+      fsGroup: 11337
   service:
     main:
       enabled: false
@@ -35,7 +49,7 @@ app-template:
     data:
       enabled: true
       type: hostPath
-      hostPath: /store/torrent/downloads
+      hostPath: /store/torrent/download
       advancedMounts:
         main:
           main:
