@@ -63,15 +63,15 @@ app-template:
         http:
           port: 3000
     bittorrent:
-      enabled: false
+      enabled: true
       type: ClusterIP
       controller: main
       ports:
         bittorrent:
           enabled: true
-          port: 56093
+          port: 48227
           protocol: TCP
-          targetPort: 56093
+          targetPort: 48227
 
   ingress:
     # -- Enable and configure ingress settings for the chart under this key.
