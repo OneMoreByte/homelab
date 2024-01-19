@@ -31,18 +31,38 @@ app-template:
             FLOOD_OPTION_RTORRENT: "true"
             # -- Allowed path for file operations
             FLOOD_OPTION_ALLOWEDPATH: "/store/torrent"
-          
           probes:
             liveness:
               enabled: false
-
             readiness:
               enabled: false
-
             startup:
               enabled: false
-
-
+        gluetun:
+          image:
+            repository: ghcr.io/qdm12/gluetun
+            tag: v3.37.0
+          env:
+            - name: VPN_SERVICE_PROVIDER
+              value: mullvad
+            - name: VPN_TYPE
+              value: wireguard
+            - name: VPN_INTERFACE
+              value: wg0
+            - name: SERVER_CITIES
+              value: Amsterdam
+            - name: FIREWALL
+              value: "off"
+            - name: DOT
+              value: "off"
+          envFrom:
+            - secretRef:
+                name: mulvad-creds
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - NET_ADMIN
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
   service:
@@ -60,7 +80,6 @@ app-template:
           port: 56093
           protocol: TCP
           targetPort: 56093
-    
 
   ingress:
     # -- Enable and configure ingress settings for the chart under this key.
@@ -80,9 +99,9 @@ app-template:
               service:
                 name: main
       tls:
-      - hosts:
-          - flood-public.jackhil.de
-        secretName: jackhil.de-cert
+        - hosts:
+            - flood-public.jackhil.de
+          secretName: jackhil.de-cert
 
     ssl-redirect:
       enabled: true
@@ -102,7 +121,7 @@ app-template:
   persistence:
     config:
       enabled: false
-  
+
     rtorrent-home:
       enabled: true
       type: persistentVolumeClaim
@@ -126,7 +145,7 @@ app-template:
       enabled: true
 
       type: "configMap"
-      name: 'rtorrent-config'
+      name: "rtorrent-config"
       advancedMounts:
         main:
           main:
@@ -140,11 +159,11 @@ app-template:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
-          - matchExpressions:
-            - key: app
-              operator: In
-              values:
-              - bulk-datastore
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - bulk-datastore
 
     securityContext:
       runAsUser: 11337
@@ -163,7 +182,7 @@ config: |
   # override only some configs via command line: -o network.port_range.set=6881-6881
   # or, on top of custom config: import = /etc/rtorrent/rtorrent.rc
 
-  
+
 
   method.insert = cfg.basedir,  private|const|string, (cat,(fs.homedir),"/.local/share/rtorrent/")
   method.insert = cfg.download, private|const|string, (cat,"/store/torrent-public/", "download/")
@@ -189,7 +208,7 @@ config: |
   schedule2 = watch_mva, 10, 10, "load.start_verbose=/store/torrent-public/watch/mva/*.torrent,d.custom1.set=mva,d.custom3.set=/store/torrent-public/complete"
   # Listening port for incoming peer traffic
   network.port_range.set = 56093-56093
-  
+
 
   method.insert = d.data_path, simple, "if=(d.is_multi_file), (cat,(d.directory),/), (cat,(d.directory),/,(d.name))"
   method.insert = d.move_to_complete, simple, "d.directory.set=$argument.1=; execute=mkdir,-p,$argument.1=; execute=mv,$argument.0=,$argument.1=; d.save_full_session="

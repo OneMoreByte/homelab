@@ -1,9 +1,0 @@
-apiVersion: v2
-name: gateway
-type: application
-version: 0.0.1
-sources:
-  - https://github.com/angelnu/gateway-admision-controller
-  - https://github.com/angelnu/pod-gateway
-  - https://github.com/angelnu/helm-charts/tree/main/charts/apps/pod-gateway
-  - https://github.com/angelnu/k8s-gitops/blob/main/core/vpn-gateway/release.yaml
