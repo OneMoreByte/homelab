@@ -18,11 +18,11 @@ app-template:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
-          - matchExpressions:
-            - key: app
-              operator: In
-              values:
-              - bulk-datastore
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - bulk-datastore
     securityContext:
       #runAsUser: 11337
       #runAsGroup: 11337
@@ -52,9 +52,9 @@ app-template:
                 name: sonarr-anime
                 port: 8989
       tls:
-      - hosts:
-         - sonarr-anime.jackhil.de
-        secretName: jackhil.de-cert
+        - hosts:
+            - sonarr-anime.jackhil.de
+          secretName: jackhil.de-cert
 
   # -- Configure persistence settings for the chart under this key.
   persistence:
@@ -70,4 +70,7 @@ app-template:
       enabled: true
       type: hostPath
       hostPath: /store/torrent/
-
+    torrent-public:
+      enabled: true
+      type: hostPath
+      hostPath: /store/torrent-public/
