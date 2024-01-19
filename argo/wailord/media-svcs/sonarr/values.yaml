@@ -11,18 +11,18 @@ app-template:
             PGID: 11337
           image:
             repository: hotio/sonarr
-            tag: "release-3.0.10.1567"
+            tag: "release-4.0.0.748"
             pullPolicy: IfNotPresent
   defaultPodOptions:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
-          - matchExpressions:
-            - key: app
-              operator: In
-              values:
-              - bulk-datastore
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - bulk-datastore
     securityContext:
       #runAsUser: 11337
       #runAsGroup: 11337
@@ -52,9 +52,9 @@ app-template:
                 name: sonarr
                 port: 8989
       tls:
-      - hosts:
-         - sonarr.jackhil.de
-        secretName: jackhil.de-cert
+        - hosts:
+            - sonarr.jackhil.de
+          secretName: jackhil.de-cert
 
   # -- Configure persistence settings for the chart under this key.
   persistence:
@@ -70,4 +70,3 @@ app-template:
       enabled: true
       type: hostPath
       hostPath: /store/torrent/
-
