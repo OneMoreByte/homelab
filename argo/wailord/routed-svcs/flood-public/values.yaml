@@ -43,21 +43,13 @@ app-template:
             repository: ghcr.io/qdm12/gluetun
             tag: v3.37.0
           env:
-            - name: VPN_SERVICE_PROVIDER
-              value: mullvad
-            - name: VPN_TYPE
-              value: wireguard
-            - name: VPN_INTERFACE
-              value: wg0
-            - name: SERVER_CITIES
-              value: Amsterdam
             - name: FIREWALL
               value: "off"
             - name: DOT
               value: "off"
           envFrom:
             - secretRef:
-                name: mulvad-creds
+                name: gluetun-protonvpn
           securityContext:
             privileged: true
             capabilities:
@@ -71,7 +63,7 @@ app-template:
         http:
           port: 3000
     bittorrent:
-      enabled: true
+      enabled: false
       type: ClusterIP
       controller: main
       ports:
@@ -207,7 +199,7 @@ config: |
   # Drop to "$(cfg.watch)/start" to add torrent and start downloading
   schedule2 = watch_mva, 10, 10, "load.start_verbose=/store/torrent-public/watch/mva/*.torrent,d.custom1.set=mva,d.custom3.set=/store/torrent-public/complete"
   # Listening port for incoming peer traffic
-  network.port_range.set = 56093-56093
+  network.port_range.set = 48227-48227
 
 
   method.insert = d.data_path, simple, "if=(d.is_multi_file), (cat,(d.directory),/), (cat,(d.directory),/,(d.name))"
