@@ -25,6 +25,17 @@ app-template:
             startup:
               enabled: false
 
+  defaultPodOptions:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - fastclock
+
   ingress:
     main:
       enabled: false
