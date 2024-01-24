@@ -30,10 +30,16 @@ app-template:
     main:
       type: LoadBalancer
       ports:
+        http:
+          enabled: false
+          primary: false
         game:
+          primary: true
+          enabled: true
           port: 8211
           protocol: UDP
         query:
+          enabled: true
           port: 27015
           protocol: UDP
         rcon:
