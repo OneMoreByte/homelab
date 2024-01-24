@@ -150,6 +150,5 @@ app-template:
       hostPath: /store/plex-files
 
     transcode:
-      enabled: false
-      accessMode: ReadWriteOnce
-      size: 64Gi
+      enabled: true
+      type: emptyDir
