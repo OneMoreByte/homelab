@@ -25,6 +25,10 @@ app-template:
             startup:
               enabled: false
 
+ingress:
+  main:
+    enabled: false
+
   # -- Configures service settings for the chart.
   service:
     main:
