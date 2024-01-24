@@ -35,8 +35,9 @@ ingress:
       type: LoadBalancer
       ports:
         http:
-          enabled: false
+          enabled: true
           primary: false
+          port: 11111
         game:
           primary: true
           enabled: true
