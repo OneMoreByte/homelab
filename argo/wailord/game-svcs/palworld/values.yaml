@@ -37,6 +37,7 @@ ingress:
         http:
           enabled: false
           primary: false
+          port: 11111
         game:
           primary: true
           enabled: true
