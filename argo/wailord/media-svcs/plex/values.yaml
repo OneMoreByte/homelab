@@ -29,6 +29,8 @@ app-template:
             # PLEX_PREFERENCE_6: "TranscoderQuality=2"
             # PLEX_PREFERENCE_7: "TreatWanIpAsLocal=0"
             # PLEX_PREFERENCE_8: "TranscoderH264BackgroundPreset=fast"
+            NVIDIA_DRIVER_CAPABILITIES: all
+
           image:
             # -- image repository
             repository: docker.io/plexinc/pms-docker
@@ -44,11 +46,11 @@ app-template:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
-          - matchExpressions:
-            - key: app
-              operator: In
-              values:
-              - bulk-datastore
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - bulk-datastore
     hostNetwork: true
     securityContext:
       #  runAsUser: 11337
@@ -61,8 +63,8 @@ app-template:
       # video:x:44:
       # render:x:109:
       supplementalGroups:
-      - 998  # Render
-      - 39   # Video
+        - 39 # Video
+        - 105
 
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
@@ -113,9 +115,9 @@ app-template:
                 name: plex
                 port: 32400
       tls:
-      - hosts:
-         - plex.jackhil.de
-        secretName: jackhil.de-cert
+        - hosts:
+            - plex.jackhil.de
+          secretName: jackhil.de-cert
     ssl-redirect:
       enabled: true
       annotations:
@@ -131,7 +133,6 @@ app-template:
                 name: plex
                 port: 32400
   # -- Enable devices to be discoverable
- 
 
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
@@ -150,4 +151,3 @@ app-template:
       enabled: false
       accessMode: ReadWriteOnce
       size: 64Gi
-
