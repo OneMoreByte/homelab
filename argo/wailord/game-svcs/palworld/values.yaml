@@ -7,9 +7,9 @@ app-template:
         main:
           env:
             MULTITHREADING: true
-            SERVER_NAME: "'Scaaaan clan'"
-            SERVER_PASSWORD: "Jackiscool"
-            COMMUNITY: true
+            SERVER_NAME: "'Island boys'"
+            #SERVER_PASSWORD: "Jackiscool"
+            COMMUNITY: false
           image:
             repository: thijsvanloef/palworld-server-docker
             tag: latest
