@@ -60,4 +60,4 @@ app-template:
     palworld:
       enabled: true
       accessMode: ReadWriteOnce
-      size: 16Gi
+      size: 64Gi
