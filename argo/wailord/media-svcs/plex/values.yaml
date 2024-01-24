@@ -41,6 +41,8 @@ app-template:
           resources:
             limits:
               nvidia.com/gpu: 1
+          securityContext:
+            privileged: true
   defaultPodOptions:
     affinity:
       nodeAffinity:
@@ -53,7 +55,6 @@ app-template:
                     - bulk-datastore
     hostNetwork: true
     securityContext:
-      privileged: true
       #  runAsUser: 11337
       #runAsGroup: 11337
       fsGroup: 11337
