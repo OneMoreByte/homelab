@@ -53,6 +53,7 @@ app-template:
                     - bulk-datastore
     hostNetwork: true
     securityContext:
+      privileged: true
       #  runAsUser: 11337
       #runAsGroup: 11337
       fsGroup: 11337
