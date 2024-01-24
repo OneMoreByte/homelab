@@ -1,0 +1,58 @@
+app-template:
+  controllers:
+    main:
+      enabled: true
+      strategy: Recreate
+      containers:
+        main:
+          env:
+            MULTITHREADING: true
+            SERVER_NAME: "Scaaaan clan"
+            SERVER_PASSWORD: "Jackiscool"
+            COMMUNITY: true
+          image:
+            repository: thijsvanloef/palworld-server-docker
+            tag: 0.12.0
+            pullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "20Gi"
+          probes:
+            liveness:
+              enabled: false
+            readiness:
+              enabled: false
+            startup:
+              enabled: false
+
+  # -- Configures service settings for the chart.
+  service:
+    main:
+      type: LoadBalancer
+      ports:
+        game:
+          port: 8211
+          protocol: UDP
+        query:
+          port: 27015
+          protocol: UDP
+        rcon:
+          enabled: false
+          port: 25575
+          protocol: tcp
+
+  ingress:
+    enabled: false
+
+  # -- Configure persistence settings for the chart under this key.
+  persistence:
+    config:
+      enabled: false
+      accessMode: ReadWriteOnce
+      size: 16Gi
+      mountPath: /config
+
+    palworld:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 16Gi
