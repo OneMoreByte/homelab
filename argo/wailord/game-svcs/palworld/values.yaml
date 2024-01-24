@@ -25,9 +25,9 @@ app-template:
             startup:
               enabled: false
 
-ingress:
-  main:
-    enabled: false
+  ingress:
+    main:
+      enabled: false
 
   # -- Configures service settings for the chart.
   service:
@@ -35,11 +35,8 @@ ingress:
       type: LoadBalancer
       ports:
         http:
-          enabled: true
-          primary: false
-          port: 11111
+          enabled: false
         game:
-          primary: true
           enabled: true
           port: 8211
           protocol: UDP
@@ -51,9 +48,6 @@ ingress:
           enabled: false
           port: 25575
           protocol: tcp
-
-  ingress:
-    enabled: false
 
   # -- Configure persistence settings for the chart under this key.
   persistence:
