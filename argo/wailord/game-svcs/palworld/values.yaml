@@ -7,7 +7,7 @@ app-template:
         main:
           env:
             MULTITHREADING: true
-            SERVER_NAME: "Scaaaan clan"
+            SERVER_NAME: "'Scaaaan clan'"
             SERVER_PASSWORD: "Jackiscool"
             COMMUNITY: true
           image:
