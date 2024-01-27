@@ -24,14 +24,14 @@ app-template:
               enabled: false
             startup:
               enabled: false
-      initContainers:
-        sleep:
-          image:
-            repository: busybox
-            tag: "1.28"
-          command: "sleep"
-          args:
-            - "30000"
+      #     initContainers:
+      #       sleep:
+      #         image:
+      #           repository: busybox
+      #           tag: "1.28"
+      #         command: "sleep"
+      #         args:
+      #           - "30000"
 
   defaultPodOptions:
     affinity:
