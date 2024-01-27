@@ -1,13 +1,3 @@
-cisco_switches:
-  hosts:
-    samuraicop.localdomain: {}
-  vars:
-    ansible_network_os: ios
-    ansible_connection: network_cli
-    cli:
-      timeout: 45
-    ansible_persistent_log_messages: True
-
 linux:
   hosts:
     fateful.jsck.network:
@@ -22,18 +12,14 @@ linux:
       ansible_user: svc
     thefall.jsck.network:
       ansible_user: jsck
+      ansible_host: jsck.zfs.rent
     theroom.jsck.network:
       ansible_user: svc
+    green-knight:
+      ansible_user: svc
+    big-lebowski:
+      ansible_user: svc
 
-zrepl:
-  hosts:
-    fateful.jsck.network:
-      ansible_user: svc
-    producers.jsck.network:
-      ansible_user: svc
-    thefall.jsck.network:
-      ansible_user: jsck
-      
 wailord:
   hosts:
     fateful.jsck.network:
@@ -51,10 +37,18 @@ standalone_cluster:
   hosts:
     thefall.jsck.network:
       ansible_user: jsck
+      ansible_host: jsck.zfs.rent
     theroom.jsck.network:
       ansible_user: svc
 
 nfs_servers:
   hosts:
     producers.jsck.network:
+      ansible_user: svc
+
+printers:
+  hosts:
+    green-knight:
+      ansible_user: svc
+    big-lebowski:
       ansible_user: svc

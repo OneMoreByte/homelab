@@ -1,6 +1,0 @@
-
-
-
-- name: Initiate virtualenv
-  pip: virtualenv="{{ virtualenv_dir }}" 
-       requirements={{ app_dir }}/requirements.txt

@@ -1,0 +1,18 @@
+- name: Install pre-reqs
+  ansible.builtin.apt:
+    name:
+      - git
+      - raspi-config
+      - network-manager
+    state: present
+  become: true
+
+- name: Clone Kiahuh (Klipper Installer)
+  ansible.builtin.git:
+    dest: ~/kiahuh
+    repo: https://github.com/dw-0/kiauh.git
+
+- name: Clone Katapult (CAN Firmware)
+  ansible.builtin.git:
+    dest: ~/katapult
+    repo: https://github.com/Arksine/katapult.git

@@ -12,26 +12,25 @@
 #  roles:
 #    - haproxy
 
-- name: Configure k8s nodes
-  hosts: wailord
+#- name: Configure k8s nodes
+#  hosts: wailord
+#roles:
+#   - k8s
+
+- name: Configure printers
+  hosts: printers
   roles:
-    - k8s
+    - printer
+#- name: Configure standalone clusters
+#  hosts: standalone_cluster
+#roles:
+#  - standalone_cluster
 
-#- name: Configure zrepl
-#  hosts: zrepl
-#  roles:
-#    - zrepl
-
-- name: Configure standalone clusters
-  hosts: standalone_cluster
-  roles:
-    - standalone_cluster
-
-      #- name: Configure storage server
-      #  hosts: storage
-      #  roles#:
-      #    - zfs
-      #    - plex
+#- name: Configure storage server
+#  hosts: storage
+#  roles#:
+#    - zfs
+#    - plex
 #- name: Playbook to configure IPA server
 #  hosts: ipaserver
 #  become: true
@@ -39,8 +38,8 @@
 #  - role: ipaserver
 #    state: present
 
-- name: setup network storage
-  hosts: nfs_servers
-  become: true
-  roles:
-    - { role: geerlingguy.nfs }
+#- name: setup network storage
+#  hosts: nfs_servers
+# become: true
+#roles:
+#  - { role: geerlingguy.nfs }
