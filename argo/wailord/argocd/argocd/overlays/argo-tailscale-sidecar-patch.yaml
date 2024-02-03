@@ -35,6 +35,7 @@ spec:
           - svc.cluster.local
           - default.svc.cluster.local
           - fawn-mamba.ts.net
+          - cluser.local
         options:
           - name: ndots
             value: "5"
