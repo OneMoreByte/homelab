@@ -10,19 +10,31 @@ spec:
           imagePullPolicy: Always
           image: "ghcr.io/tailscale/tailscale:latest"
           env:
-          - name: TS_KUBE_SECRET
-            value: "argo-tailscale-state-controller-ss"
-          - name: TS_USERSPACE
-            value: "false"
-          - name: TS_AUTHKEY
-            valueFrom:
-              secretKeyRef:
-                name: argo-tailscale-auth
-                key: TS_AUTHKEY
-                optional: true
+            - name: TS_KUBE_SECRET
+              value: "argo-tailscale-state-controller-ss"
+            - name: TS_USERSPACE
+              value: "false"
+            - name: TS_AUTHKEY
+              valueFrom:
+                secretKeyRef:
+                  name: argo-tailscale-auth
+                  key: TS_AUTHKEY
+                  optional: true
           securityContext:
             privileged: true
             capabilities:
               add:
-              - NET_ADMIN
-
+                - NET_ADMIN
+      dnsPolicy: "None"
+      dnsConfig:
+        nameservers:
+          - 169.254.25.10
+          - 100.100.100.100
+        searches:
+          - argocd.svc.cluster.local
+          - svc.cluster.local
+          - default.svc.cluster.local
+          - fawn-mamba.ts.net
+        options:
+          - name: ndots
+            value: 5
