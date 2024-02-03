@@ -29,7 +29,6 @@ longhorn:
       dataSourceParameters: ~
       expectedChecksum: ~
 
-
   longhornUI:
     priorityClass: ~
     tolerations: []
@@ -45,7 +44,8 @@ longhorn:
     #  label-key1: "label-value1"
     #  label-key2: "label-value2"
 
-  resources: {}
+  resources:
+    {}
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
     # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -64,16 +64,16 @@ longhorn:
 
     ## Add ingressClassName to the Ingress
     ## Can replace the kubernetes.io/ingress.class annotation on v1.18+
-    ingressClassName: ~
+    ingressClassName: "tailscale"
 
-    host: longhorn.jsck.network
+    host: longhorn
 
     ## Set this to true in order to enable TLS on the ingress record
     ## A side effect of this will be that the backend service will be connected at port 443
     tls: true
 
     ## If TLS is set to true, you must declare what secret will store the key/certificate for TLS
-    tlsSecret: jsck.network-cert
+    #tlsSecret: jsck.network-cert
 
     ## Ingress annotations done as key:value pairs
     ## If you're using kube-lego, you will want to add:
@@ -83,10 +83,7 @@ longhorn:
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/annotations.md
     ##
     ## If tls is set to true, annotation ingress.kubernetes.io/secure-backends: "true" will automatically be set
-    annotations:
-      traefik.ingress.kubernetes.io/router.tls: "true"
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth-middleware@kubernetescrd
+    annotations: {}
 
     #  kubernetes.io/ingress.class: nginx
     #  kubernetes.io/tls-acme: true
@@ -114,4 +111,3 @@ longhorn:
 
   # Annotations to add to the Longhorn Manager DaemonSet Pods. Optional.
   annotations: {}
-
