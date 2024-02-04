@@ -25,17 +25,3 @@ spec:
             capabilities:
               add:
                 - NET_ADMIN
-      dnsPolicy: "ClusterFirst"
-      dnsConfig:
-        nameservers:
-          - 100.100.100.100
-          - 169.254.25.10
-        searches:
-          - argocd.svc.cluster.local
-          - svc.cluster.local
-          - default.svc.cluster.local
-          - fawn-mamba.ts.net
-          - cluster.local
-        options:
-          - name: ndots
-            value: "5"
