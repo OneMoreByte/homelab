@@ -28,8 +28,8 @@ spec:
       dnsPolicy: "ClusterFirst"
       dnsConfig:
         nameservers:
-          - 169.254.25.10
           - 100.100.100.100
+          - 169.254.25.10
         searches:
           - argocd.svc.cluster.local
           - svc.cluster.local
