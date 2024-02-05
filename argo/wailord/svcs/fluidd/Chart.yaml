@@ -6,6 +6,6 @@ sources:
   - https://artifacthub.io/packages/helm/bitnami/nginx
 dependencies:
   - name: nginx
-    version: 15.10.2
+    version: 15.10.3
     repository: "https://charts.bitnami.com/bitnami"
 
