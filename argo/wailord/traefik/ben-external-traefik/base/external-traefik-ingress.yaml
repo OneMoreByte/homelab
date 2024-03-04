@@ -1,0 +1,31 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: zeta-traefik-tls
+  namespace: traefik
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: HostRegexp(`cloudyskys.org`, `{subdomain:[a-z]+}.cloudyskys.org`)
+      kind: Rule
+      services:
+        - name: zeta-traefik
+          port: 443
+  tls:
+    certResolver: cloudyskys-issuer
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: zeta-traefik
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: HostRegexp(`cloudyskys.org`, `{subdomain:[a-z]+}.cloudyskys.org`)
+      kind: Rule
+      services:
+        - name: zeta-traefik
+          port: 80

@@ -1,0 +1,6 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- base/external-traefik-cert.yaml
+- base/external-traefik-ingress.yaml
+- base/external-traefik-service.yaml
