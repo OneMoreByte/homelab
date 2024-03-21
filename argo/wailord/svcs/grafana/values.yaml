@@ -2,7 +2,7 @@ grafana:
   image:
     repository: grafana/grafana
     # Overrides the Grafana image tag whose default is the chart appVersion
-    tag: "10.4.0"
+    tag: "10.4.1"
     sha: ""
     pullPolicy: IfNotPresent
   
