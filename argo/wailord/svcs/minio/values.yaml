@@ -50,7 +50,7 @@ minio:
       versioning: true
     - name: smoking-mutex
       policy: none
-      versioning: true
+      versioning: false
 
   policies:
     - name: longhorn-backup-readwrite
