@@ -5,11 +5,11 @@ minio:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
-        - matchExpressions:
-          - key: app
-            operator: In
-            values:
-            - bulk-datastore
+          - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - bulk-datastore
 
   persistence:
     enabled: true
@@ -48,22 +48,36 @@ minio:
     - name: longhorn-backup
       policy: none
       versioning: true
+    - name: smoking-mutex
+      policy: none
+      versioning: true
 
   policies:
     - name: longhorn-backup-readwrite
       statements:
         - effect: Allow
           resources:
-            - 'arn:aws:s3:::longhorn-backup/*'
+            - "arn:aws:s3:::longhorn-backup/*"
+          actions:
+            - "s3:*"
+    - name: milien-backup-readwrite
+      statements:
+        - effect: Allow
+          resources:
+            - "arn:aws:s3:::smoking-mutex/*"
           actions:
             - "s3:*"
 
-  users: 
+  users:
     - accessKey: longhorn
       existingSecret: longhorn-user-secret
       existingSecretKey: password
       policy: longhorn-backup-readwrite
-      
+    - accessKey: okta
+      existingSecret: milien-user-secret
+      existingSecretKey: password
+      policy: milien-backup-readwrite
+
   svcaccts: []
 
   environment:
@@ -81,4 +95,3 @@ minio:
     # Can leave empty
     claimPrefix: ""
     comment: ""
-
