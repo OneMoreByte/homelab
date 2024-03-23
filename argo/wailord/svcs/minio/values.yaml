@@ -51,6 +51,9 @@ minio:
     - name: smoking-mutex
       policy: none
       versioning: false
+    - name: smoked-mutex
+      policy: none
+      versioning: false
 
   policies:
     - name: longhorn-backup-readwrite
@@ -65,6 +68,7 @@ minio:
         - effect: Allow
           resources:
             - "arn:aws:s3:::smoking-mutex/*"
+            - "arn:aws:s3:::smoked-mutex/*"
           actions:
             - "s3:*"
 
