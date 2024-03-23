@@ -84,7 +84,7 @@ minio:
     MINIO_BROWSER_REDIRECT_URL: "https://console.minio.jsck.network"
 
   oidc:
-    enabled: true
+    enabled: false
     configUrl: "https://auth.jackhil.de/auth/realms/master/.well-known/openid-configuration"
     clientId: "minio"
     existingClientSecretName: "minio-client-secret"
