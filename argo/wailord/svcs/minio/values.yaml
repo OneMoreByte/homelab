@@ -48,12 +48,9 @@ minio:
     - name: longhorn-backup
       policy: none
       versioning: true
-    - name: smoking-mutex
-      policy: none
-      versioning: false
     - name: smoked-mutex
       policy: none
-      versioning: false
+      versioning: true
 
   policies:
     - name: longhorn-backup-readwrite
@@ -67,7 +64,6 @@ minio:
       statements:
         - effect: Allow
           resources:
-            - "arn:aws:s3:::smoking-mutex/*"
             - "arn:aws:s3:::smoked-mutex/*"
           actions:
             - "s3:*"
@@ -88,7 +84,7 @@ minio:
     MINIO_BROWSER_REDIRECT_URL: "https://console.minio.jsck.network"
 
   oidc:
-    enabled: false
+    enabled: true
     configUrl: "https://auth.jackhil.de/auth/realms/master/.well-known/openid-configuration"
     clientId: "minio"
     existingClientSecretName: "minio-client-secret"
