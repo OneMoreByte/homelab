@@ -19,9 +19,8 @@ frigate:
 
   # -- additional ENV variables to set. Prefix with FRIGATE_ to target Frigate configuration values
   env: []
- #   - FRIGATE_MQTT_USER:
- #   - FRIGATE_MQTT_PASSWORD:
-
+  #   - FRIGATE_MQTT_USER:
+  #   - FRIGATE_MQTT_PASSWORD:
 
   # -- set environment variables from Secret(s)
   envFromSecrets:
@@ -197,22 +196,21 @@ frigate:
   ingress:
     # -- Enables the use of an Ingress Controller to front the Service and can provide HTTPS
     enabled: true
-
+    ingressClassName: "tailscale"
     # -- annotations to configure your Ingress. See your Ingress Controller's Docs for more info.
-    annotations:
-      traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth-middleware@kubernetescrd
+    annotations: {}
 
     # -- list of hosts and their paths that ingress controller should repsond to.
     hosts:
-      - host: frigate.jsck.network
+      - host: frigate
         paths:
-          - '/'
+          - "/"
 
     # -- list of TLS configurations
     tls:
       - hosts:
-          - frigate.jsck.network
-        secretName: jsck.network-cert
+          - frigate
+
   persistence:
     data:
       # -- Enables persistence for the data directory
@@ -285,4 +283,3 @@ frigate:
 
   # -- Set additonal pod Annotations
   podAnnotations: {}
-
