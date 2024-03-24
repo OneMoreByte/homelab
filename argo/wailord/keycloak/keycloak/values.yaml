@@ -1,4 +1,3 @@
-
 keycloakx:
   # This is an example configuration, for production grade configuration see the Keycloak documentation.
   # See https://www.keycloak.org/server/configuration
@@ -14,10 +13,9 @@ keycloakx:
     - "--spi-events-listener-jboss-logging-success-level=info"
     - "--spi-events-listener-jboss-logging-error-level=warn"
     #- "--proxy edge"
-    - '--log=gelf'
-    - '--log-gelf-host=logstash-ls-beats.observability.svc.cluster.local'
-    - '--log-gelf-port=12201'
-    - '--hostname-debug=true'
+    - "--log=gelf"
+    - "--log-gelf-host=logstash-ls-beats.observability.svc.cluster.local"
+    - "--log-gelf-port=12201"
 
   extraEnv: |
     - name: KC_HOSTNAME_URL
@@ -36,7 +34,7 @@ keycloakx:
         -XX:MaxRAMPercentage=50.0
         -Djava.awt.headless=true
         -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless
-  
+
   extraEnvFrom: |
     - secretRef:
         name: keycloak-admin-user
@@ -45,12 +43,10 @@ keycloakx:
     # The Keycloak image repository
     repository: quay.io/keycloak/keycloak
     # Overrides the Keycloak image tag whose default is the chart appVersion
-    tag: "22.0.5"
-    # Overrides the Keycloak image tag with a specific digest
-    digest: ""
+    tag: "24.0.1"
     # The Keycloak image pull policy
     pullPolicy: IfNotPresent
-  
+
   dbchecker:
     enabled: true
 
@@ -63,7 +59,6 @@ keycloakx:
     database: keycloak
     existingSecret: keycloak-db-secret
     existingSecretKey: "password"
-
 
   ingress:
     # If `true`, an Ingress is created
@@ -82,9 +77,8 @@ keycloakx:
     labels: {}
     # List of rules for the Ingress
     rules:
-      -
-        # Ingress host
-        host: 'auth.jackhil.de'
+      - # Ingress host
+        host: "auth.jackhil.de"
         # Paths for the host
         paths:
           - path: /
