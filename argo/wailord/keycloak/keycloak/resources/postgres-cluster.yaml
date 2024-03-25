@@ -8,6 +8,7 @@ spec:
     initdb:
       database: keycloak
       owner: keycloak
-      secret: keycloak-db-secret
+      secret:
+        name: keycloak-db-secret
   storage:
     size: 8Gi
