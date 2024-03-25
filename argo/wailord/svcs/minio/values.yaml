@@ -85,7 +85,7 @@ minio:
 
   oidc:
     enabled: true
-    configUrl: "https://auth.jackhil.de/auth/realms/master/.well-known/openid-configuration"
+    configUrl: "https://auth.jackhil.de/realms/master/.well-known/openid-configuration"
     clientId: "minio"
     existingClientSecretName: "minio-client-secret"
     existingClientSecretKey: "client-secret"
