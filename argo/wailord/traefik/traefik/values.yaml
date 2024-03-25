@@ -40,7 +40,7 @@ traefik:
     #   debug: false
     #   globalTag: ""
     #   prioritySampling: false
-    jaeger: {}
+    # jaeger: {}
 
     #   collector:
     #      endpoint: ""
