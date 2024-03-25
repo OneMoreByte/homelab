@@ -41,7 +41,7 @@ app-template:
         gluetun:
           image:
             repository: ghcr.io/qdm12/gluetun
-            tag: v3.37.0
+            tag: v3.38.0
           env:
             - name: FIREWALL
               value: "off"
