@@ -1,0 +1,10 @@
+apiVersion: v2
+name: longhorn
+type: application
+version: 0.0.1
+sources:
+  - https://cloudnative-pg.io/documentation/1.22/installation_upgrade/
+dependencies:
+  - name: cloudnative-pg
+    version: 0.20.2
+    repository: "https://cloudnative-pg.github.io/charts"
