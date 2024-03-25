@@ -25,6 +25,9 @@ traefik:
       enabled: false
       gateway:
         enabled: true
+  logs:
+    general:
+      level: INFO
 
   tracing:
     # instana:
