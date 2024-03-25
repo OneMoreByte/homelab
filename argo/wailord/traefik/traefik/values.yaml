@@ -22,7 +22,7 @@ traefik:
     plugins:
       enabled: true
     kubernetesGateway:
-      enabled: true
+      enabled: false
       gateway:
         enabled: true
 
