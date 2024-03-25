@@ -19,6 +19,9 @@ spec:
     hostname: "auth.jackhil.de"
   proxy:
     headers: forwarded
+  additionalOptions:
+    - name: proxy
+      value: reencrypt
   ingress:
     enabled: true
     annotations:
