@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    tailscale.com/tailnet-fqdn: backups-ultron.kingfisher-halfmoon.ts.net
+    tailscale.com/tailnet-ip: 100.76.117.64
   name: milien-remote-ts-minio
 spec:
   externalName: placeholder
