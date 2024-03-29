@@ -9,5 +9,5 @@ spec:
   type: ExternalName
   ports:
     - port: 9443
-      protocol: tcp
+      protocol: TCP
       name: https
