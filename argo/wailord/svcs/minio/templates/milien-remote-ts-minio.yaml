@@ -7,3 +7,7 @@ metadata:
 spec:
   externalName: placeholder
   type: ExternalName
+  ports:
+    - port: 9443
+      protocol: tcp
+      name: https
