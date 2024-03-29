@@ -10,6 +10,8 @@ spec:
           imagePullPolicy: Always
           image: "ghcr.io/tailscale/tailscale:latest"
           env:
+            - name: "TS_EXTRA_ARGS"
+              value: "--advertise-tags=tag:argocd"
             - name: TS_KUBE_SECRET
               value: "argo-tailscale-state-controller"
             - name: TS_USERSPACE
