@@ -5,13 +5,13 @@ tailscale-operator:
     image:
       repo: ghcr.io/onemorebyte/tailscale
       tag: 1.63.0-operator
-      imagePullPolicy: "Always"
+      pullPolicy: "Always"
     hostname: "wailord"
   proxyConfig:
     image:
       repo: ghcr.io/onemorebyte/tailscale
       tag: 1.63.0-client
-      imagePullPolicy: "Always"
+      pullPolicy: "Always"
     defaultTags: "tag:k8s,tag:wailord"
 
   apiServerProxyConfig:
