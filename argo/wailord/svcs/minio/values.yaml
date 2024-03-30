@@ -1,6 +1,32 @@
 minio:
   mode: standalone
 
+  extraContainers:
+    - name: ts-sidecar
+      imagePullPolicy: Always
+      image: "ghcr.io/tailscale/tailscale:latest"
+      env:
+        - name: "TS_ACCEPT_DNS"
+          value: "true"
+        - name: "TS_HOSTNAME"
+          value: "minio"
+        - name: "TS_EXTRA_ARGS"
+          value: "--advertise-tags=tag:minio"
+        - name: TS_KUBE_SECRET
+          value: "minio-tailscale-state"
+        - name: TS_USERSPACE
+          value: "false"
+        - name: TS_AUTHKEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-tailscale-auth
+              key: TS_AUTHKEY
+              optional: true
+      securityContext:
+        privileged: true
+        capabilities:
+          add:
+            - NET_ADMIN
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:

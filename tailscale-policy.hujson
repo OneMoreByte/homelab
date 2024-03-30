@@ -1,74 +1,86 @@
 // Example/default ACLs for unrestricted connections.
 {
-    // Declare static groups of users. Use autogroups for all users or users with a specific role.
-    "groups": {
-        "group:k8s-admins":  ["OneMoreByte@github"],
-        "group:k8s-readers": [],
+  // Declare static groups of users. Use autogroups for all users or users with a specific role.
+  "groups": {
+    "group:k8s-admins":  ["OneMoreByte@github"],
+    "group:k8s-readers": [],
+  },
+
+  // Define the tags which can be applied to devices and by which users.
+  // "tagOwners": {
+  //      "tag:example": ["autogroup:admin"],
+  // },
+  "grants": [
+    {
+      "src": ["group:k8s-admins"],
+      "dst": ["tag:k8s-operator"],
+      "app": {
+        "tailscale.com/cap/kubernetes": [{
+          "impersonate": {
+            "groups": ["system:masters"],
+          },
+        }],
+      },
     },
-
-    // Define the tags which can be applied to devices and by which users.
-    // "tagOwners": {
-    //      "tag:example": ["autogroup:admin"],
-    // },
-    "grants": [
-        {
-            "src": ["group:k8s-admins"],
-            "dst": ["tag:k8s-operator"],
-            "app": {
-                "tailscale.com/cap/kubernetes": [{
-                    "impersonate": {
-                        "groups": ["system:masters"],
-                    },
-                }],
-            },
-        },
-        {
-            "src": ["group:k8s-readers"],
-            "dst": ["tag:k8s-operator"],
-            "app": {
-                "tailscale.com/cap/kubernetes": [{
-                    "impersonate": {
-                        "groups": ["tailnet-readers"],
-                    },
-                }],
-            },
-        },
-    ],
-
-    // Define access control lists for users, groups, autogroups, tags,
-    // Tailscale IP addresses, and subnet ranges.
-    "acls": [
-        // Allow all connections.
-        // Comment this section out if you want to define specific restrictions.
-        {"action": "accept", "src": ["*"], "dst": ["*:*"]},
-    ],
-
-    // Define users and devices that can use Tailscale SSH.
-    "ssh": [
-        // Allow all users to SSH into their own devices in check mode.
-        // Comment this section out if you want to define specific restrictions.
-        {
-            "action": "check",
-            "src":    ["autogroup:member"],
-            "dst":    ["autogroup:self"],
-            "users":  ["autogroup:nonroot", "root"],
-        },
-    ],
-
-    // Test access rules every time they're saved.
-    // "tests": [
-    //      {
-    //          "src": "alice@example.com",
-    //          "accept": ["tag:example"],
-    //          "deny": ["100.101.102.103:443"],
-    //      },
-    // ],
-    "tagOwners": {
-        "tag:k8s-operator": [],
-        "tag:k8s": ["tag:k8s-operator"],
-        "tag:wailord": ["tag:k8s-operator"],
-        "tag:thefall": ["tag:k8s-operator"],
-        "tag:theroom": ["tag:k8s-operator"],
+    {
+      "src": ["tag:argocd"],
+      "dst": ["tag:k8s-operator"],
+      "app": {
+        "tailscale.com/cap/kubernetes": [{
+          "impersonate": {
+            "groups": ["system:masters"],
+          },
+        }],
+      },
     },
+    {
+      "src": ["group:k8s-readers"],
+      "dst": ["tag:k8s-operator"],
+      "app": {
+        "tailscale.com/cap/kubernetes": [{
+          "impersonate": {
+            "groups": ["tailnet-readers"],
+          },
+        }],
+      },
+    },
+  ],
+
+  // Define access control lists for users, groups, autogroups, tags,
+  // Tailscale IP addresses, and subnet ranges.
+  "acls": [
+    // Allow all connections.
+    // Comment this section out if you want to define specific restrictions.
+    {"action": "accept", "src": ["*"], "dst": ["*:*"]},
+  ],
+
+  // Define users and devices that can use Tailscale SSH.
+  "ssh": [
+    // Allow all users to SSH into their own devices in check mode.
+    // Comment this section out if you want to define specific restrictions.
+    {
+      "action": "check",
+      "src":    ["autogroup:member"],
+      "dst":    ["autogroup:self"],
+      "users":  ["autogroup:nonroot", "root"],
+    },
+  ],
+
+  // Test access rules every time they're saved.
+  // "tests": [
+  //      {
+  //          "src": "alice@example.com",
+  //          "accept": ["tag:example"],
+  //          "deny": ["100.101.102.103:443"],
+  //      },
+  // ],
+  "tagOwners": {
+    "tag:argocd":       [],
+    "tag:minio":        [],
+    "tag:k8s-operator": [],
+    "tag:k8s":          ["tag:k8s-operator"],
+    "tag:wailord":      ["tag:k8s-operator"],
+    "tag:thefall":      ["tag:k8s-operator"],
+    "tag:theroom":      ["tag:k8s-operator"],
+  },
 }
-
