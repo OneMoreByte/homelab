@@ -1,32 +1,6 @@
 minio:
   mode: standalone
 
-  extraContainers:
-    - name: ts-sidecar
-      imagePullPolicy: Always
-      image: "ghcr.io/tailscale/tailscale:latest"
-      env:
-        - name: "TS_ACCEPT_DNS"
-          value: "true"
-        - name: "TS_HOSTNAME"
-          value: "minio"
-        - name: "TS_EXTRA_ARGS"
-          value: "--advertise-tags=tag:minio"
-        - name: TS_KUBE_SECRET
-          value: "minio-tailscale-state"
-        - name: TS_USERSPACE
-          value: "false"
-        - name: TS_AUTHKEY
-          valueFrom:
-            secretKeyRef:
-              name: minio-tailscale-auth
-              key: TS_AUTHKEY
-              optional: true
-      securityContext:
-        privileged: true
-        capabilities:
-          add:
-            - NET_ADMIN
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -93,7 +67,14 @@ minio:
             - "arn:aws:s3:::smoked-mutex/*"
           actions:
             - "s3:*"
-
+    - name: longhorn-backup-readonly
+      statements:
+        - effect: Allow
+          resources:
+            - "arn:aws:s3:::longhorn-backup/*"
+          actions:
+            - "s3:GetBucketLocation"
+            - "s3:GetObject"
   users:
     - accessKey: longhorn
       existingSecret: longhorn-user-secret
@@ -103,6 +84,10 @@ minio:
       existingSecret: milien-user-secret
       existingSecretKey: password
       policy: milien-backup-readwrite
+    - accessKey: longhorn-replication-helldiver
+      existingSecret: helldiver-user-secret
+      existingSecretKey: password
+      policy: longhorn-backup-readonly
 
   svcaccts: []
 
