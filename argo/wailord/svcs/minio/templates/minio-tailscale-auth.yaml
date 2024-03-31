@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: minio-tailscale-auth
+  namespace: svcs
+spec:
+  encryptedData:
+    TS_AUTHKEY: AgBHVMfe923x3SStT+alBZYiTegD6UpmxZF+idAnWJZgsGalSfW9jhxgauqe7Mf/aZch11PZycMUuod6PuoCzrJMdV542Vl1xBKryagGD4hN3A1o0cf3q4JSnKYlydfmrzQ1Oj0z04WGo0u5lmqY36eaKg3p4PGuCN/ZC0DGPhhyEz6WkmPdAtm3VkcK1iKHJ6/NhzZIULeD7RNlMnj6JJROWUIlezeRJdsgF3IgP1qrfSUjz8KU+UmPrl4Y1G9fSUNDkzsGAZ2qhcj4fhmPgXS5+FiaS3SAAF4/3j9MtoDrOxsIUzQXgvgVYSHcZTuAH+OUJbqSV7ArsDD5wQs3x9SF5gbpbLZmpMRVnzcxmNeFh+0Dk00PPKKVW1sQahKrCMfi3n4RxhjyAnyzpcrbSBDX7+0QzA70YwaqkSPLZDl/2nED76tp2d5NUvvVzh5+yIX5aA4zaLy4ptVEmmFnpvxHNWQRvkuryaHpong0AaMjxCqLb4Ft1N7pZebIsgwds5x738bX/jC4gFbbYiCLTheOIT6PEZHZPzSitStxtHDyYm/fJohG0N24/m4KPkKbh+XlEVYB17MAux/N4WRnXy2ppjy0SjduQaUfU+LG/0drU8NR+kO8V2op6Vv3+9cDVADqcAZHF5LFqxQgEw5yp+X01jydnwKfqA6J1VLsTVZXQ9SdMMpge1LESdWuTGp4pSlGEDU4HSsYaRQtzsebwzt6gsEUzfPMIqB09Qg1wMp5dw1FGzqU+Ug1CBtHTSSGQjJDwRK/A5YfgyN9s7tpEkA=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: minio-tailscale-auth
+      namespace: svcs
