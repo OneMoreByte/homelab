@@ -1,6 +1,7 @@
 app-template:
   controllers:
     main:
+      replicas: 0
       enabled: true
       strategy: Recreate
       containers:
