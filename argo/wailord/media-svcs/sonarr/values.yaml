@@ -14,12 +14,12 @@ app-template:
             repository: hotio/sonarr
             tag: "release-4.0.0.748"
             pullPolicy: IfNotPresent
-      #      initContainers:
-      #        pvc-recovery-hold:
-      #          image:
-      #            repository: busybox
-      #            tag: latest
-      #          command: ["sleep", "50000"]
+      initContainers:
+        pvc-recovery-hold:
+          image:
+            repository: busybox
+            tag: latest
+          command: ["sleep", "50000"]
   defaultPodOptions:
     affinity:
       nodeAffinity:
