@@ -16,7 +16,9 @@ app-template:
             pullPolicy: IfNotPresent
       initContainers:
         pvc-recovery-hold:
-          image: busybox:latest
+          image:
+            repository: busybox
+            tag: latest
           command: ["sleep", "50000"]
   defaultPodOptions:
     affinity:
