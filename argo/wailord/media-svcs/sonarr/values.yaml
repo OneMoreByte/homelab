@@ -1,7 +1,7 @@
 app-template:
   controllers:
     main:
-      replicas: 0
+      replicas: 1
       enabled: true
       strategy: Recreate
       containers:
@@ -14,6 +14,10 @@ app-template:
             repository: hotio/sonarr
             tag: "release-4.0.0.748"
             pullPolicy: IfNotPresent
+      initContainers:
+        pvc-recovery-hold:
+          image: busybox:latest
+          command: ["sleep", "50000"]
   defaultPodOptions:
     affinity:
       nodeAffinity:
