@@ -142,7 +142,7 @@ app-template:
     config:
       enabled: true
       accessMode: ReadWriteOnce
-      size: 32Gi
+      size: 128Gi
 
     media:
       enabled: true
