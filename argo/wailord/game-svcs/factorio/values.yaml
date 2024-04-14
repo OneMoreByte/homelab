@@ -11,7 +11,7 @@ factorio-server-charts:
   ## @param affinity Affinity rules for pod assignment
   ## @param securityContext Useful for fixing file permissions. See official [docs](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
 
-  replicaCount: 1
+  replicaCount: 0
 
   securityContext:
     runAsUser: 0
@@ -69,7 +69,6 @@ factorio-server-charts:
     # externalTrafficPolicy: Cluster
     annotations: {}
 
-
   ## Compute Resources required by the operator container
   resources:
     ## We have to ensure that factorio have enough computing resources avaiable. We set here an absolute minimum
@@ -82,7 +81,6 @@ factorio-server-charts:
     # limits:
     #   memory: 1024Mi
     #   cpu: 1000m
-
 
   ## Strategy used to replace old pods
   ## IMPORTANT: use with care, it is suggested to leave as that for upgrade purposes
@@ -120,7 +118,6 @@ factorio-server-charts:
     ## If you have annotations to spin up a PV i.e. the location. Remove the curly braces
     annotations: {}
 
-
   #### Factorio application configuration ####
   ## @section Factorio Parameters
   ## @param mods.enabled Enable mods
@@ -128,16 +125,16 @@ factorio-server-charts:
   ## @param mods.unofficial List of unofficial mods name and url to download into the mods folder
   mods:
     enabled: false
-  # in order to use the mods portal you will need to specify the username and token in the server_settings.
+    # in order to use the mods portal you will need to specify the username and token in the server_settings.
     portal: []
-  #     - Krastorio2
-  #     - StorageTank2_Updated
-  #     - early-robots
-  # unofficial section is meant to just allow you to download and place folders into the mods folder.
-  # we will not check version compatibility automatically with these downloads.
-  # you can encounter an error if the file names dont match what the mod is expecting for example
-  # Error Util.cpp:83: Failed to load mod "Squeak-Through": Filename of mod
-  # /factorio/mods/Squeak-Through.zip doesn't match the expected Squeak Through_1.8.2.zip (case sensitive!)
+    #     - Krastorio2
+    #     - StorageTank2_Updated
+    #     - early-robots
+    # unofficial section is meant to just allow you to download and place folders into the mods folder.
+    # we will not check version compatibility automatically with these downloads.
+    # you can encounter an error if the file names dont match what the mod is expecting for example
+    # Error Util.cpp:83: Failed to load mod "Squeak-Through": Filename of mod
+    # /factorio/mods/Squeak-Through.zip doesn't match the expected Squeak Through_1.8.2.zip (case sensitive!)
     unofficial: []
   #     - url: "https://github.com/Suprcheese/Squeak-Through/archive/refs/tags/1.8.2.zip"
   #       name: "Squeak Through_1.8.2.zip"
@@ -184,20 +181,20 @@ factorio-server-charts:
     #   password: <password in base64>
     #
     # accountSecret: account-secret
-    accountSecret: 'factorio-secrets'
+    accountSecret: "factorio-secrets"
     # Your factorio.com login credentials. Required for games with visibility public
-    username: ''
-    password: ''
+    username: ""
+    password: ""
     # Authentication token. May be used instead of password above.
-    token: ''
+    token: ""
 
   ## @param serverPassword.passwordSecret Existing Secret containing a `game_password` data entry
   ## @param serverPassword.game_password Password required to log into the factorio server. Ignored if `serverPassword.passwordSecret` is set
   serverPassword:
     # password required to log into the factorio server
-    game_password: ''
+    game_password: ""
     # Existing Secret containing a `game_password` data entry
-    passwordSecret: 'factorio-secrets'
+    passwordSecret: "factorio-secrets"
 
   ## @param server_settings.name Factorio server name
   ## @param server_settings.description Factorio server description
@@ -328,38 +325,38 @@ factorio-server-charts:
     starting_area: 1
     peaceful_mode: false
     autoplace_controls: {}
-  #    coal:
-  #      frequency: 1
-  #      size: 1
-  #      richness: 1
-  #    stone:
-  #      frequency: 1
-  #      size: 1
-  #      richness: 1
-  #    copper-ore:
-  #      frequency: 1
-  #      size: 1
-  #      richness: 1
-  #    iron-ore:
-  #      frequency: 1
-  #      size: 1
-  #      richness: 1
-  #    uranium-ore:
-  #      frequency: 1
-  #      size: 1
-  #      richness: 1
-  #    crude-oil:
-  #      frequency: 1
-  #      size: 1
-  #      richness: 1
-  #    trees:
-  #      frequency: 1
-  #      size: 1
-  #      richness: 1
-  #    enemy-base:
-  #      frequency: 1
-  #      size: 1
-  #      richness: 1
+    #    coal:
+    #      frequency: 1
+    #      size: 1
+    #      richness: 1
+    #    stone:
+    #      frequency: 1
+    #      size: 1
+    #      richness: 1
+    #    copper-ore:
+    #      frequency: 1
+    #      size: 1
+    #      richness: 1
+    #    iron-ore:
+    #      frequency: 1
+    #      size: 1
+    #      richness: 1
+    #    uranium-ore:
+    #      frequency: 1
+    #      size: 1
+    #      richness: 1
+    #    crude-oil:
+    #      frequency: 1
+    #      size: 1
+    #      richness: 1
+    #    trees:
+    #      frequency: 1
+    #      size: 1
+    #      richness: 1
+    #    enemy-base:
+    #      frequency: 1
+    #      size: 1
+    #      richness: 1
     cliff_settings:
       # Name of the cliff prototype
       name: cliff
@@ -380,13 +377,13 @@ factorio-server-charts:
     # "control-setting:aux:frequency:multiplier is the inverse of the terrain type scale in the map generator GUI."
     # "control-setting:aux:bias is the teraain type bias in the map generator GUI."
     property_expression_names:
-      control-setting:moisture:frequency:multiplier: '1'
-      control-setting:moisture:bias: '0'
-      control-setting:aux:frequency:multiplier: '1'
-      control-setting:aux:bias: '0'
+      control-setting:moisture:frequency:multiplier: "1"
+      control-setting:moisture:bias: "0"
+      control-setting:aux:frequency:multiplier: "1"
+      control-setting:aux:bias: "0"
     starting_points:
-    - "x": 0
-      "y": 0
+      - "x": 0
+        "y": 0
     # Use null for a random seed, number for a specific seed.
     seed: null
 
@@ -505,27 +502,30 @@ factorio-server-charts:
       min_steps_to_check_path_find_termination: 2000
       start_to_goal_cost_multiplier_to_terminate_path_find: 500
       overload_levels:
-      - 0
-      - 100
-      - 500
+        - 0
+        - 100
+        - 500
       overload_multipliers:
-      - 2
-      - 3
-      - 4
+        - 2
+        - 3
+        - 4
       negative_path_cache_delay_interval: 20
     max_failed_behavior_count: 3
 
   ## @param admin_list Admin list
   ## @param white_list Whitelist
   ## @param ban_list Ban list
-  admin_list: []
+  admin_list:
+    []
     # - "john_doe"
     # - "jane_doe"
 
-  white_list: []
+  white_list:
+    []
     # - "john_doe"
     # - "jane_doe"
 
-  ban_list: []
+  ban_list:
+    []
     # - "john_doe"
     # - "jane_doe"
