@@ -93,16 +93,16 @@ frigate:
       streams:
         garage1:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=1
-          - "ffmpeg:garage1-high#video=h264"
+          - "ffmpeg:garage1-high#video=h264#audio=aac"
         garage1-high:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=0
-          - "ffmpeg:garage1-high#video=h264"
+          - "ffmpeg:garage1-high#video=h264#audio=aac"
         backdoor1:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=1
-          - "ffmpeg:backdoor1-high#video=h264"
+          - "ffmpeg:backdoor1-high#video=h264#audio=aac"
         backdoor1-high:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0
-          - "ffmpeg:backdoor1-high#video=h264"
+          - "ffmpeg:backdoor1-high#video=h264#audio=aac"
     cameras:
       garage1:
         ffmpeg:
