@@ -100,10 +100,12 @@ frigate:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=1
         backdoor1-high:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0
-          - "ffmpeg:backdoor1-high#audio=aac"
+          - "ffmpeg:backdoor1-high#audio=opus"
     cameras:
       garage1:
         ffmpeg:
+          output_args:
+            record: preset-record-generic-audio-aac
           inputs:
             - path: rtsp://127.0.0.1:8554/garage1?video=copy
               roles:
@@ -124,6 +126,8 @@ frigate:
             coordinates: 271,79,362,70,397,81,0,252,0,166
       backdoor1:
         ffmpeg:
+          output_args:
+            record: preset-record-generic-audio-aac
           inputs:
             - path: rtsp://127.0.0.1:8554/backdoor1?video=copy
               roles:
