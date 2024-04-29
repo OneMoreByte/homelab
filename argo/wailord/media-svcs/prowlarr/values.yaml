@@ -20,16 +20,6 @@ app-template:
       #            tag: latest
       #          command: ["sleep", "500000"]
 
-  defaultPodOptions:
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                    - bulk-datastore
     securityContext:
       #  runAsUser: 11337
       #runAsGroup: 11337
