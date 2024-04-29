@@ -13,12 +13,12 @@ app-template:
             repository: hotio/prowlarr
             tag: "release-1.11.4.4173"
             pullPolicy: IfNotPresent
-      initContainers:
-        hold:
-          image:
-            repository: ghcr.io/roxedus/pgloader
-            tag: latest
-          command: ["sleep", "500000"]
+      #      initContainers:
+      #        hold:
+      #          image:
+      #            repository: ghcr.io/roxedus/pgloader
+      #            tag: latest
+      #          command: ["sleep", "500000"]
 
   defaultPodOptions:
     affinity:
@@ -69,4 +69,3 @@ app-template:
       enabled: true
       accessMode: ReadWriteOnce
       size: 16Gi
-

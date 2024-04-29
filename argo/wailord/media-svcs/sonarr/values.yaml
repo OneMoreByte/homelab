@@ -14,12 +14,12 @@ app-template:
             repository: hotio/sonarr
             tag: "release-4.0.3.1413"
             pullPolicy: IfNotPresent
-      initContainers:
-        hold:
-          image:
-            repository: ghcr.io/roxedus/pgloader
-            tag: latest
-          command: ["sleep", "500000"]
+      #      initContainers:
+      #        hold:
+      #          image:
+      #            repository: ghcr.io/roxedus/pgloader
+      #            tag: latest
+      #          command: ["sleep", "500000"]
   defaultPodOptions:
     affinity:
       nodeAffinity:

@@ -13,12 +13,12 @@ app-template:
             repository: hotio/radarr
             tag: "release-5.1.3.8246"
             pullPolicy: IfNotPresent
-      initContainers:
-        hold:
-          image:
-            repository: ghcr.io/roxedus/pgloader
-            tag: latest
-          command: ["sleep", "500000"]
+      #      initContainers:
+      #        hold:
+      #          image:
+      #            repository: ghcr.io/roxedus/pgloader
+      #            tag: latest
+      #          command: ["sleep", "500000"]
   defaultPodOptions:
     affinity:
       nodeAffinity:
