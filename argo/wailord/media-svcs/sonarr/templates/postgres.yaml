@@ -11,7 +11,7 @@ spec:
       secret:
         name: sonarr-db-secret
       postInitSQL:
-        - CREATE DATABASE sonarr-log
+        - CREATE DATABASE "sonarr-log"
         - GRANT ALL PRIVILEGES ON DATABASE "sonarr-log" to sonarr
   storage:
     size: 8Gi
