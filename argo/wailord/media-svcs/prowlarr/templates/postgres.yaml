@@ -1,0 +1,17 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: prowlarr-pg-cluster
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: prowlarr
+      owner: prowlarr
+      secret:
+        name: prowlarr-db-secret
+      postInitSQL:
+        - CREATE DATABASE prowlarr-log
+        - GRANT ALL PRIVILEGES ON DATABASE "prowlarr-log" to prowlarr
+  storage:
+    size: 8Gi

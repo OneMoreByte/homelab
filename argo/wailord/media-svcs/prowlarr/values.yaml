@@ -13,16 +13,23 @@ app-template:
             repository: hotio/prowlarr
             tag: "release-1.11.4.4173"
             pullPolicy: IfNotPresent
+      initContainers:
+        hold:
+          image:
+            repository: busybox
+            tag: latest
+          command: ["sleep", "50000"]
+
   defaultPodOptions:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
-          - matchExpressions:
-            - key: app
-              operator: In
-              values:
-              - bulk-datastore
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - bulk-datastore
     securityContext:
       #  runAsUser: 11337
       #runAsGroup: 11337
@@ -52,9 +59,9 @@ app-template:
                 name: prowlarr
                 port: 9696
       tls:
-      - hosts:
-         - prowlarr.jackhil.de
-        secretName: jackhil.de-cert
+        - hosts:
+            - prowlarr.jackhil.de
+          secretName: jackhil.de-cert
 
   # -- Configure persistence settings for the chart under this key.
   persistence:
@@ -62,3 +69,4 @@ app-template:
       enabled: true
       accessMode: ReadWriteOnce
       size: 16Gi
+

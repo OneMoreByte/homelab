@@ -1,0 +1,17 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: radarr-pg-cluster
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: radarr
+      owner: radarr
+      secret:
+        name: radarr-db-secret
+      postInitSQL:
+        - CREATE DATABASE radarr-log
+        - GRANT ALL PRIVILEGES ON DATABASE "radarr-log" to radarr
+  storage:
+    size: 8Gi
