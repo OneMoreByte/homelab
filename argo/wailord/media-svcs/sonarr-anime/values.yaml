@@ -12,7 +12,7 @@ app-template:
             PGID: 11337
           image:
             repository: hotio/sonarr
-            tag: "release-4.0.3.1413"
+            tag: "release-4.0.4.1491"
             pullPolicy: IfNotPresent
       #      initContainers:
       #        hold:
