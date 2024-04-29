@@ -12,6 +12,6 @@ spec:
         name: radarr-db-secret
       postInitSQL:
         - CREATE DATABASE "radarr-log"
-        - GRANT ALL PRIVILEGES ON DATABASE "radarr-log" to radarr
+        - ALTER DATABASE "radarr-log" OWNER TO radarr
   storage:
     size: 8Gi

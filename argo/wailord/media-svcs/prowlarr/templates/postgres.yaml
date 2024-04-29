@@ -12,6 +12,6 @@ spec:
         name: prowlarr-db-secret
       postInitSQL:
         - CREATE DATABASE "prowlarr-log"
-        - GRANT ALL PRIVILEGES ON DATABASE "prowlarr-log" to prowlarr
+        - ALTER DATABASE "prowlarr-log" OWNER TO prowlarr
   storage:
     size: 8Gi
