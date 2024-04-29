@@ -18,7 +18,7 @@ app-template:
           image:
             repository: busybox
             tag: latest
-          command: ["sleep", "50000"]
+          command: ["sleep", "1"]
   defaultPodOptions:
     affinity:
       nodeAffinity:
