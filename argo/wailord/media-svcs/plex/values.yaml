@@ -141,8 +141,8 @@ app-template:
   persistence:
     config:
       enabled: true
-      accessMode: ReadWriteOnce
-      size: 128Gi
+      type: hostPath
+      hostPath: /store/k8s-hostpath/plex
 
     media:
       enabled: true
