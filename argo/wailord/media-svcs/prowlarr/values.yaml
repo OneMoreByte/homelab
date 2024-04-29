@@ -16,7 +16,7 @@ app-template:
       initContainers:
         hold:
           image:
-            repository: busybox
+            repository: ghcr.io/roxedus/pgloader
             tag: latest
           command: ["sleep", "500000"]
 
