@@ -6,7 +6,7 @@ spec:
   instances: 1
   bootstrap:
     initdb:
-      database: prowlarr
+      database: prowlarr-main
       owner: prowlarr
       secret:
         name: prowlarr-db-secret

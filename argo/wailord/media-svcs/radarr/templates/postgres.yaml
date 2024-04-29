@@ -6,7 +6,7 @@ spec:
   instances: 1
   bootstrap:
     initdb:
-      database: radarr
+      database: radarr-main
       owner: radarr
       secret:
         name: radarr-db-secret
