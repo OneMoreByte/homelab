@@ -143,7 +143,10 @@ app-template:
       enabled: true
       type: hostPath
       hostPath: /store/k8s-hostpath/plex
-
+      advancedMounts:
+        main: # the controller with the "main" identifier
+          main: # the container with the "main" identifier
+            - path: /config
     media:
       enabled: true
       type: hostPath
