@@ -48,6 +48,7 @@ app-template:
           port: 3000
     bittorrent:
       enabled: true
+      controller: main
       type: LoadBalancer
       ports:
         bittorrent:
