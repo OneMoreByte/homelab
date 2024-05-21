@@ -199,13 +199,13 @@ immich:
       library:
         enabled: true
         type: hostPath
-        mountPath: "/store/k8s-hostpath/immich"
+        hostPath: "/store/k8s-hostpath/immich"
         existingClaim: ""
 
       syncthing-library:
         enabled: true
         type: hostPath
-        mountPath: "/store/backups/syncthings/Pictures"
+        hostPath: "/store/backups/syncthings/Pictures"
 
 
   microservices:
@@ -219,13 +219,13 @@ immich:
       library:
         enabled: true
         type: hostPath
-        mountPath: "/store/k8s-hostpath/immich/"
+        hostPath: "/store/k8s-hostpath/immich/"
         existingClaim: ""
 
       syncthing-library:
         enabled: true
         type: hostPath
-        mountPath: "/store/backups/syncthings/Pictures"
+        hostPath: "/store/backups/syncthings/Pictures"
 
   machine-learning:
     enabled: true
