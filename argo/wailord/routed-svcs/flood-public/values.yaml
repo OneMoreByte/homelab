@@ -89,7 +89,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: main
+                name: flood-public-main
                 port: 3000
       tls:
         - hosts:
@@ -108,7 +108,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: main
+                name: flood-public-main
                 port: 3000
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
