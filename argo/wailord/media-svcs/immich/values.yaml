@@ -26,7 +26,7 @@ immich:
         enabled: true
         type: hostPath
         mountPath: "/store/k8s-hostpath/immich/library"
-        existingClaim: ""
+        existingClaim: "fake-value"
 
       syncthing-library:
         enabled: true
