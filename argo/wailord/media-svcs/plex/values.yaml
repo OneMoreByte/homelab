@@ -72,6 +72,7 @@ app-template:
   # @default -- See values.yaml
   service:
     main:
+      controller: main
       enabled: true
       type: LoadBalancer
       ports:

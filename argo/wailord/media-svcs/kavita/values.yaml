@@ -59,7 +59,7 @@ app-template:
                 port: 5000
 
   defaultPodOptions:
-    podSecurityContext:
+    securityContext:
       runAsUser: 11337
       runAsGroup: 11337
       fsGroup: 11337
