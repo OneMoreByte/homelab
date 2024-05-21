@@ -31,6 +31,13 @@ app-template:
               enabled: false
             startup:
               enabled: false
+
+          initContainers:
+            hold:
+              image:
+                repository: ghcr.io/roxedus/pgloader
+                tag: latest
+              command: ["sleep", "500000"]
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
   service:
@@ -91,11 +98,15 @@ app-template:
       enabled: false
       type: emptyDir
 
-    rtorrent-flood-config:
+    rtorrent-home:
       enabled: true
       type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 8Gi
+      advancedMounts:
+        main:
+          main:
+            - path: "/config/"
 
     downloads:
       enabled: true
