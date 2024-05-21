@@ -177,8 +177,6 @@ immich:
     image:
       repository: ghcr.io/immich-app/immich-server
       pullPolicy: IfNotPresent
-    env:
-      IMMICH_MEDIA_LOCATION: "/store/k8s-hostpath/immich/upload"
     ingress:
       main:
         enabled: true
