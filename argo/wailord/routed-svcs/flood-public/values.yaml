@@ -115,6 +115,7 @@ app-template:
   persistence:
     config:
       enabled: false
+      type: emptyDir
 
     rtorrent-home:
       enabled: true
