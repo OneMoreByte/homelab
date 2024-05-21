@@ -68,4 +68,4 @@ grafana:
       auth_url: "https://auth.jackhil.de/realms/master/protocol/openid-connect/auth"
       token_url: "https://auth.jackhil.de/realms/master/protocol/openid-connect/token"
       api_url: "https://auth.jackhil.de/realms/master/protocol/openid-connect/userinfo"
-      role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
+      role_attribute_path: "contains(resource_access.grafana.roles[*], 'admin') && 'Admin' || contains(resource_access.grafana.roles[*], 'editor') && 'Editor' || 'Viewer'"
