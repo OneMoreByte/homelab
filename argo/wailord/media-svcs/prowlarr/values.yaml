@@ -13,17 +13,17 @@ app-template:
             repository: hotio/prowlarr
             tag: "release-1.11.4.4173"
             pullPolicy: IfNotPresent
+          securityContext:
+            #  runAsUser: 11337
+            #runAsGroup: 11337
+            fsGroup: 11337
+
       #      initContainers:
       #        hold:
       #          image:
       #            repository: ghcr.io/roxedus/pgloader
       #            tag: latest
       #          command: ["sleep", "500000"]
-
-    securityContext:
-      #  runAsUser: 11337
-      #runAsGroup: 11337
-      fsGroup: 11337
 
   # -- Configures service settings for the chart.
   service:

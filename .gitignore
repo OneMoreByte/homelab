@@ -7,3 +7,4 @@ venv
 tmp
 .syncthing*
 realm.json
+.idea

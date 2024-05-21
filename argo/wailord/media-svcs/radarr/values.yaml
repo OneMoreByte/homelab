@@ -37,6 +37,7 @@ app-template:
   # -- Configures service settings for the chart.
   service:
     main:
+      controller: main
       ports:
         http:
           port: 7878

@@ -41,6 +41,7 @@ app-template:
       fsGroup: 11337
   service:
     main:
+      controller: main
       ports:
         http:
           port: 5656
