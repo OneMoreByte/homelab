@@ -32,12 +32,12 @@ app-template:
             startup:
               enabled: false
 
-        initContainers:
-          hold:
-            image:
-              repository: ghcr.io/roxedus/pgloader
-              tag: latest
-            command: ["sleep", "500000"]
+      initContainers:
+        hold:
+          image:
+            repository: ghcr.io/roxedus/pgloader
+            tag: latest
+          command: ["sleep", "500000"]
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
   service:
