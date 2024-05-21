@@ -19,7 +19,7 @@ spec:
         name: immich-db-secret
       dataChecksums: true
       encoding: 'UTF8'
-      postInitSQL:
+      postInitApplicationSQL:
         - CREATE EXTENSION IF NOT EXISTS "vectors";
         - CREATE EXTENSION IF NOT EXISTS "cube";
         - CREATE EXTENSION IF NOT EXISTS "earthdistance" CASCADE;
