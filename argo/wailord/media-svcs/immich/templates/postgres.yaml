@@ -1,0 +1,26 @@
+# From https://docs.pgvecto.rs/admin/kubernetes.html
+
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: immich-pg-cluster
+spec:
+  instances: 1
+  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.3
+  postgresql:
+    shared_preload_libraries:
+      - "vectors.so"
+  bootstrap:
+    initdb:
+      database: immich
+      owner: immich
+      secret:
+        name: immich-db-secret
+      dataChecksums: true
+      encoding: 'UTF8'
+      postInitSQL:
+        - CREATE EXTENSION IF NOT EXISTS "cube";
+        - CREATE EXTENSION IF NOT EXISTS "earthdistance";
+        - CREATE EXTENSION IF NOT EXISTS "vectors";
+  storage:
+    size: 8Gi

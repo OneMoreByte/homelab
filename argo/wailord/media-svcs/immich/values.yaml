@@ -1,0 +1,113 @@
+immich:
+  env:
+    DB_HOSTNAME: "{{ .Release.Name }}-pg-cluster-rw"
+    DB_DATABASE_NAME: "immich"
+
+    DB_USERNAME:
+      valueFrom:
+        secretKeyRef:
+          name: immich-db-secret
+          key: username
+    DB_PASSWORD:
+      valueFrom:
+        secretKeyRef:
+          name: immich-db-secret
+          key: password
+
+
+
+  immich:
+    metrics:
+      # Enabling this will create the service monitors needed to monitor immich with the prometheus operator
+      enabled: true
+    persistence:
+      # Main data store for all photos shared between different components.
+      library:
+        enabled: true
+        type: hostPath
+        mountPath: "/store/k8s-hostpath/immich/library"
+        existingClaim: ""
+
+      syncthing-library:
+        enabled: true
+        type: hostPath
+        mountPath: "/store/backups/syncthings/Pictures"
+
+    configuration: {}
+      # trash:
+      #   enabled: false
+      #   days: 30
+      # storageTemplate:
+      #   enabled: true
+      #   template: "{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}"
+
+  # Dependencies
+
+  postgresql:
+    enabled: false
+
+  redis:
+    enabled: true
+    architecture: standalone
+    auth:
+      enabled: false
+
+  # Immich components
+
+  server:
+    enabled: true
+    image:
+      repository: ghcr.io/immich-app/immich-server
+      pullPolicy: IfNotPresent
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: "true"
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
+        hosts:
+          - host: photos.jackhil.de
+            paths:
+              - path: "/"
+        tls:
+          - hosts:
+              - photos.jackhil.de
+            secretName: jackhil.de-cert
+
+  microservices:
+    enabled: true
+    image:
+      repository: ghcr.io/immich-app/immich-server
+      pullPolicy: IfNotPresent
+
+    persistence:
+      # Main data store for all photos shared between different components.
+      library:
+        enabled: true
+        type: hostPath
+        mountPath: "/store/k8s-hostpath/immich/library"
+        existingClaim: ""
+
+      syncthing-library:
+        enabled: true
+        type: hostPath
+        mountPath: "/store/backups/syncthings/Pictures"
+
+  machine-learning:
+    enabled: true
+    securityContext:
+      # Let it have a look at the GPU without requesting one (since we only have one)
+      privileged: true
+    image:
+      repository: ghcr.io/immich-app/immich-machine-learning
+      pullPolicy: IfNotPresent
+    env:
+      TRANSFORMERS_CACHE: /cache
+      NVIDIA_DRIVER_CAPABILITIES: all
+    persistence:
+      cache:
+        enabled: true
+        size: 16Gi
+        type: pvc
+        accessMode: ReadWriteMany
