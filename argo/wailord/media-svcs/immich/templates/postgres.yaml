@@ -23,8 +23,7 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS "cube";
         - CREATE EXTENSION IF NOT EXISTS "earthdistance";
         - CREATE EXTENSION IF NOT EXISTS "vectors";
-      postInitSQL:
-        - ALTER SYSTEM SET search_path TO "$user", public, vectors;
-        - CREATE EXTENSION IF NOT EXISTS "vectors";
+        - GRANT ALL ON SCHEMA vectors TO immich;
+        - GRANT SELECT ON TABLE pg_vector_index_stat to immich;
   storage:
     size: 8Gi
