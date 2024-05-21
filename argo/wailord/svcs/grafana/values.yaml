@@ -62,7 +62,7 @@ grafana:
     auth.generic_oauth:
       enabled: true
       oauth_name: "Login Keycloak"
-      scopes: "openid profile email"
+      scopes: "openid profile email roles"
       allow_sign_up: true
       client_id: grafana
       auth_url: "https://auth.jackhil.de/realms/master/protocol/openid-connect/auth"
