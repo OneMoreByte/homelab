@@ -3,7 +3,7 @@ kind: Keycloak
 metadata:
   name: jscknet-kc
 spec:
-  instances: 3
+  instances: 1
   db:
     vendor: postgres
     host: keycloak-pg-cluster-rw
