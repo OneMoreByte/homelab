@@ -31,12 +31,6 @@ app-template:
               enabled: false
             startup:
               enabled: false
-      initContainers:
-        hold:
-          image:
-            repository: ghcr.io/roxedus/pgloader
-            tag: latest
-          command: ["sleep", "500000"]
 
 
   # -- Minimal configuration provided from https://github.com/jesec/rtorrent/blob/master/doc/rtorrent.rc
