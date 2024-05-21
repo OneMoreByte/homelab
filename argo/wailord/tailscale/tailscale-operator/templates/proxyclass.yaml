@@ -1,0 +1,11 @@
+# https://tailscale.com/kb/1236/kubernetes-operator#cluster-resource-customization-using-proxyclass-custom-resource
+apiVersion: tailscale.com/v1alpha1
+kind: ProxyClass
+metadata:
+  name: prod
+spec:
+  statefulSet:
+    pod:
+      tailscaleContainer:
+        securityContext:
+          privileged: true
