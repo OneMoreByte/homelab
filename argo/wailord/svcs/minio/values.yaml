@@ -78,6 +78,9 @@ minio:
     - name: smoked-mutex
       policy: none
       versioning: true
+    - name: thanos
+      policy: none
+      versioning: true
 
   policies:
     - name: longhorn-backup-readwrite
@@ -109,6 +112,14 @@ minio:
             - "s3:GetBucketLocation"
             - "s3:GetObject"
             - "s3:List*"
+
+    - name: thanos-readwrite
+      statements:
+        - effect: Allow
+          resources:
+            - "arn:aws:s3:::thanos/*"
+          actions:
+            - "s3:*"
   users:
     - accessKey: longhorn
       existingSecret: longhorn-user-secret
@@ -122,6 +133,10 @@ minio:
       existingSecret: helldiver-user-secret
       existingSecretKey: password
       policy: longhorn-backup-readonly
+    - accessKey: thanos
+      existingSecret: thanos-user-secret
+      existingSecretKey: password
+      policy: thanos-readwrite
 
   svcaccts: []
 
