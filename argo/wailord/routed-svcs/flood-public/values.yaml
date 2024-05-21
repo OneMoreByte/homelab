@@ -79,7 +79,6 @@ app-template:
     # @default -- See values.yaml
     main:
       enabled: true
-      primary: true
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -91,6 +90,7 @@ app-template:
               pathType: Prefix
               service:
                 name: main
+                port: 3000
       tls:
         - hosts:
             - flood-public.jackhil.de
@@ -109,6 +109,7 @@ app-template:
               pathType: Prefix
               service:
                 name: main
+                port: 3000
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
   persistence:
