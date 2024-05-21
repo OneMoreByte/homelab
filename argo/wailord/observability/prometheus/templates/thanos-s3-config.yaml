@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: thanos-s3-config
+  namespace: observability
+spec:
+  encryptedData:
+    config: AgC1jqBzQH6N6aB1PE5jVkMxSogoTicL0UBECGcNHty4+yS9dgx7pxSVm6YUgKV4fWho6GAbbUvwTm5lXqZgkZuGSQ078ow6hboNLro7LCNUTcBVJAqgphSEvPCqbkj6dH1HpRALbLrS4nFDkY4HLl+W30fowp9iqCeQLwTro4Z3+oZ9KNZ86Jb+LwC7YIFGJdWoFyTdp4MgUWLzraReNi+YSjK7XlKx6/rnIL/yquwq+cQoSAJaKkt/Efa5FVQsRSyOP1CrBoxwz8dwNiSgoo1R957Qkoihr63DSoVg2+59Pl5t8KWRfv5ig3xc/DOjCQoaEHqv73F4Q+jmQzOEBM+kv+3Vf9CI15ivCzipaF2aBMSoaCRL8qOj6hyk2/nD/zefQ4OCG0mpmKfmuXXpuZA0KSosd1yXHKsuIgDqw7GFijcdTRDCKz2ruKzfLSNiKS8GvHtF7lkrdiLV5zkDOrOkzahkrEOUUVw/oVPlkPuS93k1Xi1aJZHI9TRlPTkGW7iQw3pVytYP7/4uqHMI3NC2DFWguDN+DyoU2sWBJYVLN53UZwEvxO93SVyYy5lV518bMSzzvKI8lT4jKH0NtPEsPr1xOZg/Vj4gNWcF9KETkXYsL3e3BxSPEEkmSit9pYF3nHWyNrZlbAcaWoE5Un29jcpWbXais3hpHC2kYmX6Cz5ra7XEPU5+TELJTRinZbOLNsMkVv4bzq975SFovr4pPT6h85akG0lMfdbIQYleChiD4gwiv79NixJZmXyBrwr0uueK6C+9rDEqS2F9DzTqTy+Rmjw3XuLKqrkVg3EPM3yCZIPSHLlHrirXqgi/HurGAivXkfDn1115rOVGsywCO+IirYaRF7TkU9wk9qxQ4h5mKdQlKQlsivokxEmFCKRwsEib3YYdaiI=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: thanos-s3-config
+      namespace: observability
