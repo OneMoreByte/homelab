@@ -150,8 +150,9 @@ minio:
     existingClientSecretName: "minio-client-secret"
     existingClientSecretKey: "client-secret"
     claimName: "policy"
-    scopes: "openid,profile,email,preferred_username"
+    scopes: "openid,profile,email"
     redirectUri: "https://console.minio.jsck.network/oauth_callback"
     # Can leave empty
     claimPrefix: ""
     comment: ""
+    displayName: "Keycloak"
