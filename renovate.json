@@ -1,13 +1,21 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "timezone": "America/Chicago",
-  "ignorePaths": ["argo/wailord/game-svcs/**"],
+  "ignorePaths": [
+    "argo/wailord/game-svcs/**",
+    "argo/wailord/media-svcs/immich"
+  ],
   "extends": [
     "config:base"
   ],
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
       "automerge": true,
       "automergeSchedule": [
         "after 11pm",
