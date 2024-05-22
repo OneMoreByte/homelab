@@ -28,7 +28,7 @@ patches:
   - path: overlays/argo-server-tailscale-sidecar-patch.yaml
   - patch: |-
       - op: replace
-        path: /spec/template/spec/initContainers/0/command
+        path: /spec/template/spec/initContainers
         value: []
     target:
       kind: Deployment
