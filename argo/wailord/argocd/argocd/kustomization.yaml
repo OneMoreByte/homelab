@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - base/repository.yaml
+  - base/redis-password.yaml
   - base/applications/theroom.yaml
   - base/ingress.yaml
   - base/argo-client-secret.yaml
