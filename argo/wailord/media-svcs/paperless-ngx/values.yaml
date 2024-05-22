@@ -1,0 +1,82 @@
+paperless-ngx:
+  env:
+    # -- Set the container timezone
+    TZ: UTC
+    # PAPERLESS_SECRET_KEY: ""
+    A_REDIS_PASSWORD: ""
+    PAPERLESS_DBENGINE: postgresql
+    PAPERLESS_DBHOST: paperless-pg-cluster-rw
+    PAPERLESS_DBNAME: paperless
+    PAPERLESS_DBUSER:
+      secretKeyRef:
+        name: paperless-db-secret
+        key: username
+    PAPERLESS_DBPASS:
+      secretKeyRef:
+        name: paperless-db-secret
+        key: password
+
+  service:
+    # -- Configures service settings for the chart.
+    # @default -- See [values.yaml](./values.yaml)
+    main:
+      ports:
+        http:
+          port: 8000
+
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - bulk-datastore
+
+  ingress:
+    # -- Enable and configure ingress settings for the chart under this key.
+    # @default -- See [values.yaml](./values.yaml)
+    main:
+      enabled: false
+      annotations: {}
+      # hosts:
+      #   - host: chart-example.local
+      #     paths:
+      #       - path: /
+      # tls:
+      #   - secretName: chart-example.local
+      #     hosts:
+      #       - chart-example.local
+
+  persistence:
+    data:
+      enabled: true
+      retain: true
+      mountPath: /usr/src/paperless/data
+      hostPath: /store/k8s-hostpath/paperless/data
+      storageClass: "hostPath"
+    media:
+      enabled: true
+      retain: true
+      mountPath: /usr/src/paperless/media
+      hostPath: /store/k8s-hostpath/paperless/media
+      storageClass: "hostPath"
+    export:
+      enabled: true
+      retain: true
+      mountPath: /usr/src/paperless/export
+      hostPath: /store/k8s-hostpath/paperless/export
+      storageClass: "hostPath"
+    consume:
+      enabled: true
+      retain: true
+      mountPath: /usr/src/paperless/consume
+      hostPath: /store/k8s-hostpath/paperless/consume
+      storageClass: "hostPath"
+
+  redis:
+    enabled: true
+    auth:
+      enabled: false
