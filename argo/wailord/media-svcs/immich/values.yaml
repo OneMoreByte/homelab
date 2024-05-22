@@ -101,6 +101,12 @@ immich:
         type: hostPath
         hostPath: "/store/backups/syncthings/Pictures"
 
+
+      config:
+        enabled: true
+        type: secret
+        name: immich-config
+
   machine-learning:
     enabled: true
     securityContext:
