@@ -2,7 +2,6 @@ immich:
   env:
     DB_HOSTNAME: "{{ .Release.Name }}-pg-cluster-rw"
     DB_DATABASE_NAME: "immich"
-
     DB_USERNAME:
       valueFrom:
         secretKeyRef:
@@ -14,153 +13,9 @@ immich:
           name: immich-db-secret
           key: password
 
-
-
-  immich:
-    metrics:
-      # Enabling this will create the service monitors needed to monitor immich with the prometheus operator
-      enabled: true
-    persistence:
-      # Main data store for all photos shared between different components.
-      library:
-        enabled: true
-        type: hostPath
-        mountPath: "/store/k8s-hostpath/immich/library"
-        existingClaim: "fake-value"
-
-      syncthing-library:
-        enabled: true
-        type: hostPath
-        mountPath: "/store/backups/syncthings/Pictures"
-
-    configuration:
-      ffmpeg:
-        crf: 23
-        threads: 0
-        preset: ultrafast
-        targetVideoCodec: h264
-        acceptedVideoCodecs:
-          - h264
-        targetAudioCodec: aac
-        acceptedAudioCodecs:
-          - aac
-          - mp3
-          - libopus
-        targetResolution: '720'
-        maxBitrate: '0'
-        bframes: -1
-        refs: 0
-        gopSize: 0
-        npl: 0
-        temporalAQ: false
-        cqMode: auto
-        twoPass: false
-        preferredHwDevice: auto
-        transcode: required
-        tonemap: hable
-        accel: disabled
-      job:
-        backgroundTask:
-          concurrency: 5
-        smartSearch:
-          concurrency: 2
-        metadataExtraction:
-          concurrency: 5
-        faceDetection:
-          concurrency: 2
-        search:
-          concurrency: 5
-        sidecar:
-          concurrency: 5
-        library:
-          concurrency: 5
-        migration:
-          concurrency: 5
-        thumbnailGeneration:
-          concurrency: 5
-        videoConversion:
-          concurrency: 1
-      logging:
-        enabled: true
-        level: log
-      machineLearning:
-        enabled: true
-        url: http://immich-machine-learning:3003
-        clip:
-          enabled: true
-          modelName: ViT-B-32__openai
-        duplicateDetection:
-          enabled: false
-          maxDistance: 0.03
-        facialRecognition:
-          enabled: true
-          modelName: buffalo_l
-          minScore: 0.7
-          maxDistance: 0.6
-          minFaces: 3
-      map:
-        enabled: true
-        lightStyle: ''
-        darkStyle: ''
-      reverseGeocoding:
-        enabled: true
-      oauth:
-        enabled: false
-        issuerUrl: ''
-        clientId: ''
-        clientSecret: ''
-        scope: openid email profile
-        signingAlgorithm: RS256
-        storageLabelClaim: preferred_username
-        storageQuotaClaim: immich_quota
-        defaultStorageQuota: 0
-        buttonText: Login with OAuth
-        autoRegister: true
-        autoLaunch: false
-        mobileOverrideEnabled: false
-        mobileRedirectUri: ''
-      passwordLogin:
-        enabled: true
-      storageTemplate:
-        enabled: false
-        hashVerificationEnabled: true
-        template: '{{y}}/{{y}}-{{MM}}-{{dd}}/{{filename}}'
-      image:
-        thumbnailFormat: webp
-        thumbnailSize: 250
-        previewFormat: jpeg
-        previewSize: 1440
-        quality: 80
-        colorspace: p3
-        extractEmbedded: false
-      newVersionCheck:
-        enabled: true
-      trash:
-        enabled: true
-        days: 30
-      theme:
-        customCss: ''
-      user:
-        deleteDelay: 7
-      library:
-        scan:
-          enabled: true
-          cronExpression: 0 0 * * *
-        watch:
-          enabled: true
-          usePolling: false
-          interval: 10000
-      server:
-        externalDomain: ''
-        loginPageMessage: ''
-
-
-
-
-
+  immich: {}
 
   # Dependencies
-
   postgresql:
     enabled: false
 
@@ -171,7 +26,6 @@ immich:
       enabled: false
 
   # Immich components
-
   server:
     enabled: true
     image:
@@ -204,6 +58,11 @@ immich:
         enabled: true
         type: hostPath
         hostPath: "/store/backups/syncthings/Pictures"
+
+      config:
+        enabled: true
+        type: secret
+        name: immich-config
 
 
   microservices:

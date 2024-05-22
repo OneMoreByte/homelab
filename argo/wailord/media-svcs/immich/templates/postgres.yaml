@@ -19,6 +19,7 @@ spec:
         name: immich-db-secret
       dataChecksums: true
       encoding: 'UTF8'
+      # This came from a mix of the pgvector docs and here: https://github.com/immich-app/immich/discussions/8327
       postInitApplicationSQL:
         - CREATE EXTENSION IF NOT EXISTS "vectors";
         - CREATE EXTENSION IF NOT EXISTS "cube";
