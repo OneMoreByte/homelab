@@ -13,6 +13,11 @@ immich:
           name: immich-db-secret
           key: password
 
+  image:
+    repository: ghcr.io/immich-app/immich-server
+    pullPolicy: IfNotPresent
+    tag: v1.105.1
+
   immich:
     metrics:
       # Enabling this will create the service monitors needed to monitor immich with the prometheus operator
@@ -64,7 +69,6 @@ immich:
               - photos.jackhil.de
             secretName: jackhil.de-cert
 
-
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -93,13 +97,11 @@ immich:
         type: secret
         name: immich-config
 
-
   microservices:
     enabled: true
     image:
       repository: ghcr.io/immich-app/immich-server
       pullPolicy: IfNotPresent
-
 
     affinity:
       nodeAffinity:
@@ -124,7 +126,6 @@ immich:
         type: hostPath
         hostPath: "/store/backups/syncthings/Pictures"
 
-
       config:
         enabled: true
         type: secret
@@ -138,7 +139,7 @@ immich:
     image:
       repository: ghcr.io/immich-app/immich-machine-learning
       pullPolicy: IfNotPresent
-      tag: v1.100.0-cuda
+      tag: v1.105.1-cuda
     env:
       TRANSFORMERS_CACHE: /cache
       NVIDIA_DRIVER_CAPABILITIES: all
