@@ -26,3 +26,10 @@ patches:
   - path: overlays/argo-tailscale-sidecar-patch.yaml
   - path: overlays/argo-controller-ss-tailscale-sidecar-patch.yaml
   - path: overlays/argo-server-tailscale-sidecar-patch.yaml
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/initContainers/0/command
+        value: []
+    target:
+      kind: Deployment
+      name: argocd-redis
