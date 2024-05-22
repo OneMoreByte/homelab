@@ -56,25 +56,25 @@ paperless-ngx:
       retain: true
       mountPath: /usr/src/paperless/data
       hostPath: /store/k8s-hostpath/paperless/data
-      storageClass: "hostPath"
+      type: "hostPath"
     media:
       enabled: true
       retain: true
       mountPath: /usr/src/paperless/media
       hostPath: /store/k8s-hostpath/paperless/media
-      storageClass: "hostPath"
+      type: "hostPath"
     export:
       enabled: true
       retain: true
       mountPath: /usr/src/paperless/export
       hostPath: /store/k8s-hostpath/paperless/export
-      storageClass: "hostPath"
+      type: "hostPath"
     consume:
       enabled: true
       retain: true
       mountPath: /usr/src/paperless/consume
       hostPath: /store/k8s-hostpath/paperless/consume
-      storageClass: "hostPath"
+      type: "hostPath"
 
   redis:
     enabled: true
