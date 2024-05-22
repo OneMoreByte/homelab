@@ -13,7 +13,24 @@ immich:
           name: immich-db-secret
           key: password
 
-  immich: {}
+  immich:
+    metrics:
+      # Enabling this will create the service monitors needed to monitor immich with the prometheus operator
+      enabled: true
+    persistence:
+      # Main data store for all photos shared between different components.
+      library:
+        enabled: true
+        type: hostPath
+        mountPath: "/store/k8s-hostpath/immich/library"
+        existingClaim: "fake-value"
+
+      syncthing-library:
+        enabled: true
+        type: hostPath
+        mountPath: "/store/backups/syncthings/Pictures"
+
+    configuration: {}
 
   # Dependencies
   postgresql:
