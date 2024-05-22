@@ -63,6 +63,18 @@ immich:
           - hosts:
               - photos.jackhil.de
             secretName: jackhil.de-cert
+
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - bulk-datastore
+
     persistence:
       # Main data store for all photos shared between different components.
       library:
@@ -87,6 +99,17 @@ immich:
     image:
       repository: ghcr.io/immich-app/immich-server
       pullPolicy: IfNotPresent
+
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - bulk-datastore
 
     persistence:
       # Main data store for all photos shared between different components.
@@ -124,3 +147,13 @@ immich:
         size: 16Gi
         type: pvc
         accessMode: ReadWriteMany
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - bulk-datastore
