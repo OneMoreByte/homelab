@@ -7,7 +7,6 @@ paperless-ngx:
     # -- Image tag
     tag: 2.7.2
 
-
   env:
     # -- Set the container timezone
     TZ: UTC
@@ -32,7 +31,6 @@ paperless-ngx:
       ports:
         http:
           port: 8000
-
 
   affinity:
     nodeAffinity:
@@ -88,6 +86,6 @@ paperless-ngx:
   redis:
     enabled: true
     auth:
-      enabled: false
+      enabled: true
       existingSecret: paperless-ngx-redis
       existingSecretPasswordKey: redis-password
