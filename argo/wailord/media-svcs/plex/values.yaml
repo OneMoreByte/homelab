@@ -115,7 +115,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: plex
+                name: plex-main
                 port: 32400
       tls:
         - hosts:
@@ -133,7 +133,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: plex
+                name: plex-main
                 port: 32400
   # -- Enable devices to be discoverable
 
