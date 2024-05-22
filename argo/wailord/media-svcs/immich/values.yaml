@@ -138,7 +138,7 @@ immich:
     image:
       repository: ghcr.io/immich-app/immich-machine-learning
       pullPolicy: IfNotPresent
-      tag: v1.100.0-cuda
+      tag: v1.105.1-cuda
     env:
       TRANSFORMERS_CACHE: /cache
       NVIDIA_DRIVER_CAPABILITIES: all
