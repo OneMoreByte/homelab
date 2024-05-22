@@ -1,4 +1,13 @@
 paperless-ngx:
+  image:
+    # -- Image repository
+    repository: ghcr.io/paperless-ngx/paperless-ngx
+    # -- Image pull policy
+    pullPolicy: IfNotPresent
+    # -- Image tag
+    tag: 2.7.2
+
+
   env:
     # -- Set the container timezone
     TZ: UTC
@@ -80,3 +89,5 @@ paperless-ngx:
     enabled: true
     auth:
       enabled: false
+      existingSecret: paperless-ngx-redis
+      existingSecretPasswordKey: redis-password
