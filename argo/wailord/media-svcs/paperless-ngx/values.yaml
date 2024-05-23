@@ -49,16 +49,19 @@ paperless-ngx:
     # -- Enable and configure ingress settings for the chart under this key.
     # @default -- See [values.yaml](./values.yaml)
     main:
-      enabled: false
-      annotations: {}
-      # hosts:
-      #   - host: chart-example.local
-      #     paths:
-      #       - path: /
-      # tls:
-      #   - secretName: chart-example.local
-      #     hosts:
-      #       - chart-example.local
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
+      hosts:
+        - host: paper.jackhil.de
+          paths:
+            - path: /
+      tls:
+        - secretName: jackhil.de-cert
+          hosts:
+            - paper.jackhil.de
 
   persistence:
     data:
