@@ -47,9 +47,11 @@ traefik:
 
   logs:
     general:
-      level: DEBUG
+      level: INFO
     access:
       enabled: true
+      format: json
+      filePath: "/var/log/traefik/access.log"
 
   ingressRoute:
     dashboard:
