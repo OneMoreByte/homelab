@@ -15,12 +15,13 @@ spec:
         providers:
           - type: kubernetes
             node: ${NODE_NAME}
-            hints:
-              enabled: true
-              default_config:
-                type: container
-                paths:
-                  - /var/log/containers/*${data.kubernetes.container.id}.log
+            templates:
+              - condition:
+                  contains:
+                    kubernetes.container.name: "traefik"
+                config:
+                  - module: traefik
+
     processors:
       - add_cloud_metadata: {}
       - add_host_metadata: {}
@@ -39,24 +40,16 @@ spec:
               # If using Red Hat OpenShift uncomment this:
               #privileged: true
             volumeMounts:
-              - name: varlogcontainers
-                mountPath: /var/log/containers
-              - name: varlogpods
-                mountPath: /var/log/pods
-              - name: varlibdockercontainers
-                mountPath: /var/lib/docker/containers
+              - name: traefik-logs
+                mountPath: /var/log/traefik
+
             env:
               - name: NODE_NAME
                 valueFrom:
                   fieldRef:
                     fieldPath: spec.nodeName
         volumes:
-          - name: varlogcontainers
-            hostPath:
-              path: /var/log/containers
-          - name: varlogpods
-            hostPath:
-              path: /var/log/pods
-          - name: varlibdockercontainers
-            hostPath:
-              path: /var/lib/docker/containers
+          - name: traefik-logs
+            persistentVolumeClaim:
+              claimName: traefik-logs
+
