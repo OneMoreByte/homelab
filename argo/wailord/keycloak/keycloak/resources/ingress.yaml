@@ -14,7 +14,6 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/service.serversscheme: https
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
     traefik.ingress.kubernetes.io/service.serverstransport: traefik-skipverify@kubernetescrd
 spec:
   tls:
