@@ -100,10 +100,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: filebeat
-  namespace: observability
 subjects:
   - kind: ServiceAccount
     name: filebeat
+    namespace: observability
 roleRef:
   kind: ClusterRole
   name: filebeat
