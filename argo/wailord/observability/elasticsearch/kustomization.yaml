@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
 - https://download.elastic.co/downloads/eck/2.8.0/operator.yaml
 - base/elasticsearch.yaml
+- base/filebeat-container-logs.yaml
+- base/traefik-logs.yaml
