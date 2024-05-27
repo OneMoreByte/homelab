@@ -6,4 +6,4 @@ resources:
   - base/elasticsearch.yaml
   - base/filebeat-container-logs.yaml
   - base/traefik-logs.yaml
-  - base/elasticsearch-oicd-settings.yaml
+
