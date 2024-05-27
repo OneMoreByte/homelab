@@ -16,6 +16,9 @@ spec:
     filebeat:
       modules:
         - module: traefik
+          access:
+            enabled: true
+            var.paths: [ "/var/log/traefik/access.log*" ]
     processors:
       - add_cloud_metadata: {}
       - add_host_metadata: {}
