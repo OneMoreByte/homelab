@@ -5,10 +5,18 @@ metadata:
 spec:
   version: 8.12.1
   nodeSets:
-    - name: default
+    - name: master
       count: 3
       config:
-        node.store.allow_mmap: false
+        node.roles: [ "master" ]
+      podTemplate:
+        spec:
+          initContainers:
+          - name: sysctl
+            securityContext:
+              privileged: true
+              runAsUser: 0
+            command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
       volumeClaimTemplates:
         - metadata:
             name: elasticsearch-data # Do not change this name unless you set up a volume mount for the data path.
@@ -17,7 +25,29 @@ spec:
               - ReadWriteOnce
             resources:
               requests:
-                storage: 32Gi
+                storage: 10Gi
+
+    - name: data
+      count: 5
+      config:
+        node.roles: [ "data" ]
+      podTemplate:
+        spec:
+          initContainers:
+            - name: sysctl
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data # Do not change this name unless you set up a volume mount for the data path.
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 64Gi
 
 ---
 apiVersion: kibana.k8s.elastic.co/v1
