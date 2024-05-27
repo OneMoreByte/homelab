@@ -14,6 +14,10 @@ traefik:
 
   deployment:
     annotations: {}
+    additionalVolumes:
+      - name: traefik-logs
+        persistentVolumeClaim:
+          claimName: traefik-logs
 
   metrics:
     addInternals: true
@@ -32,11 +36,6 @@ traefik:
       enabled: false
       gateway:
         enabled: true
-
-  volumes:
-    - name: traefik-logs
-      persistentVolumeClaim:
-        claimName: traefik-logs
 
   additionalVolumeMounts:
     - name: traefik-logs
