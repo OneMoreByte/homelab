@@ -13,6 +13,7 @@ spec:
           dnsZones:
             - "*.jackhil.de"
             - "console.minio.jsck.network"
+            - "syncthings.wailord.jackhil.de"
             - "*.jsck.network"
             - "*.harbor.jsck.network"
             - "*.totallynothax.net"
