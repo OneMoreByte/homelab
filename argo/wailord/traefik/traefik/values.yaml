@@ -33,6 +33,11 @@ traefik:
       gateway:
         enabled: true
 
+  volumes:
+    - name: traefik-logs
+      persistentVolumeClaim:
+        claimName: traefik-logs
+
   additionalVolumeMounts:
     - name: traefik-logs
       mountPath: /var/logs/traefik
