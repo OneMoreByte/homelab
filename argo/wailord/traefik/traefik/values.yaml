@@ -47,7 +47,14 @@ traefik:
     access:
       enabled: true
 
+  ingressRoute:
+    dashboard:
+      enabled: true
+    healthcheack:
+      enabled: true
+
   tracing:
+    {}
     # instana:
     #   localAgentHost: 127.0.0.1
     #   localAgentPort: 42699
