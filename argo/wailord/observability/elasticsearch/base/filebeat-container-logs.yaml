@@ -108,18 +108,3 @@ roleRef:
   kind: ClusterRole
   name: filebeat
   apiGroup: rbac.authorization.k8s.io
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: traefik-logs
-spec:
-  accessModes:
-  - ReadWriteMany
-  resources:
-    requests:
-      storage: 32Gi
-  storageClassName: longhorn
-  volumeMode: Filesystem
-  volumeName: pvc-da60c3b3-94a8-457c-a4e5-3940d9255c20
