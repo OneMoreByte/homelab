@@ -40,7 +40,6 @@ metadata:
     traefik.ingress.kubernetes.io/service.serversscheme: https
     traefik.ingress.kubernetes.io/service.serverstransport: traefik-skipverify@kubernetescrd
   name: kibana-ui
-  namespace: default
 spec:
   rules:
     - host: kibana.jsck.network
