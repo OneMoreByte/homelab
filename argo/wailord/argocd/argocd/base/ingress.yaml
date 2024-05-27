@@ -13,9 +13,6 @@ spec:
       services:
         - name: argocd-server
           port: 80
-      middlewares:
-      - name: redirect-http-2-https
-        namespace: traefik
     - kind: Rule
       match: Host(`argo.jackhil.de`) && Headers(`Content-Type`, `application/grpc`)
       priority: 11
@@ -27,7 +24,6 @@ spec:
     secretName: jsck.network-cert
 
 ---
-
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -43,9 +39,6 @@ spec:
       services:
         - name: argocd-server
           port: 80
-      middlewares:
-      - name: redirect-http-2-https
-        namespace: traefik
     - kind: Rule
       match: Host(`argo.jackhil.de`) && Headers(`Content-Type`, `application/grpc`)
       priority: 11
@@ -53,6 +46,3 @@ spec:
         - name: argocd-server
           port: 80
           scheme: h2c
-      middlewares:
-      - name: redirect-http-2-https
-        namespace: traefik
