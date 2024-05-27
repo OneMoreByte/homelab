@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app: longhorn-ingress
+    tailscale.com/proxy-class: "jscknet"
+  name: longhorn-ingress
+spec:
+  ingressClassName: tailscale
+  rules:
+    - host: longhorn
+      http:
+        paths:
+          - backend:
+              service:
+                name: longhorn-frontend
+                port:
+                  number: 80
+            path: /
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - longhorn
+      secretName: longhorn.local-tls
+status:
+  loadBalancer:
+    ingress:
+      - hostname: longhorn.fawn-mamba.ts.net
+        ports:
+          - port: 443
+            protocol: TCP

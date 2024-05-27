@@ -60,7 +60,7 @@ longhorn:
 
   ingress:
     ## Set to true to enable ingress record generation
-    enabled: true
+    enabled: false
 
     ## Add ingressClassName to the Ingress
     ## Can replace the kubernetes.io/ingress.class annotation on v1.18+
