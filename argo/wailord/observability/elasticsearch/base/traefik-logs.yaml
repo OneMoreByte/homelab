@@ -28,7 +28,8 @@ spec:
       dashboard:
         index: "traefik-access-*"
     output.elasticsearch.index: "traefik-access-%{[agent.version]}"
-  daemonSet:
+  deployment:
+    replicas: 1
     podTemplate:
       spec:
         terminationGracePeriodSeconds: 30
