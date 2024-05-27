@@ -8,15 +8,15 @@ spec:
     - name: master
       count: 3
       config:
-        node.roles: [ "master" ]
+        node.roles: ["master"]
       podTemplate:
         spec:
           initContainers:
-          - name: sysctl
-            securityContext:
-              privileged: true
-              runAsUser: 0
-            command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+            - name: sysctl
+              securityContext:
+                privileged: true
+                runAsUser: 0
+              command: ["sh", "-c", "sysctl -w vm.max_map_count=262144"]
       volumeClaimTemplates:
         - metadata:
             name: elasticsearch-data # Do not change this name unless you set up a volume mount for the data path.
@@ -30,7 +30,7 @@ spec:
     - name: data
       count: 5
       config:
-        node.roles: [ "data" ]
+        node.roles: ["data", "ingest", "transform"]
       podTemplate:
         spec:
           initContainers:
@@ -38,7 +38,7 @@ spec:
               securityContext:
                 privileged: true
                 runAsUser: 0
-              command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+              command: ["sh", "-c", "sysctl -w vm.max_map_count=262144"]
       volumeClaimTemplates:
         - metadata:
             name: elasticsearch-data # Do not change this name unless you set up a volume mount for the data path.
