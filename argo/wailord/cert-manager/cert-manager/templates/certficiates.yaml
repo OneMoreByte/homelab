@@ -45,6 +45,7 @@ metadata:
 spec:
   dnsNames:
     - "*.jackhil.de"
+    - "syncthings.wailord.jackhil.de"
   secretName: jackhil.de-cert
   issuerRef:
     name: letsencrypt-aws-issuer
@@ -151,6 +152,19 @@ kind: Certificate
 metadata:
   name: jackhil.de-cert
   namespace: home-automation
+spec:
+  dnsNames:
+    - "*.jackhil.de"
+  secretName: jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jackhil.de-cert
+  namespace: routed-svcs
 spec:
   dnsNames:
     - "*.jackhil.de"
