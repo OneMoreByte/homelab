@@ -43,7 +43,7 @@ traefik:
 
   additionalVolumeMounts:
     - name: traefik-logs
-      mountPath: /var/logs/traefik
+      mountPath: /var/log/traefik
 
   logs:
     general:
