@@ -4,6 +4,8 @@ metadata:
   name: elasticsearch
 spec:
   version: 8.12.1
+  secureSettings:
+  - secretName: elasticsearch-oicd-settings
   nodeSets:
     - name: default
       count: 3
