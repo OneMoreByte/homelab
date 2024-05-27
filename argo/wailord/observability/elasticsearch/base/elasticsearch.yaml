@@ -31,6 +31,33 @@ spec:
     name: elasticsearch
 
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/service.serversscheme: https
+    traefik.ingress.kubernetes.io/service.serverstransport: traefik-skipverify@kubernetescrd
+  name: kibana-ui
+  namespace: default
+spec:
+  rules:
+    - host: kibana.jsck.network
+      http:
+        paths:
+          - backend:
+              service:
+                name: kibana-ui-kb-http
+                port:
+                  number: 5601
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - kibana.jsck.network
+      secretName: jsck.network-cert
+---
 apiVersion: logstash.k8s.elastic.co/v1alpha1
 kind: Logstash
 metadata:
