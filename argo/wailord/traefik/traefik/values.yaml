@@ -49,9 +49,9 @@ traefik:
 
   ingressRoute:
     dashboard:
-      enabled: true
+      enabled: false
     healthcheack:
-      enabled: true
+      enabled: false
 
   tracing:
     {}
