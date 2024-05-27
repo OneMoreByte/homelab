@@ -107,7 +107,6 @@ app-template:
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
       labels: {}
       hosts:
         - host: plex.jackhil.de
@@ -125,7 +124,6 @@ app-template:
       enabled: true
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: web
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-http-2-https@kubernetescrd
       labels: {}
       hosts:
         - host: plex.jackhil.de
