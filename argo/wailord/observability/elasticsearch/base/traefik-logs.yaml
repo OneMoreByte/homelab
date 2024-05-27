@@ -18,9 +18,13 @@ spec:
     processors:
       - add_cloud_metadata: {}
       - add_host_metadata: {}
-    output:
-      elasticsearch:
-        index: traefik-access
+    setup:
+      template:
+        name: "traefik-access"
+        pattern: "traefik-access-%{[agent.version]}*"
+      dashboard:
+        index: "traefik-access-*"
+    output.elasticsearch.index: "traefik-access-%{[agent.version]}"
   daemonSet:
     podTemplate:
       spec:
