@@ -8,9 +8,13 @@ traefik:
     kubernetesIngress:
       publishedService:
         enabled: true
+      allowEmptyServices: true
+      allowExternalNameServices: true
     kubernetesCRD:
       enabled: true
       allowCrossNamespace: true
+      allowEmptyServices: true
+      allowExternalNameServices: true
 
   deployment:
     annotations: {}
