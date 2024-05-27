@@ -15,20 +15,33 @@ traefik:
   deployment:
     annotations: {}
 
-  metrics: {}
+  metrics:
+    addInternals: true
+    prometheus:
+      entryPoint: metrics
+      service:
+        enabled: true
+        labels: {}
+        annotations: {}
+      disableAPICheck: false
+      serviceMonitor: {}
 
   experimental:
-    v3:
-      enabled: true
-    plugins:
-      enabled: true
+    plugins: {}
     kubernetesGateway:
-      enabled: false
+      enabled: true
       gateway:
         enabled: true
+
+  additionalVolumeMounts:
+    - name: traefik-logs
+      mountPath: /var/logs/traefik
+
   logs:
     general:
       level: DEBUG
+    access:
+      enabled: true
 
   tracing:
     # instana:
