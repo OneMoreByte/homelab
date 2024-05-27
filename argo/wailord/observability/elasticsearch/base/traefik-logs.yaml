@@ -14,7 +14,8 @@ spec:
     namespace: observability
   config:
     filebeat:
-      modules: traefik
+      modules:
+        - module: traefik
     processors:
       - add_cloud_metadata: {}
       - add_host_metadata: {}
