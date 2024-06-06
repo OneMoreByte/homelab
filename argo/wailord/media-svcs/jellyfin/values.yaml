@@ -15,7 +15,7 @@ app-template:
             # -- image repository
             repository: jellyfin/jellyfin
             # -- image tag
-            tag: 10.9.4
+            tag: 10.9.5
             # -- image pull policy
             pullPolicy: IfNotPresent
 
