@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hydroxide
+  labels:
+    app: hydroxide
+spec:
+  template:
+    metadata:
+      labels:
+        app: hydroxide
+    spec:
+      containers:
+        - name: hydroxide
+          image: ghcr.io/onemorebyte/hydroxide:v0.2.28
+          env:
+            - name: PROTONMAIL_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: hydroxide-secret
+                  key: PROTONMAIL_PASS
+            - name: PROTONMAIL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: hydroxide-secret
+                  key: PROTONMAIL_USER
+          ports:
+            - name: smtp
+              protocol: TCP
+              containerPort: 1025
+            - name: imap
+              protocol: TCP
+              containerPort: 1143
+            - name: caldev
+              protocol: TCP
+              containerPort: 8080
+          volumeMounts:
+            - name: data
+              mountPath: /home/hydroxide/
+
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: "hydroxide-data"
+  selector:
+    matchLabels:
+      app: hydroxide
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hydroxide
+  labels:
+    app: hydroxide
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+

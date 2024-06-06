@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hydroxide
+spec:
+  selector:
+    app: hydroxide
+  type: ClusterIP
+  ports:
+    - name: smtp
+      protocol: TCP
+      port: 1025
+      targetPort: 1025
+    - name: imap
+      protocol: TCP
+      port: 1143
+      targetPort: 1143
+    - name: caldev
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
