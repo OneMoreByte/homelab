@@ -10,10 +10,6 @@ spec:
       labels:
         app: hydroxide
     spec:
-      initContainers:
-        - name: chown-home
-          image: ghcr.io/onemorebyte/hydroxide:v0.2.28
-
       containers:
         - name: hydroxide
           image: ghcr.io/onemorebyte/hydroxide:v0.2.28
