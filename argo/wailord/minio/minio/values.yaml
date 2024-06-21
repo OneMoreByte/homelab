@@ -1,5 +1,9 @@
 minio:
   mode: distributed
+  drivesPerNode: 1
+  replicas: 4
+
+  ignoreChartChecksums: true
 
   affinity:
     nodeAffinity:
@@ -10,6 +14,12 @@ minio:
                 operator: In
                 values:
                   - yes
+  topologySpreadConstraints:
+    maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      app: minio
 
   persistence:
     enabled: true
