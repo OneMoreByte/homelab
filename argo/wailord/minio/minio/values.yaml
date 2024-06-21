@@ -19,7 +19,8 @@ minio:
     topologyKey: kubernetes.io/hostname
     whenUnsatisfiable: DoNotSchedule
     labelSelector:
-      app: minio
+      matchLabels:
+        app: minio
 
   persistence:
     enabled: true
