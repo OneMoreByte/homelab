@@ -30,7 +30,7 @@ minio:
 
   persistence:
     enabled: true
-    storageClassName: "local-storage"
+    storageClass: "local-storage"
     size: 1.8Ti
 
   ingress:
