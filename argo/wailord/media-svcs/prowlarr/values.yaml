@@ -23,7 +23,7 @@ app-template:
           image:
             repository: ghcr.io/roxedus/pgloader
             tag: latest
-        command: ["sleep", "500000"]
+          command: ["sleep", "500000"]
 
   # -- Configures service settings for the chart.
   service:
