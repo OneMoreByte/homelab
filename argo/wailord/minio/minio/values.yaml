@@ -9,6 +9,10 @@ minio:
   drivesPerNode: 1
   replicas: 4
 
+  resources:
+    requests:
+      memory: 4Gi
+
   ignoreChartChecksums: true
 
   affinity:
