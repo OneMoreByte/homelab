@@ -6,6 +6,6 @@ sources:
   - https://github.com/NVIDIA/k8s-device-plugin
 dependencies:
   - name: nvidia-device-plugin
-    version: 0.15.0
+    version: 0.15.1
     repository: "https://nvidia.github.io/k8s-device-plugin"
 
