@@ -96,21 +96,6 @@ immich:
         type: secret
         name: immich-config
 
-  microservices:
-    enabled: true
-    image:
-      repository: ghcr.io/immich-app/immich-server
-      pullPolicy: IfNotPresent
-
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                    - bulk-datastore
 
     persistence:
       # Main data store for all photos shared between different components.
