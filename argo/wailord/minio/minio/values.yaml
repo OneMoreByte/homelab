@@ -38,7 +38,7 @@ minio:
     size: 1.8Ti
 
   ingress:
-    enabled: false
+    enabled: true
     annotations: {}
     path: /
     hosts:
@@ -49,7 +49,7 @@ minio:
           - minio.jsck.network
 
   consoleIngress:
-    enabled: false
+    enabled: true
     annotations: {}
     path: /
     hosts:
