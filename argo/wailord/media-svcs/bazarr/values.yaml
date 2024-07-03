@@ -11,8 +11,8 @@ app-template:
             PUID: 11337
             PGID: 11337
           image:
-            repository: hotio/sonarr
-            tag: "release-4.0.6.1805"
+            repository: hotio/bazarr
+            tag: "release-1.4.3"
             pullPolicy: IfNotPresent
       #      initContainers:
       #        hold:
@@ -41,7 +41,7 @@ app-template:
       controller: main
       ports:
         http:
-          port: 8989
+          port: 6767
 
   ingress:
     # -- Enable and configure ingress settings for the chart under this key.
@@ -51,16 +51,16 @@ app-template:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       enabled: true
       hosts:
-        - host: sonarr-anime.jackhil.de
+        - host: bazarr.jackhil.de
           paths:
             - path: /
               pathType: Prefix
               service:
-                name: sonarr-anime
-                port: 8989
+                name: bazarr
+                port: 6767
       tls:
         - hosts:
-            - sonarr-anime.jackhil.de
+            - bazarr.jackhil.de
           secretName: jackhil.de-cert
 
   # -- Configure persistence settings for the chart under this key.
@@ -68,16 +68,8 @@ app-template:
     config:
       enabled: true
       accessMode: ReadWriteOnce
-      size: 16Gi
+      size: 2Gi
     media:
       enabled: true
       type: hostPath
       hostPath: /store/plex-files/
-    torrent:
-      enabled: true
-      type: hostPath
-      hostPath: /store/torrent/
-    torrent-public:
-      enabled: true
-      type: hostPath
-      hostPath: /store/torrent-public/

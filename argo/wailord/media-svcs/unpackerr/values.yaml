@@ -11,7 +11,7 @@ app-template:
             PGID: 11337
           image:
             repository: ghcr.io/hotio/unpackerr
-            tag: "release-0.12.0"
+            tag: "release-0.13.1"
             pullPolicy: IfNotPresent
           probes:
             liveness:
