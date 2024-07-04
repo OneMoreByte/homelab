@@ -50,6 +50,13 @@ immich:
   # Immich components
   server:
     enabled: true
+    probes:
+      liveness:
+        spec:
+          initialDelaySeconds: 120
+      readiness:
+        spec:
+          initialDelaySeconds: 120
     image:
       repository: ghcr.io/immich-app/immich-server
       pullPolicy: IfNotPresent
