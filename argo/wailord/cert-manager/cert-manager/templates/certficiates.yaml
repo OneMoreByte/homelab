@@ -96,7 +96,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: console.minio.jsck.network-cert
-  namespace: svcs
+  namespace: minio
 spec:
   dnsNames:
     - "console.minio.jsck.network"
@@ -186,3 +186,4 @@ spec:
     name: letsencrypt-aws-issuer
     kind: ClusterIssuer
 ---
+
