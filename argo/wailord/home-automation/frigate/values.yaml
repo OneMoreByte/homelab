@@ -125,13 +125,12 @@ frigate:
           width: 704
           height: 480
         motion:
-          mask:
-           - 704,0,704,63,626,51,385,69,231,82,90,129,0,167,0,0
+          mask: []
         zones:
           driveway:
-            coordinates: 0,480,594,480,639,370,661,198,654,107,583,54,460,59,369,71,241,128,0,250
+            coordinates: 0,480,594,480,704,480,704,315,530,271,360,197,320,181,230,183,120,175,70,169,0,171,0,250
           front_door:
-            coordinates: 271,79,362,70,397,81,0,252,0,166
+            coordinates: 364,187,474,185,704,235,704,313,328,201
       backdoor1:
         ffmpeg:
           output_args:
@@ -167,7 +166,11 @@ frigate:
           width: 704
           height: 480
         motion: {}
-        zones: {}
+        zones:
+          deck:
+            coordinates: 704,480,0,480,0,375,44,305,466,331,630,229
+          yard:
+            coordinates: 232,325,482,333,608,231,704,175,704,67,322,69,52,299
     snapshots:
       enabled: True
       retain:
