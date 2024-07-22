@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: registry
+  name: registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registry
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: registry
+    spec:
+      containers:
+        - image: docker.io/registry:2.8.3
+          name: registry
+          volumeMounts:
+            - mountPath: /etc/docker/registry/
+              name: registry-config
+            - mountPath: /registry
+              name: registry-data
+          ports:
+            - containerPort: 5000
+              name: http
+              protocol: TCP
+      volumes:
+        - name: registry-config
+          secret:
+            secretName: registry-config
+        - name: registry-data
+          emptyDir: {}
