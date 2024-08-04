@@ -16,7 +16,7 @@ resources:
   - base/clusters/thefall.fawn-mamba.ts.net.yaml
   - base/applications/thefall.yaml
   - base/applications/wailord.yaml
-
+  - base/clusters/office-space.jsck.network.yaml
 namespace: argocd
 patches:
   - path: overlays/argocd-cm.yaml

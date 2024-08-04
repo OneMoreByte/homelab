@@ -15,9 +15,11 @@ linux:
       ansible_host: jsck.zfs.rent
     theroom.jsck.network:
       ansible_user: svc
-    green-knight:
+    office-space.jsck.network:
       ansible_user: svc
-    big-lebowski:
+    green-knight.jsck.network:
+      ansible_user: svc
+    big-lebowski.jsck.network:
       ansible_user: svc
 
 wailord:
@@ -40,6 +42,8 @@ standalone_cluster:
       ansible_host: jsck.zfs.rent
     theroom.jsck.network:
       ansible_user: svc
+    office-space.jsck.network:
+      ansible_user: svc
 
 nfs_servers:
   hosts:
@@ -48,7 +52,7 @@ nfs_servers:
 
 printers:
   hosts:
-    green-knight:
+    green-knight.jsck.network:
       ansible_user: svc
-    big-lebowski:
+    big-lebowski.jsck.network:
       ansible_user: svc

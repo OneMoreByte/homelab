@@ -21,11 +21,10 @@
   hosts: printers
   roles:
     - printer
-#- name: Configure standalone clusters
-#  hosts: standalone_cluster
-#roles:
-#  - standalone_cluster
-
+- name: Configure standalone clusters
+  hosts: standalone_cluster
+  roles:
+    - standalone_cluster
 #- name: Configure storage server
 #  hosts: storage
 #  roles#:

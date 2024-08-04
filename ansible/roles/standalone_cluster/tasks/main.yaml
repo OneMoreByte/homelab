@@ -1,3 +1,4 @@
+# Maybe add this for pis in the future cgroup_memory=1 cgroup_enable=memory
 
 - name: Install k3s
   become: true
@@ -21,8 +22,8 @@
 - name: Check for existing cluster config
   delegate_to: 127.0.0.1
   ansible.builtin.stat:
-    path: "{{ base_git_dir.stdout }}/argo/argocd/base/clusters/{{ hostname }}.yaml"
-  register: config_stat_result  
+    path: "{{ base_git_dir.stdout }}/argo/wailord/argocd/argocd/base/clusters/{{ hostname }}.yaml"
+  register: config_stat_result
 
 - name: Gather cluster configs
   ansible.builtin.command: kubectl config view --raw
@@ -31,7 +32,7 @@
   when: not config_stat_result.stat.exists
 
 - name: Seal cluster configs
-  ansible.builtin.shell: echo {{ rendered_template |quote }} | kubeseal 
+  ansible.builtin.shell: echo {{ rendered_template |quote }} | kubeseal -n argocd
   register: sealed_configs
   delegate_to: 127.0.0.1
   vars:
@@ -42,15 +43,15 @@
 - name: Write out sealed configs
   ansible.builtin.copy:
     content: "{{ sealed_configs.stdout | from_json | to_yaml(indent=4) }}"
-    dest: "{{ base_git_dir.stdout }}/argo/argocd/base/clusters/{{ hostname }}.yaml"
+    dest: "{{ base_git_dir.stdout }}/argo/wailord/argocd/argocd/base/clusters/{{ hostname }}.yaml"
   delegate_to: 127.0.0.1
   when: not config_stat_result.stat.exists
 
 - name: Add config to kustomization
   delegate_to: 127.0.0.1
-  ansible.builtin.command: 
+  ansible.builtin.command:
     cmd: kustomize edit add base base/clusters/{{ hostname }}.yaml
-    chdir: "{{ base_git_dir.stdout }}/argo/argocd"
+    chdir: "{{ base_git_dir.stdout }}/argo/wailord/argocd/argocd"
   register: command_result
   ignore_errors: true
   changed_when: "'Error: base base/clusters/' + hostname + '.yaml already in kustomization file' not in command_result.stderr"
