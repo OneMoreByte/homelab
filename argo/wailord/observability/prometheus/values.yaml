@@ -2,7 +2,6 @@ kube-prometheus-stack:
   grafana:
     enabled: false
 
-
   prometheus:
     prometheusSpec:
       emptyDir: {}
@@ -10,5 +9,20 @@ kube-prometheus-stack:
       objectStorageConfig:
         name: thanos-s3-config
         key: config
+    thanosService:
+      enabled: true
+    thanosServiceMonitor:
+      enabled: true
+    thanosIngress:
+      enabled: true
+      ingressClassName: tailscale
+      labels:
+        tailscale.com/proxy-class: "jscknet"
+      hosts:
+        - thanos
+      tls:
+        - hosts:
+            - thanos
+          secretName: thanos.local-tls
 
-
+    additionalScrapeConfigs: []

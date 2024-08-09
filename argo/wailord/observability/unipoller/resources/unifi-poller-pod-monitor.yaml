@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: unifi-poller
+spec:
+  selector:
+    matchLabels:
+      app: unifi-poller
+  podMetricsEndpoints:
+    - port: 9130
+      path: /metrics

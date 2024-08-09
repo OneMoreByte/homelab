@@ -17,6 +17,7 @@ resources:
   - base/applications/thefall.yaml
   - base/applications/wailord.yaml
   - base/clusters/office-space.jsck.network.yaml
+  - base/clusters/jsck.zfs.rent.yaml
 namespace: argocd
 patches:
   - path: overlays/argocd-cm.yaml
