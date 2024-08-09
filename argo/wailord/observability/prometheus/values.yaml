@@ -8,8 +8,9 @@ kube-prometheus-stack:
         emptyDir: {}
       thanos:
         objectStorageConfig:
-          name: thanos-s3-config
-          key: config
+          existingSecret:
+            name: thanos-s3-config
+            key: config
       additionalScrapeConfigs: []
 
     thanosService:
