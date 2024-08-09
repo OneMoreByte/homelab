@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - ./resources/unifi-poller-secret.yaml
 - ./resources/unifi-poller-deployment.yaml
+- resources/unifi-poller-pod-monitor.yaml
