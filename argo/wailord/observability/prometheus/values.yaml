@@ -4,11 +4,14 @@ kube-prometheus-stack:
 
   prometheus:
     prometheusSpec:
-      emptyDir: {}
-    thanos:
-      objectStorageConfig:
-        name: thanos-s3-config
-        key: config
+      storageSpec:
+        emptyDir: {}
+      thanos:
+        objectStorageConfig:
+          name: thanos-s3-config
+          key: config
+      additionalScrapeConfigs: []
+
     thanosService:
       enabled: true
     thanosServiceMonitor:
@@ -27,5 +30,3 @@ kube-prometheus-stack:
         - hosts:
             - thanos
           secretName: thanos.local-tls
-
-    additionalScrapeConfigs: []
