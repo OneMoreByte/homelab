@@ -25,7 +25,7 @@ spec:
         helm:
           releaseName: "{{ values.app_name }}"
           valueFiles:
-          - values.yaml
+            - values.yaml
       destination:
         name: wailord.jsck.network
         namespace: "{{ values.namespace }}"
@@ -34,7 +34,8 @@ spec:
           prune: true
           selfHeal: true
         syncOptions:
-        - CreateNamespace=true
+          - CreateNamespace=true
+          - ServerSideApply=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -62,10 +63,11 @@ spec:
         targetRevision: "HEAD"
       destination:
         name: wailord.jsck.network
-        namespace: "{{ values.namespace }}" 
+        namespace: "{{ values.namespace }}"
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
-        - CreateNamespace=true
+          - CreateNamespace=true
+          - ServerSideApply=true
