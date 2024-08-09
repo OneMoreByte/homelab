@@ -15,6 +15,7 @@ kube-prometheus-stack:
 
     thanosService:
       enabled: true
+      clusterIP: ""
     thanosServiceMonitor:
       enabled: true
     thanosIngress:
