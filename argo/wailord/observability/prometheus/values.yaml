@@ -22,6 +22,7 @@ kube-prometheus-stack:
         - thanos
       paths:
         - /
+      pathType: ImplementationSpecific
       tls:
         - hosts:
             - thanos
