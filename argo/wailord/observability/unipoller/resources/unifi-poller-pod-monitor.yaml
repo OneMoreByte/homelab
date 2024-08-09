@@ -7,5 +7,6 @@ spec:
     matchLabels:
       app: unifi-poller
   podMetricsEndpoints:
-    - port: 9130
+    - port: "9130"
       path: /metrics
+
