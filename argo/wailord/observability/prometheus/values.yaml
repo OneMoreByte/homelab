@@ -10,7 +10,7 @@ kube-prometheus-stack:
         objectStorageConfig:
           existingSecret:
             name: thanos-s3-config
-            key: config
+            key: object-storage-configs.yaml
       additionalScrapeConfigs: []
 
     thanosService:
