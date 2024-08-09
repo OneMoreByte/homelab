@@ -25,9 +25,6 @@ spec:
             - containerPort: 9130
               name: tcp
               protocol: TCP
-            - containerPort: 9130
-              name: udp
-              protocol: UDP
           volumeMounts:
             - name: config-volume
               mountPath: /etc/unpoller/up.conf
