@@ -15,6 +15,7 @@ kube-prometheus-stack:
 
     thanosService:
       enabled: true
+      type: NodePort
     thanosServiceMonitor:
       enabled: true
     thanosIngress:
