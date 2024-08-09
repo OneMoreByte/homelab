@@ -20,6 +20,8 @@ kube-prometheus-stack:
         tailscale.com/proxy-class: "jscknet"
       hosts:
         - thanos
+      path:
+        - /
       tls:
         - hosts:
             - thanos
