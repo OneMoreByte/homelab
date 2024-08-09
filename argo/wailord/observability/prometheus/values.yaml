@@ -30,4 +30,3 @@ kube-prometheus-stack:
       tls:
         - hosts:
             - thanos
-          secretName: thanos.local-tls
