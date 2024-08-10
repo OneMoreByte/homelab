@@ -14,7 +14,7 @@ app-template:
           image:
             repository: jesec/rtorrent-flood
             # -- image tag
-            tag: latest@sha256:cf1c64d98789140a1a9d36a2c2750d4c29a7d281ef7856560c64e777e46b7277
+            tag: latest@sha256:515d16b46f1e502ba415a9333b411269845dc1b29f4f27ed10fa91d1d2d319ba
             # -- image pull policy
             pullPolicy: IfNotPresent
           # @default -- See below
