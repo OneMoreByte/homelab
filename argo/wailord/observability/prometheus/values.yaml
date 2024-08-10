@@ -10,7 +10,7 @@ kube-prometheus-stack:
         objectStorageConfig:
           existingSecret:
             name: thanos-s3-config
-            key: object-storage-configs.yaml
+            key: objstore.yml
       additionalScrapeConfigs: []
 
     thanosService:
@@ -19,7 +19,7 @@ kube-prometheus-stack:
     thanosServiceMonitor:
       enabled: true
     thanosIngress:
-      enabled: true
+      enabled: false
       ingressClassName: tailscale
       labels:
         tailscale.com/proxy-class: "jscknet"
@@ -31,3 +31,31 @@ kube-prometheus-stack:
       tls:
         - hosts:
             - thanos
+
+thanos:
+  commonLabels:
+   tailscale.com/proxy-class: "jscknet"
+
+  existingObjstoreSecret: thanos-s3-config
+
+  query:
+    dnsDiscovery:
+      sidecarsService: "prometheus-operated"
+
+  compactor:
+    enabled: true
+
+  storegateway:
+    enabled: true
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+  queryFrontend:
+    ingress:
+      enabled: true
+      hostname: thanos
+      tls: true
+      ingressClassName: tailscale
