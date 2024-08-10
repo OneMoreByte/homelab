@@ -4,8 +4,6 @@ kube-prometheus-stack:
 
   prometheus:
     prometheusSpec:
-      storageSpec:
-        emptyDir: {}
       thanos:
         objectStorageConfig:
           existingSecret:
