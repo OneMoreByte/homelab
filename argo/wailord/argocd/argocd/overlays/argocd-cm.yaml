@@ -15,4 +15,6 @@ data:
     jqPathExpressions:
       - '.spec.volumeClaimTemplates[]?.kind'
       - '.spec.volumeClaimTemplates[]?.apiVersion'
-    
+  resource.customizations.ignoreDifferences.Service: |
+    jqPathExpressions:
+      - '.spec?.clusterIP'

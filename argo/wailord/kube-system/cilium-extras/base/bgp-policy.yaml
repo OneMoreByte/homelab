@@ -7,10 +7,16 @@ spec: # CiliumBGPPeeringPolicySpec
     matchLabels:
       bgp-policy: a
   virtualRouters:
-    - localASN: 65513
+    - exportPodCIDR: false
+      localASN: 65513
       neighbors:
-        - peerAddress: "192.168.13.1/32"
+        - connectRetryTimeSeconds: 120
+          eBGPMultihopTTL: 1
+          holdTimeSeconds: 90
+          keepAliveTimeSeconds: 30
           peerASN: 65511
+          peerAddress: 192.168.13.1/32
+          peerPort: 179
       serviceSelector:
         matchExpressions:
           - { key: somekey, operator: NotIn, values: ["never-used-value"] }

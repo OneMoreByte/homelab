@@ -14,6 +14,7 @@ minio:
       memory: 4Gi
 
   ignoreChartChecksums: true
+  existingSecret: "minio-root"
 
   affinity:
     nodeAffinity:
