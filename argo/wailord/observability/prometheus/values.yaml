@@ -56,6 +56,9 @@ thanos:
   queryFrontend:
     ingress:
       enabled: true
-      hostname: thanos
+      hostname: thanos-query
       tls: true
       ingressClassName: tailscale
+      extraTls:
+        - hosts:
+            - thanos-query
