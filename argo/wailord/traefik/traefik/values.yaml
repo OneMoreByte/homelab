@@ -29,10 +29,7 @@ traefik:
       entryPoint: metrics
       service:
         enabled: true
-        labels: {}
-        annotations: {}
       disableAPICheck: false
-      serviceMonitor: {}
 
   experimental:
     plugins: {}

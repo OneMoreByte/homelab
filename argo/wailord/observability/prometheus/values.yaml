@@ -16,19 +16,6 @@ kube-prometheus-stack:
       clusterIP: ""
     thanosServiceMonitor:
       enabled: true
-    thanosIngress:
-      enabled: false
-      ingressClassName: tailscale
-      labels:
-        tailscale.com/proxy-class: "jscknet"
-      hosts:
-        - thanos
-      paths:
-        - /
-      pathType: ImplementationSpecific
-      tls:
-        - hosts:
-            - thanos
 
 thanos:
   commonLabels:

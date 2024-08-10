@@ -1,18 +1,26 @@
 grafana:
-  image:
-    repository: grafana/grafana
-    # Overrides the Grafana image tag whose default is the chart appVersion
-    tag: "11.1.3"
-    sha: ""
-    pullPolicy: IfNotPresent
+  datasources:
+    datasources.yaml:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-thanos-query-frontend.observability.svc.cluster.local
+        access: proxy
+        isDefault: true
+        jsonData:
+          prometheusType: Thanos
+          customQueryParameters: max_source_resolution=auto
+#      - name: Elasticsearch
+#        type: elasticsearch
+#        url: http://elasticsearch-es-internal-http:9200
+#        password: ""
+#        user: ""
+#        access: proxy
+#        isDefault: false
+#        jsonData:
+#          indexName: "index"
+#          esVersion: "version"
+#          logLevelField: ""
 
-    ## Optionally specify an array of imagePullSecrets.
-    ## Secrets must be manually created in the namespace.
-    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-    ## Can be templated.
-    ##
-    pullSecrets: []
-    #   - myRegistrKeySecretName
 
   persistence:
     type: pvc
@@ -20,30 +28,19 @@ grafana:
     accessModes:
       - ReadWriteOnce
     size: 10Gi
-    # annotations: {}
-    #finalizers:
-    #  - kubernetes.io/pvc-protection
-    # subPath: ""
-    # existingClaim:
+
+  serviceMonitor:
+    enabled: true
 
   ingress:
     enabled: true
-    # Values can be templated
     annotations:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
     labels: {}
     path: /
     hosts:
       - grafana.jackhil.de
-    ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
-    extraPaths: []
-    # - path: /*
-    #   backend:
-    #     serviceName: ssl-redirect
-    #     servicePort: use-annotation
     tls:
       - hosts:
           - grafana.jackhil.de
