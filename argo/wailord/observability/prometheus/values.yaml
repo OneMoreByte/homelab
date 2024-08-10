@@ -4,6 +4,12 @@ kube-prometheus-stack:
 
   prometheus:
     prometheusSpec:
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      probeSelectorNilUsesHelmValues: false
+      scrapeConfigSelectorNilUsesHelmValues: false
+
       thanos:
         objectStorageConfig:
           existingSecret:
