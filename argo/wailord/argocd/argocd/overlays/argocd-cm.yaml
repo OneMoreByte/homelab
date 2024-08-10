@@ -11,4 +11,8 @@ data:
     clientSecret: $argo-client-secret:oidc.keycloak.clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]
     skipAudienceCheckWhenTokenHasNoAudience: true
-
+  resource.customizations.ignoreDifferences.apps_StatefulSet: |
+    jqPathExpressions:
+      - '.spec.volumeClaimTemplates[]?.kind'
+      - '.spec.volumeClaimTemplates[]?.apiVersion'
+    
