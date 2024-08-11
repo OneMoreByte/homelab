@@ -1,10 +1,10 @@
 apiVersion: v2
 name: hass
 type: application
-version: 0.0.1
+version: 0.1.1
 sources:
   - https://artifacthub.io/packages/helm/k8s-at-home/home-assistant
 dependencies:
-  - name: home-assistant
-    version: 13.4.2
-    repository: "https://k8s-at-home.com/charts/"
+  - name: app-template
+    version: 3.3.2
+    repository: "https://bjw-s.github.io/helm-charts"
