@@ -19,9 +19,10 @@ app-template:
             pullPolicy: IfNotPresent
           # @default -- See below
           ports:
-          - name: http
-            port: 3000
-            type: tcp
+            - name: http
+              containerPort: 3000
+              hostPort: 3000
+              type: tcp
           env:
             # -- Set the container timezone
             TZ: UTC
