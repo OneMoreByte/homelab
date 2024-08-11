@@ -6,7 +6,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/home-assistant/home-assistant
-            tag: latest@sha256:515d16b46f1e502ba415a9333b411269845dc1b29f4f27ed10fa91d1d2d319ba
+            tag: 2024.8.1
             pullPolicy: IfNotPresent
 
           env:
