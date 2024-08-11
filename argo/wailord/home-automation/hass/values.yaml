@@ -99,7 +99,7 @@ home-assistant:
     enabled: false
     image:
       repository: bitnami/postgresql
-      tag: 15.7.0
+      tag: 15.8.0
   global:
     postgresql:
       auth:
