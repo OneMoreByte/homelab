@@ -18,11 +18,6 @@ app-template:
             # -- image pull policy
             pullPolicy: IfNotPresent
           # @default -- See below
-          ports:
-            - name: http
-              containerPort: 3000
-              hostPort: 3000
-              type: tcp
           env:
             # -- Set the container timezone
             TZ: UTC
@@ -48,8 +43,10 @@ app-template:
             repository: ghcr.io/qdm12/gluetun
             tag: v3.39.0
           env:
-            - name: FIREWALL
-              value: "off"
+            - name: FIREWALL_INPUT_PORTS
+              value: "3000"
+            - name: FIREWALL_OUTBOUND_SUBNETS
+              value: "10.0.0.0/16,192.168.0.0/24"
             - name: DOT
               value: "off"
           envFrom:
