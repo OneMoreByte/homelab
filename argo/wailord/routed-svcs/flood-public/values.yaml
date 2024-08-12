@@ -49,10 +49,6 @@ app-template:
               value: "10.0.0.0/16,192.168.0.0/24"
             - name: DOT
               value: "off"
-            - name: VPN_PORT_FORWARDING
-              value: "on"
-            - name: VPN_PORT_FORWARDING_PROVIDER
-              value: "airvpn"
           envFrom:
             - secretRef:
                 name: gluetun-protonvpn
