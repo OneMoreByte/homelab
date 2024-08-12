@@ -37,7 +37,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: hass-main
+                name: hass
                 port: 8123
       tls:
         - hosts:
