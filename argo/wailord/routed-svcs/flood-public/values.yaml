@@ -229,7 +229,7 @@ config: |
 
   # Memory resource usage (increase if you have a large number of items loaded,
   # and/or the available resources to spend)
-  pieces.memory.max.set = 1800M
+  pieces.memory.max.set = 4G
   #network.xmlrpc.size_limit.set = 16M
 
   # Basic operational settings
@@ -257,4 +257,6 @@ config: |
   log.add_output = "info", "log"
 
   session.use_lock.set = no
+
+  throttle.global_up.max_rate.set_kb = 100
   ### END of rtorrent.rc ###
