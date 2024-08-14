@@ -221,15 +221,6 @@ config: |
   # UDP tracker support
   trackers.use_udp.set = yes
 
-  # Peer settings
-  throttle.max_uploads.set = 1000
-  throttle.max_uploads.global.set = 25000
-  throttle.min_peers.normal.set = 200
-  throttle.max_peers.normal.set = 600
-  throttle.min_peers.seed.set = 300
-  throttle.max_peers.seed.set = 800
-  trackers.numwant.set = 800
-
   #protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 
   # Limits for file handle resources, this is optimized for
