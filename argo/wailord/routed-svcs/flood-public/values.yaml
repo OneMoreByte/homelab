@@ -43,6 +43,8 @@ app-template:
             repository: ghcr.io/qdm12/gluetun
             tag: v3.39.0
           env:
+            - name: FIREWALL_ENABLED_DISABLING_IT_SHOOTS_YOU_IN_YOUR_FOOT # This fucker...
+              value: "off"
             - name: FIREWALL_INPUT_PORTS
               value: "3000"
             - name: FIREWALL_OUTBOUND_SUBNETS
