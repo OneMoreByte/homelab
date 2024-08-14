@@ -38,27 +38,27 @@ app-template:
               enabled: false
             startup:
               enabled: false
-        gluetun:
-          image:
-            repository: ghcr.io/qdm12/gluetun
-            tag: v3.39.0
-          env:
-            - name: FIREWALL_ENABLED_DISABLING_IT_SHOOTS_YOU_IN_YOUR_FOOT # This fucker...
-              value: "off"
-            - name: FIREWALL_INPUT_PORTS
-              value: "3000"
-            - name: FIREWALL_OUTBOUND_SUBNETS
-              value: "10.233.0.0/16,192.168.0.0/16"
-            - name: DOT
-              value: "off"
-          envFrom:
-            - secretRef:
-                name: gluetun-protonvpn
-          securityContext:
-            privileged: true
-            capabilities:
-              add:
-                - NET_ADMIN
+        #        gluetun:
+        #          image:
+        #            repository: ghcr.io/qdm12/gluetun
+        #            tag: v3.39.0
+        #          env:
+        #            - name: FIREWALL_ENABLED_DISABLING_IT_SHOOTS_YOU_IN_YOUR_FOOT # This fucker...
+        #              value: "off"
+        #            - name: FIREWALL_INPUT_PORTS
+        #              value: "3000"
+        #            - name: FIREWALL_OUTBOUND_SUBNETS
+        #              value: "10.233.0.0/16,192.168.0.0/16"
+        #            - name: DOT
+        #              value: "off"
+        #          envFrom:
+        #            - secretRef:
+        #                name: gluetun-protonvpn
+        #          securityContext:
+        #            privileged: true
+        #            capabilities:
+        #              add:
+        #                - NET_ADMIN
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
   service:
