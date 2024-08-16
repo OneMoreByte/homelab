@@ -16,6 +16,7 @@ resources:
   - base/clusters/thefall.fawn-mamba.ts.net.yaml
   - base/applications/thefall.yaml
   - base/applications/wailord.yaml
+  - base/applications/office-space.yaml
   - base/clusters/office-space.jsck.network.yaml
   - base/clusters/jsck.zfs.rent.yaml
 namespace: argocd
