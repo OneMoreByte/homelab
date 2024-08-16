@@ -1,0 +1,71 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: office-space-helm-appset
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/OneMoreByte/homelab.git
+        revision: HEAD
+        files:
+          - path: argo/office-space/*/*/values.yaml
+        values:
+          base_dir: "argo/office-space/{{ path[2] }}/{{ path[3] }}"
+          app_name: "{{ path[3] }}"
+          namespace: "{{ path[2] }}"
+  template:
+    metadata:
+      name: "office-space-{{ values.app_name }}"
+    spec:
+      project: default
+      source:
+        path: "{{ values.base_dir }}"
+        repoURL: https://github.com/OneMoreByte/homelab.git
+        targetRevision: "HEAD"
+        helm:
+          releaseName: "{{ values.app_name }}"
+          valueFiles:
+            - values.yaml
+      destination:
+        name: office-space.jsck.network
+        namespace: "{{ values.namespace }}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: office-space-kustomize-appset
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/OneMoreByte/homelab.git
+        revision: HEAD
+        files:
+          - path: argo/office-space/*/*/kustomization.yaml
+        values:
+          base_dir: "argo/office-space/{{ path[2] }}/{{ path[3] }}"
+          app_name: "{{ path[3] }}"
+          namespace: "{{ path[2] }}"
+  template:
+    metadata:
+      name: "office-space-{{ values.app_name }}"
+    spec:
+      project: default
+      source:
+        path: "{{ values.base_dir }}"
+        repoURL: https://github.com/OneMoreByte/homelab.git
+        targetRevision: "HEAD"
+      destination:
+        name: office-space.jsck.network
+        namespace: "{{ values.namespace }}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
