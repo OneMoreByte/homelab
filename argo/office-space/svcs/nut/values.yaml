@@ -1,0 +1,77 @@
+app-template:
+  controllers:
+    main:
+      enabled: true
+      strategy: Recreate
+      containers:
+        main:
+          env:
+            TZ: America/Chicago
+          image:
+            repository: docker.io/instantlinux/nut-upsd
+            tag: "2.8.2-r0"
+            pullPolicy: IfNotPresent
+          command: sh
+          args:
+            - -c
+            - 'mkdir -p -m2750 /dev/shm/nut && ln -s /dev/shm/nut /var/run && echo 0 > /var/run/nut/upsd.pid && echo 0 > /var/run/upsmon.pid && chown $USER.$GROUP /dev/shm/nut && /usr/sbin/upsdrvctl -u root start && /usr/sbin/upsd -u $USER && exec /usr/sbin/upsmon -D'
+
+    securityContext:
+      privileged: true
+
+  service:
+    main:
+      controller: main
+      type: NodePort
+      ports:
+        http:
+          port: 3493
+          nodePort: 33493
+
+  configMaps:
+    nut-configs:
+      ups.conf: |
+        [office-ups]
+          driver = usbhid-ups
+          port = auto
+          desc = "UPS for desktop and work laptop"
+          vendorid = "051d"
+          productid = "0002"
+
+      upsd.conf: |
+        LISTEN 0.0.0.0
+      
+
+  persistence:
+    config:
+      enabled: false
+
+    nutData:
+      enabled: false
+      type: hostPath
+      hostPath: /mnt/k8s/nut
+      advancedMounts:
+        main:
+          - path: /etc/nut/
+
+    nutConfigs:
+      enabled: true
+      type: configMap
+      identifier: nut-configs
+      items:
+        - ups.conf
+        - upsd.conf
+      advancedMounts:
+        main:
+          - path: /etc/nut/
+
+    nutSecretConfigs:
+      enabled: true
+      type: configMap
+      name: nut-secret-configs
+      items:
+        - uspmon.conf
+        - upsd.users
+      advancedMounts:
+        main:
+          - path: /etc/nut/

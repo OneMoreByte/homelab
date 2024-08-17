@@ -1,9 +1,0 @@
-tailscale-operator:
-  oauth: {}
-  operatorConfig:
-    hostname: "theroom"
-  proxyConfig:
-    defaultTags: "tag:k8s,tag:theroom"
-
-  apiServerProxyConfig:
-    mode: "true"

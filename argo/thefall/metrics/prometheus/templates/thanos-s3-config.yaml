@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: thanos-s3-config
+  namespace: metrics
+spec:
+  encryptedData:
+    objstore.yml: AgA08AC0s997qzGGjTDLCoeRstzUulKhJu0A1WOHckVD2BJjvmNeq5ukQmwonDVTlYKf9oDyZRva9NrGxosFjce6e9mUTKV+UWCnMfuoZ3ViX46xURx+Zil59aB46dk54E6vAXxGpfSU8UVJ4j3OwKpHDDKVmLhEtkf/SXnGoDZUepPsjb/Q5FsIL0xf6AfXN06rPjqvmaQniQtGAGRujbvCjmSRR1hEMyWxU6fYiBkhVg8tp+eQg5ZEd+z8M51T/ju4pzFT/r8VfO3NbyNqRnyMFv+xMyPsrzp6Lkb6j/emG8jZRm3aZlOC2c3j94uNfkrhXIYTI4YHP2Qn2qZSfeeywAY1xgcNOn1TOwOiu41vHB9OefHNYKC8VlwuQEG6w37EN0Uj7YaM+8gIcMhBx7eyzaRCpJ4zPJOS3gSjK7oyaVxM/ONfiY9CuuMey+F56LxAmMwvY5d/5HHbY0+KXrX3tQNJfxYHUYzVINvhPlpKMOmUdOG/aTr1GV2bZKLJf/94lMJweJuB/LtRmCV/YIMIDa1yKMS5KbyRs/nTQVJ1p80JK02D3bnC/Dns/swQdQ2ZlvO1vA7P4CH/MENjrYWomCNmLJ8aTNeb5cLLFP1a9ewaw6PjYKpSUkVi+F0Dg3VX4vYrr4euKURygLDPuCFqTIsb0yTbxnSqxKNj04206g2+TBToVXNQv99IeogPWqo6Z/MGcZXo8JNVIrNV+SJI5/+X6+SnJgQSsHvktjx2GBKoqnRhwHAM5Af1Cr4CD9a/mN9BKj4JCQsZNYxJ5WdBnTM9deaBy5lkp4lR+IYTWaY2mv+3W5iwuemyE7bLS2jw0JTU5g7uIFFKT5GTwAE8TaNPO33v/fLpGBPv/ri3U7tnNqlA1QKJ8+o64PvnC4xNRnBeBmbCZ0Y=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: thanos-s3-config
+      namespace: metrics
