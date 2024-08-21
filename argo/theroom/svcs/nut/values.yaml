@@ -30,24 +30,25 @@ app-template:
 
   configMaps:
     nut-configs:
-      ups.conf: |       
-        [network-ups]
-          driver = usbhid-ups
-          port = auto
-          desc = "UPS for all networking gear in rack"
-          vendorid = "0764"
-          productid = "0501"
+      data:
+        ups.conf: |       
+          [network-ups]
+            driver = usbhid-ups
+            port = auto
+            desc = "UPS for all networking gear in rack"
+            vendorid = "0764"
+            productid = "0501"
 
-        [server-ups]
-          driver = usbhid-ups
-          port = auto
-          desc = "UPS for servers in rack"
-          vendorid = "0764"
-          productid = "0601"
+          [server-ups]
+            driver = usbhid-ups
+            port = auto
+            desc = "UPS for servers in rack"
+            vendorid = "0764"
+            productid = "0601"
 
-      upsd.conf: |
-        LISTEN 0.0.0.0
-      
+        upsd.conf: |
+          LISTEN 0.0.0.0
+        
 
   persistence:
     config:
