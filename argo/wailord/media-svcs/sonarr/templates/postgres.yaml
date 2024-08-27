@@ -14,4 +14,4 @@ spec:
         - CREATE DATABASE "sonarr-log"
         - ALTER DATABASE "sonarr-log" OWNER TO sonarr
   storage:
-    size: 8Gi
+    size: 32Gi
