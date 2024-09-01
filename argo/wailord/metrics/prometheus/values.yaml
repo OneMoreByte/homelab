@@ -1,0 +1,55 @@
+kube-prometheus-stack:
+  grafana:
+    enabled: false
+
+  prometheus:
+    prometheusSpec:
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      probeSelectorNilUsesHelmValues: false
+      scrapeConfigSelectorNilUsesHelmValues: false
+
+      thanos:
+        objectStorageConfig:
+          existingSecret:
+            name: thanos-s3-config
+            key: objstore.yml
+      additionalScrapeConfigs: []
+
+    thanosService:
+      enabled: true
+      clusterIP: ""
+    thanosServiceMonitor:
+      enabled: true
+
+thanos:
+  commonLabels:
+   tailscale.com/proxy-class: "jscknet"
+
+  existingObjstoreSecret: thanos-s3-config
+
+  query:
+    dnsDiscovery:
+      sidecarsService: "prometheus-operated"
+
+  compactor:
+    enabled: true
+
+  storegateway:
+    enabled: true
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+  queryFrontend:
+    ingress:
+      enabled: true
+      hostname: thanos-query
+      tls: true
+      ingressClassName: tailscale
+      extraTls:
+        - hosts:
+            - thanos-query
