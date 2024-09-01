@@ -8,17 +8,17 @@ spec:
   version: 8.12.1
   elasticsearchRef:
     name: elasticsearch
-    namespace: observability
+    namespace: metrics
   kibanaRef:
     name: kibana-ui
-    namespace: observability
+    namespace: metrics
   config:
     filebeat:
       modules:
         - module: traefik
           access:
             enabled: true
-            var.paths: [ "/var/log/traefik/access.log*" ]
+            var.paths: ["/var/log/traefik/access.log*"]
     processors:
       - add_host_metadata: {}
     setup:
@@ -53,4 +53,3 @@ spec:
           - name: traefik-logs
             persistentVolumeClaim:
               claimName: traefik-logs
-
