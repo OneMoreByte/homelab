@@ -33,9 +33,9 @@ app-template:
 
           image:
             # -- image repository
-            repository: docker.io/plexinc/pms-docker
+            repository: ghcr.io/onemorebyte/plex
             # -- image tag
-            tag: 1.40.5.8921-836b34c27
+            tag: 1.40.5-8897
             # -- image pull policy
             pullPolicy: IfNotPresent
           resources:
