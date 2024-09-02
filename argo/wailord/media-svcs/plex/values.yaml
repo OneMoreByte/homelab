@@ -35,7 +35,7 @@ app-template:
             # -- image repository
             repository: ghcr.io/onemorebyte/plex
             # -- image tag
-            tag: 1.40.5-8897
+            tag: 1.40.5-8921
             # -- image pull policy
             pullPolicy: IfNotPresent
           resources:
