@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: unifi-poller
-  namespace: observability
   labels:
     app: unifi-poller
     type: poller
@@ -33,3 +32,4 @@ spec:
         - name: config-volume
           secret:
             secretName: unifi-poller
+
