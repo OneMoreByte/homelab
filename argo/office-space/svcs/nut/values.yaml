@@ -60,7 +60,12 @@ app-template:
         - upsd.conf
       advancedMounts:
         main:
-          - path: /etc/nut/
+          main:
+            - path: /etc/nut/ups.conf
+              subPath: ups.conf
+            - path: /etc/nut/upsd.conf
+              subPath: upsd.conf
+
 
     nutSecretConfigs:
       enabled: true
@@ -71,4 +76,9 @@ app-template:
         - upsd.users
       advancedMounts:
         main:
-          - path: /etc/nut/
+          main:
+            - path: /etc/nut/uspmon.conf
+              subPath: uspmon.conf
+            - path: /etc/nut/upsd.users
+              subPath: upsd.users
+
