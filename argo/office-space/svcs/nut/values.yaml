@@ -14,7 +14,7 @@ app-template:
           command: sh
           args:
             - -c
-            - 'mkdir -p -m2750 /dev/shm/nut && ln -s /dev/shm/nut /var/run && echo 0 > /var/run/nut/upsd.pid && echo 0 > /var/run/upsmon.pid && /usr/sbin/upsdrvctl -u root start && /usr/sbin/upsd -u root && exec /usr/sbin/upsmon -D'
+            - 'mkdir -p -m2750 /dev/shm/nut && ln -s /dev/shm/nut /var/run  && echo 0 > /var/run/nut/usbhid-ups-server-ups.pid && echo 0 > /var/run/nut/upsd.pid && echo 0 > /var/run/upsmon.pid && /usr/sbin/upsdrvctl -u root start && /usr/sbin/upsd -u root && exec /usr/sbin/upsmon -D'
           securityContext:
             privileged: true
 
