@@ -25,7 +25,7 @@ app-template:
       ports:
         http:
           port: 3493
-          nodePort: 33493
+          nodePort: 30493
 
   configMaps:
     nut-configs:
