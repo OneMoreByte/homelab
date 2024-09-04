@@ -14,8 +14,7 @@ app-template:
           command: sh
           args:
             - -c
-            - 'mkdir -p -m2750 /dev/shm/nut && ln -s /dev/shm/nut /var/run && echo 0 > /var/run/nut/upsd.pid && echo 0 > /var/run/upsmon.pid && chown $USER.$GROUP /dev/shm/nut && /usr/sbin/upsdrvctl -u root start && /usr/sbin/upsd -u $USER && exec /usr/sbin/upsmon -D'
-
+            - "mkdir -p -m2750 /dev/shm/nut && ln -s /dev/shm/nut /var/run && echo 0 > /var/run/nut/upsd.pid && echo 0 > /var/run/upsmon.pid && chown $USER.$GROUP /dev/shm/nut && /usr/sbin/upsdrvctl -u root start && /usr/sbin/upsd -u $USER && exec /usr/sbin/upsmon -D"
 
   defaultPodOptions:
     securityContext:
@@ -33,7 +32,7 @@ app-template:
   configMaps:
     nut-configs:
       data:
-        ups.conf: |       
+        ups.conf: |
           [network-ups]
             driver = usbhid-ups
             port = auto
@@ -50,12 +49,8 @@ app-template:
 
         upsd.conf: |
           LISTEN 0.0.0.0
-        
 
   persistence:
-    config:
-      enabled: false
-
     nutData:
       enabled: false
       type: hostPath
@@ -77,7 +72,7 @@ app-template:
 
     nutSecretConfigs:
       enabled: true
-      type: configMap
+      type: secret
       name: nut-secret-configs
       advancedMounts:
         main:
