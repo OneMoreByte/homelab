@@ -29,16 +29,17 @@ app-template:
 
   configMaps:
     nut-configs:
-      ups.conf: |
-        [office-ups]
-          driver = usbhid-ups
-          port = auto
-          desc = "UPS for desktop and work laptop"
-          vendorid = "051d"
-          productid = "0002"
+      data:
+        ups.conf: |
+          [office-ups]
+            driver = usbhid-ups
+            port = auto
+            desc = "UPS for desktop and work laptop"
+            vendorid = "051d"
+            productid = "0002"
 
-      upsd.conf: |
-        LISTEN 0.0.0.0
+        upsd.conf: |
+          LISTEN 0.0.0.0
       
 
   persistence:
