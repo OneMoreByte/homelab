@@ -21,6 +21,7 @@ app-template:
   persistence:
     config:
       enabled: false
+      type: tmpfs
 
     certs:
       enabled: true
