@@ -48,7 +48,8 @@ app-template:
       hostPath: /mnt/k8s/nut
       advancedMounts:
         main:
-          - path: /etc/nut/
+          main:
+            - path: /etc/nut/
 
     nutConfigs:
       enabled: true
