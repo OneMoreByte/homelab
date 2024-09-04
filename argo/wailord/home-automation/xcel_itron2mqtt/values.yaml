@@ -1,0 +1,32 @@
+app-template:
+  controllers:
+    main:
+      enabled: true
+      strategy: Recreate
+      containers:
+        main:
+          env:
+            MQTT_SERVER: mqtt-mosquitto
+            METER_IP: 192.168.60.102
+          image:
+            repository: ghcr.io/zaknye/xcel_itron2mqtt
+            tag: "main"
+            pullPolicy: IfNotPresent
+
+  service:
+    main:
+      controller: main
+      enabled: false
+
+  persistence:
+    config:
+      enabled: false
+
+    certs:
+      enabled: true
+      type: secret
+      name: xcel-lfdi
+      advancedMounts:
+        main:
+          main:
+            - path: /opt/xcel_itron2mqtt/certs
