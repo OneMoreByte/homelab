@@ -55,9 +55,6 @@ app-template:
       enabled: true
       type: configMap
       identifier: nut-configs
-      items:
-        - ups.conf
-        - upsd.conf
       advancedMounts:
         main:
           main:
@@ -71,9 +68,6 @@ app-template:
       enabled: true
       type: secret
       name: nut-secret-configs
-      items:
-        - uspmon.conf
-        - upsd.users
       advancedMounts:
         main:
           main:
