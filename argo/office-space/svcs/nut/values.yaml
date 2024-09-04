@@ -74,8 +74,8 @@ app-template:
       advancedMounts:
         main:
           main:
-            - path: /etc/nut/uspmon.conf
-              subPath: uspmon.conf
+            - path: /etc/nut/upsmon.conf
+              subPath: upsmon.conf
             - path: /etc/nut/upsd.users
               subPath: upsd.users
 
