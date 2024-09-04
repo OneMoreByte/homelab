@@ -14,7 +14,7 @@ app-template:
           command: sh
           args:
             - -c
-            - 'sleep 50000; mkdir -p -m2750 /dev/shm/nut && ln -s /dev/shm/nut /var/run && rm -rf /var/run/upsmon.pid /var/run/nut/*.pid && echo 0 > /var/run/nut/upsd.pid && echo 0 > /run/upsmon.pid  && /usr/sbin/upsdrvctl -u root start && /usr/sbin/upsd -u root && exec /usr/sbin/upsmon -D'
+            - 'mkdir -p -m2750 /dev/shm/nut && ln -s /dev/shm/nut /var/run && rm -rf /var/run/upsmon.pid /var/run/nut/*.pid && echo 0 > /var/run/nut/upsd.pid && echo 0 > /run/upsmon.pid  && /usr/sbin/upsdrvctl -u root start && /usr/sbin/upsd -u root && exec /usr/sbin/upsmon -D'
           securityContext:
             privileged: true
 
