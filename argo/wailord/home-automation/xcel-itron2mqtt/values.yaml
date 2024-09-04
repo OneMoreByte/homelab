@@ -8,6 +8,7 @@ app-template:
           env:
             MQTT_SERVER: mqtt-mosquitto
             METER_IP: 192.168.60.102
+            METER_PORT: 5353
           image:
             repository: ghcr.io/zaknye/xcel_itron2mqtt
             tag: "main"
