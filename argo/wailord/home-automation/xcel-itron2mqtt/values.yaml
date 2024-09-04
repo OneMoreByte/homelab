@@ -19,10 +19,6 @@ app-template:
       enabled: false
 
   persistence:
-    config:
-      enabled: false
-      type: tmpfs
-
     certs:
       enabled: true
       type: secret
