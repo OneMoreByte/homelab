@@ -62,6 +62,7 @@ app-template:
       enabled: true
       type: configMap
       identifier: nut-configs
+      defaultMode: 384
       advancedMounts:
         main:
           main:
@@ -74,6 +75,7 @@ app-template:
       enabled: true
       type: secret
       name: nut-secret-configs
+      defaultMode: 384
       advancedMounts:
         main:
           main:
