@@ -49,7 +49,7 @@ app-template:
           LISTEN 0.0.0.0
 
   persistence:
-    nutData:
+    nut-data:
       enabled: false
       type: hostPath
       hostPath: /mnt/k8s/nut
@@ -58,7 +58,7 @@ app-template:
           main:
             - path: /etc/nut/
 
-    nutConfigs:
+    nut-configs:
       enabled: true
       type: configMap
       identifier: nut-configs
@@ -70,7 +70,7 @@ app-template:
             - path: /etc/nut/upsd.conf
               subPath: upsd.conf
 
-    nutSecretConfigs:
+    nut-secret-configs:
       enabled: true
       type: secret
       name: nut-secret-configs
