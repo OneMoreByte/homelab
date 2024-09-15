@@ -18,7 +18,7 @@ spec:
       secret:
         name: immich-db-secret
       dataChecksums: true
-      encoding: 'UTF8'
+      encoding: "UTF8"
       # This came from a mix of the pgvector docs and here: https://github.com/immich-app/immich/discussions/8327
       postInitApplicationSQL:
         - CREATE EXTENSION IF NOT EXISTS "vectors";
@@ -29,4 +29,4 @@ spec:
         - GRANT SELECT ON TABLE pg_vector_index_stat to immich;
 
   storage:
-    size: 8Gi
+    size: 32Gi
