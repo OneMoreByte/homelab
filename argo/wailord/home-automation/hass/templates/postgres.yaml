@@ -11,4 +11,4 @@ spec:
       secret:
         name: hass-db-secret
   storage:
-    size: 8Gi
+    size: 64Gi
