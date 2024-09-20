@@ -5,11 +5,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      - zigbee2mqtt
+      app: zigbee2mqtt
   template:
     metadata:
       labels:
-        - zigbee2mqtt
+        app: zigbee2mqtt
     spec:
       serviceAccountName: {{ include "..serviceAccountName" . }}
       containers:
