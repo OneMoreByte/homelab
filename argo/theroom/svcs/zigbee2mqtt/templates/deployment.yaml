@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "..fullname" . }}
+  name: { { include "..fullname" . } }
 spec:
   selector:
     matchLabels:
@@ -11,11 +11,11 @@ spec:
       labels:
         app: zigbee2mqtt
     spec:
-      serviceAccountName: {{ include "..serviceAccountName" . }}
+      serviceAccountName: { { include "..serviceAccountName" . } }
       containers:
-        - name: {{ .Chart.Name }}
+        - name: { { .Chart.Name } }
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: { { .Values.image.pullPolicy } }
           volumeMounts:
             - mountPath: /run/udev
               name: udev
@@ -26,39 +26,13 @@ spec:
           securityContext:
             privileged: true
           env:
-          - name: "TZ"
-            value: "America/Chicago"
+            - name: "TZ"
+              value: "America/Chicago"
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: { { .Values.service.port } }
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
       volumes:
-        - name: ttyacm0
-          hostPath:
-            path: /dev
-        - name: udev
-          hostPath:
-            path: /run/udev
         - name: data
           hostPath:
             path: /mnt/k8s/zigbee2mqtt/
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
