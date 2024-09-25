@@ -1,7 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-resources:
-  - base/elasticsearch.yaml
-  - base/filebeat-container-logs.yaml
-  - base/traefik-logs.yaml
