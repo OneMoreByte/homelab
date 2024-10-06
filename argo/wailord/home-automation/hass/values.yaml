@@ -1,6 +1,7 @@
 app-template:
   controllers:
     main:
+      enabled: false
       containers:
         main:
           image:
