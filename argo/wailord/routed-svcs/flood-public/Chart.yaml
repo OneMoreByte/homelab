@@ -1,9 +1,0 @@
-apiVersion: v2
-name: flood-public
-type: application
-version: 0.0.2
-sources: []
-dependencies:
-  - name: app-template
-    version: 3.5.0
-    repository: "https://bjw-s.github.io/helm-charts"
