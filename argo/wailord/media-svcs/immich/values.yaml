@@ -16,7 +16,7 @@ immich:
   image:
     repository: ghcr.io/immich-app/immich-server
     pullPolicy: IfNotPresent
-    tag: v1.107.2
+    tag: v1.117.0
 
   immich:
     metrics:
@@ -102,7 +102,6 @@ immich:
         enabled: true
         type: secret
         name: immich-config
-
 
   machine-learning:
     enabled: true
