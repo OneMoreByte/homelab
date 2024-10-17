@@ -6,5 +6,5 @@ sources:
   - https://cloudnative-pg.io/documentation/1.22/installation_upgrade/
 dependencies:
   - name: cloudnative-pg
-    version: 0.22.0
+    version: 0.22.1
     repository: "https://cloudnative-pg.github.io/charts"
