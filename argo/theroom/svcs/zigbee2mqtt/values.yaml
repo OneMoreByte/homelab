@@ -9,7 +9,7 @@ app-template:
             TZ: America/Chicago
           image:
             repository: ghcr.io/koenkk/zigbee2mqtt
-            tag: "1.40.2"
+            tag: "1.41.0"
             pullPolicy: IfNotPresent
           securityContext:
             privileged: true
