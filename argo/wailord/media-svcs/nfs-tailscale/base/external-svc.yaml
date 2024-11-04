@@ -2,9 +2,8 @@ apiVersion: tailscale.com/v1alpha1
 kind: Connector
 metadata:
   name: home-server-network
-  labels:
-    tailscale.com/proxy-class: "jscknet"
 spec:
+  proxyClass: "jscknet"
   hostname: home-server-network
   subnetRouter:
     advertiseRoutes:
