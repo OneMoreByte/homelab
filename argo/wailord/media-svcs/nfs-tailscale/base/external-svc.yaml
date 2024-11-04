@@ -68,48 +68,47 @@ subsets:
       - name: nfs-tcp
         protocol: TCP
         port: 2049
-        targetPort: 2049
+
       - name: nfs-udp
         protocol: UDP
         port: 2049
-        targetPort: 2049
+
       - name: rpc-tcp
         protocol: TCP
         port: 111
-        targetPort: 111
+
       - name: rpc-udp
         protocol: UDP
         port: 111
-        targetPort: 111
+
       - name: statd-tcp
         protocol: TCP
         port: 20768
-        targetPort: 20768
+
       - name: statd-udp
         protocol: UDP
         port: 20768
-        targetPort: 20768
+
       - name: lockd-tcp
         protocol: TCP
         port: 20767
-        targetPort: 20767
+
       - name: lockd-udp
         protocol: UDP
         port: 20767
-        targetPort: 20767
+
       - name: mountd-tcp
         protocol: TCP
         port: 20048
-        targetPort: 20048
+
       - name: mountd-udp
         protocol: UDP
         port: 20048
-        targetPort: 20048
+
       - name: rdma-tcp
         protocol: TCP
         port: 20049
-        targetPort: 20049
+
       - name: rdma-udp
         protocol: UDP
         port: 20049
-        targetPort: 20049
