@@ -2,7 +2,7 @@ apiVersion: tailscale.com/v1alpha1
 kind: Connector
 metadata:
   name: home-server-network
-  annotations:
+  labels:
     tailscale.com/proxy-class: "jscknet"
 spec:
   hostname: home-server-network
