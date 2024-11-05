@@ -7,4 +7,4 @@ spec:
   hostname: home-server-network
   subnetRouter:
     advertiseRoutes:
-      - "192.168.13.0/28"
+      - "192.168.13.0/24"
