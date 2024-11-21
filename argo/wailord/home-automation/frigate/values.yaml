@@ -2,6 +2,8 @@ frigate:
   env:
 #    YOLO_MODELS: yolov4-608,yolov7x-640
     USE_FP16: false
+    NVIDIA_DRIVER_CAPABILITIES: all
+    NVIDIA_VISIBLE_DEVICES: all
 
   # -- set environment variables from Secret(s)
   envFromSecrets:
@@ -9,8 +11,9 @@ frigate:
     - frigate-rstp-credentials
 
   gpu:
+    # We're over-provisioning the gpu :)
     nvidia:
-      enabled: true
+      enabled: false
 
   persistence:
     data:
