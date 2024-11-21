@@ -1,4 +1,9 @@
 frigate:
+
+  image:
+    repository: ghcr.io/blakeblackshear/frigate
+    tag: 0.14.1-tensorrt
+
   env:
 #    YOLO_MODELS: yolov4-608,yolov7x-640
     USE_FP16: false
