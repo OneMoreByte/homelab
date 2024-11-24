@@ -1,11 +1,6 @@
 frigate:
-
-  image:
-    repository: ghcr.io/blakeblackshear/frigate
-    tag: 0.14.1-tensorrt
-
   env:
-#    YOLO_MODELS: yolov4-608,yolov7x-640
+    #    YOLO_MODELS: yolov4-608,yolov7x-640
     USE_FP16: false
     NVIDIA_DRIVER_CAPABILITIES: all
     NVIDIA_VISIBLE_DEVICES: all
@@ -55,7 +50,6 @@ frigate:
     media:
       enabled: false
 
-
   # -- declare extra volumes to use for Frigate
   extraVolumes:
     - name: recording-storage
@@ -93,10 +87,7 @@ frigate:
         retain:
           default: 7
           mode: all
-    detectors:
-      tensorrt:
-        type: tensorrt
-        device: 0 #This is the default, select the first GPU
+    detectors: {}
 
     model:
       path: /config/model_cache/tensorrt/yolov7-320.trt
@@ -244,9 +235,6 @@ frigate:
   ingress:
     # Needed to make our own for tailscale.
     enabled: false
-
-
-
 
   # -- Set resource limits/requests for the Pod(s)
   resources:
