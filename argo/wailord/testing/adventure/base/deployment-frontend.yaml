@@ -19,12 +19,14 @@ spec:
         - name: adventure-frontend
           image: ghcr.io/seanmorley15/adventurelog-frontend:latest
           imagePullPolicy: IfNotPresent
+          command: ["bash"]
+          args: ["-c" "ORIGIN=$ORIGIN node --trace-warnings build"]
           ports:
             - containerPort: 3000
           env:
             - name: PUBLIC_SERVER_URL
               value: "http://adventure-backend.testing.svc.cluster.local:8016"
             - name: ORIGIN
-              value: "http://adventure.fawn-mamba.ts.net node --trace-warnings build ||"
+              value: "http://adventure.fawn-mamba.ts.net"
             - name: BODY_SIZE_LIMIT
               value: "Infinity"
