@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: adventure-backend-nginx-config
 data:
-  nginx.config: |
+  nginx.conf: |
     worker_processes 1;
     events {
         worker_connections 1024;
