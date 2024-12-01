@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adventure-frontend
+  labels:
+    app: adventure-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adventure-frontend
+  template:
+    metadata:
+      name: adventure-frontend
+      labels:
+        app: adventure-frontend
+    spec:
+      containers:
+        - name: adventure-frontend
+          image: ghcr.io/seanmorley15/adventurelog-frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PUBLIC_SERVER_URL
+              value: "http://adventure-backend.testing.svc.cluster.local:8016"
+            - name: ORIGIN
+              value: "http://adventure-test.fawn-mamba.ts.net"
+            - name: BODY_SIZE_LIMIT
+              value: "Infinity"

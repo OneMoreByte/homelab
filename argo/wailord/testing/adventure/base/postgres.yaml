@@ -1,0 +1,14 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: adventure-pg-cluster
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: database
+      owner: adventure
+      secret:
+        name: adventure-db-secret
+  storage:
+    size: 8Gi

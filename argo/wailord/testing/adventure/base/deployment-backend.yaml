@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adventure-backend
+  labels:
+    app: adventure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adventure-backend
+  template:
+    metadata:
+      name: adventure-backend
+      labels:
+        app: adventure-backend
+    spec:
+      containers:
+        - name: adventure-backend
+          image: ghcr.io/seanmorley15/adventurelog-backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: adventure-journal
+              mountPath: /code/media
+          env:
+            - name: PGHOST
+              value: "adventure-pg-cluster"
+            - name: PGDATABASE
+              value: "database"
+            - name: PGUSER
+              value: "adventure"
+            - name: PGPASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: adventurelog-secret
+                  key: password
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: adventurelog-secret
+                  key: secret_key
+            - name: PUBLIC_URL
+              value: "http://adventure-test.fawn-mamba.ts.net" # Match the outward port, used for the creation of image urls
+            - name: FRONTEND_URL
+              value: "http://adventure-test.fawn-mamba.ts.net"
+            - name: CSRF_TRUSTED_ORIGINS
+              value: "http://adventure-test.fawn-mamba.ts.net:80,http://adventure-test:80"
+            - name: DJANGO_ADMIN_USERNAME
+              value: "admin"
+            - name: DJANGO_ADMIN_PASSWORD
+              value: "admin"
+            - name: DJANGO_ADMIN_EMAIL
+              value: "admin@example.com"
+            - name: DEBUG
+              value: "True"
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: adventure-journal
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
