@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- base/deployment-frontend.yaml
+- base/deployment-backend.yaml
+- base/loadbalancer-frontend.yaml
+- base/loadbalancer-backend.yaml
+- base/postgres.yaml
+- adventurelog-secret.yaml
