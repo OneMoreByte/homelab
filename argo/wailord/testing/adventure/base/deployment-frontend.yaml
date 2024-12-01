@@ -20,7 +20,7 @@ spec:
           image: ghcr.io/seanmorley15/adventurelog-frontend:latest
           imagePullPolicy: IfNotPresent
           command: ["sh"]
-          args: ["-c", "ORIGIN=$ORIGIN node --trace-warnings build"]
+          args: ["-c", "ORIGIN=$ORIGIN node --trace-warnings dev"]
           ports:
             - containerPort: 3000
           env:
