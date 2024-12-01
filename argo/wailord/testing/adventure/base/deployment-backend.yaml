@@ -28,6 +28,8 @@ spec:
           volumeMounts:
             - name: adventure-journal
               mountPath: /code/media
+          command: ["sleep"]
+          args: ["5000"]
           env:
             - name: PGHOST
               value: "adventure-pg-cluster-rw"
