@@ -15,6 +15,10 @@ spec:
       labels:
         app: adventure-backend
     spec:
+      volumes:
+        - name: adventure-journal
+          persistentVolumeClaim:
+            claimName: adventure-journal-pvc
       containers:
         - name: adventure-backend
           image: ghcr.io/seanmorley15/adventurelog-backend:latest
