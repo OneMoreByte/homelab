@@ -50,7 +50,7 @@ spec:
             - name: FRONTEND_URL
               value: "http://adventure-test.fawn-mamba.ts.net"
             - name: CSRF_TRUSTED_ORIGINS
-              value: "http://adventure-test.fawn-mamba.ts.net:80,http://adventure-test:80"
+              value: "http://adventure-test.fawn-mamba.ts.net:80"
             - name: DJANGO_ADMIN_USERNAME
               value: "admin"
             - name: DJANGO_ADMIN_PASSWORD
