@@ -25,6 +25,6 @@ spec:
             - name: PUBLIC_SERVER_URL
               value: "http://adventure-backend.testing.svc.cluster.local:8016"
             - name: ORIGIN
-              value: "http://adventure-test.fawn-mamba.ts.net"
+              value: "http://adventure.fawn-mamba.ts.net"
             - name: BODY_SIZE_LIMIT
               value: "Infinity"
