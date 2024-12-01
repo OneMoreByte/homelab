@@ -23,7 +23,7 @@ spec:
             - containerPort: 3000
           env:
             - name: PUBLIC_SERVER_URL
-              value: "http://adventure-backend.testing.svc.cluster.local:8000"
+              value: "http://adventure-backend.testing.svc.cluster.local:8016"
             - name: ORIGIN
               value: "http://adventure.fawn-mamba.ts.net"
             - name: BODY_SIZE_LIMIT
