@@ -53,7 +53,7 @@ spec:
                   name: adventurelog-secret
                   key: secret_key
             - name: PUBLIC_URL
-              value: "http://adventure.fawn-mamba.ts.net:80" # Match the outward port, used for the creation of image urls
+              value: "http://adventure-backend.fawn-mamba.ts.net:8016"
             - name: FRONTEND_URL
               value: "http://adventure.fawn-mamba.ts.net:80"
             - name: CSRF_TRUSTED_ORIGINS
