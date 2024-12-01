@@ -1,12 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wanderlust
-
+  name: adventure
   annotations:
-    tailscale.com/hostname: adventure-test
+    tailscale.com/hostname: adventure
   labels:
-    tailscale.com/proxy-class: "irish-eyes"
+    tailscale.com/proxy-class: "jscknet"
 spec:
   type: LoadBalancer
   loadBalancerClass: tailscale
@@ -16,4 +15,4 @@ spec:
     protocol: TCP
     targetPort: 3000
   selector:
-    app: adventure
+    app: adventure-frontend
