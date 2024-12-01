@@ -19,7 +19,7 @@ spec:
         - name: adventure-frontend
           image: ghcr.io/seanmorley15/adventurelog-frontend:latest
           imagePullPolicy: IfNotPresent
-          command: ["bash"]
+          command: ["sh"]
           args: ["-c", "ORIGIN=$ORIGIN node --trace-warnings build"]
           ports:
             - containerPort: 3000
