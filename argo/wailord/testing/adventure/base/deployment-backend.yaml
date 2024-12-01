@@ -57,7 +57,7 @@ spec:
             - name: FRONTEND_URL
               value: "http://adventure.fawn-mamba.ts.net:80"
             - name: CSRF_TRUSTED_ORIGINS
-              value: "http://adventure.fawn-mamba.ts.net:80"
+              value: "http://adventure.fawn-mamba.ts.net:80, http://adventure-backend.fawn-mamba.ts.net:8016, http://adventure-backend:8016, http://adventure-backend.testing.svc.cluster.local:8016"
             - name: DJANGO_ADMIN_USERNAME
               value: "admin"
             - name: DJANGO_ADMIN_PASSWORD
