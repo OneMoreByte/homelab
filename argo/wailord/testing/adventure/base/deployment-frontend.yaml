@@ -25,6 +25,6 @@ spec:
             - name: PUBLIC_SERVER_URL
               value: "http://adventure-backend:8016"
             - name: ORIGIN
-              value: "http://adventure-backend.fawn-mamba.ts.net:8016"
+              value: "http://adventure-backend:8016"
             - name: BODY_SIZE_LIMIT
               value: "Infinity"
