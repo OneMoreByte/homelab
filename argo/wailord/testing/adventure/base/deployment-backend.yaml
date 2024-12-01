@@ -74,3 +74,19 @@ spec:
   resources:
     requests:
       storage: 10Gi
+---
+# This is an insane loopback that's required because of how the adventurelog backend nginx is configured...
+# nginx will try to resolve a "server:8000"
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8000
+      targetPort: 3000
+  selector:
+    app: adventure-backend
