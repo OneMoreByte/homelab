@@ -30,7 +30,7 @@ spec:
               mountPath: /code/media
           env:
             - name: PGHOST
-              value: "adventure-pg-cluster"
+              value: "adventure-pg-cluster-rw"
             - name: PGDATABASE
               value: "database"
             - name: PGUSER
