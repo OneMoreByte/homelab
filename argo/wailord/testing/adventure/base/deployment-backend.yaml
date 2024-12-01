@@ -19,6 +19,9 @@ spec:
         - name: adventure-journal
           persistentVolumeClaim:
             claimName: adventure-journal
+        - name: nginx-replace
+          configMap:
+            name: adventure-backend-nginx-config
       containers:
         - name: adventure-backend
           image: ghcr.io/seanmorley15/adventurelog-backend:latest
@@ -29,6 +32,9 @@ spec:
           volumeMounts:
             - name: adventure-journal
               mountPath: /code/media
+            - name: nginx-replace
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
           env:
             - name: PGHOST
               value: "adventure-pg-cluster-rw"

@@ -8,3 +8,4 @@ resources:
 - base/loadbalancer-backend.yaml
 - base/postgres.yaml
 - base/adventurelog-secret.yaml
+- base/backend-nginx-workaround-cm.yaml
