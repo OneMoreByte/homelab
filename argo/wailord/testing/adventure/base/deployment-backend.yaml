@@ -24,6 +24,7 @@ spec:
           image: ghcr.io/seanmorley15/adventurelog-backend:latest
           imagePullPolicy: IfNotPresent
           ports:
+            - containerPort: 80
             - containerPort: 3000
           volumeMounts:
             - name: adventure-journal

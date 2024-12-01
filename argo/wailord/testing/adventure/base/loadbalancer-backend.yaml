@@ -13,6 +13,6 @@ spec:
     - name: http
       protocol: TCP
       port: 8016
-      targetPort: 3000
+      targetPort: 80
   selector:
     app: adventure-backend
