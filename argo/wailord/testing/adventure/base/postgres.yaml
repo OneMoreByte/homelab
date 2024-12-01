@@ -9,6 +9,6 @@ spec:
       database: database
       owner: adventure
       secret:
-        name: adventure-db-secret
+        name: adventurelog-secret
   storage:
     size: 8Gi
