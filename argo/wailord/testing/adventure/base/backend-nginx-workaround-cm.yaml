@@ -19,6 +19,7 @@ data:
         server {
             listen 80;  # NGINX always listens on port 80 inside the container
             server_name localhost;
+            client_max_body_size 1G;
 
             location / {
                 proxy_pass http://localhost:8000;  # Explicitly forward to Django service
