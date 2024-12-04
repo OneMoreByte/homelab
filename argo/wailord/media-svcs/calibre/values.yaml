@@ -1,0 +1,66 @@
+app-template:
+  controllers:
+    main:
+      enabled: true
+      strategy: Recreate
+      containers:
+        main:
+          env:
+            TZ: America/Chicago
+            PUID: 11337
+            PGID: 11337
+          image:
+            repository: linuxserver/calibre
+            tag: "7.22.0"
+            pullPolicy: IfNotPresent
+      #      initContainers:
+      #        hold:
+      #          image:
+      #            repository: ghcr.io/roxedus/pgloader
+      #            tag: latest
+      #          command: ["sleep", "500000"]
+  defaultPodOptions:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - bulk-datastore
+    securityContext:
+      #  runAsUser: 11337
+      #runAsGroup: 11337
+      fsGroup: 11337
+
+  # -- Configures service settings for the chart.
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: 8081
+        gui:
+          port: 8181
+
+  ingress:
+    # -- Enable and configure ingress settings for the chart under this key.
+    main:
+      enabled: false
+
+  # -- Configure persistence settings for the chart under this key.
+  persistence:
+    config:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 16Gi
+    books:
+      enabled: true
+      type: hostPath
+      hostPath: /store/text-media/
+      advancedMounts:
+        main:
+          main:
+            - path: /books
+              readOnly: false
