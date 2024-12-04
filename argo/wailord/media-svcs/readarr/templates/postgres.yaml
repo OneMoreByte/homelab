@@ -12,6 +12,6 @@ spec:
         name: readarr-db-secret
       postInitSQL:
         - CREATE DATABASE "readarr-log"
-        - ALTER DATABASE "readarr-log" OWNER TO radarr
+        - ALTER DATABASE "readarr-log" OWNER TO readarr
   storage:
     size: 8Gi
