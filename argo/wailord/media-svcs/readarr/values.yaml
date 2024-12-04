@@ -10,8 +10,8 @@ app-template:
             PUID: 11337
             PGID: 11337
           image:
-            repository: hotio/radarr
-            tag: "release-5.15.1.9463"
+            repository: hotio/readarr
+            tag: "testing-0.4.4.2686"
             pullPolicy: IfNotPresent
       #      initContainers:
       #        hold:
@@ -40,7 +40,7 @@ app-template:
       controller: main
       ports:
         http:
-          port: 7878
+          port: 8787
 
   ingress:
     # -- Enable and configure ingress settings for the chart under this key.
@@ -50,16 +50,16 @@ app-template:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       enabled: true
       hosts:
-        - host: radarr.jackhil.de
+        - host: readarr.jackhil.de
           paths:
             - path: /
               pathType: Prefix
               service:
-                name: radarr
-                port: 7878
+                name: readarr
+                port: 8787
       tls:
         - hosts:
-            - radarr.jackhil.de
+            - readarr.jackhil.de
           secretName: jackhil.de-cert
 
   # -- Configure persistence settings for the chart under this key.
@@ -71,7 +71,7 @@ app-template:
     media:
       enabled: true
       type: hostPath
-      hostPath: /store/plex-files/
+      hostPath: /store/text-media/
     torrent:
       enabled: true
       type: hostPath

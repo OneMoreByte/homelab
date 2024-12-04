@@ -11,7 +11,7 @@ app-template:
             PGID: 11337
           image:
             repository: hotio/prowlarr
-            tag: "release-1.19.0.4568"
+            tag: "release-1.27.0.4852"
             pullPolicy: IfNotPresent
           securityContext:
             #runAsUser: 11337
