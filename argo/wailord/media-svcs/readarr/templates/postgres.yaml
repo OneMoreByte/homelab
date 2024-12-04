@@ -13,5 +13,7 @@ spec:
       postInitSQL:
         - CREATE DATABASE "readarr-log"
         - ALTER DATABASE "readarr-log" OWNER TO readarr
+        - CREATE DATABASE "readarr-cache"
+        - ALTER DATABASE "readarr-cache" OWNER TO readarr
   storage:
     size: 8Gi
