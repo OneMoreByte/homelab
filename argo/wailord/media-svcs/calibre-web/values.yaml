@@ -57,7 +57,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: calibre
+                name: calibre-web
                 port: 8083
       tls:
         - hosts:
