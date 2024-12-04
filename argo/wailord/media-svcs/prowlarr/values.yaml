@@ -13,10 +13,6 @@ app-template:
             repository: hotio/prowlarr
             tag: "release-1.27.0.4852"
             pullPolicy: IfNotPresent
-          securityContext:
-            #runAsUser: 11337
-            #runAsGroup: 11337
-            fsGroup: 11337
 
       #initContainers:
       #  hold:
@@ -25,6 +21,11 @@ app-template:
       # tag: latest
       #command: ["sleep", "500000"]
 
+  defaultPodOptions:
+    securityContext:
+      #  runAsUser: 11337
+      #runAsGroup: 11337
+      fsGroup: 11337
   # -- Configures service settings for the chart.
   service:
     main:
