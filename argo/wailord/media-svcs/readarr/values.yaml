@@ -72,6 +72,11 @@ app-template:
       enabled: true
       type: hostPath
       hostPath: /store/text-media/
+      advancedMounts:
+        main:
+          main:
+            - path: /books
+              readOnly: false
     torrent:
       enabled: true
       type: hostPath
