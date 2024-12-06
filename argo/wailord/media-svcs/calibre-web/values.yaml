@@ -49,7 +49,7 @@ app-template:
     main:
       annotations:
         traefik.ingress.kubernetes.io/router.tls: "true"
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
       enabled: true
       hosts:
         - host: calibre.jackhil.de
