@@ -48,7 +48,6 @@ app-template:
     # -- Enable and configure ingress settings for the chart under this key.
     main:
       annotations:
-        #traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
       enabled: true
       hosts:
