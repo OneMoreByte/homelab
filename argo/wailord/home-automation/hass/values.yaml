@@ -11,6 +11,7 @@ app-template:
           env:
             # -- Set the container timezone
             TZ: "America/Chicago"
+            PYTHONPATH: /config/deps
       #      initContainers:
       #        hold:
       #          image:
