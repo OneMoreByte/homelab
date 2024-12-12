@@ -12,12 +12,7 @@ app-template:
             # -- Set the container timezone
             TZ: "America/Chicago"
             PYTHONPATH: /config/deps
-      initContainers:
-        hold:
-          image:
-            repository: ghcr.io/roxedus/pgloader
-            tag: latest
-          command: ["sleep", "500000"]
+          #command: ["sleep", "500000"]
   service:
     main:
       controller: main
