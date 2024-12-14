@@ -52,7 +52,7 @@ spec:
       volumes:
         - configMap:
             items:
-              - key: nginx.conf
+              - key: nginx.config
                 path: nginx.conf
             name: nginx-config
           name: nginx-config
