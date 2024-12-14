@@ -28,8 +28,7 @@ spec:
               name: http
               protocol: TCP
           volumeMounts:
-            - mountPath: /etc/nginx/nginx.conf
-              subPath: nginx.conf
+            - mountPath: /etc/nginx/
               name: nginx-config
         - name: ts-sidecar
           imagePullPolicy: Always
@@ -54,5 +53,6 @@ spec:
         - configMap:
             items:
               - key: nginx.conf
+                path: nginx.conf
             name: redroom-minio-nginx-config
           name: nginx-config
