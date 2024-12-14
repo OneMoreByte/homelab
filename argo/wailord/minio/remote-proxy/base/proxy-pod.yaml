@@ -54,5 +54,5 @@ spec:
             items:
               - key: nginx.conf
                 path: nginx.conf
-            name: redroom-minio-nginx-config
+            name: nginx-config
           name: nginx-config
