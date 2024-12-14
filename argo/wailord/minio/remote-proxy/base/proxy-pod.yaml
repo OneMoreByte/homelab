@@ -24,7 +24,9 @@ spec:
           image: "nginx:1.27.3"
           imagePullPolicy: Always
           ports:
-            - 80:80
+            - containerPort: 80
+              name: http
+              protocol: TCP
           volumeMounts:
             - mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
