@@ -5,3 +5,6 @@ resources:
 - base/proxy-pod.yaml
 - base/proxy-svc.yaml
 - base/redroom-ts-secret.yaml
+- base/sa.yaml
+- base/ts-rolebindings.yaml
+- base/ts-role.yaml

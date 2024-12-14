@@ -19,6 +19,7 @@ spec:
       labels:
         app: redroom-minio-proxy
     spec:
+      serviceAccountName: minio-redroom-proxy
       containers:
         - name: nginx-proxy
           image: "nginx:1.27.3"
