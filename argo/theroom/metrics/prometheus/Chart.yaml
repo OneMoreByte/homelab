@@ -9,5 +9,5 @@ dependencies:
     version: 66.6.0
     repository: "https://prometheus-community.github.io/helm-charts"
   - name: thanos
-    version: 15.8.4
+    version: 15.9.2
     repository: https://charts.bitnami.com/bitnami
