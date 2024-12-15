@@ -9,6 +9,7 @@ data:
 
         location / {
             proxy_pass https://100.106.95.54:9000/;
+            proxy_pass_request_headers off;
         }
     }
 ---
