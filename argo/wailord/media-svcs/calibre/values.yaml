@@ -41,7 +41,7 @@ app-template:
       ports:
         http:
           port: 8081
-        gui:
+        https: # This is really fucky tailscale...
           port: 8181
 
   ingress:
