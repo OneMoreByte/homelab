@@ -15,7 +15,7 @@ spec:
               service:
                 name: calibre
                 port:
-                  number: 8081
+                  number: 8181
             path: /
             pathType: ImplementationSpecific
   tls:
