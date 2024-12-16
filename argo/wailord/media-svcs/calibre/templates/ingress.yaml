@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app: calibre
+    tailscale.com/proxy-class: "jscknet"
+  name: calibre
+spec:
+  ingressClassName: tailscale
+  rules:
+    - host: calibre
+      http:
+        paths:
+          - backend:
+              service:
+                name: calibre
+                port:
+                  number: 8081
+            path: /
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - calibre
