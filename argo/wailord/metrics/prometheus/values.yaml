@@ -38,6 +38,9 @@ thanos:
 
   storegateway:
     enabled: true
+    resources:
+      limits:
+        memory: 1Gi
 
   metrics:
     enabled: true
