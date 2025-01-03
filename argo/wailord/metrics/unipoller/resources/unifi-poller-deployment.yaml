@@ -22,7 +22,7 @@ spec:
           image: ghcr.io/unpoller/unpoller:v2.9.2
           ports:
             - containerPort: 9130
-              name: tcp
+              name: metrics
               protocol: TCP
           volumeMounts:
             - name: config-volume
