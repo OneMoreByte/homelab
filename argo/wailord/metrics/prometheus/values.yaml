@@ -73,12 +73,17 @@ kube-prometheus-stack:
         {{ end }}
         {{ end }}
 
-    # Mount the secret as a file
-    secrets:
-      - name: alertmanager-discord-webhook
-        mountPath: /etc/alertmanager/secrets
-        subPath: webhook-url
-        key: webhook-url
+    alertmanagerSpec:
+      volumeMounts:
+        - name: alertmanager-discord-webhook
+          mountPath: /etc/alertmanager/secrets
+          subPath: webhook-url
+          key: webhook-url
+
+      volumes:
+        - name: alertmanager-discord-webhook
+          secret:
+            secretName: alertmanager-discord-webhook
 
 thanos:
   commonLabels:
