@@ -10,6 +10,17 @@ kube-prometheus-stack:
       probeSelectorNilUsesHelmValues: false
       scrapeConfigSelectorNilUsesHelmValues: false
 
+      # Allegedly, an llm said this will select all labels.
+      serviceMonitorSelector:
+        matchLabels: {}
+      podMonitorSelector:
+        matchLabels: {}
+      probeSelector:
+        matchLabels: {}
+      ruleSelector:
+        matchLabels: {}
+      scrapeConfigSelector:
+        matchLabels: {}
       thanos:
         objectStorageConfig:
           existingSecret:
@@ -23,10 +34,55 @@ kube-prometheus-stack:
     thanosServiceMonitor:
       enabled: true
 
+  alertmanager:
+    config:
+      global:
+        resolve_timeout: 5m
+      route:
+        group_by: ["job"]
+        group_wait: 30s
+        group_interval: 5m
+        repeat_interval: 12h
+        receiver: "discord-notifications"
+      receivers:
+        - name: "discord-notifications"
+          discord_configs:
+            - webhook_url_file: "/etc/alertmanager/secrets/webhook-url"
+              title: '{{ template "discord.default.title" . }}'
+              message: '{{ template "discord.default.message" . }}'
+      templates:
+        - "/etc/alertmanager/config/*.tmpl"
+    templateFiles:
+      discord.tmpl: |-
+        {{ define "discord.default.title" }}
+        [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }}
+        {{ end }}
+
+        {{ define "discord.default.message" }}
+        {{ if gt (len .Alerts.Firing) 0 }}
+        **Alerts Firing:**
+        {{ range .Alerts.Firing }}
+        • {{ .Labels.instance }}: {{ .Annotations.description }}
+        {{- end }}
+        {{ end }}
+        {{ if gt (len .Alerts.Resolved) 0 }}
+        **Alerts Resolved:**
+        {{ range .Alerts.Resolved }}
+        • {{ .Labels.instance }}: {{ .Annotations.description }}
+        {{- end }}
+        {{ end }}
+        {{ end }}
+
+    # Mount the secret as a file
+    secrets:
+      - name: alertmanager-discord-webhook
+        mountPath: /etc/alertmanager/secrets
+        subPath: webhook-url
+        key: webhook-url
+
 thanos:
   commonLabels:
-   tailscale.com/proxy-class: "jscknet"
-
+    tailscale.com/proxy-class: "jscknet"
   existingObjstoreSecret: thanos-s3-config
 
   query:
