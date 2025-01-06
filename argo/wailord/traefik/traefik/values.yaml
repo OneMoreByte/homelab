@@ -29,6 +29,10 @@ traefik:
       entryPoint: metrics
       service:
         enabled: true
+      serviceMonitor:
+        enabled: true
+      prometheusRule:
+        enabled: true
       disableAPICheck: false
 
   experimental:
