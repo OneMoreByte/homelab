@@ -111,3 +111,7 @@ longhorn:
 
   # Annotations to add to the Longhorn Manager DaemonSet Pods. Optional.
   annotations: {}
+
+  metrics:
+    serviceMonitor:
+      enabled: true
