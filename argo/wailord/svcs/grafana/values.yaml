@@ -3,14 +3,20 @@ grafana:
     datasources.yaml:
       apiVersion: 1
       datasources:
-        - name: Prometheus
+        - name: Thanos
           type: prometheus
           url: http://prometheus-thanos-query-frontend.observability.svc.cluster.local
           access: proxy
-          isDefault: true
+          isDefault: false
           jsonData:
             prometheusType: Thanos
             customQueryParameters: max_source_resolution=auto
+        - name: Prometheus
+          type: prometheus
+          url: http://prometheus-kube-prometheus-prometheus.observability.svc.cluster.local
+          access: proxy
+          isDefault: true
+
   #      - name: Elasticsearch
   #        type: elasticsearch
   #        url: http://elasticsearch-es-internal-http:9200
@@ -22,7 +28,6 @@ grafana:
   #          indexName: "index"
   #          esVersion: "version"
   #          logLevelField: ""
-
 
   persistence:
     enabled: false
