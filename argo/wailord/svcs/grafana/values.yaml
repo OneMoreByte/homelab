@@ -5,7 +5,7 @@ grafana:
       datasources:
         - name: Thanos
           type: prometheus
-          url: http://prometheus-thanos-query-frontend.observability.svc.cluster.local
+          url: http://prometheus-thanos-query-frontend.metrics.svc.cluster.local
           access: proxy
           isDefault: false
           jsonData:
@@ -13,7 +13,7 @@ grafana:
             customQueryParameters: max_source_resolution=auto
         - name: Prometheus
           type: prometheus
-          url: http://prometheus-kube-prometheus-prometheus.observability.svc.cluster.local
+          url: http://prometheus-kube-prometheus-prometheus.metrics.svc.cluster.local
           access: proxy
           isDefault: true
 
