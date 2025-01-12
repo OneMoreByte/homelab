@@ -16,6 +16,8 @@ spec:
   template:
     metadata:
       name: "theroom-{{ values.app_name }}"
+      annotations:
+        notifications.argoproj.io/subscribe.sync-status: discord
     spec:
       project: default
       source:
@@ -25,7 +27,7 @@ spec:
         helm:
           releaseName: "{{ values.app_name }}"
           valueFiles:
-          - values.yaml
+            - values.yaml
       destination:
         name: theroom.jsck.network
         namespace: "{{ values.namespace }}"
@@ -34,8 +36,8 @@ spec:
           prune: true
           selfHeal: true
         syncOptions:
-        - CreateNamespace=true
-        - ServerSideApply=true
+          - CreateNamespace=true
+          - ServerSideApply=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -55,6 +57,8 @@ spec:
   template:
     metadata:
       name: "theroom-{{ values.app_name }}"
+      annotations:
+        notifications.argoproj.io/subscribe.sync-status: discord
     spec:
       project: default
       source:
@@ -63,11 +67,11 @@ spec:
         targetRevision: "HEAD"
       destination:
         name: theroom.jsck.network
-        namespace: "{{ values.namespace }}" 
+        namespace: "{{ values.namespace }}"
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
-        - CreateNamespace=true
-        - ServerSideApply=true
+          - CreateNamespace=true
+          - ServerSideApply=true

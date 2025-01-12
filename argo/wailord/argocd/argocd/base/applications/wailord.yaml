@@ -16,6 +16,8 @@ spec:
   template:
     metadata:
       name: "{{ values.app_name }}"
+      annotations:
+        notifications.argoproj.io/subscribe.sync-status: discord
     spec:
       project: default
       source:
@@ -55,6 +57,8 @@ spec:
   template:
     metadata:
       name: "{{ values.app_name }}"
+      annotations:
+        notifications.argoproj.io/subscribe.sync-status: discord
     spec:
       project: default
       source:

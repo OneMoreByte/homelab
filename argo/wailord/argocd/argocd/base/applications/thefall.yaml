@@ -16,6 +16,8 @@ spec:
   template:
     metadata:
       name: "thefall-{{ values.app_name }}"
+      annotations:
+        notifications.argoproj.io/subscribe.sync-status: discord
     spec:
       project: default
       source:
@@ -25,7 +27,7 @@ spec:
         helm:
           releaseName: "{{ values.app_name }}"
           valueFiles:
-          - values.yaml
+            - values.yaml
       destination:
         name: thefall.fawn-mamba.ts.net
         namespace: "{{ values.namespace }}"
@@ -34,8 +36,8 @@ spec:
           prune: true
           selfHeal: true
         syncOptions:
-        - CreateNamespace=true
-        - ServerSideApply=true
+          - CreateNamespace=true
+          - ServerSideApply=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -63,11 +65,11 @@ spec:
         targetRevision: "HEAD"
       destination:
         name: thefall.fawn-mamba.ts.net
-        namespace: "{{ values.namespace }}" 
+        namespace: "{{ values.namespace }}"
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
-        - CreateNamespace=true
-        - ServerSideApply=true
+          - CreateNamespace=true
+          - ServerSideApply=true
