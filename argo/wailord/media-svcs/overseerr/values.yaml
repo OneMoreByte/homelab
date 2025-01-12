@@ -10,7 +10,7 @@ app-template:
             PORT: 5055
             DB_TYPE: postgres
             DB_HOST: jellyseerr-pg-cluster-rw
-            DB_USER: jellyseer
+            DB_USER: jellyseerr
             DB_PASS:
               valueFrom:
                 secretKeyRef:
