@@ -1,4 +1,4 @@
-apiVersioncePer: app.status.operationState.syncResult.revision
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: argocd-notifications-cm
