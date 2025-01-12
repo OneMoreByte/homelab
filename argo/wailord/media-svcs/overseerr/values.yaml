@@ -8,12 +8,18 @@ app-template:
           env:
             TZ: America/Chicago
             PORT: 5055
+            DB_TYPE: postgres
+            DB_HOST: jellyseerr-pg-cluster-rw
+            DB_USER: jellyseer
+            DB_PASS:
+              valueFrom:
+                secretKeyRef:
+                  name: jellyseerr-db-secret
+                  key: password
           image:
             repository: docker.io/fallenbagel/jellyseerr
             tag: "2.2.3"
             pullPolicy: IfNotPresent
-          command: ["sleep"]
-          args: ["5000"]
   # -- Configures service settings for the chart.
   service:
     main:
