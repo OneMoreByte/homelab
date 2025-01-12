@@ -29,7 +29,8 @@ spec:
         - GRANT SELECT ON TABLE pg_vector_index_stat to immich;
   backup:
     barmanObjectStore:
-      destinationPath: "s3://minio.jsck.network/cnpg-backup/immich/"
+      destinationPath: "s3://cnpg-backup/immich/"
+      endpointURL: "https://minio.jsck.network"
       s3Credentials:
         accessKeyId:
           name: immich-backup-secret
