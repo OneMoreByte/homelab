@@ -5,4 +5,4 @@ resources:
   - resources/keycloak.yaml
   - resources/postgres-cluster.yaml
   - resources/ingress.yaml
-  - resources/keycloak-backup-secret.yaml
+  - resources/cluster-backup-creds.yaml
