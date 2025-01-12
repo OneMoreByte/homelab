@@ -85,6 +85,9 @@ minio:
     - name: thanos
       policy: none
       versioning: true
+    - name: cnpg-backup
+      policy: none
+      versioning: true
 
   policies:
     - name: longhorn-backup-readwrite
@@ -124,6 +127,15 @@ minio:
             - "arn:aws:s3:::thanos/*"
           actions:
             - "s3:*"
+
+    - name: cnpg-backup-readwrite
+      statements:
+        - effect: Allow
+          resources:
+            - "arn:aws:s3:::cnpg-backup/*"
+          actions:
+            - "s3:*"
+
   users:
     - accessKey: longhorn
       existingSecret: longhorn-user-secret
@@ -141,6 +153,10 @@ minio:
       existingSecret: thanos-user-secret
       existingSecretKey: password
       policy: thanos-readwrite
+    - accessKey: cnpg-db
+      existingSecret: cnpg-db-user-secret
+      existingSecretKey: password
+      policy: cnpg-backup-readwrite
 
   svcaccts: []
 
