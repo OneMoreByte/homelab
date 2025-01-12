@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersioncePer: app.status.operationState.syncResult.revision
 kind: ConfigMap
 metadata:
   name: argocd-notifications-cm
@@ -12,17 +12,16 @@ data:
   trigger.sync-status: |
     - when: app.status.sync.status == 'Synced'
       send: [app-sync-succeeded]
-      on: sync.status.changed
+      oncePer: app.status.operationState.syncResult.revision
     - when: app.status.sync.status == 'OutOfSync' || app.status.operationState.phase in ['Error']
       send: [app-sync-failed]
-      on: (sync.status.changed || operation.changed)
+      oncePer: app.status.operationState.syncResult.revision
     - when: app.status.operationState.phase in ['Running'] && app.status.operationState.startedAt < timestamp() - hours(2)
       send: [app-sync-stuck]
-      on: time.changed
-      oncePer: 24h
+      oncePer: app.status.operationState.syncResult.revision
     - when: app.status.health.status == 'Degraded'
       send: [app-degraded]
-      on: health.status.changed
+      oncePer: app.status.operationState.syncResult.revision
 
   template.app-sync-succeeded: |
     webhook:
