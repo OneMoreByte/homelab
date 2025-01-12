@@ -13,5 +13,17 @@ spec:
       postInitSQL:
         - CREATE DATABASE "radarr-log"
         - ALTER DATABASE "radarr-log" OWNER TO radarr
+  backup:
+    barmanObjectStore:
+      destinationPath: "s3://cnpg-backup/radarr/"
+      endpointURL: "https://minio.jsck.network"
+      s3Credentials:
+        accessKeyId:
+          name: radarr-backup-secret
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: radarr-backup-secret
+          key: ACCESS_SECRET_KEY
+    retentionPolicy: "30d"
   storage:
     size: 8Gi
