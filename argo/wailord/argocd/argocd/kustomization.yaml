@@ -9,6 +9,7 @@ resources:
   - base/argo-client-secret.yaml
   - base/clusters/wailord.yaml
   - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.13.3
+  - https://raw.githubusercontent.com/argoproj/argo-cd/stable/notifications_catalog/install.yaml
   - base/clusters/theroom.jsck.network.yaml
   - base/tailscale/argo-tailscale-auth.yaml
   - base/tailscale/ts-rolebindings.yaml
@@ -19,6 +20,8 @@ resources:
   - base/applications/office-space.yaml
   - base/clusters/office-space.jsck.network.yaml
   - base/clusters/jsck.zfs.rent.yaml
+  - base/prometheus/service-monitors.yaml
+  - base/notifications/argocd-notifications-secret.yaml
 namespace: argocd
 patches:
   - path: overlays/argocd-cm.yaml
@@ -28,6 +31,7 @@ patches:
   - path: overlays/argo-tailscale-sidecar-patch.yaml
   - path: overlays/argo-controller-ss-tailscale-sidecar-patch.yaml
   - path: overlays/argo-server-tailscale-sidecar-patch.yaml
+  - path: overlays/argocd-notifications-cm.yaml
   - patch: |-
       - op: replace
         path: /spec/template/spec/initContainers
