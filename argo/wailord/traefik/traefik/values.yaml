@@ -31,6 +31,8 @@ traefik:
         enabled: true
       serviceMonitor:
         enabled: true
+        jobLabel: traefik
+        interval: 30s
       prometheusRule:
         enabled: true
         rules:
