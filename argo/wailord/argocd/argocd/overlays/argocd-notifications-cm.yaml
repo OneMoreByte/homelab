@@ -50,3 +50,9 @@ data:
         method: POST
         body: |
           {"content": "🔥 Application **{{.app.metadata.name}}** is in a degraded state!\nHealth Status: {{.app.status.health.status}}\nMessage: {{.app.status.health.message}}"}
+
+  subscriptions: |
+    - recipients:
+      - discord
+      triggers:
+      - sync-status
