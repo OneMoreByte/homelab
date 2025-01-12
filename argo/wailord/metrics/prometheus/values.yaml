@@ -37,11 +37,11 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       hostname: prometheus
-      tls: true
-      ingressClassName: tailscale
-      extraTls:
+      tls:
         - hosts:
             - prometheus
+      ingressClassName: tailscale
+
   alertmanager:
     config:
       global:
