@@ -9,8 +9,8 @@ app-template:
             TZ: America/Chicago
             PORT: 5055
           image:
-            repository: sctx/overseerr
-            tag: "1.33.2"
+            repository: docker.io/fallenbagel/jellyseerr
+            tag: "2.2.3"
             pullPolicy: IfNotPresent
   # -- Configures service settings for the chart.
   service:
@@ -36,9 +36,9 @@ app-template:
                 name: overseerr
                 port: 5055
       tls:
-      - hosts:
-         - requests.jackhil.de
-        secretName: jackhil.de-cert
+        - hosts:
+            - requests.jackhil.de
+          secretName: jackhil.de-cert
 
   # -- Configure persistence settings for the chart under this key.
   persistence:
@@ -50,4 +50,3 @@ app-template:
         main:
           main:
             - path: /app/config
-
