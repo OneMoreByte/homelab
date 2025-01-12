@@ -12,6 +12,8 @@ app-template:
             repository: docker.io/fallenbagel/jellyseerr
             tag: "2.2.3"
             pullPolicy: IfNotPresent
+          command: ["sleep"]
+          args: ["5000"]
   # -- Configures service settings for the chart.
   service:
     main:
