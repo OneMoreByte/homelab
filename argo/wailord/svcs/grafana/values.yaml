@@ -30,7 +30,7 @@ grafana:
   #          logLevelField: ""
 
   persistence:
-    enabled: false
+    enabled: true
 
   serviceMonitor:
     enabled: true
