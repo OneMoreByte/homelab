@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: argocd-notifications-cm
 data:
-  service.webhook.discord_webhook: |
+  service.webhook.discord: |
     url: $discord-webhook
     headers:
     - name: Content-Type
@@ -26,24 +26,28 @@ data:
 
   template.app-sync-succeeded: |
     webhook:
-      method: POST
-      body: |
-        {"content": "✅ Application **{{.app.metadata.name}}** has been successfully synced."}
+      discord:
+        method: POST
+        body: |
+          {"content": "✅ Application **{{.app.metadata.name}}** has been successfully synced."}
 
   template.app-sync-failed: |
     webhook:
-      method: POST
-      body: |
-        {"content": "❌ Application **{{.app.metadata.name}}** failed to sync!\nStatus: {{.app.status.sync.status}}"}
+      discord:
+        method: POST
+        body: |
+          {"content": "❌ Application **{{.app.metadata.name}}** failed to sync!\nStatus: {{.app.status.sync.status}}"}
 
   template.app-sync-stuck: |
     webhook:
-      method: POST
-      body: |
-        {"content": "⚠️ Application **{{.app.metadata.name}}** has been stuck in progress for over 2 hours\nStarted at: {{.app.status.operationState.startedAt}}"}
+      discord:
+        method: POST
+        body: |
+          {"content": "⚠️ Application **{{.app.metadata.name}}** has been stuck in progress for over 2 hours\nStarted at: {{.app.status.operationState.startedAt}}"}
 
   template.app-degraded: |
     webhook:
-      method: POST
-      body: |
-        {"content": "🔥 Application **{{.app.metadata.name}}** is in a degraded state!\nHealth Status: {{.app.status.health.status}}\nMessage: {{.app.status.health.message}}"}
+      discord:
+        method: POST
+        body: |
+          {"content": "🔥 Application **{{.app.metadata.name}}** is in a degraded state!\nHealth Status: {{.app.status.health.status}}\nMessage: {{.app.status.health.message}}"}
