@@ -19,7 +19,7 @@ data:
     - when: app.status.operationState.phase in ['Running'] && app.status.operationState.startedAt < timestamp() - hours(2)
       send: [app-sync-stuck]
       on: time.changed
-      oncePer: 1d
+      oncePer: 24h
     - when: app.status.health.status == 'Degraded'
       send: [app-degraded]
       on: health.status.changed
