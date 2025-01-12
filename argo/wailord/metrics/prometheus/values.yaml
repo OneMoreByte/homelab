@@ -34,6 +34,14 @@ kube-prometheus-stack:
     thanosServiceMonitor:
       enabled: true
 
+    ingress:
+      enabled: true
+      hostname: prometheus
+      tls: true
+      ingressClassName: tailscale
+      extraTls:
+        - hosts:
+            - prometheus
   alertmanager:
     config:
       global:
