@@ -1,7 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- resources/keycloak-db-secret.yaml
-- resources/keycloak.yaml
-- resources/postgres-cluster.yaml
-- resources/ingress.yaml
+  - resources/keycloak-db-secret.yaml
+  - resources/keycloak.yaml
+  - resources/postgres-cluster.yaml
+  - resources/ingress.yaml
+  - resources/keycloak-backup-secret.yaml
