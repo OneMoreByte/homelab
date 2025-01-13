@@ -12,7 +12,7 @@ app-template:
             # -- Set the container timezone
             TZ: "America/Chicago"
             PYTHONPATH: /config/deps
-          #command: ["sleep", "500000"]
+          command: ["sleep", "500000"]
   service:
     main:
       controller: main
