@@ -1,0 +1,26 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: hass-pg-cluster
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: hass
+      owner: hass
+      secret:
+        name: hass-db-secret
+  backup:
+    barmanObjectStore:
+      destinationPath: "s3://cnpg-backup/hass/"
+      endpointURL: "https://minio.jsck.network"
+      s3Credentials:
+        accessKeyId:
+          name: hass-backup-secret
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: hass-backup-secret
+          key: ACCESS_SECRET_KEY
+    retentionPolicy: "30d"
+  storage:
+    size: 8Gi
