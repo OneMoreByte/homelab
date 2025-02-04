@@ -7,5 +7,5 @@ sources:
   - https://github.com/blakeblackshear/blakeshome-charts/tree/master/charts/frigate
 dependencies:
   - name: frigate
-    version: 7.6.0
+    version: 7.7.0
     repository: "https://blakeblackshear.github.io/blakeshome-charts/"
