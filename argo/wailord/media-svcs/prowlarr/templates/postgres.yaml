@@ -26,4 +26,4 @@ spec:
           key: ACCESS_SECRET_KEY
     retentionPolicy: "30d"
   storage:
-    size: 8Gi
+    size: 16Gi
