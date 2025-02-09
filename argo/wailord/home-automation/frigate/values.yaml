@@ -249,7 +249,7 @@ frigate:
           - frigate
 
   persistence:
-    data:
+    config:
       # -- Enables persistence for the data directory
       enabled: true
       ## frigate data Persistent Volume Storage Class
