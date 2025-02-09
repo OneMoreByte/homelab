@@ -40,7 +40,7 @@
         "values.yaml"
       ],
       "matchStrings": [
-        "tag: release-(?<currentValue>.*)"
+        "image: (?<depName>ghcr.io/hotio/.*)\\n\\ *tag: release-(?<currentValue>.*)"
       ],
       "extractVersionTemplate": "^release-(?<version>.*)$",
       "datasourceTemplate": "docker"
