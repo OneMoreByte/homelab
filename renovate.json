@@ -22,6 +22,15 @@
       ],
       "automergeType": "pr",
       "platformAutomerge": true
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "argo/wailord/media-svcs/plex"
+      ],
+      "versioning": "semver"
     }
   ],
   "customManagers": [
