@@ -80,11 +80,13 @@ frigate:
       # Optional: interval in seconds for publishing stats (default: shown below)
       stats_interval: 60
     record:
-      enabled: True
-      events:
+      enabled: true
+      alerts:
         retain:
-          default: 7
-          mode: all
+          days: 7
+      detections:
+        retain:
+          days: 7
     detectors:
       coral:
         type: edgetpu
@@ -93,22 +95,22 @@ frigate:
       streams:
         garage1:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=1
-          - "ffmpeg:garage1-high#video=h264#audio=aac"
+          - ffmpeg:garage1-high#video=h264#audio=aac
         garage1-high:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=0
-          - "ffmpeg:garage1-high#video=h264#audio=aac"
+          - ffmpeg:garage1-high#video=h264#audio=aac
         backdoor1:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=1
-          - "ffmpeg:backdoor1-high#video=h264#audio=aac"
+          - ffmpeg:backdoor1-high#video=h264#audio=aac
         backdoor1-high:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0
-          - "ffmpeg:backdoor1-high#video=h264#audio=aac"
+          - ffmpeg:backdoor1-high#video=h264#audio=aac
         backyard1:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=1
-          - "ffmpeg:backyard1-high#video=h264#audio=aac"
+          - ffmpeg:backyard1-high#video=h264#audio=aac
         backyard1-high:
           - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=0
-          - "ffmpeg:backyard1-high#video=h264#audio=aac"
+          - ffmpeg:backyard1-high#video=h264#audio=aac
     cameras:
       garage1:
         ffmpeg:
@@ -128,7 +130,8 @@ frigate:
           mask: []
         zones:
           driveway:
-            coordinates: 0,480,594,480,704,480,704,315,530,271,360,197,320,181,230,183,120,175,70,169,0,171,0,250
+            coordinates:
+              0,480,594,480,704,480,704,315,530,271,360,197,320,181,230,183,120,175,70,169,0,171,0,250
           front_door:
             coordinates: 364,187,474,185,704,235,704,313,328,201
       backdoor1:
@@ -172,7 +175,7 @@ frigate:
           yard:
             coordinates: 232,325,482,333,608,231,704,175,704,67,322,69,52,299
     snapshots:
-      enabled: True
+      enabled: true
       retain:
         default: 60
     objects:
@@ -186,6 +189,7 @@ frigate:
         - cat
         - dog
         - hot dog
+    version: 0.15-1
   # Probes configuration
   probes:
     liveness:
