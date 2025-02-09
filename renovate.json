@@ -40,7 +40,8 @@
         "values.yaml"
       ],
       "matchStrings": [
-        "repository: (?<depName>hotio\\/.*)\\n\\ *tag: \"release-(?<currentValue>.*)\""
+        "repository: (?<depName>hotio\\/.*)\\n\\ *tag: \"release-(?<currentValue>.*)\"",
+        "repository: (?<depName>hotio\\/.*)\\n\\ *tag: \"testing-(?<currentValue>.*)\""
       ],
       "extractVersionTemplate": "^release-(?<version>.*)$",
       "datasourceTemplate": "docker"
