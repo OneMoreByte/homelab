@@ -28,7 +28,7 @@
         "docker"
       ],
       "matchPackageNames": [
-        "argo/wailord/media-svcs/plex"
+        "ghcr.io/onemorebyte/plex"
       ],
       "versioning": "semver"
     }
