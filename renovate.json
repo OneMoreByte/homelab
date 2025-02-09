@@ -5,7 +5,7 @@
     "argo/wailord/game-svcs/**"
   ],
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "packageRules": [
     {
