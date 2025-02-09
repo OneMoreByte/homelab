@@ -31,6 +31,12 @@
         "ghcr.io/onemorebyte/plex"
       ],
       "versioning": "semver"
+    },
+    {
+      "matchPackageNames": [
+        "linuxserver/calibre-web"
+      ],
+      "allowedVersions": "!/202\\d\\..*/"
     }
   ],
   "customManagers": [
