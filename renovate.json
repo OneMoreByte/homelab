@@ -36,7 +36,7 @@
       "matchPackageNames": [
         "linuxserver/calibre-web"
       ],
-      "allowedVersions": "!/202\\d\\..*/|v\\d"
+      "allowedVersions": "!/202\\d\\..*|v\\d/"
     }
   ],
   "customManagers": [
