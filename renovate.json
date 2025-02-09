@@ -2,8 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "timezone": "America/Chicago",
   "ignorePaths": [
-    "argo/wailord/game-svcs/**",
-    "argo/wailord/media-svcs/immich"
+    "argo/wailord/game-svcs/**"
   ],
   "extends": [
     "config:base"
@@ -23,6 +22,19 @@
       ],
       "automergeType": "pr",
       "platformAutomerge": true
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "values.yaml"
+      ],
+      "matchStrings": [
+        "image: (?<depName>ghcr.io/hotio/.*):release-(?<currentValue>.*)"
+      ],
+      "extractVersionTemplate": "^release-(?<version>.*)$",
+      "datasourceTemplate": "docker"
     }
   ]
 }
