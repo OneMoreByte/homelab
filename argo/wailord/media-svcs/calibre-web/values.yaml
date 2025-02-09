@@ -13,7 +13,7 @@ app-template:
             OAUTH_LIB_RELAX_TOKEN_SCOPE: "1"
           image:
             repository: linuxserver/calibre-web
-            tag: "0.6.24"
+            tag: "5.33.2"
             pullPolicy: IfNotPresent
       #      initContainers:
       #        hold:
