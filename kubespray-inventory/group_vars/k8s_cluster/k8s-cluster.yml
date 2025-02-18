@@ -17,7 +17,7 @@ kube_token_dir: "{{ kube_config_dir }}/tokens"
 kube_api_anonymous_auth: true
 
 ## Change this to use another Kubernetes version, e.g. a current beta release
-#kube_version: v1.28.5
+kube_version: v1.31.4
 
 # Where the binaries will be downloaded.
 # Note: ensure that you've enough disk space (about 1G)
@@ -238,17 +238,6 @@ kubeconfig_localhost: true
 # A comma separated list of levels of node allocatable enforcement to be enforced by kubelet.
 # Acceptable options are 'pods', 'system-reserved', 'kube-reserved' and ''. Default is "".
 # kubelet_enforce_node_allocatable: pods
-
-## Optionally reserve resources for OS system daemons.
-# system_reserved: true
-## Uncomment to override default values
-# system_memory_reserved: 512Mi
-# system_cpu_reserved: 500m
-# system_ephemeral_storage_reserved: 2Gi
-## Reservation for master hosts
-# system_master_memory_reserved: 256Mi
-# system_master_cpu_reserved: 250m
-# system_master_ephemeral_storage_reserved: 2Gi
 
 ## Eviction Thresholds to avoid system OOMs
 # https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#eviction-thresholds

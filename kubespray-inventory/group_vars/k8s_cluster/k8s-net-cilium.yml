@@ -1,5 +1,5 @@
 ---
-# cilium_version: "v1.12.1"
+cilium_version: "v1.16.6"
 
 # Log-level
 cilium_debug: true
@@ -7,6 +7,9 @@ cilium_debug: true
 # cilium_mtu: ""
 # cilium_enable_ipv4: true
 # cilium_enable_ipv6: false
+
+# Enable l2 announcement from cilium to replace Metallb Ref: https://docs.cilium.io/en/v1.14/network/l2-announcements/
+# cilium_l2announcements: false
 
 # Cilium agent health port
 # cilium_agent_health_port: "9879"
@@ -40,6 +43,10 @@ cilium_debug: true
 
 # Overlay Network Mode
 # cilium_tunnel_mode: vxlan
+
+# LoadBalancer Mode (snat/dsr/hybrid) Ref: https://docs.cilium.io/en/stable/network/kubernetes/kubeproxy-free/#dsr-mode
+# cilium_loadbalancer_mode: snat
+
 # Optional features
 cilium_enable_prometheus: true
 # Enable if you want to make use of hostPort mappings
@@ -52,14 +59,20 @@ cilium_enable_prometheus: true
 # Only effective when monitor aggregation is set to "medium" or higher.
 # cilium_monitor_aggregation_flags: "all"
 # Kube Proxy Replacement mode (strict/partial)
-# cilium_kube_proxy_replacement: partial
+cilium_kube_proxy_replacement: strict
 
 # If upgrading from Cilium < 1.5, you may want to override some of these options
 # to prevent service disruptions. See also:
 # http://docs.cilium.io/en/stable/install/upgrade/#changes-that-may-require-action
 # cilium_preallocate_bpf_maps: false
 
-# Unique ID of the cluster. Must be unique across all conneted clusters and
+# `cilium_tofqdns_enable_poller` is deprecated in 1.8, removed in 1.9
+# cilium_tofqdns_enable_poller: false
+
+# `cilium_enable_legacy_services` is deprecated in 1.6, removed in 1.9
+# cilium_enable_legacy_services: false
+
+# Unique ID of the cluster. Must be unique across all connected clusters and
 # in the range of 1 and 255. Only relevant when building a mesh of clusters.
 # This value is not defined by default
 # cilium_cluster_id:
@@ -69,7 +82,7 @@ cilium_enable_prometheus: true
 # cilium_deploy_additionally: false
 
 # Auto direct nodes routes can be used to advertise pods routes in your cluster
-# without any tunelling (with `cilium_tunnel_mode` sets to `disabled`).
+# without any tunneling (with `cilium_tunnel_mode` sets to `disabled`).
 # This works only if you have a L2 connectivity between all your nodes.
 # You wil also have to specify the variable `cilium_native_routing_cidr` to
 # make this work. Please refer to the cilium documentation for more
@@ -92,7 +105,7 @@ cilium_enable_prometheus: true
 # cilium_native_routing_cidr_ipv6: ""
 
 # Enable transparent network encryption.
-# cilium_encryption_enabled: false
+# cilium_encryption_enabled: true
 
 # Encryption method. Can be either ipsec or wireguard.
 # Only effective when `cilium_encryption_enabled` is set to true.
@@ -100,7 +113,7 @@ cilium_enable_prometheus: true
 
 # Enable encryption for pure node to node traffic.
 # This option is only effective when `cilium_encryption_type` is set to `ipsec`.
-# cilium_ipsec_node_encryption: false
+# cilium_ipsec_node_encryption: true
 
 # If your kernel or distribution does not support WireGuard, Cilium agent can be configured to fall back on the user-space implementation.
 # When this flag is enabled and Cilium detects that the kernel has no native support for WireGuard,
@@ -132,9 +145,16 @@ cilium_enable_prometheus: true
 ### A time interval at which the agent attempts to reload config from disk
 # cilium_ip_masq_resync_interval: 60s
 
+### Host Firewall and Policy Audit Mode
+# cilium_enable_host_firewall: false
+# cilium_policy_audit_mode: false
+
 # Hubble
 ### Enable Hubble without install
 cilium_enable_hubble: true
+### Enable Hubble-ui
+### Installed by default when hubble is enabled. To disable set to false
+# cilium_enable_hubble_ui: "{{ cilium_enable_hubble }}
 ### Enable Hubble Metrics
 cilium_enable_hubble_metrics: true
 ### if cilium_enable_hubble_metrics: true
@@ -149,9 +169,18 @@ cilium_enable_hubble_metrics: true
 cilium_hubble_install: true
 ### Enable auto generate certs if cilium_hubble_install: true
 cilium_hubble_tls_generate: true
+
+### Tune cilium_hubble_event_buffer_capacity & cilium_hubble_event_queue_size values to avoid dropping events when hubble is under heavy load
+### Capacity of Hubble events buffer. The provided value must be one less than an integer power of two and no larger than 65535
+### (ie: 1, 3, ..., 2047, 4095, ..., 65535) (default 4095)
+# cilium_hubble_event_buffer_capacity: 4095
+### Buffer size of the channel to receive monitor events.
+# cilium_hubble_event_queue_size: 50
+
 # IP address management mode for v1.9+.
 # https://docs.cilium.io/en/v1.9/concepts/networking/ipam/
 # cilium_ipam_mode: kubernetes
+cilium_ipam_mode: cluster-pool
 
 # Extra arguments for the Cilium agent
 # cilium_agent_custom_args: []
@@ -171,8 +200,8 @@ cilium_hubble_tls_generate: true
 ##  cilium_config_extra_vars:
 ##    var1: "value1"
 ##    var2: "value2"
-cilium_config_extra_vars:
-  enable-bgp-control-plane: "true"
+# cilium_config_extra_vars: {}
+
 # For adding and mounting extra volumes to the cilium operator
 # cilium_operator_extra_volumes: []
 # cilium_operator_extra_volume_mounts: []
@@ -219,6 +248,102 @@ cilium_config_extra_vars:
 # -- Enable native IP masquerade support in eBPF
 # cilium_enable_bpf_masquerade: false
 
+# -- Enable BGP Control Plane
+cilium_enable_bgp_control_plane: true
+
+
+# -- Configure Loadbalancer IP Pools
+# cilium_loadbalancer_ip_pools:
+#   - name: "blue-pool"
+#     cidrs:
+#       - "10.0.10.0/24"
+
+# -- Configure BGP Instances (New bgpv2 API v1.16+)
+# cilium_bgp_cluster_configs:
+#   - name: "cilium-bgp"
+#     spec:
+#       bgpInstances:
+#       - name: "instance-64512"
+#         localASN: 64512
+#         peers:
+#         - name: "peer-64512-tor1"
+#           peerASN: 64512
+#           peerAddress: '10.47.1.1'
+#           peerConfigRef:
+#             name: "cilium-peer"
+#       nodeSelector:
+#         matchExpressions:
+#           - {key: somekey, operator: NotIn, values: ['never-used-value']}
+
+# -- Configure BGP Peers (New bgpv2 API v1.16+)
+# cilium_bgp_peer_configs:
+#   - name: cilium-peer
+#     spec:
+#       # authSecretRef: bgp-auth-secret
+#       gracefulRestart:
+#         enabled: true
+#         restartTimeSeconds: 15
+#       families:
+#         - afi: ipv4
+#           safi: unicast
+#           advertisements:
+#             matchLabels:
+#               advertise: "bgp"
+#         - afi: ipv6
+#           safi: unicast
+#           advertisements:
+#             matchLabels:
+#               advertise: "bgp"
+
+# -- Configure BGP Advertisements (New bgpv2 API v1.16+)
+# cilium_bgp_advertisements:
+#   - name: bgp-advertisements
+#     labels:
+#       advertise: bgp
+#     spec:
+#       advertisements:
+#         # - advertisementType: "PodCIDR"
+#         #   attributes:
+#         #     communities:
+#         #       standard: [ "64512:99" ]
+#         - advertisementType: "Service"
+#           service:
+#             addresses:
+#               - ClusterIP
+#               - ExternalIP
+#               - LoadBalancerIP
+#           selector:
+#             matchExpressions:
+#                 - {key: somekey, operator: NotIn, values: ['never-used-value']}
+
+# -- Configure BGP Node Config Overrides (New bgpv2 API v1.16+)
+# cilium_bgp_node_config_overrides:
+#   - name: bgp-node-config-override
+#     spec:
+#     bgpInstances:
+#       - name: "instance-65000"
+#         routerID: "192.168.10.1"
+#         localPort: 1790
+#         peers:
+#           - name: "peer-65000-tor1"
+#             localAddress: fd00:10:0:2::2
+#           - name: "peer-65000-tor2"
+#             localAddress: fd00:11:0:2::2
+
+# -- Configure BGP Peers (Legacy v1.16+)
+# cilium_bgp_peering_policies:
+#   - name: "01-bgp-peering-policy"
+#     spec:
+#       virtualRouters:
+#         - localASN: 64512
+#           exportPodCIDR: false
+#           neighbors:
+#           - peerAddress: '10.47.1.1/24'
+#             peerASN: 64512
+#           serviceSelector:
+#               matchExpressions:
+#               - {key: somekey, operator: NotIn, values: ['never-used-value']}
+
 # -- Configure whether direct routing mode should route traffic via
 # host stack (true) or directly and more efficiently out of BPF (false) if
 # the kernel supports it. The latter has the implication that it will also
@@ -255,4 +380,3 @@ cilium_config_extra_vars:
 #       resourceNames:
 #       - toto
 # cilium_clusterrole_rules_operator_extra_vars: []
-

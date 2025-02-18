@@ -1,22 +1,48 @@
-apiVersion: "cilium.io/v2alpha1"
-kind: CiliumBGPPeeringPolicy
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPClusterConfig
 metadata:
-  name: 01-bgp-peering-policy
-spec: # CiliumBGPPeeringPolicySpec
-  nodeSelector:
-    matchLabels:
-      bgp-policy: a
-  virtualRouters:
-    - exportPodCIDR: false
-      localASN: 65513
-      neighbors:
-        - connectRetryTimeSeconds: 120
-          eBGPMultihopTTL: 1
-          holdTimeSeconds: 90
-          keepAliveTimeSeconds: 30
-          peerASN: 65511
-          peerAddress: 192.168.13.1/32
-          peerPort: 179
-      serviceSelector:
+  name: cilium-bgp
+spec:
+  bgpInstances:
+  - name: "udm-bgp-router"
+    localASN: 65513
+    peers:
+    - name: "unifi-udm-pro"
+      peerASN: 65511
+      peerAddress: 192.168.13.1/32
+      peerConfigRef:
+        name: "unifi-bgp-peer"
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPPeerConfig
+metadata:
+  name: unifi-bgp-peer
+spec:
+  timers:
+    holdTimeSeconds: 9
+    keepAliveTimeSeconds: 3
+  gracefulRestart:
+    enabled: true
+    restartTimeSeconds: 15
+  families:
+    - afi: ipv4
+      safi: unicast
+      advertisements:
+        matchLabels:
+          advertise: "bgp"
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPAdvertisement
+metadata:
+  name: pod-ip-pool-advert
+  labels:
+    advertise: bgp
+spec:
+  advertisements:
+    - advertisementType: "Service"
+      service:
+        addresses:
+          - LoadBalancerIP
+      selector:
         matchExpressions:
-          - { key: somekey, operator: NotIn, values: ["never-used-value"] }
+          - { key: somekey, operator: NotIn, values: [ 'never-used-value' ] }
