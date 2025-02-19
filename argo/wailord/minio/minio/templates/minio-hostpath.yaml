@@ -1,5 +1,5 @@
 {{- $root := . }}
-{{- range $driveNumber :=  until (int .Values.minio.drivesPerNode) }}
+{{- range $driveNumber :=  until (int .Values.nodeDrives) }}
 {{- range $hostname := $root.Values.nodeHostnames }}
 ---
 apiVersion: v1

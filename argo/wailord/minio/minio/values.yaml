@@ -3,11 +3,12 @@ nodeHostnames:
   - fateful
   - twisted-pair-1
   - twisted-pair-2
+nodeDrives: 2
 
 minio:
   mode: distributed
-  drivesPerNode: 2
-  replicas: 4
+  drivesPerNode: 1
+  replicas: 8
 
   resources:
     requests:
