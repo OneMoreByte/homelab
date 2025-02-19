@@ -18,6 +18,7 @@ kind: CiliumBGPPeerConfig
 metadata:
   name: unifi-bgp-peer
 spec:
+  ebgpMultihop: 4
   timers:
     holdTimeSeconds: 9
     keepAliveTimeSeconds: 3
