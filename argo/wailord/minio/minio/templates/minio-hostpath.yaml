@@ -1,18 +1,20 @@
-{{- range $hostname := .Values.nodeHostnames }}
+{{- $root := . }}
+{{- range $driveNumber :=  until (int .Values.minio.drivesPerNode) }}
+{{- range $hostname := $root.Values.nodeHostnames }}
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: minio-drive-1-{{ $hostname }}
+  name: minio-drive-{{ add $driveNumber 1 }}-{{ $hostname }}
 spec:
   capacity:
-    storage: 1.8Ti
+    storage: {{ $root.Values.minio.persistence.size }}
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   storageClassName: local-storage
   local:
-    path: /mnt/minio-drive-1
+    path: /mnt/minio-drive-{{ add $driveNumber 1 }}
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -21,4 +23,5 @@ spec:
               operator: In
               values:
                 - {{ $hostname }}
+{{- end }}
 {{- end }}
