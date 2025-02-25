@@ -21,6 +21,6 @@ spec:
         secretAccessKey:
           name: paperless-backup-secret
           key: ACCESS_SECRET_KEY
-    retentionPolicy: "30d"
+    retentionPolicy: "15d"
   storage:
     size: 64Gi
