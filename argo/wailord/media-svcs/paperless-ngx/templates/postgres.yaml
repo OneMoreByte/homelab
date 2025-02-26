@@ -27,4 +27,4 @@ spec:
         compression: bzip2
     retentionPolicy: 15d
   storage:
-    size: 64Gi
+    size: 100Gi
