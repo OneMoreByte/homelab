@@ -15,8 +15,8 @@ spec:
         - ALTER DATABASE "radarr-log" OWNER TO radarr
   backup:
     barmanObjectStore:
-      destinationPath: "s3://cnpg-backup/radarr/"
-      endpointURL: "https://minio.jsck.network"
+      destinationPath: s3://cnpg-backup/radarr/
+      endpointURL: https://minio.jsck.network
       s3Credentials:
         accessKeyId:
           name: radarr-backup-secret
@@ -24,6 +24,10 @@ spec:
         secretAccessKey:
           name: radarr-backup-secret
           key: ACCESS_SECRET_KEY
-    retentionPolicy: "30d"
+      wal:
+        compression: bzip2
+      data:
+        compression: bzip2
+    retentionPolicy: 30d
   storage:
     size: 64Gi

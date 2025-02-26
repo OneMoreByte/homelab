@@ -1,5 +1,3 @@
-# From https://docs.pgvecto.rs/admin/kubernetes.html
-
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
@@ -9,7 +7,7 @@ spec:
   imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.3-v0.2.1
   postgresql:
     shared_preload_libraries:
-      - "vectors.so"
+      - vectors.so
     enableAlterSystem: true
   bootstrap:
     initdb:
@@ -18,8 +16,7 @@ spec:
       secret:
         name: immich-db-secret
       dataChecksums: true
-      encoding: "UTF8"
-      # This came from a mix of the pgvector docs and here: https://github.com/immich-app/immich/discussions/8327
+      encoding: UTF8
       postInitApplicationSQL:
         - CREATE EXTENSION IF NOT EXISTS "vectors";
         - CREATE EXTENSION IF NOT EXISTS "cube";
@@ -29,8 +26,8 @@ spec:
         - GRANT SELECT ON TABLE pg_vector_index_stat to immich;
   backup:
     barmanObjectStore:
-      destinationPath: "s3://cnpg-backup/immich/"
-      endpointURL: "https://minio.jsck.network"
+      destinationPath: s3://cnpg-backup/immich/
+      endpointURL: https://minio.jsck.network
       s3Credentials:
         accessKeyId:
           name: immich-backup-secret
@@ -38,6 +35,10 @@ spec:
         secretAccessKey:
           name: immich-backup-secret
           key: ACCESS_SECRET_KEY
-    retentionPolicy: "30d"
+      wal:
+        compression: bzip2
+      data:
+        compression: bzip2
+    retentionPolicy: 30d
   storage:
     size: 32Gi

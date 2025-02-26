@@ -12,8 +12,8 @@ spec:
         name: paperless-db-secret
   backup:
     barmanObjectStore:
-      destinationPath: "s3://cnpg-backup/paperless/"
-      endpointURL: "https://minio.jsck.network"
+      destinationPath: s3://cnpg-backup/paperless/
+      endpointURL: https://minio.jsck.network
       s3Credentials:
         accessKeyId:
           name: paperless-backup-secret
@@ -21,6 +21,10 @@ spec:
         secretAccessKey:
           name: paperless-backup-secret
           key: ACCESS_SECRET_KEY
-    retentionPolicy: "15d"
+      wal:
+        compression: bzip2
+      data:
+        compression: bzip2
+    retentionPolicy: 15d
   storage:
     size: 64Gi

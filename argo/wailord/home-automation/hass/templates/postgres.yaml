@@ -12,8 +12,8 @@ spec:
         name: hass-db-secret
   backup:
     barmanObjectStore:
-      destinationPath: "s3://cnpg-backup/hass/"
-      endpointURL: "https://minio.jsck.network"
+      destinationPath: s3://cnpg-backup/hass/
+      endpointURL: https://minio.jsck.network
       s3Credentials:
         accessKeyId:
           name: hass-backup-secret
@@ -21,6 +21,10 @@ spec:
         secretAccessKey:
           name: hass-backup-secret
           key: ACCESS_SECRET_KEY
-    retentionPolicy: "30d"
+      wal:
+        compression: bzip2
+      data:
+        compression: bzip2
+    retentionPolicy: 30d
   storage:
     size: 200Gi
