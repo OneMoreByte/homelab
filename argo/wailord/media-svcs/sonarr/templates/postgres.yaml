@@ -30,4 +30,4 @@ spec:
         compression: bzip2
     retentionPolicy: 30d
   storage:
-    size: 100Gi
+    size: 120Gi
