@@ -1,0 +1,53 @@
+seaweedfs:
+  global:
+    replicationPlacement: "002"
+
+
+  master:
+    # config: |-
+      
+
+    data:
+      type: "hostPath"
+      storageClass: ""
+      hostPathPrefix: /mnt/s3-1
+
+    logs:
+      type: "hostPath"
+      size: ""
+      storageClass: ""
+      hostPathPrefix: /mnt/s3-1
+
+  volume:
+    dataCenter: "home"
+    rack: "wailord"
+    replicas: 3
+
+    dataDirs:
+      - name: data1
+        type: "hostPath"
+        hostPathPrefix: /mnt/s3-1
+        maxVolumes: 0
+      - name: data2
+        type: "hostPath"
+        hostPathPrefix: /mnt/s3-2
+        maxVolumes: 0
+
+    nodeSeletor: |
+      weed: "yes"
+
+  filer:
+    enabled: true
+    data:
+      type: "hostPath"
+      storageClass: ""
+      hostPathPrefix: /mnt/s3-1
+
+    logs:
+      type: "hostPath"
+      size: ""
+      storageClass: ""
+      hostPathPrefix: /mnt/s3-1
+
+  s3:
+    enabled: true
