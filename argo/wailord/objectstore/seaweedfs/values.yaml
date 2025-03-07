@@ -33,7 +33,7 @@ seaweedfs:
         hostPathPrefix: /mnt/s3-2
         maxVolumes: 0
 
-    nodeSeletor: |
+    nodeSelector: |
       weed: "yes"
 
   filer:
