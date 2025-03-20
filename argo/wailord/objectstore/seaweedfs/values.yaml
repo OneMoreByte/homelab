@@ -2,10 +2,8 @@ seaweedfs:
   global:
     replicationPlacement: "002"
 
-
   master:
     # config: |-
-      
 
     data:
       type: "hostPath"
@@ -51,3 +49,4 @@ seaweedfs:
 
   s3:
     enabled: true
+    existingConfigSecret: "seaweedfs-s3-config"
