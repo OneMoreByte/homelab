@@ -46,6 +46,14 @@ seaweedfs:
       size: ""
       storageClass: ""
       hostPathPrefix: /mnt/s3-1
+    s3:
+      enabled: true
+      existingConfigSecret: "seaweedfs-s3-config"
+      createBuckets:
+        - smoked-mutex
+        - longhorn-backup
+        - thanos
+        - cnpg-backup
 
   s3:
     enabled: true
