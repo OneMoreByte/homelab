@@ -19,7 +19,7 @@ seaweedfs:
   volume:
     dataCenter: "home"
     rack: "wailord"
-    replicas: 3
+    replicas: 4
 
     dataDirs:
       - name: data1
