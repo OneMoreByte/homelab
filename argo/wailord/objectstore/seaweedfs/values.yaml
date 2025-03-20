@@ -51,10 +51,14 @@ seaweedfs:
       enableAuth: true
       existingConfigSecret: "seaweedfs-s3-config"
       createBuckets:
-        - smoked-mutex
-        - longhorn-backup
-        - thanos
-        - cnpg-backup
+        - name: smoked-mutex
+          anonymousRead: false
+        - name: longhorn-backup
+          anonymousRead: false
+        - name: thanos
+          anonymousRead: false
+        - name: cnpg-backup
+          anonymousRead: false
 
   s3:
     enabled: true
