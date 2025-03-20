@@ -48,6 +48,7 @@ seaweedfs:
       hostPathPrefix: /mnt/s3-1
     s3:
       enabled: true
+      enableAuth: true
       existingConfigSecret: "seaweedfs-s3-config"
       createBuckets:
         - smoked-mutex
@@ -57,4 +58,5 @@ seaweedfs:
 
   s3:
     enabled: true
+    enableAuth: true
     existingConfigSecret: "seaweedfs-s3-config"
