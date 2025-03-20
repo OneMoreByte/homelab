@@ -13,7 +13,7 @@ spec:
   backup:
     barmanObjectStore:
       destinationPath: s3://cnpg-backup/paperless/
-      endpointURL: https://minio.jsck.network
+      endpointURL: http://seaweedfs-s3.objectstore.svc.cluster.local:8333
       s3Credentials:
         accessKeyId:
           name: paperless-backup-secret
