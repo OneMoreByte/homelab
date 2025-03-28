@@ -11,7 +11,7 @@ app-template:
             PGID: 11337
           image:
             repository: linuxserver/calibre
-            tag: "7.26.0"
+            tag: "8.1.1"
             pullPolicy: IfNotPresent
       #      initContainers:
       #        hold:
