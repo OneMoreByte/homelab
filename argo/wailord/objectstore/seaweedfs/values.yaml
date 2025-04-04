@@ -19,16 +19,16 @@ seaweedfs:
   volume:
     dataCenter: "home"
     rack: "wailord"
-    replicas: 4
+    replicas: 0
 
     dataDirs:
       - name: data1
         type: "hostPath"
-        hostPathPrefix: /mnt/s3-1
+        hostPathPrefix: /mnt/weed-1
         maxVolumes: 0
       - name: data2
         type: "hostPath"
-        hostPathPrefix: /mnt/s3-2
+        hostPathPrefix: /mnt/weed-2
         maxVolumes: 0
 
     nodeSelector: |
