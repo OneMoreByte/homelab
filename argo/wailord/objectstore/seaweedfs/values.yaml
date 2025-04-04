@@ -49,7 +49,7 @@ seaweedfs:
     s3:
       enabled: true
       enableAuth: true
-      existingConfigSecret: "seaweedfs-weed-config"
+      existingConfigSecret: "seaweedfs-s3-config"
       createBuckets:
         - name: smoked-mutex
           anonymousRead: false
@@ -63,4 +63,4 @@ seaweedfs:
   s3:
     enabled: true
     enableAuth: true
-    existingConfigSecret: "seaweedfs-weed-config"
+    existingConfigSecret: "seaweedfs-s3-config"
