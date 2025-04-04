@@ -8,13 +8,13 @@ seaweedfs:
     data:
       type: "hostPath"
       storageClass: ""
-      hostPathPrefix: /mnt/s3-1
+      hostPathPrefix: /mnt/weed-1
 
     logs:
       type: "hostPath"
       size: ""
       storageClass: ""
-      hostPathPrefix: /mnt/s3-1
+      hostPathPrefix: /mnt/weed-1
 
   volume:
     dataCenter: "home"
@@ -39,17 +39,17 @@ seaweedfs:
     data:
       type: "hostPath"
       storageClass: ""
-      hostPathPrefix: /mnt/s3-1
+      hostPathPrefix: /mnt/weed-1
 
     logs:
       type: "hostPath"
       size: ""
       storageClass: ""
-      hostPathPrefix: /mnt/s3-1
+      hostPathPrefix: /mnt/weed-1
     s3:
       enabled: true
       enableAuth: true
-      existingConfigSecret: "seaweedfs-s3-config"
+      existingConfigSecret: "seaweedfs-weed-config"
       createBuckets:
         - name: smoked-mutex
           anonymousRead: false
@@ -63,4 +63,4 @@ seaweedfs:
   s3:
     enabled: true
     enableAuth: true
-    existingConfigSecret: "seaweedfs-s3-config"
+    existingConfigSecret: "seaweedfs-weed-config"
