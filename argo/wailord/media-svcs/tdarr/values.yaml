@@ -86,10 +86,33 @@ app-template:
       enabled: false
       type: emptyDir
 
-    app:
+    app-server:
       enabled: true
       accessMode: ReadWriteOnce
       size: 16Gi
+      advancedMounts:
+        main:
+          main:
+            - path: /app/server
+
+    app-config:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 16Gi
+      advancedMounts:
+        main:
+          main:
+            - path: /app/configs
+
+    app-logs:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 16Gi
+      advancedMounts:
+        main:
+          main:
+            - path: /app/logs
+
     media:
       enabled: true
       type: hostPath
