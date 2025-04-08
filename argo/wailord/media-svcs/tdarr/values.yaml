@@ -84,6 +84,8 @@ app-template:
   persistence:
     config:
       enabled: false
+      type: emptyDir
+
     app:
       enabled: true
       accessMode: ReadWriteOnce
