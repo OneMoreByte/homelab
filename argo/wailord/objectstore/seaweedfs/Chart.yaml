@@ -5,5 +5,5 @@ version: 0.0.1
 sources: []
 dependencies:
   - name: seaweedfs
-    version: 4.0.385
+    version: 4.0.386
     repository: "https://seaweedfs.github.io/seaweedfs/helm"
