@@ -32,7 +32,7 @@ seaweedfs:
         maxVolumes: 0
 
     nodeSelector: |
-      weed: "yes"
+      weed-master: "yes"
 
   filer:
     enabled: true
