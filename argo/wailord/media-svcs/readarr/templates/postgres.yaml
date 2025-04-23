@@ -32,4 +32,4 @@ spec:
         compression: bzip2
     retentionPolicy: 7d
   storage:
-    size: 120Gi
+    size: 32Gi
