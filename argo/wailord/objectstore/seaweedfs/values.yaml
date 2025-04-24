@@ -16,6 +16,9 @@ seaweedfs:
       storageClass: ""
       hostPathPrefix: /mnt/weed-1
 
+    nodeSelector: |
+      weed-master: "yes"
+
   volume:
     dataCenter: "home"
     rack: "wailord"
@@ -32,7 +35,7 @@ seaweedfs:
         maxVolumes: 0
 
     nodeSelector: |
-      weed-master: "yes"
+      weed: "yes"
 
   filer:
     enabled: true
