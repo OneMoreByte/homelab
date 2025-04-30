@@ -36,7 +36,7 @@ spec:
             emptyDir: {}
         initContainers:
           - name: theme-provider
-            image: image/alpine:latest
+            image: docker.io/alpine:latest
             imagePullPolicy: Always
             command:
               - sh
