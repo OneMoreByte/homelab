@@ -3,7 +3,7 @@ kind: Cluster
 metadata:
   name: keycloak-pg-cluster
 spec:
-  instances: 3
+  instances: 1
   bootstrap:
     initdb:
       database: keycloak
@@ -13,7 +13,7 @@ spec:
   backup:
     barmanObjectStore:
       destinationPath: "s3://cnpg-backup/keycloak/"
-      endpointURL: "https://minio.jsck.network"
+      endpointURL: "http://seaweedfs-s3.objectstore.svc.cluster.local:8333"
       s3Credentials:
         accessKeyId:
           name: keycloak-backup-secret
@@ -21,6 +21,6 @@ spec:
         secretAccessKey:
           name: keycloak-backup-secret
           key: ACCESS_SECRET_KEY
-    retentionPolicy: "30d"
+    retentionPolicy: "7d"
   storage:
-    size: 8Gi
+    size: 16Gi
