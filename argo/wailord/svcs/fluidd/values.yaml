@@ -1,0 +1,24 @@
+nginx:
+  serverBlock: |-
+    server {
+      server_name big-lebowski;
+      listen 8080;
+
+      location / {
+        proxy_pass http://192.168.60.61/;
+      }
+    }
+    server {
+      server_name green-knight;
+      listen 8081;
+
+      location / {
+        proxy_pass http://192.168.60.128/;
+      }
+    }
+
+  containerPorts:
+    bl: 8080
+    gn: 8081
+  service:
+    type: NodePort
