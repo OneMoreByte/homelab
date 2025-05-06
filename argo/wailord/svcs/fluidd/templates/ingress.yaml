@@ -1,4 +1,5 @@
 kind: Ingress
+apiVersion: networking.k8s.io/v1
 metadata:
   labels:
     tailscale.com/proxy-class: "jscknet"
@@ -29,6 +30,7 @@ status:
             protocol: TCP
 ---
 kind: Ingress
+apiVersion: networking.k8s.io/v1
 metadata:
   labels:
     tailscale.com/proxy-class: "jscknet"
