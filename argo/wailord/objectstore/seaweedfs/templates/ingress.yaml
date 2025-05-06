@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app: seaweedfs-master-ingress
+    tailscale.com/proxy-class: "jscknet"
+  name: seaweedfs-master-ingress
+spec:
+  ingressClassName: tailscale
+  rules:
+    - host: seaweedfs-master
+      http:
+        paths:
+          - backend:
+              service:
+                name: seaweedfs-master
+                port:
+                  number: 933
+            path: /
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - seaweedfs-master
+      secretName: seaweedfs-master.local-tls
+status:
+  loadBalancer:
+    ingress:
+      - hostname: seaweedfs-master.fawn-mamba.ts.net
+        ports:
+          - port: 443
+            protocol: TCP
