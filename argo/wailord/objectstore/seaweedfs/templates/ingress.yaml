@@ -15,7 +15,7 @@ spec:
               service:
                 name: seaweedfs-master
                 port:
-                  number: 933
+                  number: 9333
             path: /
             pathType: ImplementationSpecific
   tls:
