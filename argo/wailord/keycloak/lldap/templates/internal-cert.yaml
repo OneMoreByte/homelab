@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: lldap-internal-cert
+spec:
+  dnsNames:
+    - "lldap"
+    - "lldap.keycloak.svc.cluster.local"
+  secretName: lldap-internal-cert
+  issuerRef:
+    name: trust-manager-wailord-ca-issuer
+    kind: ClusterIssuer
