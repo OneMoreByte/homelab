@@ -22,6 +22,8 @@ spec:
   additionalOptions:
     - name: proxy
       value: reencrypt
+    - name: truststore-paths
+      value: "/internal-ca/ca-certificates.crt"
   ingress:
     enabled: false
   unsupported:
@@ -31,9 +33,14 @@ spec:
           - volumeMounts:
               - name: theme
                 mountPath: /opt/keycloak/providers
+              - name: internal-ca
+                mountPath: /internal-ca
         volumes:
           - name: theme
             emptyDir: {}
+          - name: internal-ca
+            configMap:
+              name: wailord-bundle
         initContainers:
           - name: theme-provider
             image: docker.io/alpine:latest
