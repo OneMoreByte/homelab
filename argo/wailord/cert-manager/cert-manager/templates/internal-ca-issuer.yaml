@@ -4,4 +4,4 @@ metadata:
   name: trust-manager-wailord-ca-issuer
 spec:
   ca:
-    secretName: trust-manager-wailord-ca
+    secretName: trust-manager-wailord-ca-secret
