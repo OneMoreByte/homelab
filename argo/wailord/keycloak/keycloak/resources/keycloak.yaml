@@ -22,8 +22,8 @@ spec:
   additionalOptions:
     - name: proxy
       value: reencrypt
-#    - name: truststore-paths
-#      value: "/internal-ca/ca-certificates.crt"
+    - name: truststore-paths
+      value: "/internal-ca/ca-certificates.crt,/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
   ingress:
     enabled: false
   unsupported:
