@@ -27,7 +27,7 @@ metadata:
   name: owncloud-local-producers-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 2Ti
