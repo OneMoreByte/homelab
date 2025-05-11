@@ -45,6 +45,12 @@ ocis:
     ocm:
       enabled: true
 
+  ingress:
+    enabled: true
+    tls:
+      - secretName: jackhil.de-cert
+        hosts:
+          - drive.jackhil.de
 
 
   services:
