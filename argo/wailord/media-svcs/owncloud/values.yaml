@@ -21,6 +21,7 @@ ocis:
     externalUserManagement:
       enabled: true
       oidc:
+        webClientID: ocis
         issuerURI: https://auth.jackhil.de
         sessionManagementLink: https://auth.jackhil.de/realms/master/account/
         editAccountLink: https://auth.jackhil.de/realms/master/account/
