@@ -1,0 +1,47 @@
+oics:
+  image:
+    repository: owncloud/ocis
+    tag:
+  features:
+    emailNotifications:
+      enabled: false
+      smtp:
+        host: host.name
+        port: 1
+        sender: "e <e@eeeee.e>"
+        authentication: plain
+        encryption: ssl
+    sharing:
+      publiclink:
+        shareMustHavePassword: true
+      passwordPolicies:
+        minCharacters: 24
+    autoprovisionAccounts:
+      enabled: true
+
+    externalUserManagement:
+      enabled: true
+      oicd:
+        issuerURI: https://auth.jackhil.de
+        sessionManagementLink: https://auth.jackhil.de/realms/master/account/
+        editAccountLink: https://auth.jackhil.de/realms/master/account/
+        userIDClaim: ocis.user.uuid
+        roleAssignment:
+          enabled: true
+          claim: roles
+          mapping:
+            - role_name: admin
+              claim_value: ocisAdmin
+            - role_name: spaceadmin
+              claim_value: ocisSpaceAdmin
+            - role_name: user
+              claim_value: ocisUser
+            - role_name: user-light
+              claim_value: ocisGuest
+
+    ocm:
+      enabled: true
+
+  nodeSelector:
+    app: bulk-datastore
+

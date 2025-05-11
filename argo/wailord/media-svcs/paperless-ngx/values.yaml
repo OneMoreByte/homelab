@@ -27,6 +27,9 @@ paperless-ngx:
         name: paperless-db-secret
         key: password
 
+  envFrom:
+    - secret: paperless-oicd-settings
+
   service:
     # -- Configures service settings for the chart.
     # @default -- See [values.yaml](./values.yaml)

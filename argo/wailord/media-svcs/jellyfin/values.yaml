@@ -110,4 +110,7 @@ app-template:
       type: hostPath
       hostPath: /store/plex-files
 
-
+    certs:
+      enabled: true
+      type: configMap
+      name: wailord-bundle
