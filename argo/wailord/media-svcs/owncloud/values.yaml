@@ -49,7 +49,8 @@ ocis:
 
   services:
     storagesystem:
-      persistence: true
+      persistence:
+        enabled: true
     storageusers:
       storageBackend:
         driver: ocis
