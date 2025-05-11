@@ -32,3 +32,4 @@ spec:
     requests:
       storage: 2Ti
   storageClassName: local-storage
+  volumeName: owncloud-local-producers-pv
