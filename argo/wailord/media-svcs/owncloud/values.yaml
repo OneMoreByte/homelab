@@ -45,3 +45,4 @@ oics:
   nodeSelector:
     app: bulk-datastore
 
+  externalDomain: drive.jackhil.de
