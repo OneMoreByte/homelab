@@ -1,7 +1,9 @@
-oics:
+ocis:
+  externalDomain: drive.jackhil.de
+
   image:
     repository: owncloud/ocis
-    tag:
+    tag: "7.1.2"
   features:
     emailNotifications:
       enabled: false
@@ -16,12 +18,9 @@ oics:
         shareMustHavePassword: true
       passwordPolicies:
         minCharacters: 24
-    autoprovisionAccounts:
-      enabled: true
-
     externalUserManagement:
       enabled: true
-      oicd:
+      oidc:
         issuerURI: https://auth.jackhil.de
         sessionManagementLink: https://auth.jackhil.de/realms/master/account/
         editAccountLink: https://auth.jackhil.de/realms/master/account/
@@ -39,10 +38,33 @@ oics:
             - role_name: user-light
               claim_value: ocisGuest
 
+      autoprovisionAccounts:
+        enabled: true
+
+
     ocm:
       enabled: true
 
-  nodeSelector:
-    app: bulk-datastore
 
-  externalDomain: drive.jackhil.de
+
+  services:
+    storagesystem:
+      persistence: true
+    storageusers:
+      storageBackend:
+        driver: ocis
+
+      maintenance:
+        cleanUpExpiredUploads:
+          enabled: true
+        purgeExpiredTrashBinItems:
+          enabled: true
+        restartPostprocessing:
+          enabled: true
+
+      persistence:
+        enabled: True
+        existingClaim: owncloud-local-producers-pvc
+
+      nodeSelector:
+        app: bulk-datastore
