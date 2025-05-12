@@ -77,7 +77,3 @@ app-template:
       enabled: true
       type: hostPath
       hostPath: /store/torrent/
-    torrent-public:
-      enabled: true
-      type: hostPath
-      hostPath: /store/torrent-public/
