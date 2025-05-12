@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    tailscale.com/proxy-class: "jscknet"
+  name: watchstate-ingress
+spec:
+  ingressClassName: tailscale
+  rules:
+    - host: watchstate
+      http:
+        paths:
+          - backend:
+              service:
+                name: watchstate
+                port:
+                  number: 8080
+            path: /
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - watchstate
+      secretName: watchstate.local-tls
+status:
+  loadBalancer:
+    ingress:
+      - hostname: watchstate.fawn-mamba.ts.net
+        ports:
+          - port: 443
+            protocol: TCP

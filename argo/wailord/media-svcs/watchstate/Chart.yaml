@@ -1,0 +1,10 @@
+apiVersion: v2
+name: watchstate
+type: application
+version: 0.1.0
+sources:
+  - "https://github.com/arabcoders/watchstate"
+dependencies:
+  - name: app-template
+    version: 3.7.3
+    repository: "https://bjw-s-labs.github.io/helm-charts"
