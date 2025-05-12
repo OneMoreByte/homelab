@@ -9,6 +9,7 @@ app-template:
           env:
             TZ: America/Chicago
             LLDAP_LDAP_BASE_DN: dc=jsck,dc=network
+            LLDAP_HTTP_URL: https://lldap.jsck.network
           envFrom:
             - secret: lldap-config
           image:
