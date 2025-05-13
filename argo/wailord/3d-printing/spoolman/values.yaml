@@ -37,8 +37,6 @@ app-template:
             SPOOLMAN_DIR_DATA: /config # Is this needed?
             SPOOLMAN_DIR_BACKUPS: /config # Ditto
             SPOOLMAN_DIR_LOGS: /config
-            UID: 1000
-            GID: 1000
 
   defaultPodOptions:
     securityContext:
