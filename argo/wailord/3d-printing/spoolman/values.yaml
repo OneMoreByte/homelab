@@ -24,6 +24,8 @@ app-template:
           env:
             # -- Set the container timezone
             TZ: America/Chicago
+            SPOOLMAN_HOST: 0.0.0.0
+            SPOOLMAN_PORT: 7912
             SPOOLMAN_DB_TYPE: postgres
             SPOOLMAN_DB_HOST: spoolman-pg-cluster-rw
             SPOOLMAN_DB_PORT: 5432
