@@ -34,19 +34,15 @@ app-template:
                 secretKeyRef:
                   name: spoolman-db-secret
                   key: password
-            SPOOLMAN_DIR_DATA: /config    # Is this needed?
+            SPOOLMAN_DIR_DATA: /config # Is this needed?
             SPOOLMAN_DIR_BACKUPS: /config # Ditto
             SPOOLMAN_DIR_LOGS: /config
             UID: 1000
             GID: 1000
 
-
   defaultPodOptions:
     securityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
       fsGroup: 1000
-
 
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
@@ -75,9 +71,9 @@ app-template:
                 name: spoolman
                 port: 7912
       tls:
-      - hosts:
-          - spoolman.jsck.network
-        secretName: spoolman.jsck.network-cert
+        - hosts:
+            - spoolman.jsck.network
+          secretName: spoolman.jsck.network-cert
 
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
@@ -86,4 +82,3 @@ app-template:
       enabled: true
       accessMode: ReadWriteOnce
       size: 16Gi
-
