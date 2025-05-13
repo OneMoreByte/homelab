@@ -1,0 +1,16 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: pg-backup-secret-key
+  namespace: 3d-printing
+spec:
+  encryptedData:
+    key: AgAMprIq46eXSNhGqcMDZCELGQVq13geIPW9q4RuS78e0/gNdmYmr7JFJXxmmdGL3XT4czgDlzeQY2+exQ4gBwFM3BxTGGFh8Ux8tBu1UcKe8qz4wDSQF6XxctAGJ7h2uwmtbBGGluPRZOvTfGTFxRyKXupmso1DWOzN8WW8IxxVavNyjrOSbGgKEFBIwnfRpfKRIVfuhHa3icSbt2gQTDsKcV4T+Y9geWrYsRIMNH4LLV4gBEihA1H7X5TDwCoVmyjBuPd7HUo7SkFLULGZZAq+kR7oRj+xzYj180IJAubTViJcT4R01oaB8L7Msc4us3GeZD2HrfkGW8B6734YeT3s4gU7kwlHwfdFh6Os3J6+4KEiEbSJgbdGWBb/dZsaSHAv2RPWnOIqzpUfEbm0faPmZ9Txl31LVHdR9unWrtxBmJzScwgkbvD9RHoqXq2o2BBsvY9a8a/GebOD/mZjzYjTw2IRu3CtaS1n9eVPGPUsFn08cs7efa/gm2B+qXDgBz0IwrLk7MxCVV8pQB+WiyV5jxT2GeUrP+I4Jp6O6UU4KsrUbBnVJphotw2Alo79CCs0TretP3Xvbmz2a1gp4TY5PtDA2QbB69L+wcAPrxCRltJuZl6QA5U/u50yN1FB5InS2V/wW3dvWHPuTJ/WsEfCBJhigoT0x/kjjiSZMmZfh4y8qanRdns/WJ+SOgWvutVcLt4f6K8fsGPZOS+cg7Qu5Pq3R/s4G+1ZB9j9xx1rTtN8moH0NH4SRkpGZX5JSs07xS7/LAGc06QfIH13fXkhIVZVclSgJsV7QaGHJbxqtIrEJcOBLHLmckvv+kUZ+RD7UK2aOmtKKq16qLYQDZyc5UTOlw==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: pg-backup-secret-key
+      namespace: 3d-printing
+    type: Opaque
