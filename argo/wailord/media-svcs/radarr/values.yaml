@@ -11,7 +11,7 @@ app-template:
             PGID: 11337
           image:
             repository: hotio/radarr
-            tag: "release-5.22.4.9896"
+            tag: "release-5.23.3.9987"
             pullPolicy: IfNotPresent
       #      initContainers:
       #        hold:
