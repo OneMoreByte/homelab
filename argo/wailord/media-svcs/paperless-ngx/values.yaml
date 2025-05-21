@@ -5,7 +5,7 @@ paperless-ngx:
     # -- Image pull policy
     pullPolicy: IfNotPresent
     # -- Image tag
-    tag: 2.15.3
+    tag: 2.16.1
 
   env:
     # -- Set the container timezone
