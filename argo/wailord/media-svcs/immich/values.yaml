@@ -16,7 +16,7 @@ immich:
   image:
     repository: ghcr.io/immich-app/immich-server
     pullPolicy: IfNotPresent
-    tag: v1.133.1
+    tag: v1.134.0
 
   immich:
     metrics:
