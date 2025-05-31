@@ -11,7 +11,7 @@ app-template:
             PGID: 11337
           image:
             repository: hotio/prowlarr
-            tag: "release-1.35.1.5034"
+            tag: "release-1.36.3.5071"
             pullPolicy: IfNotPresent
 
       #initContainers:
