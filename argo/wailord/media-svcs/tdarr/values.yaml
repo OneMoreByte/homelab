@@ -23,7 +23,7 @@ app-template:
             privileged: true
           image:
             repository: ghcr.io/haveagitgat/tdarr
-            tag: "2.41.02"
+            tag: "2.42.01"
             pullPolicy: IfNotPresent
       #      initContainers:
       #        hold:
