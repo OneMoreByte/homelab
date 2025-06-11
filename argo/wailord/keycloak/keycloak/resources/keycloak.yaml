@@ -52,7 +52,7 @@ spec:
               - |
                 cd /theme
                 echo "Getting theme..."
-                wget https://github.com/OneMoreByte/keycloak-homelab-theme/releases/latest/download/standalone-keycloak-theme.jar
+                wget -O standalone-keycloak-theme.jar https://github.com/OneMoreByte/keycloak-homelab-theme/releases/latest/download/standalone-keycloak-theme.jar
             volumeMounts:
               - name: theme
                 mountPath: /theme
