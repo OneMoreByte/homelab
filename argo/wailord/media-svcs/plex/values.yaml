@@ -4,7 +4,9 @@
 # This chart inherits from our common library chart. You can check the default values/options here:
 # https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
 #
-app-template:  global:    alwaysAppendIdentifierToResourceName: true
+app-template:
+  global:
+    alwaysAppendIdentifierToResourceName: true
   controllers:
     main:
       enabled: true
@@ -38,9 +40,6 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             tag: 1.41.6-9685-vanilla
             # -- image pull policy
             pullPolicy: IfNotPresent
-          resources:
-            limits:
-              nvidia.com/gpu: 1
           securityContext:
             privileged: true
   defaultPodOptions:
