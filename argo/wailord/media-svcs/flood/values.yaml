@@ -1,4 +1,4 @@
-app-template:
+app-template:  global:    alwaysAppendIdentifierToResourceName: true
 
   controllers:
     main:

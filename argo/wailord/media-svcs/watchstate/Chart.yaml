@@ -6,5 +6,5 @@ sources:
   - "https://github.com/arabcoders/watchstate"
 dependencies:
   - name: app-template
-    version: 3.7.3
+    version: 4.1.0
     repository: "https://bjw-s-labs.github.io/helm-charts"
