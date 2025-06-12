@@ -1,4 +1,6 @@
-app-template:  global:    alwaysAppendIdentifierToResourceName: true
+app-template:
+  global:
+    alwaysAppendIdentifierToResourceName: true
   controllers:
     main:
       containers:
@@ -7,24 +9,20 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             repository: ghcr.io/home-assistant/home-assistant
             tag: 2025.5.3
             pullPolicy: IfNotPresent
-
           env:
-            # -- Set the container timezone
-            TZ: "America/Chicago"
+            TZ: America/Chicago
             PYTHONPATH: /config/deps
-
   service:
     main:
       controller: main
       ports:
         http:
           port: 8123
-
   ingress:
     main:
       enabled: true
       annotations:
-        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.tls: 'true'
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       labels: {}
       hosts:
@@ -33,13 +31,12 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             - path: /
               pathType: Prefix
               service:
-                name: hass
+                name: hass-main
                 port: 8123
       tls:
         - hosts:
             - home.jackhil.de
           secretName: jackhil.de-cert
-
   persistence:
     config:
       enabled: true

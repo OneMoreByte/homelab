@@ -1,4 +1,6 @@
-app-template:  global:    alwaysAppendIdentifierToResourceName: true
+app-template:
+  global:
+    alwaysAppendIdentifierToResourceName: true
   controllers:
     main:
       enabled: true
@@ -8,8 +10,7 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
         main:
           env:
             MULTITHREADING: true
-            SERVER_NAME: "Island boys"
-            #SERVER_PASSWORD: "Jackiscool"
+            SERVER_NAME: Island boys
             COMMUNITY: false
           image:
             repository: thijsvanloef/palworld-server-docker
@@ -17,7 +18,7 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             pullPolicy: Always
           resources:
             requests:
-              memory: "24Gi"
+              memory: 24Gi
           probes:
             liveness:
               enabled: false
@@ -25,15 +26,6 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
               enabled: false
             startup:
               enabled: false
-      #      initContainers:
-      #        sleep:
-      #         image:
-      #  repository: busybox
-      # tag: "1.28"
-      # command: "sleep"
-      # args:
-  #  - "30000"
-
   defaultPodOptions:
     affinity:
       nodeAffinity:
@@ -44,12 +36,9 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
                   operator: In
                   values:
                     - fastclock
-
   ingress:
     main:
       enabled: false
-
-  # -- Configures service settings for the chart.
   service:
     main:
       type: LoadBalancer
@@ -68,15 +57,12 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
           enabled: false
           port: 25575
           protocol: tcp
-
-  # -- Configure persistence settings for the chart under this key.
   persistence:
     config:
       enabled: false
       accessMode: ReadWriteOnce
       size: 16Gi
       mountPath: /config
-
     palworld:
       enabled: true
       accessMode: ReadWriteOnce

@@ -1,9 +1,3 @@
-#
-# IMPORTANT NOTE
-#
-# This chart inherits from our common library chart. You can check the default values/options here:
-# https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
-#
 app-template:
   global:
     alwaysAppendIdentifierToResourceName: true
@@ -14,31 +8,17 @@ app-template:
       containers:
         main:
           env:
-            # -- Set the container timezone
             TZ: America/Chicago
             HOSTNAME: producers
             PLEX_UID: 11337
             PLEX_GID: 11337
             CHANGE_CONFIG_DIR_OWNERSHIP: false
-            # ADVERTISE_IP:
-            # ALLOWED_NETWORKS:
             PLEX_CLAIM: claim-8zwd13n8SRF6TNxhR2EY
-            PLEX_PREFERENCE_1: "FriendlyName=producers"
-            # PLEX_PREFERENCE_2: "EnableIPv6=0"
-            # PLEX_PREFERENCE_3: "logDebug=0"
-            # PLEX_PREFERENCE_4: "DisableTLSv1_0=1"
-            # PLEX_PREFERENCE_5: "LanNetworksBandwidth=xxx.xxx.xxx.0/18\,xxx.xxx.xxx.0/24\,xxx.xxx.xxx.0/24"
-            # PLEX_PREFERENCE_6: "TranscoderQuality=2"
-            # PLEX_PREFERENCE_7: "TreatWanIpAsLocal=0"
-            # PLEX_PREFERENCE_8: "TranscoderH264BackgroundPreset=fast"
+            PLEX_PREFERENCE_1: FriendlyName=producers
             NVIDIA_DRIVER_CAPABILITIES: all
-
           image:
-            # -- image repository
             repository: ghcr.io/onemorebyte/plex
-            # -- image tag
             tag: 1.41.8-9834
-            # -- image pull policy
             pullPolicy: IfNotPresent
           securityContext:
             privileged: true
@@ -54,21 +34,10 @@ app-template:
                     - bulk-datastore
     hostNetwork: true
     securityContext:
-      #  runAsUser: 11337
-      #runAsGroup: 11337
       fsGroup: 11337
-      # Hardware acceleration using an Intel iGPU w/ QuickSync
-      # These IDs below should be matched to your `video` and `render` group on the host
-      # To obtain those IDs run the following grep statement on the host:
-      # $ cat /etc/group | grep "video\|render"
-      # video:x:44:
-      # render:x:109:
       supplementalGroups:
-        - 39 # Video
+        - 39
         - 105
-
-  # -- Configures service settings for the chart.
-  # @default -- See values.yaml
   service:
     main:
       controller: main
@@ -99,12 +68,11 @@ app-template:
           protocol: TCP
           targetPort: 1900
       externalTrafficPolicy: Local
-
   ingress:
     main:
       enabled: true
       annotations:
-        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.tls: 'true'
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       labels: {}
       hosts:
@@ -113,7 +81,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: plex-main
+                name: plex-main-main
                 port: 32400
       tls:
         - hosts:
@@ -132,24 +100,19 @@ app-template:
               service:
                 name: plex-main
                 port: 32400
-  # -- Enable devices to be discoverable
-
-  # -- Configure persistence settings for the chart under this key.
-  # @default -- See values.yaml
   persistence:
     config:
       enabled: true
       type: hostPath
       hostPath: /store/k8s-hostpath/plex
       advancedMounts:
-        main: # the controller with the "main" identifier
-          main: # the container with the "main" identifier
+        main:
+          main:
             - path: /config
     media:
       enabled: true
       type: hostPath
       hostPath: /store/plex-files
-
     transcode:
       enabled: true
       type: emptyDir

@@ -1,4 +1,6 @@
-app-template:  global:    alwaysAppendIdentifierToResourceName: true
+app-template:
+  global:
+    alwaysAppendIdentifierToResourceName: true
   controllers:
     main:
       replicas: 1
@@ -10,27 +12,21 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             TZ: America/Chicago
             PUID: 11337
             PGID: 11337
-            serverIP: "0.0.0.0"
-            serverPort: "8266"
-            webUIPort: "8265"
-            internalNode: "true"
-            inContainer: "true"
-            ffmpegVersion: "7"
-            NVIDIA_DRIVER_CAPABILITIES: "all"
-            NVIDIA_VISIBLE_DEVICES: "all"
-            nodeName: "producers"
+            serverIP: 0.0.0.0
+            serverPort: '8266'
+            webUIPort: '8265'
+            internalNode: 'true'
+            inContainer: 'true'
+            ffmpegVersion: '7'
+            NVIDIA_DRIVER_CAPABILITIES: all
+            NVIDIA_VISIBLE_DEVICES: all
+            nodeName: producers
           securityContext:
             privileged: true
           image:
             repository: ghcr.io/haveagitgat/tdarr
-            tag: "2.42.01"
+            tag: 2.42.01
             pullPolicy: IfNotPresent
-      #      initContainers:
-      #        hold:
-      #          image:
-      #            repository: ghcr.io/roxedus/pgloader
-      #            tag: latest
-      #          command: ["sleep", "500000"]
   defaultPodOptions:
     affinity:
       nodeAffinity:
@@ -42,14 +38,10 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
                   values:
                     - bulk-datastore
     securityContext:
-      #runAsUser: 11337
-      #runAsGroup: 11337
       fsGroup: 11337
       supplementalGroups:
-        - 39 # Video
+        - 39
         - 105
-
-  # -- Configures service settings for the chart.
   service:
     main:
       controller: main
@@ -59,12 +51,10 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
           port: 8265
         server:
           port: 8266
-
   ingress:
-    # -- Enable and configure ingress settings for the chart under this key.
     main:
       annotations:
-        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.tls: 'true'
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       enabled: false
       hosts:
@@ -73,19 +63,16 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             - path: /
               pathType: Prefix
               service:
-                name: tdarr
+                name: tdarr-main
                 port: 8265
       tls:
         - hosts:
             - tdarr.jackhil.de
           secretName: jackhil.de-cert
-
-  # -- Configure persistence settings for the chart under this key.
   persistence:
     config:
       enabled: false
       type: emptyDir
-
     app-server:
       enabled: true
       accessMode: ReadWriteOnce
@@ -94,7 +81,6 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
         main:
           main:
             - path: /app/server
-
     app-config:
       enabled: true
       accessMode: ReadWriteOnce
@@ -103,7 +89,6 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
         main:
           main:
             - path: /app/configs
-
     app-logs:
       enabled: true
       accessMode: ReadWriteOnce
@@ -112,7 +97,6 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
         main:
           main:
             - path: /app/logs
-
     media:
       enabled: true
       type: hostPath

@@ -1,4 +1,6 @@
-app-template:  global:    alwaysAppendIdentifierToResourceName: true
+app-template:
+  global:
+    alwaysAppendIdentifierToResourceName: true
   controllers:
     main:
       enabled: true
@@ -11,14 +13,12 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             METER_PORT: 8081
           image:
             repository: ghcr.io/zaknye/xcel_itron2mqtt
-            tag: "main"
+            tag: main
             pullPolicy: IfNotPresent
-
   service:
     main:
       controller: main
       enabled: false
-
   persistence:
     certs:
       enabled: true

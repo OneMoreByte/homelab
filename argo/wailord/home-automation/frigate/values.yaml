@@ -1,47 +1,20 @@
 frigate:
-  # Default values for frigate.
-  # This is a YAML-formatted file.
-  # Declare variables to be passed into your templates.
-
-  # -- upgrade strategy type (e.g. Recreate or RollingUpdate)
   strategyType: Recreate
-
   image:
-    # -- Docker registry/repository to pull the image from
     repository: ghcr.io/blakeblackshear/frigate
-    # -- Overrides the default tag (appVersion) used in Chart.yaml ([Docker Hub](https://hub.docker.com/r/blakeblackshear/frigate/tags?page=1))
     tag: 0.15.1
-    # -- Docker image pull policy
     pullPolicy: IfNotPresent
-
-  # -- Docker image pull policy
   imagePullSecrets: []
-
-  # -- additional ENV variables to set. Prefix with FRIGATE_ to target Frigate configuration values
   env: []
-  #   - FRIGATE_MQTT_USER:
-  #   - FRIGATE_MQTT_PASSWORD:
-
-  # -- set environment variables from Secret(s)
   envFromSecrets:
-    # secrets are required before `helm install`
     - frigate-rstp-credentials
-
   coral:
-    # -- enables the use of a Coral device
     enabled: false
-    # -- path on the host to which to mount the Coral device
     hostPath: /dev/apex_0
-
   gpu:
     nvidia:
-      # -- Enables NVIDIA GPU compatibility. Must also use the "amd64nvidia" tagged image
       enabled: false
-
-      # -- Overrides the default runtimeClassName
-      runtimeClassName:
-
-  # -- declare extra volumes to use for Frigate
+      runtimeClassName: null
   extraVolumes:
     - name: coral
       hostPath:
@@ -49,148 +22,57 @@ frigate:
     - name: recording-storage
       hostPath:
         path: /store/frigate
-  # -- declare additional volume mounts
   extraVolumeMounts:
     - mountPath: /dev/apex_0
       name: coral
     - mountPath: /media/frigate
       name: recording-storage
-  # -- amount of shared memory to use for caching
   shmSize: 1Gi
-
-  # -- frigate configuration - see [Docs](https://docs.frigate.video/configuration/index) for more info
-  config: |
-    mqtt:
-      # Required: host name
-      host: mqtt.jsck.network
-      # Optional: port (default: shown below)
-      port: 1883
-      # Optional: topic prefix (default: shown below)
-      # WARNING: must be unique if you are running multiple instances
-      topic_prefix: frigate
-      # Optional: client id (default: shown below)
-      # WARNING: must be unique if you are running multiple instances
-      client_id: frigate
-      # Optional: user
-      #user: '{FRIGATE_MQTT_USER}'
-      # Optional: password
-      # NOTE: Environment variables that begin with 'FRIGATE_' may be referenced in {}.
-      #       eg. password: '{FRIGATE_MQTT_PASSWORD}'
-      #password: '{FRIGATE_MQTT_PASSWORD}'
-      # Optional: interval in seconds for publishing stats (default: shown below)
-      stats_interval: 60
-    record:
-      enabled: true
-      alerts:
-        retain:
-          days: 7
-      detections:
-        retain:
-          days: 7
-    detectors:
-      coral:
-        type: edgetpu
-        device: pci
-    go2rtc:
-      streams:
-        garage1:
-          - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=1
-          - ffmpeg:garage1-high#video=h264#audio=aac
-        garage1-high:
-          - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=0
-          - ffmpeg:garage1-high#video=h264#audio=aac
-        backdoor1:
-          - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=1
-          - ffmpeg:backdoor1-high#video=h264#audio=aac
-        backdoor1-high:
-          - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0
-          - ffmpeg:backdoor1-high#video=h264#audio=aac
-        backyard1:
-          - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=1
-          - ffmpeg:backyard1-high#video=h264#audio=aac
-        backyard1-high:
-          - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=0
-          - ffmpeg:backyard1-high#video=h264#audio=aac
-    cameras:
-      garage1:
-        ffmpeg:
-          output_args:
-            record: preset-record-generic-audio-aac
-          inputs:
-            - path: rtsp://127.0.0.1:8554/garage1?video=copy
-              roles:
-                - detect
-            - path: rtsp://127.0.0.1:8554/garage1-high?video=copy
-              roles:
-                - record
-        detect:
-          width: 704
-          height: 480
-        motion:
-          mask: []
-        zones:
-          driveway:
-            coordinates:
-              0,480,594,480,704,480,704,315,530,271,360,197,320,181,230,183,120,175,70,169,0,171,0,250
-          front_door:
-            coordinates: 364,187,474,185,704,235,704,313,328,201
-      backdoor1:
-        ffmpeg:
-          output_args:
-            record: preset-record-generic-audio-aac
-          inputs:
-            - path: rtsp://127.0.0.1:8554/backdoor1?video=copy
-              roles:
-                - detect
-            - path: rtsp://127.0.0.1:8554/backdoor1-high?video=copy
-              roles:
-                - record
-        detect:
-          width: 704
-          height: 480
-        motion:
-          mask:
-            - 487,0,362,44,120,53,0,59,0,0
-        zones:
-          backdoor:
-            coordinates: 361,52,451,0,570,0,704,47,704,480,0,480,0,77,124,51
-      backyard1:
-        ffmpeg:
-          output_args:
-            record: preset-record-generic-audio-aac
-          inputs:
-            - path: rtsp://127.0.0.1:8554/backyard1?video=copy
-              roles:
-                - detect
-            - path: rtsp://127.0.0.1:8554/backyard1-high?video=copy
-              roles:
-                - record
-        detect:
-          width: 704
-          height: 480
-        motion: {}
-        zones:
-          deck:
-            coordinates: 704,480,0,480,0,375,44,305,466,331,630,229
-          yard:
-            coordinates: 232,325,482,333,608,231,704,175,704,67,322,69,52,299
-    snapshots:
-      enabled: true
-      retain:
-        default: 60
-    objects:
-      # Optional: list of objects to track from labelmap.txt (default: shown below)
-      track:
-        - person
-        - bicycle
-        - car
-        - motorcycle
-        - bus
-        - cat
-        - dog
-        - hot dog
-    version: 0.15-1
-  # Probes configuration
+  config: "mqtt:\n  # Required: host name\n  host: mqtt.jsck.network\n  # Optional:\
+    \ port (default: shown below)\n  port: 1883\n  # Optional: topic prefix (default:\
+    \ shown below)\n  # WARNING: must be unique if you are running multiple instances\n\
+    \  topic_prefix: frigate\n  # Optional: client id (default: shown below)\n  #\
+    \ WARNING: must be unique if you are running multiple instances\n  client_id:\
+    \ frigate\n  # Optional: user\n  #user: '{FRIGATE_MQTT_USER}'\n  # Optional: password\n\
+    \  # NOTE: Environment variables that begin with 'FRIGATE_' may be referenced\
+    \ in {}.\n  #       eg. password: '{FRIGATE_MQTT_PASSWORD}'\n  #password: '{FRIGATE_MQTT_PASSWORD}'\n\
+    \  # Optional: interval in seconds for publishing stats (default: shown below)\n\
+    \  stats_interval: 60\nrecord:\n  enabled: true\n  alerts:\n    retain:\n    \
+    \  days: 7\n  detections:\n    retain:\n      days: 7\ndetectors:\n  coral:\n\
+    \    type: edgetpu\n    device: pci\ngo2rtc:\n  streams:\n    garage1:\n     \
+    \ - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=1\n\
+    \      - ffmpeg:garage1-high#video=h264#audio=aac\n    garage1-high:\n      -\
+    \ rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=0\n\
+    \      - ffmpeg:garage1-high#video=h264#audio=aac\n    backdoor1:\n      - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=1\n\
+    \      - ffmpeg:backdoor1-high#video=h264#audio=aac\n    backdoor1-high:\n   \
+    \   - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0\n\
+    \      - ffmpeg:backdoor1-high#video=h264#audio=aac\n    backyard1:\n      - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=1\n\
+    \      - ffmpeg:backyard1-high#video=h264#audio=aac\n    backyard1-high:\n   \
+    \   - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=0\n\
+    \      - ffmpeg:backyard1-high#video=h264#audio=aac\ncameras:\n  garage1:\n  \
+    \  ffmpeg:\n      output_args:\n        record: preset-record-generic-audio-aac\n\
+    \      inputs:\n        - path: rtsp://127.0.0.1:8554/garage1?video=copy\n   \
+    \       roles:\n            - detect\n        - path: rtsp://127.0.0.1:8554/garage1-high?video=copy\n\
+    \          roles:\n            - record\n    detect:\n      width: 704\n     \
+    \ height: 480\n    motion:\n      mask: []\n    zones:\n      driveway:\n    \
+    \    coordinates:\n          0,480,594,480,704,480,704,315,530,271,360,197,320,181,230,183,120,175,70,169,0,171,0,250\n\
+    \      front_door:\n        coordinates: 364,187,474,185,704,235,704,313,328,201\n\
+    \  backdoor1:\n    ffmpeg:\n      output_args:\n        record: preset-record-generic-audio-aac\n\
+    \      inputs:\n        - path: rtsp://127.0.0.1:8554/backdoor1?video=copy\n \
+    \         roles:\n            - detect\n        - path: rtsp://127.0.0.1:8554/backdoor1-high?video=copy\n\
+    \          roles:\n            - record\n    detect:\n      width: 704\n     \
+    \ height: 480\n    motion:\n      mask:\n        - 487,0,362,44,120,53,0,59,0,0\n\
+    \    zones:\n      backdoor:\n        coordinates: 361,52,451,0,570,0,704,47,704,480,0,480,0,77,124,51\n\
+    \  backyard1:\n    ffmpeg:\n      output_args:\n        record: preset-record-generic-audio-aac\n\
+    \      inputs:\n        - path: rtsp://127.0.0.1:8554/backyard1?video=copy\n \
+    \         roles:\n            - detect\n        - path: rtsp://127.0.0.1:8554/backyard1-high?video=copy\n\
+    \          roles:\n            - record\n    detect:\n      width: 704\n     \
+    \ height: 480\n    motion: {}\n    zones:\n      deck:\n        coordinates: 704,480,0,480,0,375,44,305,466,331,630,229\n\
+    \      yard:\n        coordinates: 232,325,482,333,608,231,704,175,704,67,322,69,52,299\n\
+    snapshots:\n  enabled: true\n  retain:\n    default: 60\nobjects:\n  # Optional:\
+    \ list of objects to track from labelmap.txt (default: shown below)\n  track:\n\
+    \    - person\n    - bicycle\n    - car\n    - motorcycle\n    - bus\n    - cat\n\
+    \    - dog\n    - hot dog\nversion: 0.15-1\n"
   probes:
     liveness:
       enabled: true
@@ -206,108 +88,34 @@ frigate:
       enabled: false
       failureThreshold: 30
       periodSeconds: 10
-
   service:
-    # -- Type of Service to use
     type: LoadBalancer
-    # -- Port the Service should communicate on
     port: 5000
-    ## Specify the nodePort value for the LoadBalancer and NodePort service types.
-    ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
-    ##
-    # nodePort:
-    ## Provide any additional annotations which may be required. This can be used to
-    ## set the LoadBalancer service type to internal only.
-    ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
-    ##
-    # annotations: {}
-    # labels: {}
-
-    # -- Set specific IP address for LoadBalancer. `service.type` must be set to `LoadBalancer`
-    # loadBalancerIP:
-
-    # loadBalancerSourceRanges: []
-    ## Set the externalTrafficPolicy in the Service to either Cluster or Local
-    # externalTrafficPolicy: Cluster
-
   ingress:
-    # -- Enables the use of an Ingress Controller to front the Service and can provide HTTPS
     enabled: false
-    ingressClassName: "tailscale"
-    # -- annotations to configure your Ingress. See your Ingress Controller's Docs for more info.
+    ingressClassName: tailscale
     annotations: {}
-
-    # -- list of hosts and their paths that ingress controller should repsond to.
     hosts:
       - host: frigate
         paths:
-          - "/"
-
-    # -- list of TLS configurations
+          - /
     tls:
       - hosts:
           - frigate
-
   persistence:
     config:
-      # -- Enables persistence for the data directory
       enabled: true
-      ## frigate data Persistent Volume Storage Class
-      ## If defined, storageClassName: <storageClass>
-      ## If set to "-", storageClassName: "", which disables dynamic provisioning
-      ## If undefined (the default) or set to null, no storageClassName spec is
-      ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
-      ##   GKE, AWS & OpenStack)
-      ##
-      # storageClass: "-"
-      ##
-      ## If you want to reuse an existing claim, you can pass the name of the PVC using
-      ## the existingClaim variable
-      # existingClaim: your-claim
-      # subPath: some-subpath
-
-      # -- [access mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) to use for the PVC
       accessMode: ReadWriteOnce
-
-      # -- size/capacity of the PVC
       size: 32Gi
-
-      # -- Do not delete the pvc upon helm uninstall
       skipuninstall: false
-
-  # -- Set resource limits/requests for the Pod(s)
   resources:
     requests:
       cpu: 200m
       memory: 128Mi
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    #   gpu.intel.com/i915: 1
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
-    #   gpu.intel.com/i915: 1
-
-  # -- Set Security Context
   securityContext:
     privileged: true
-    #fsGroup: 11337
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
-    # privileged: true
-
-  # -- Node Selector configuration
   nodeSelector: {}
-
-  # -- Node toleration configuration
   tolerations: []
-
-  # -- Set Pod affinity rules
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -317,6 +125,4 @@ frigate:
                 operator: In
                 values:
                   - bulk-datastore
-
-  # -- Set additonal pod Annotations
   podAnnotations: {}

@@ -1,10 +1,8 @@
 tailscale-operator:
   oauth: {}
-
   operatorConfig:
-    hostname: "wailord"
+    hostname: wailord
   proxyConfig:
-    defaultTags: "tag:k8s,tag:wailord"
-
+    defaultTags: tag:k8s,tag:wailord
   apiServerProxyConfig:
-    mode: "true"
+    mode: 'true'

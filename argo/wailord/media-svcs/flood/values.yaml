@@ -1,29 +1,21 @@
-app-template:  global:    alwaysAppendIdentifierToResourceName: true
-
+app-template:
+  global:
+    alwaysAppendIdentifierToResourceName: true
   controllers:
     main:
       containers:
         main:
           image:
             repository: jesec/rtorrent-flood
-            # -- image tag
             tag: latest@sha256:ff7708d8971716bd0f2ad1b0013695fc4948e5f6eca31a1aa024db368b160bb0
-            # -- image pull policy
             pullPolicy: IfNotPresent
-          # @default -- See below
           env:
-            # -- Set the container timezone
             TZ: UTC
-            # -- Folder where Flood stores it's configuration
-            HOME: "/config"
-            # -- The host that Flood should listen for web connections on
-            FLOOD_OPTION_HOST: "0.0.0.0"
-            # -- The port that Flood should listen for web connections on
-            FLOOD_OPTION_PORT: "3000"
-            # -- ADVANCED: rTorrent daemon managed by Flood
-            FLOOD_OPTION_RTORRENT: "true"
-            # -- Allowed path for file operations
-            FLOOD_OPTION_ALLOWEDPATH: "/store/torrent"
+            HOME: /config
+            FLOOD_OPTION_HOST: 0.0.0.0
+            FLOOD_OPTION_PORT: '3000'
+            FLOOD_OPTION_RTORRENT: 'true'
+            FLOOD_OPTION_ALLOWEDPATH: /store/torrent
           probes:
             liveness:
               enabled: false
@@ -31,10 +23,6 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
               enabled: false
             startup:
               enabled: false
-
-
-  # -- Minimal configuration provided from https://github.com/jesec/rtorrent/blob/master/doc/rtorrent.rc
-  # @default -- string
   defaultPodOptions:
     affinity:
       nodeAffinity:
@@ -45,14 +33,10 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
                   operator: In
                   values:
                     - bulk-datastore
-
     securityContext:
       runAsUser: 11337
       runAsGroup: 11337
       fsGroup: 11337
-
-  # -- Configures service settings for the chart.
-  # @default -- See values.yaml
   service:
     main:
       controller: main
@@ -69,14 +53,11 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
           port: 10181
           protocol: TCP
           targetPort: 10181
-
   ingress:
-    # -- Enable and configure ingress settings for the chart under this key.
-    # @default -- See values.yaml
     main:
       enabled: true
       annotations:
-        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.tls: 'true'
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       labels: {}
       hosts:
@@ -85,12 +66,12 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             - path: /
               pathType: Prefix
               service:
-                name: flood-main
+                name: flood-main-main
                 port: 3000
       tls:
-      - hosts:
-          - flood.jackhil.de
-        secretName: jackhil.de-cert
+        - hosts:
+            - flood.jackhil.de
+          secretName: jackhil.de-cert
     ssl-redirect:
       enabled: true
       annotations:
@@ -104,13 +85,10 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
               service:
                 name: flood-main
                 port: 3000
-  # -- Configure persistence settings for the chart under this key.
-  # @default -- See values.yaml
   persistence:
     config:
       enabled: false
       type: emptyDir
-
     rtorrent-home:
       enabled: true
       type: persistentVolumeClaim
@@ -119,149 +97,237 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
       advancedMounts:
         main:
           main:
-            - path: "/config/"
-
+            - path: /config/
     downloads:
       enabled: true
       type: hostPath
       advancedMounts:
         main:
           main:
-            - path: "/store/torrent/"
+            - path: /store/torrent/
       hostPath: /store/torrent/
-
     rtorrent-flood-configmap:
       enabled: true
-
-      type: "configMap"
-      name: "rtorrent-config"
+      type: configMap
+      name: rtorrent-config
       advancedMounts:
         main:
           main:
-            - path: "/config/.rtorrent.rc"
-              subPath: ".rtorrent.rc"
+            - path: /config/.rtorrent.rc
+              subPath: .rtorrent.rc
+config: '#############################################################################
 
-# -- Minimal configuration provided from https://github.com/jesec/rtorrent/blob/master/doc/rtorrent.rc
-# @default -- string
-config: |
-  #############################################################################
   # A minimal rTorrent configuration that provides the basic features
+
   #############################################################################
 
-  # Some default configs are commented out by #, you can override them to fit your needs
+
+  # Some default configs are commented out by #, you can override them to fit your
+  needs
+
   # Lines commented out by ## are merely examples (NOT default)
 
+
   # It is recommended to extend upon this default config file. For example:
+
   # override only some configs via command line: -o network.port_range.set=6881-6881
+
   # or, on top of custom config: import = /etc/rtorrent/rtorrent.rc
 
+
   method.insert = cfg.basedir,  private|const|string, (cat,(fs.homedir),"/.local/share/rtorrent/")
+
   method.insert = cfg.download, private|const|string, (cat,"/store/torrent/", "download/")
+
   method.insert = cfg.logs,     private|const|string, (cat,"/store/torrent/","log/")
+
   method.insert = cfg.logfile,  private|const|string, (cat,(cfg.logs),"rtorrent-",(system.time),".log")
+
   method.insert = cfg.session,  private|const|string, (cat,(cfg.basedir),".session/")
+
   method.insert = cfg.watch,    private|const|string, (cat,"/store/torrent/","watch/")
+
   method.insert = cfg.complete,    private|const|string, (cat,"/store/torrent/","complete/")
 
 
+
   # Create directories
+
   fs.mkdir.recursive = (cat,(cfg.basedir))
 
+
   fs.mkdir = (cat,(cfg.download))
+
   fs.mkdir = (cat,(cfg.logs))
+
   fs.mkdir = (cat,(cfg.session))
 
+
   fs.mkdir = (cat,(cfg.watch))
+
   fs.mkdir = (cat,(cfg.watch),"/load")
+
   fs.mkdir = (cat,(cfg.watch),"/start")
+
   fs.mkdir = (cat,(cfg.watch),"/morethantv")
 
+
   fs.mkdir = (cat,(cfg.complete))
+
   fs.mkdir = (cat,(cfg.complete),"/morethantv")
 
 
+
   # Drop to "$(cfg.watch)/load" to add torrent
+
   schedule2 = watch_load, 11, 10, ((load.verbose, (cat, (cfg.watch), "load/*.torrent")))
 
+
   # Drop to "$(cfg.watch)/start" to add torrent and start downloading
+
   # schedule2 = watch_start, 10, 10, ((load.start_verbose, (cat, (cfg.watch), "start/*.torrent")))
+
 
   schedule2 = watch_morethantv, 10, 10, "load.start_verbose=/store/torrent/watch/morethantv/*.torrent,d.custom1.set=morethantvauto,d.custom3.set=/store/torrent/complete/morethantv/"
 
-  method.insert = d.data_path, simple, "if=(d.is_multi_file), (cat,(d.directory),/), (cat,(d.directory),/,(d.name))"
-  method.insert = d.move_to_complete, simple, "execute=mkdir,-p,$argument.1=; execute=cp,-r,$argument.0=,$argument.1=; d.save_full_session="
+
+  method.insert = d.data_path, simple, "if=(d.is_multi_file), (cat,(d.directory),/),
+  (cat,(d.directory),/,(d.name))"
+
+  method.insert = d.move_to_complete, simple, "execute=mkdir,-p,$argument.1=; execute=cp,-r,$argument.0=,$argument.1=;
+  d.save_full_session="
+
   method.set_key = event.download.finished,move_complete,"d.move_to_complete=$d.data_path=,$d.custom3=;"
 
+
   # Add new method to get finished dir (called get_finished_dir)
+
   # method.insert = d.get_finished_dir,simple,"cat=[folder]finished/,$d.custom3="
 
+
   # Bind event "torrent has finished" to action "move to new directory based on label"
+
   # method.set_key = event.download.finished,move_complete,"d.directory.set=$d.get_finished_dir=;execute=mkdir,-p,$d.get_finished_dir=;execute=mv,-u,$d.base_path=,$d.get_finished_dir="
 
+
   # Listening port for incoming peer traffic
+
   network.port_range.set = 10181-10181
 
+
   # Distributed Hash Table and Peer EXchange
+
   # Enable tracker-less torrents but vulnerable to passive sniffing
+
   # DHT and PEX are always disabled for private torrents
+
   dht.mode.set = auto
+
   dht.port.set = 6881
+
   protocol.pex.set = yes
 
+
   # DHT nodes for bootstrapping
+
   dht.add_bootstrap = dht.transmissionbt.com:6881
+
   dht.add_bootstrap = dht.libtorrent.org:25401
 
+
   # UDP tracker support
+
   trackers.use_udp.set = yes
 
+
   # Peer settings
+
   throttle.max_uploads.set = 1000
+
   throttle.max_uploads.global.set = 25000
+
   throttle.min_peers.normal.set = 200
+
   throttle.max_peers.normal.set = 600
+
   throttle.min_peers.seed.set = 300
+
   throttle.max_peers.seed.set = 800
+
   trackers.numwant.set = 800
+
 
   #protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 
+
   # Limits for file handle resources, this is optimized for
+
   # an `ulimit` of 1024 (a common default). You MUST leave
-  # a ceiling of handles reserved for rTorrent's internal needs!
+
+  # a ceiling of handles reserved for rTorrent''s internal needs!
+
   network.max_open_files.set = 600
+
   network.max_open_sockets.set = 300
 
+
   # Memory resource usage (increase if you have a large number of items loaded,
+
   # and/or the available resources to spend)
+
   pieces.memory.max.set = 1800M
+
   #network.xmlrpc.size_limit.set = 16M
 
+
   # Basic operational settings
+
   session.path.set = (cat, (cfg.session))
+
   directory.default.set = (cat, (cfg.download))
+
   log.execute = (cat, (cfg.logs), "execute.log")
+
   ##log.xmlrpc = (cat, (cfg.logs), "xmlrpc.log")
 
+
   # Other operational settings
+
   encoding.add = utf8
+
   system.umask.set = 002
+
   system.cwd.set = (directory.default)
+
   #schedule2 = low_diskspace, 5, 60, ((close_low_diskspace, 500M))
+
   #pieces.hash.on_completion.set = no
+
   ##view.sort_current = seeding, greater=d.ratio=
+
   ##keys.layout.set = qwerty
 
+
   # HTTP and SSL
+
   network.http.max_open.set = 50
+
   network.http.dns_cache_timeout.set = 25
 
+
   network.scgi.open_local = (cat,(cfg.basedir),rtorrent.sock)
+
   print = (cat, "Logging to ", (cfg.logfile))
+
   log.open_file = "log", (cfg.logfile)
+
   log.add_output = "info", "log"
 
 
 
+
   session.use_lock.set = no
+
   ### END of rtorrent.rc ###
+
+  '

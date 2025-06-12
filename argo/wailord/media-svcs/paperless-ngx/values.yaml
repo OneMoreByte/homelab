@@ -1,20 +1,15 @@
 paperless-ngx:
   image:
-    # -- Image repository
     repository: ghcr.io/paperless-ngx/paperless-ngx
-    # -- Image pull policy
     pullPolicy: IfNotPresent
-    # -- Image tag
     tag: 2.16.3
-
   env:
-    # -- Set the container timezone
     TZ: UTC
     PAPERLESS_SECRET_KEY:
       secretKeyRef:
         name: paperless-secret-key
         key: key
-    A_REDIS_PASSWORD: ""
+    A_REDIS_PASSWORD: ''
     PAPERLESS_DBENGINE: postgresql
     PAPERLESS_DBHOST: paperless-pg-cluster-rw
     PAPERLESS_DBNAME: paperless
@@ -26,18 +21,13 @@ paperless-ngx:
       secretKeyRef:
         name: paperless-db-secret
         key: password
-
   envFrom:
     - secret: paperless-oicd-settings
-
   service:
-    # -- Configures service settings for the chart.
-    # @default -- See [values.yaml](./values.yaml)
     main:
       ports:
         http:
           port: 8000
-
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -47,14 +37,11 @@ paperless-ngx:
                 operator: In
                 values:
                   - bulk-datastore
-
   ingress:
-    # -- Enable and configure ingress settings for the chart under this key.
-    # @default -- See [values.yaml](./values.yaml)
     main:
       enabled: true
       annotations:
-        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.tls: 'true'
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       hosts:
         - host: paper.jackhil.de
@@ -64,33 +51,31 @@ paperless-ngx:
         - secretName: jackhil.de-cert
           hosts:
             - paper.jackhil.de
-
   persistence:
     data:
       enabled: true
       retain: true
       mountPath: /usr/src/paperless/data
       hostPath: /store/k8s-hostpath/paperless/data
-      type: "hostPath"
+      type: hostPath
     media:
       enabled: true
       retain: true
       mountPath: /usr/src/paperless/media
       hostPath: /store/k8s-hostpath/paperless/media
-      type: "hostPath"
+      type: hostPath
     export:
       enabled: true
       retain: true
       mountPath: /usr/src/paperless/export
       hostPath: /store/k8s-hostpath/paperless/export
-      type: "hostPath"
+      type: hostPath
     consume:
       enabled: true
       retain: true
       mountPath: /usr/src/paperless/consume
       hostPath: /store/k8s-hostpath/paperless/consume
-      type: "hostPath"
-
+      type: hostPath
   redis:
     enabled: true
     auth:

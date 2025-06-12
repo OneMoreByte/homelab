@@ -1,4 +1,6 @@
-app-template:  global:    alwaysAppendIdentifierToResourceName: true
+app-template:
+  global:
+    alwaysAppendIdentifierToResourceName: true
   controllers:
     main:
       enabled: true
@@ -9,15 +11,17 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             TZ: America/Chicago
           image:
             repository: docker.io/instantlinux/nut-upsd
-            tag: "2.8.2-r0"
+            tag: 2.8.2-r0
             pullPolicy: IfNotPresent
           command: sh
           args:
             - -c
-            - 'mkdir -p -m2750 /dev/shm/nut && ln -s /dev/shm/nut /var/run  && rm -rf /var/run/upsmon.pid /var/run/nut/*.pid && echo 0 > /var/run/nut/upsd.pid && echo 0 > /run/upsmon.pid && /usr/sbin/upsdrvctl -u root start && /usr/sbin/upsd -u root && exec /usr/sbin/upsmon -D'
+            - mkdir -p -m2750 /dev/shm/nut && ln -s /dev/shm/nut /var/run  && rm -rf
+              /var/run/upsmon.pid /var/run/nut/*.pid && echo 0 > /var/run/nut/upsd.pid
+              && echo 0 > /run/upsmon.pid && /usr/sbin/upsdrvctl -u root start &&
+              /usr/sbin/upsd -u root && exec /usr/sbin/upsmon -D
           securityContext:
             privileged: true
-
   service:
     main:
       controller: main
@@ -26,22 +30,15 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
         http:
           port: 3493
           nodePort: 30493
-
   configMaps:
     nut-configs:
       data:
-        ups.conf: |
-          [office-ups]
-            driver = usbhid-ups
-            port = auto
-            desc = "UPS for desktop and work laptop"
-            vendorid = "051d"
-            productid = "0002"
+        ups.conf: "[office-ups]\n  driver = usbhid-ups\n  port = auto\n  desc = \"\
+          UPS for desktop and work laptop\"\n  vendorid = \"051d\"\n  productid =\
+          \ \"0002\"\n"
+        upsd.conf: 'LISTEN 0.0.0.0
 
-        upsd.conf: |
-          LISTEN 0.0.0.0
-      
-
+          '
   persistence:
     nut-data:
       enabled: false
@@ -51,7 +48,6 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
         main:
           main:
             - path: /etc/nut/
-
     nut-configs:
       enabled: true
       type: configMap
@@ -64,8 +60,6 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
               subPath: ups.conf
             - path: /etc/nut/upsd.conf
               subPath: upsd.conf
-
-
     nut-secret-configs:
       enabled: true
       type: secret
@@ -78,4 +72,3 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
               subPath: upsmon.conf
             - path: /etc/nut/upsd.users
               subPath: upsd.users
-

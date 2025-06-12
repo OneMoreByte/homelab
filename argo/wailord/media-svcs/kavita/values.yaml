@@ -1,6 +1,6 @@
----
-
-app-template:  global:    alwaysAppendIdentifierToResourceName: true
+app-template:
+  global:
+    alwaysAppendIdentifierToResourceName: true
   controllers:
     main:
       enabled: true
@@ -13,22 +13,17 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             pullPolicy: IfNotPresent
           env:
             TZ: America/Chicago
-
-  # -- Configures service settings for the chart.
-  # @default -- See values.yaml
   service:
     main:
       controller: main
       ports:
         http:
           port: 5000
-
-
   ingress:
     main:
       enabled: true
       annotations:
-        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.tls: 'true'
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       labels: {}
       hosts:
@@ -37,7 +32,7 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             - path: /
               pathType: Prefix
               service:
-                name: kavita
+                name: kavita-main
                 port: 5000
       tls:
         - hosts:
@@ -56,13 +51,11 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
               service:
                 name: kavita
                 port: 5000
-
   defaultPodOptions:
     securityContext:
       runAsUser: 11337
       runAsGroup: 11337
       fsGroup: 11337
-
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -72,13 +65,10 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
                   operator: In
                   values:
                     - bulk-datastore
-
-
   persistence:
     config:
       enabled: false
       type: emptyDir
-
     kavita-config:
       enabled: true
       type: persistentVolumeClaim

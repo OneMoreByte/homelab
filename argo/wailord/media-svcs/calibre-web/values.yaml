@@ -1,4 +1,6 @@
-app-template:  global:    alwaysAppendIdentifierToResourceName: true
+app-template:
+  global:
+    alwaysAppendIdentifierToResourceName: true
   controllers:
     main:
       enabled: true
@@ -9,18 +11,12 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             TZ: America/Chicago
             PUID: 11337
             PGID: 11337
-            DOCKER_MODS: "linuxserver/mods:universal-calibre|linuxserver/mods:calibre-web-dtrpg-metadata"
-            OAUTH_LIB_RELAX_TOKEN_SCOPE: "1"
+            DOCKER_MODS: linuxserver/mods:universal-calibre|linuxserver/mods:calibre-web-dtrpg-metadata
+            OAUTH_LIB_RELAX_TOKEN_SCOPE: '1'
           image:
             repository: linuxserver/calibre-web
-            tag: "0.6.24"
+            tag: 0.6.24
             pullPolicy: IfNotPresent
-      #      initContainers:
-      #        hold:
-      #          image:
-      #            repository: ghcr.io/roxedus/pgloader
-      #            tag: latest
-      #          command: ["sleep", "500000"]
   defaultPodOptions:
     affinity:
       nodeAffinity:
@@ -32,20 +28,14 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
                   values:
                     - bulk-datastore
     securityContext:
-      #  runAsUser: 11337
-      #runAsGroup: 11337
       fsGroup: 11337
-
-  # -- Configures service settings for the chart.
   service:
     main:
       controller: main
       ports:
         http:
           port: 8083
-
   ingress:
-    # -- Enable and configure ingress settings for the chart under this key.
     main:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
@@ -56,14 +46,12 @@ app-template:  global:    alwaysAppendIdentifierToResourceName: true
             - path: /
               pathType: Prefix
               service:
-                name: calibre-web
+                name: calibre-web-main
                 port: 8083
       tls:
         - hosts:
             - calibre.jackhil.de
           secretName: jackhil.de-cert
-
-  # -- Configure persistence settings for the chart under this key.
   persistence:
     config:
       enabled: true

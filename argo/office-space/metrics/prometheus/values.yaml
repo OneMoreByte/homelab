@@ -1,7 +1,6 @@
 kube-prometheus-stack:
   grafana:
     enabled: false
-
   prometheus:
     prometheusSpec:
       ruleSelectorNilUsesHelmValues: false
@@ -9,17 +8,14 @@ kube-prometheus-stack:
       podMonitorSelectorNilUsesHelmValues: false
       probeSelectorNilUsesHelmValues: false
       scrapeConfigSelectorNilUsesHelmValues: false
-
       thanos:
         objectStorageConfig:
           existingSecret:
             name: thanos-s3-config
             key: objstore.yml
       additionalScrapeConfigs: []
-
     thanosService:
       enabled: true
-      clusterIP: ""
+      clusterIP: ''
     thanosServiceMonitor:
       enabled: true
-

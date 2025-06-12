@@ -1,61 +1,53 @@
 seaweedfs:
   global:
-    replicationPlacement: "002"
-
+    replicationPlacement: '002'
   master:
-    # config: |-
-
     data:
-      type: "hostPath"
-      storageClass: ""
+      type: hostPath
+      storageClass: ''
       hostPathPrefix: /mnt/weed-1
-
     logs:
-      type: "hostPath"
-      size: ""
-      storageClass: ""
+      type: hostPath
+      size: ''
+      storageClass: ''
       hostPathPrefix: /mnt/weed-1
+    nodeSelector: 'weed-master: "yes"
 
-    nodeSelector: |
-      weed-master: "yes"
-
+      '
   volume:
-    dataCenter: "home"
-    rack: "wailord"
+    dataCenter: home
+    rack: wailord
     replicas: 4
-
     dataDirs:
       - name: data1
-        type: "hostPath"
+        type: hostPath
         hostPathPrefix: /mnt/weed-1
         maxVolumes: 0
       - name: data2
-        type: "hostPath"
+        type: hostPath
         hostPathPrefix: /mnt/weed-2
         maxVolumes: 0
+    nodeSelector: 'weed: "yes"
 
-    nodeSelector: |
-      weed: "yes"
-
+      '
   filer:
     enabled: true
     data:
-      type: "hostPath"
-      storageClass: ""
+      type: hostPath
+      storageClass: ''
       hostPathPrefix: /mnt/weed-1
+    nodeSelector: 'weed-filer: "yes"
 
-    nodeSelector: |
-      weed-filer: "yes"
-
+      '
     logs:
-      type: "hostPath"
-      size: ""
-      storageClass: ""
+      type: hostPath
+      size: ''
+      storageClass: ''
       hostPathPrefix: /mnt/weed-1
     s3:
       enabled: true
       enableAuth: true
-      existingConfigSecret: "seaweedfs-s3-config"
+      existingConfigSecret: seaweedfs-s3-config
       createBuckets:
         - name: smoked-mutex
           anonymousRead: false
@@ -65,8 +57,7 @@ seaweedfs:
           anonymousRead: false
         - name: cnpg-backup
           anonymousRead: false
-
   s3:
     enabled: true
     enableAuth: true
-    existingConfigSecret: "seaweedfs-s3-config"
+    existingConfigSecret: seaweedfs-s3-config

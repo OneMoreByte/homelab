@@ -1,22 +1,8 @@
 nginx:
-  serverBlock: |-
-    server {
-      server_name big-lebowski;
-      listen 8080;
-
-      location / {
-        proxy_pass http://192.168.60.61/;
-      }
-    }
-    server {
-      server_name green-knight;
-      listen 8081;
-
-      location / {
-        proxy_pass http://192.168.60.128/;
-      }
-    }
-
+  serverBlock: "server {\n  server_name big-lebowski;\n  listen 8080;\n\n  location\
+    \ / {\n    proxy_pass http://192.168.60.61/;\n  }\n}\nserver {\n  server_name\
+    \ green-knight;\n  listen 8081;\n\n  location / {\n    proxy_pass http://192.168.60.128/;\n\
+    \  }\n}"
   containerPorts:
     bl: 8080
     gn: 8081

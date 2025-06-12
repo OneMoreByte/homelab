@@ -1,10 +1,6 @@
 nvidia-device-plugin:
   config:
     map:
-      default: |-
-        version: v1
-        flags:
-          migStrategy: "none"
-
+      default: "version: v1\nflags:\n  migStrategy: \"none\""
   gfd:
     enabled: true

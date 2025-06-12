@@ -1,9 +1,6 @@
 traefik:
   additionalArguments:
-    - "--serverstransport.insecureskipverify=true"
-  #    - "--entryPoints.web.proxyProtocol.trustedIps=127.0.0.1/32,192.168.1.243/32"
-  #    - "--entryPoints.websecure.proxyProtocol.trustedIps=127.0.0.1/32,192.168.1.243/32"
-  #    - "--providers.kubernetescrd.allowCrossNamespace=true"
+    - --serverstransport.insecureskipverify=true
   providers:
     kubernetesIngress:
       publishedService:
@@ -15,14 +12,12 @@ traefik:
       allowCrossNamespace: true
       allowEmptyServices: true
       allowExternalNameServices: true
-
   deployment:
     annotations: {}
     additionalVolumes:
       - name: traefik-logs
         persistentVolumeClaim:
           claimName: traefik-logs
-
   metrics:
     addInternals: true
     prometheus:
@@ -43,70 +38,31 @@ traefik:
               context: traefik
               severity: warning
             annotations:
-              summary: "Traefik Down"
-              description: "{{ $labels.pod }} on {{ $labels.nodename }} is down"
+              summary: Traefik Down
+              description: '{{ $labels.pod }} on {{ $labels.nodename }} is down'
       disableAPICheck: false
-
   experimental:
     plugins: {}
     kubernetesGateway:
       enabled: false
       gateway:
         enabled: true
-
   additionalVolumeMounts:
     - name: traefik-logs
       mountPath: /var/log/traefik
-
   logs:
     general:
       level: INFO
     access:
       enabled: true
       format: json
-      filePath: "/var/log/traefik/access.log"
+      filePath: /var/log/traefik/access.log
     maxSize: 1000
     maxAge: 3
     maxBackups: 3
-
   ingressRoute:
     dashboard:
       enabled: false
     healthcheack:
       enabled: false
-
-  tracing:
-    {}
-    # instana:
-    #   localAgentHost: 127.0.0.1
-    #   localAgentPort: 42699
-    #   logLevel: info
-    #   enableAutoProfile: true
-    # datadog:
-    #   localAgentHostPort: 127.0.0.1:8126
-    #   debug: false
-    #   globalTag: ""
-    #   prioritySampling: false
-    # jaeger: {}
-
-    #   collector:
-    #      endpoint: ""
-    #      user: ""
-    #      password: ""
-    # zipkin:
-    #   httpEndpoint: http://localhost:9411/api/v2/spans
-    #   sameSpan: false
-    #   id128Bit: true
-    #   sampleRate: 1.0
-    # haystack:
-    #   localAgentHost: 127.0.0.1
-    #   localAgentPort: 35000
-    #   globalTag: ""
-    #   traceIDHeaderName: ""
-    #   parentIDHeaderName: ""
-    #   spanIDHeaderName: ""
-    #   baggagePrefixHeaderName: ""
-    # elastic:
-    #   serverURL: http://localhost:8200
-    #   secretToken: ""
-    #   serviceEnvironment: ""
+  tracing: {}
