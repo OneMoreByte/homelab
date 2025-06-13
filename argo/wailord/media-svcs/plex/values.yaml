@@ -81,7 +81,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: plex-main-main
+                name: plex-main
                 port: 32400
       tls:
         - hosts:
