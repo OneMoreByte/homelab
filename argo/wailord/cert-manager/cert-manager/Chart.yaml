@@ -6,7 +6,7 @@ sources:
   - https://github.com/cert-manager/cert-manager/
 dependencies:
   - name: cert-manager
-    version: v1.18.0
+    version: v1.18.1
     repository: "https://charts.jetstack.io"
 
   - name: trust-manager
