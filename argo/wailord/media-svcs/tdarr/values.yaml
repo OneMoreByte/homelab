@@ -25,7 +25,7 @@ app-template:
             privileged: true
           image:
             repository: ghcr.io/haveagitgat/tdarr
-            tag: 2.42.01
+            tag: 2.45.01
             pullPolicy: IfNotPresent
   defaultPodOptions:
     affinity:
