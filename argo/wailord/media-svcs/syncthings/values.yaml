@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: syncthing/syncthing
   pullPolicy: IfNotPresent
-  tag: 1.29.7
+  tag: 1.30.0
 imagePullSecrets: []
 nameOverride: ''
 fullnameOverride: ''
