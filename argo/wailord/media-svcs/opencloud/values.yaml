@@ -1,0 +1,22 @@
+opencloud:
+  global:
+    domain:
+      opencloud: drive.jackhil.de
+  keycloak:
+    enabled: true
+    internal:
+      enabled: false
+    external:
+      enable: true
+      url: https://auth.jackhil.de
+      realm: master
+      clientId: opencloud
+  postgres:
+    enabled: false
+  onlyoffice:
+    enabled: false
+  opencloud:
+    storage:
+      s3:
+        internal:
+          enabled: false
