@@ -10,7 +10,7 @@ app-template:
           env:
             TZ: America/Chicago
           image:
-            repository: ghcr.io/node-red/node-red
+            repository: docker.io/nodered/node-red
             tag: 4.0.9
             pullPolicy: IfNotPresent
   service:
