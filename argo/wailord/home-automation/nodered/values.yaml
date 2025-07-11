@@ -13,6 +13,7 @@ app-template:
             repository: docker.io/nodered/node-red
             tag: 4.0.9
             pullPolicy: IfNotPresent
+  defaultPodOptions:
     securityContext:
       fsGroup: 1000
   service:
