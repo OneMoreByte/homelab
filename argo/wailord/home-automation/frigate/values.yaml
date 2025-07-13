@@ -2,7 +2,7 @@ frigate:
   strategyType: Recreate
   image:
     repository: ghcr.io/blakeblackshear/frigate
-    tag: 0.15.1
+    tag: 0.15.2
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   env: []
