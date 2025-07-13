@@ -5,8 +5,8 @@ metadata:
   name: lldap-internal-cert
 spec:
   dnsNames:
-    - "lldap"
-    - "lldap.keycloak.svc.cluster.local"
+    - "lldap-main"
+    - "lldap-main.keycloak.svc.cluster.local"
   secretName: lldap-internal-cert
   issuerRef:
     name: trust-manager-wailord-ca-issuer
