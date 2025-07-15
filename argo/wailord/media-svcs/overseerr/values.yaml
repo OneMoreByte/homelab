@@ -20,7 +20,7 @@ app-template:
                   key: password
           image:
             repository: docker.io/fallenbagel/jellyseerr
-            tag: 2.7.0
+            tag: 2.7.1
             pullPolicy: IfNotPresent
   service:
     main:
