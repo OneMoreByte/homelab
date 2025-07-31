@@ -11,7 +11,7 @@ app-template:
             TZ: America/Chicago
           image:
             repository: docker.io/nodered/node-red
-            tag: 4.0.9
+            tag: 4.1.0
             pullPolicy: IfNotPresent
   defaultPodOptions:
     securityContext:
