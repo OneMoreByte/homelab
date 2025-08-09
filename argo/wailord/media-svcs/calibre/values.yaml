@@ -13,7 +13,7 @@ app-template:
             PGID: 11337
           image:
             repository: linuxserver/calibre
-            tag: 8.7.0
+            tag: 8.8.0
             pullPolicy: IfNotPresent
   defaultPodOptions:
     affinity:
