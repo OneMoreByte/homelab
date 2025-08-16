@@ -18,7 +18,7 @@ app-template:
             NVIDIA_DRIVER_CAPABILITIES: all
           image:
             repository: ghcr.io/onemorebyte/plex
-            tag: 1.41.8-9834
+            tag: 1.42.1-10054
             pullPolicy: IfNotPresent
           securityContext:
             privileged: true
@@ -72,7 +72,7 @@ app-template:
     main:
       enabled: true
       annotations:
-        traefik.ingress.kubernetes.io/router.tls: 'true'
+        traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       labels: {}
       hosts:
