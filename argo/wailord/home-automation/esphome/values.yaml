@@ -11,7 +11,7 @@ app-template:
             TZ: America/Chicago
           image:
             repository: ghcr.io/esphome/esphome
-            tag: 2025.8.0
+            tag: 2025.8.1
             pullPolicy: IfNotPresent
 
           securityContext:
