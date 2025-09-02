@@ -13,8 +13,8 @@ app-template:
             TZ: UTC
             HOME: /config
             FLOOD_OPTION_HOST: 0.0.0.0
-            FLOOD_OPTION_PORT: '3000'
-            FLOOD_OPTION_RTORRENT: 'true'
+            FLOOD_OPTION_PORT: "3000"
+            FLOOD_OPTION_RTORRENT: "true"
             FLOOD_OPTION_ALLOWEDPATH: /store/torrent
           probes:
             liveness:
@@ -57,7 +57,7 @@ app-template:
     main:
       enabled: true
       annotations:
-        traefik.ingress.kubernetes.io/router.tls: 'true'
+        traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
       labels: {}
       hosts:
@@ -66,7 +66,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: flood-main-main
+                name: flood-main
                 port: 3000
       tls:
         - hosts:
@@ -115,7 +115,8 @@ app-template:
           main:
             - path: /config/.rtorrent.rc
               subPath: .rtorrent.rc
-config: '#############################################################################
+config:
+  '#############################################################################
 
   # A minimal rTorrent configuration that provides the basic features
 
