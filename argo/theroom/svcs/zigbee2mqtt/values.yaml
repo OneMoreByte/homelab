@@ -11,7 +11,7 @@ app-template:
             TZ: America/Chicago
           image:
             repository: ghcr.io/koenkk/zigbee2mqtt
-            tag: 2.6.0
+            tag: 2.6.1
             pullPolicy: IfNotPresent
           securityContext:
             privileged: true
