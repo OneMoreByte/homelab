@@ -2,7 +2,7 @@ paperless-ngx:
   image:
     repository: ghcr.io/paperless-ngx/paperless-ngx
     pullPolicy: IfNotPresent
-    tag: 2.18.2
+    tag: 2.18.3
   env:
     TZ: UTC
     PAPERLESS_SECRET_KEY:
