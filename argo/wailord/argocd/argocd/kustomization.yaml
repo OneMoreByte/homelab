@@ -8,7 +8,7 @@ resources:
   - base/ingress.yaml
   - base/argo-client-secret.yaml
   - base/clusters/wailord.yaml
-  - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v3.1.5
+  - https://github.com/argoproj/argo-cd/manifests/cluster-install?ref=v3.1.6
   - base/clusters/theroom.jsck.network.yaml
   - base/tailscale/argo-tailscale-auth.yaml
   - base/tailscale/ts-rolebindings.yaml
