@@ -11,4 +11,4 @@ spec:
     operation: copy
   ref:
     tag: 37.1.1
-  url: ghcr.io/traefik/helm/traefik
+  url: oci://ghcr.io/traefik/helm/traefik
