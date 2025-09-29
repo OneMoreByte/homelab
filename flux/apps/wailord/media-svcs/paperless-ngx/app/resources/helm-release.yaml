@@ -38,9 +38,9 @@ spec:
         secretKeyRef:
           name: paperless-db-secret
           key: password
-    envFrom:
-      - secretRef:
-          name: paperless-oicd-settings
+    #envFrom:
+    #  - secretRef:
+    #      name: paperless-oicd-settings
     service:
       main:
         ports:
