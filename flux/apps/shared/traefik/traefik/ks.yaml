@@ -12,7 +12,7 @@ spec:
 
   dependsOn: []
   interval: 1h
-  path: ./flux/apps/wailord/traefik/traefik/app
+  path: ./flux/apps/shared/traefik/traefik/app
   prune: true
   retryInterval: 2m
   sourceRef:
