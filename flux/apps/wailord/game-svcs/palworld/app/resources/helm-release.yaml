@@ -78,9 +78,8 @@ spec:
     persistence:
       config:
         enabled: false
-        accessMode: ReadWriteOnce
-        size: 16Gi
-        mountPath: /config
+        type: emptyDir
+
       palworld:
         enabled: true
         type: persistentVolumeClaim
