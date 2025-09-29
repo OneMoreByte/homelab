@@ -1,0 +1,85 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: traefik
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    additionalArguments:
+      - --serverstransport.insecureskipverify=true
+    providers:
+      kubernetesIngress:
+        publishedService:
+          enabled: true
+        allowEmptyServices: true
+        allowExternalNameServices: true
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowEmptyServices: true
+        allowExternalNameServices: true
+    deployment:
+      annotations: {}
+      additionalVolumes:
+        - name: traefik-logs
+          persistentVolumeClaim:
+            claimName: traefik-logs
+    metrics:
+      addInternals: true
+      prometheus:
+        entryPoint: metrics
+        service:
+          enabled: true
+        serviceMonitor:
+          enabled: true
+          jobLabel: traefik
+          interval: 30s
+        prometheusRule:
+          enabled: true
+          rules:
+            - alert: TraefikDown
+              expr: up{job="traefik"} == 0
+              for: 5m
+              labels:
+                context: traefik
+                severity: warning
+              annotations:
+                summary: Traefik Down
+                description: '{{ $labels.pod }} on {{ $labels.nodename }} is down'
+        disableAPICheck: false
+    experimental:
+      plugins: {}
+      kubernetesGateway:
+        enabled: false
+        gateway:
+          enabled: true
+    #additionalVolumeMounts:
+    #  - name: traefik-logs
+    #    mountPath: /var/log/traefik
+    logs:
+      general:
+        level: INFO
+      access:
+        enabled: true
+        format: json
+        filePath: /var/log/traefik/access.log
+      maxSize: 1000
+      maxAge: 3
+      maxBackups: 3
+    ingressRoute:
+      dashboard:
+        enabled: false
+      healthcheack:
+        enabled: false
+    tracing: {}
+

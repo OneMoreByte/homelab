@@ -1,0 +1,58 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: mqtt
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: mqtt
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: docker.io/eclipse-mosquitto
+              tag: 2.0.22
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true
+        controller: main
+        type: LoadBalancer
+        ports:
+          mqtt:
+            enabled: true
+            port: 1883
+    configMaps:
+      config:
+        enabled: true
+        data:
+          mosquitto.conf: |
+            per_listener_settings false
+            listener 1883
+            allow_anonymous true
+            persistence true
+            persistence_location /mosquitto/data/
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        identifier: config
+      data:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 8Gi

@@ -1,0 +1,119 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tdarr
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: tdarr
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        replicas: 1
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            env:
+              TZ: America/Chicago
+              PUID: 11337
+              PGID: 11337
+              serverIP: 0.0.0.0
+              serverPort: '8266'
+              webUIPort: '8265'
+              internalNode: 'true'
+              inContainer: 'true'
+              ffmpegVersion: '7'
+              NVIDIA_DRIVER_CAPABILITIES: all
+              NVIDIA_VISIBLE_DEVICES: all
+              nodeName: producers
+            securityContext:
+              privileged: true
+            image:
+              repository: ghcr.io/haveagitgat/tdarr
+              tag: 2.45.01
+              pullPolicy: IfNotPresent
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bulk-datastore
+      securityContext:
+        fsGroup: 11337
+        supplementalGroups:
+          - 39
+          - 105
+    service:
+      main:
+        controller: main
+        type: LoadBalancer
+        ports:
+          http:
+            port: 8265
+          server:
+            port: 8266
+    ingress:
+      main:
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        enabled: false
+        hosts:
+          - host: tdarr.jackhil.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: tdarr-main
+                  port: 8265
+        tls:
+          - hosts:
+              - tdarr.jackhil.de
+            secretName: jackhil.de-cert
+    persistence:
+      config:
+        enabled: false
+        type: emptyDir
+      app-server:
+        enabled: true
+        accessMode: ReadWriteOnce
+        size: 16Gi
+        advancedMounts:
+          main:
+            main:
+              - path: /app/server
+      app-config:
+        enabled: true
+        accessMode: ReadWriteOnce
+        size: 16Gi
+        advancedMounts:
+          main:
+            main:
+              - path: /app/configs
+      app-logs:
+        enabled: true
+        accessMode: ReadWriteOnce
+        size: 16Gi
+        advancedMounts:
+          main:
+            main:
+              - path: /app/logs
+      media:
+        enabled: true
+        type: hostPath
+        hostPath: /store/plex-files/

@@ -1,0 +1,81 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: spoolman
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: spoolman
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/donkie/spoolman
+              tag: 0.22.1
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/Chicago
+              SPOOLMAN_HOST: 0.0.0.0
+              SPOOLMAN_PORT: 7912
+              SPOOLMAN_DB_TYPE: postgres
+              SPOOLMAN_DB_HOST: spoolman-pg-cluster-rw
+              SPOOLMAN_DB_PORT: 5432
+              sPOOLMAN_DB_NAME: spoolman
+              SPOOLMAN_DB_USERNAME: spoolman
+              SPOOLMAN_DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: spoolman-db-secret
+                    key: password
+              SPOOLMAN_DIR_DATA: /config
+              SPOOLMAN_DIR_BACKUPS: /config
+              SPOOLMAN_DIR_LOGS: /config
+    defaultPodOptions:
+      securityContext:
+        fsGroup: 1000
+    service:
+      main:
+        controller: main
+        enabled: true
+        type: LoadBalancer
+        ports:
+          http:
+            port: 7912
+    ingress:
+      main:
+        enabled: false
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        labels: {}
+        hosts:
+          - host: spoolman.jsck.network
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: spoolman-main
+                  port: 7912
+        tls:
+          - hosts:
+              - spoolman.jsck.network
+            secretName: spoolman.jsck.network-cert
+    persistence:
+      config:
+        enabled: true
+        accessMode: ReadWriteOnce
+        size: 16Gi

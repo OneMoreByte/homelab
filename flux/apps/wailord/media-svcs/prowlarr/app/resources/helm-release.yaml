@@ -1,0 +1,66 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prowlarr
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: prowlarr
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            env:
+              TZ: America/Chicago
+              PUID: 11337
+              PGID: 11337
+            image:
+              repository: hotio/prowlarr
+              tag: release-1.37.0.5076
+              pullPolicy: IfNotPresent
+    defaultPodOptions:
+      securityContext:
+        fsGroup: 11337
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 9696
+    ingress:
+      main:
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        enabled: true
+        hosts:
+          - host: prowlarr.jackhil.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: prowlarr-main
+                  port: 9696
+        tls:
+          - hosts:
+              - prowlarr.jackhil.de
+            secretName: jackhil.de-cert
+    persistence:
+      config:
+        enabled: true
+        accessMode: ReadWriteOnce
+        size: 16Gi

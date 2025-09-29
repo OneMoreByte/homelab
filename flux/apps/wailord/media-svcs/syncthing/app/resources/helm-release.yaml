@@ -1,0 +1,116 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: syncthing
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: syncthing
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        replicas: 1
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            env:
+              TZ: America/Chicago
+              PUID: 11337
+              PGID: 11337
+            image:
+              repository: syncthing/syncthing
+              tag: 2.0.3
+              pullPolicy: IfNotPresent
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bulk-datastore
+      securityContext:
+        fsGroup: 11337
+    service:
+      webui:
+        enabled: true
+        primary: true
+        controller: main
+        ports:
+          webui:
+            port: 8384
+            protocol: TCP
+        type: ClusterIP
+      tcptransfer:
+        enabled: true
+        primary: false
+        ports:
+          tcptransfer:
+            port: 22000
+            protocol: TCP
+        type: ClusterIP
+      quictransfer:
+        enabled: true
+        primary: false
+        ports:
+          quictransfer:
+            port: 22000
+            protocol: UDP
+        type: ClusterIP
+      localdiscovery:
+        enabled: true
+        primary: false
+        ports:
+          localdiscovery:
+            port: 21027
+            protocol: UDP
+        type: NodePort
+    ingress:
+      main:
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        enabled: true
+        hosts:
+          - host: syncthings.wailord.jackhil.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: webui
+                  port: 8384
+        tls:
+          - hosts:
+              - syncthings.wailord.jackhil.de
+            secretName: jackhil.de-cert
+    persistence:
+      config:
+        enabled: false
+        type: emptyDir
+
+      data:
+        enabled: true
+        type: hostPath
+        hostPath: /store/backups/syncthings
+        advancedMounts:
+          main:
+            main:
+              - path: /var/syncthing
+      roms:
+        enabled: true
+        type: hostPath
+        hostPath: /store/roms

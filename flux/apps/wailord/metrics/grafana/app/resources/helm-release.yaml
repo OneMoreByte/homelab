@@ -1,0 +1,72 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: grafana
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: grafana
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - name: Thanos
+            type: prometheus
+            url: http://prometheus-thanos-query-frontend.metrics.svc.cluster.local:9090
+            access: proxy
+            isDefault: false
+            jsonData:
+              prometheusType: Thanos
+              customQueryParameters: max_source_resolution=auto
+          - name: Prometheus
+            type: prometheus
+            url: http://prometheus-kube-prometheus-prometheus.metrics.svc.cluster.local:9090
+            access: proxy
+            isDefault: true
+    persistence:
+      enabled: true
+    serviceMonitor:
+      enabled: true
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      labels: {}
+      path: /
+      hosts:
+        - grafana.jackhil.de
+      tls:
+        - hosts:
+            - grafana.jackhil.de
+          secretName: jackhil.de-cert
+    envFromSecrets:
+      - name: grafana-client-secret
+        optional: true
+    grafana.ini:
+      server:
+        domain: grafana.jackhil.de
+        root_url: https://grafana.jackhil.de
+      auth:
+        oauth_allow_insecure_email_lookup: false
+        allow_assign_grafana_admin: true
+      auth.generic_oauth:
+        enabled: true
+        oauth_name: Login Keycloak
+        scopes: openid profile email groups roles
+        allow_sign_up: true
+        client_id: grafana
+        auth_url: https://auth.jackhil.de/realms/master/protocol/openid-connect/auth
+        token_url: https://auth.jackhil.de/realms/master/protocol/openid-connect/token
+        api_url: https://auth.jackhil.de/realms/master/protocol/openid-connect/userinfo
+        role_attribute_path: contains(grafana.roles[*], 'admin') && 'Admin' || contains(grafana.roles[*],
+          'editor') && 'Editor' || 'Viewer'

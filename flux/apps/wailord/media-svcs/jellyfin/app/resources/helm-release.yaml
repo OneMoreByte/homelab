@@ -1,0 +1,102 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: jellyfin
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: jellyfin
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: jellyfin/jellyfin
+              tag: 10.10.7
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/Chicago
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bulk-datastore
+      hostNetwork: true
+      securityContext:
+        fsGroup: 11337
+        supplementalGroups:
+          - 998
+          - 39
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 8096
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        labels: {}
+        hosts:
+          - host: jelly.jackhil.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: jellyfin-main
+                  port: 8096
+        tls:
+          - hosts:
+              - jelly.jackhil.de
+            secretName: jackhil.de-cert
+      ssl-redirect:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: web
+        labels: {}
+        hosts:
+          - host: jelly.jackhil.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: jellyfin
+                  port: 8096
+    persistence:
+      config:
+        enabled: true
+        accessMode: ReadWriteOnce
+        size: 16Gi
+      cache:
+        enabled: true
+        accessMode: ReadWriteOnce
+        size: 16Gi
+      media:
+        enabled: true
+        type: hostPath
+        hostPath: /store/plex-files
+      certs:
+        enabled: true
+        type: configMap
+        name: wailord-bundle

@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: argocd-rbac-cm
-data:
-  policy.csv: |
-    g, infra_admin, role:admin
-    g, infra_view, role:readonly

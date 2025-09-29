@@ -1,0 +1,60 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: longhorn
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: longhorn
+      version:  1.9.1
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn-repo
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      cattle:
+        systemDefaultRegistry: ''
+    service:
+      ui:
+        type: ClusterIP
+        nodePort: null
+      manager:
+        type: ClusterIP
+        nodePort: ''
+    persistence:
+      defaultClass: true
+      defaultFsType: ext4
+      defaultClassReplicaCount: 3
+      reclaimPolicy: Delete
+      recurringJobSelector:
+        enable: false
+        jobList: []
+      backingImage:
+        enable: false
+        name: null
+        dataSourceType: null
+        dataSourceParameters: null
+        expectedChecksum: null
+    longhornUI:
+      priorityClass: null
+      tolerations: []
+      nodeSelector: {}
+    resources: {}
+    ingress:
+      # Tailscale's ingress is too unconventional for restrictive helm chart templating
+      enabled: false
+
+    enablePSP: false
+    namespaceOverride: ''
+    annotations: {}
+    metrics:
+      serviceMonitor:
+        enabled: false

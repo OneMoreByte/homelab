@@ -1,0 +1,118 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: kube-prometheus-stack
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    grafana:
+      enabled: false
+    prometheus:
+      prometheusSpec:
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        scrapeConfigSelectorNilUsesHelmValues: false
+        serviceMonitorSelector:
+          matchLabels: {}
+        podMonitorSelector:
+          matchLabels: {}
+        probeSelector:
+          matchLabels: {}
+        ruleSelector:
+          matchLabels: {}
+        scrapeConfigSelector:
+          matchLabels: {}
+        thanos:
+          objectStorageConfig:
+            existingSecret:
+              name: thanos-s3-config
+              key: objstore.yml
+        additionalScrapeConfigs: []
+      thanosService:
+        enabled: true
+        clusterIP: ''
+      thanosServiceMonitor:
+        enabled: true
+      ingress:
+        enabled: true
+        hostname: prometheus
+        tls:
+          - hosts:
+              - prometheus
+        ingressClassName: tailscale
+    alertmanager:
+      config:
+        global:
+          resolve_timeout: 5m
+        route:
+          group_by:
+            - job
+          group_wait: 30s
+          group_interval: 5m
+          repeat_interval: 12h
+          receiver: discord-notifications
+        receivers:
+          - name: discord-notifications
+            discord_configs:
+              - webhook_url_file: /etc/alertmanager/secrets/webhook-url
+                title: '{{ template "discord.default.title" . }}'
+                message: '{{ template "discord.default.message" . }}'
+        templates:
+          - /etc/alertmanager/config/*.tmpl
+      templateFiles:
+        discord.tmpl: '{{ define "discord.default.title" }}
+
+          [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len
+          }}{{ end }}] {{ .CommonLabels.alertname }}
+
+          {{ end }}
+
+
+          {{ define "discord.default.message" }}
+
+          {{ if gt (len .Alerts.Firing) 0 }}
+
+          **Alerts Firing:**
+
+          {{ range .Alerts.Firing }}
+
+          • {{ .Labels.instance }}: {{ .Annotations.description }}
+
+          {{- end }}
+
+          {{ end }}
+
+          {{ if gt (len .Alerts.Resolved) 0 }}
+
+          **Alerts Resolved:**
+
+          {{ range .Alerts.Resolved }}
+
+          • {{ .Labels.instance }}: {{ .Annotations.description }}
+
+          {{- end }}
+
+          {{ end }}
+
+          {{ end }}'
+      alertmanagerSpec:
+        volumes:
+          - name: discord-webhook
+            secret:
+              secretName: alertmanager-discord-webhook
+        volumeMounts:
+          - name: discord-webhook
+            mountPath: /etc/alertmanager/secrets
+            subPath: webhook-url
