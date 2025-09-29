@@ -11,4 +11,4 @@ spec:
     operation: copy
   ref:
     tag: 0.9.3
-  url: ghcr.io/immich-app/immich-charts/immich
+  url: oci://ghcr.io/immich-app/immich-charts/immich
