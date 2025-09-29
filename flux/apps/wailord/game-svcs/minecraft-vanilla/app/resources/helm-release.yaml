@@ -17,43 +17,25 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: latest
-      pullPolicy: IfNotPresent
-      pullSecret: ""
     replicaCount: 1
     resources:
       requests:
         memory: 4Gi
         cpu: 4
     strategyType: Recreate
-    nodeSelector: {}
-    tolerations: []
-    affinity: {}
+    nodeSelector:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - fastclock
+
     securityContext:
       runAsUser: 1000
       fsGroup: 2000
-    livenessProbe:
-      command:
-        - mc-health
-      initialDelaySeconds: 420
-      periodSeconds: 5
-      failureThreshold: 20
-      successThreshold: 1
-      timeoutSeconds: 1
-    readinessProbe:
-      command:
-        - mc-health
-      initialDelaySeconds: 420
-      periodSeconds: 5
-      failureThreshold: 20
-      successThreshold: 1
-      timeoutSeconds: 1
-    startupProbe:
-      command:
-        - mc-health
-      enabled: false
-      failureThreshold: 30
-      periodSeconds: 10
+
     sidecarContainers: []
     extraVolumes: []
     minecraftServer:
@@ -147,39 +129,4 @@ spec:
     rconServiceAnnotations: {}
     mcbackup:
       enabled: false
-      image:
-        repository: itzg/mc-backup
-        tag: latest
-        pullPolicy: IfNotPresent
-      initialDelay: 2m
-      backupInterval: 24h
-      pauseIfNoPlayers: "false"
-      pruneBackupsDays: 7
-      rconRetries: 5
-      rconRetryInterval: 10s
-      excludes: "*.jar,cache,logs"
-      backupMethod: tar
-      destDir: /backups
-      linkLatest: "false"
-      compressMethod: gzip
-      zstdParameters: -3 --long=25 --single-thread
-      rcloneRemote: null
-      rcloneDestDir: null
-      rcloneCompressMethod: gzip
-      rcloneConfig: null
-      resticRepository: null
-      resticAdditionalTags: mc_backups
-      pruneResticRetention:
-        --keep-daily 7 --keep-weekly 5 --keep-monthly 12 --keep-yearly
-        75
-      resticEnvs: []
-      extraEnvs: []
-      resources:
-        requests:
-          memory: 512Mi
-          cpu: 500m
-      persistence:
-        annotations: {}
-        backupDir:
-          enabled: false
-          Size: 1Gi
+
