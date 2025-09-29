@@ -4,6 +4,7 @@ metadata:
   name: minecraft-vanilla
 spec:
   interval: 1h
+  timeout: 15m
   chartRef:
     kind: OCIRepository
     name: minecraft-vanilla
@@ -23,14 +24,15 @@ spec:
         memory: 4Gi
         cpu: 4
     strategyType: Recreate
-    nodeSelector:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: app
-                operator: In
-                values:
-                  - fastclock
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - fastclock
 
     securityContext:
       runAsUser: 1000
