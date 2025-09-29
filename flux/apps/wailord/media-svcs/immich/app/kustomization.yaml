@@ -8,3 +8,5 @@ resources:
   - resources/postgres-db-secret.yaml
   - resources/immich-config.yaml
   - resources/cluster-backup-creds.yaml
+  - resources/valkey-helm-release.yaml
+  - resources/valkey-helm-repo.yaml
