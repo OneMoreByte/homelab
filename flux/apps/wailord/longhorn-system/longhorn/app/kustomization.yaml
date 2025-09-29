@@ -3,5 +3,7 @@ kind: Kustomization
 
 resources:
   - resources/helm-release.yaml
-  - resources/oci-repo.yaml
+  - resources/helm-repo.yaml
+  - resources/backup-secret.yaml
+  - resources/ingress.yaml
 
