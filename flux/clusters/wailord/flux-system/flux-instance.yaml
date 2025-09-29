@@ -23,4 +23,4 @@ spec:
     kind: GitRepository
     url: "https://github.com/OneMoreByte/homelab.git"
     ref: "refs/heads/main"
-    path: "clusters/wailord"
+    path: "flux/clusters/wailord"
