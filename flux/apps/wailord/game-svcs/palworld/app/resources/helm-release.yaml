@@ -61,8 +61,6 @@ spec:
         type: LoadBalancer
         controller: main
         ports:
-          http:
-            enabled: false
           game:
             enabled: true
             port: 8211
