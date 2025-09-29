@@ -50,9 +50,6 @@ spec:
       enabled: false
     redis:
       enabled: false
-      architecture: standalone
-      auth:
-        enabled: false
     server:
       enabled: true
       probes:
