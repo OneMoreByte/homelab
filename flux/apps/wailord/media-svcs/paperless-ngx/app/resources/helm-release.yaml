@@ -4,6 +4,7 @@ metadata:
   name: paperless-ngx
 spec:
   interval: 1h
+  timeout: 15m
   chartRef:
     kind: OCIRepository
     name: paperless-ngx
