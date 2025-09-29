@@ -1,16 +1,16 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: immich
+  name: immich-valkey
 spec:
   interval: 1h
   chart:
     spec:
-      chart: valkey
+      chart: immich-valkey
       version:  0.7.2
       sourceRef:
         kind: HelmRepository
-        name: valkey
+        name: immich-valkey
   install:
     remediation:
       retries: -1

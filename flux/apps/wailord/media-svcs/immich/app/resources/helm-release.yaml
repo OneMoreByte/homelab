@@ -16,6 +16,7 @@ spec:
       retries: 3
   values:
     env:
+      REDIS_HOSTNAME: ""
       DB_HOSTNAME: '{{ .Release.Name }}-pg-cluster-rw'
       DB_DATABASE_NAME: immich
       DB_USERNAME:
