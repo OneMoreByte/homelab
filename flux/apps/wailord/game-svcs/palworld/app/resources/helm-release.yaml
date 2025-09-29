@@ -74,7 +74,7 @@ spec:
           rcon:
             enabled: false
             port: 25575
-            protocol: tcp
+            protocol: TCP
     persistence:
       config:
         enabled: false
