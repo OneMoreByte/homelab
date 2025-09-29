@@ -4,5 +4,4 @@ namespace: game-svcs
 resources:
   - factorio/ks.yaml
   - minecraft-vanilla/ks.yaml
-  - minecraft-yotc-2024/ks.yaml
   - palworld/ks.yaml
