@@ -52,5 +52,6 @@
       "extractVersionTemplate": "^release-(?<version>.*)$",
       "datasourceTemplate": "docker"
     }
-  ]
+  ],
+  "enabled": false
 }
