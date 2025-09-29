@@ -1,12 +1,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: palword
+  name: palworld
 spec:
   interval: 1h
   chartRef:
     kind: OCIRepository
-    name: palword
+    name: palworld
   install:
     remediation:
       retries: -1
