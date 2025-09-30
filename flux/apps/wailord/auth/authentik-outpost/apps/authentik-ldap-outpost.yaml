@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+    labels:
+        app.kubernetes.io/instance: jscknet-ldap-outpost
+        app.kubernetes.io/name: jscknet-ldap-outpost
+    name: jscknet-ldap-outpost
+spec:
+    ports:
+        - name: ldap
+          port: 389
+          protocol: TCP
+          targetPort: ldap
+        - name: ldaps
+          port: 636
+          protocol: TCP
+          targetPort: ldaps
+    type: ClusterIP
+    selector:
+        app.kubernetes.io/instance: jscknet-ldap-outpost
+        app.kubernetes.io/name: jscknet-ldap-outpost
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        app.kubernetes.io/instance: jscknet-ldap-outpost
+        app.kubernetes.io/name: jscknet-ldap-outpost
+    name: jscknet-ldap-outpost
+spec:
+    selector:
+        matchLabels:
+            app.kubernetes.io/instance: jscknet-ldap-outpost
+            app.kubernetes.io/name: jscknet-ldap-outpost
+    template:
+        metadata:
+            labels:
+                app.kubernetes.io/instance: jscknet-ldap-outpost
+                app.kubernetes.io/name: jscknet-ldap-outpost
+        spec:
+            containers:
+                - image: ghcr.io/goauthentik/ldap
+                  name: ldap
+                  ports:
+                      - containerPort: 389
+                        name: ldap
+                        protocol: TCP
+                      - containerPort: 636
+                        name: ldaps
+                        protocol: TCP
+                  envFrom:
+                      - secretRef:
+                            name: authentik-api-config
