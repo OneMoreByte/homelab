@@ -42,10 +42,10 @@ spec:
                 - image: ghcr.io/goauthentik/ldap
                   name: ldap
                   ports:
-                      - containerPort: 389
+                      - containerPort: 3389
                         name: ldap
                         protocol: TCP
-                      - containerPort: 636
+                      - containerPort: 6636
                         name: ldaps
                         protocol: TCP
                   envFrom:
