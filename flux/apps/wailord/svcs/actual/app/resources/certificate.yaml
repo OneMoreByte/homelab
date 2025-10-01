@@ -4,7 +4,7 @@ metadata:
   name: budget.jackhil.de-cert
 spec:
   dnsNames:
-    - "budget.jackhil.de
+    - "budget.jackhil.de"
   secretName: budget.jackhil.de-cert
   issuerRef:
     name: letsencrypt-aws-issuer
