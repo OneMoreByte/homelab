@@ -1,0 +1,68 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: actual
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: actual
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: docker.io/actualbudget/actual-server
+              tag: 25.9.0
+              pullPolicy: IfNotPresent
+            env: {}
+
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 5006
+
+    ingress:
+      main:
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        enabled: false
+        hosts:
+          - host: budget.jackhil.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: 5006
+        tls:
+          - hosts:
+              - budget.jackhil.de
+            secretName: budget.jackhil.de
+
+
+    persistence:
+      config:
+        enabled: false
+        type: emptyDir
+
+      data:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 8Gi
