@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: budget.jackhil.de-cert
+spec:
+  dnsNames:
+    - "budget.jackhil.de
+  secretName: budget.jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-aws-issuer
+    kind: ClusterIssuer

@@ -53,7 +53,7 @@ spec:
         tls:
           - hosts:
               - budget.jackhil.de
-            secretName: budget.jackhil.de
+            secretName: budget.jackhil.de-cert
 
 
     persistence:
