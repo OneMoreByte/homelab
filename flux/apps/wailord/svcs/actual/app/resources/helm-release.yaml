@@ -27,7 +27,8 @@ spec:
               repository: docker.io/actualbudget/actual-server
               tag: 25.9.0
               pullPolicy: IfNotPresent
-            env: {}
+            env:
+              ACTUAL_OPENID_SERVER_HOSTNAME: &hostname budget.jackhil.de
 
     service:
       main:
@@ -43,7 +44,7 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
         enabled: true
         hosts:
-          - host: budget.jackhil.de
+          - host: *hostname
             paths:
               - path: /
                 pathType: Prefix
@@ -52,7 +53,7 @@ spec:
                   port: 5006
         tls:
           - hosts:
-              - budget.jackhil.de
+              - *hostname
             secretName: budget.jackhil.de-cert
 
 
