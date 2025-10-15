@@ -25,6 +25,8 @@ spec:
             env:
               REDIS_HOSTNAME: "immich-valkey"
               BLAH: "blah"
+              UID: 11337
+              PID: 11337
               DB_HOSTNAME: '{{ .Release.Name }}-pg-cluster-rw'
               DB_DATABASE_NAME: immich
               DB_USERNAME:
@@ -48,6 +50,8 @@ spec:
                     operator: In
                     values:
                       - bulk-datastore
+      securityContext:
+        fsGroup: 11337
 
     persistence:
       data:
