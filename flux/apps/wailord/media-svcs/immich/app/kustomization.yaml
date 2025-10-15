@@ -10,3 +10,4 @@ resources:
   - resources/cluster-backup-creds.yaml
   - resources/valkey-helm-release.yaml
   - resources/valkey-helm-repo.yaml
+  - resources/stupid-helm-chart.yaml
