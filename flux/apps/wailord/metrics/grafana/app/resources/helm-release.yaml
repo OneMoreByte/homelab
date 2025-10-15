@@ -13,7 +13,7 @@ spec:
   upgrade:
     cleanupOnFail: true
     remediation:
-      retries: 3
+      retries: 2
   values:
     datasources:
       datasources.yaml:
