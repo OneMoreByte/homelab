@@ -61,12 +61,11 @@ spec:
         allow_assign_grafana_admin: true
       auth.generic_oauth:
         enabled: true
-        oauth_name: Login Keycloak
+        oauth_name: Login with The Science Team
         scopes: openid profile email groups roles
         allow_sign_up: true
-        client_id: grafana
-        auth_url: https://auth.jackhil.de/realms/master/protocol/openid-connect/auth
-        token_url: https://auth.jackhil.de/realms/master/protocol/openid-connect/token
-        api_url: https://auth.jackhil.de/realms/master/protocol/openid-connect/userinfo
-        role_attribute_path: contains(grafana.roles[*], 'admin') && 'Admin' || contains(grafana.roles[*],
-          'editor') && 'Editor' || 'Viewer'
+        client_id: Q031o80DKMWG9lLErskBJG5ByC4a4v2kerbn2IXA
+        auth_url: https://auth.thescience.team/application/o/authorize/
+        token_url: https://auth.thescience.team/application/o/token/
+        api_url: https://auth.thescience.team/application/o/userinfo/
+        role_attribute_path: contains(groups[*], 'grafana-jscknet-admin') && 'Admin' || contains(groups[*], 'grafana-jscknet-editor') && 'Editor' || 'Viewer'
