@@ -55,11 +55,11 @@ spec:
       library:
         enabled: true
         type: hostPath
-        mountPath: /store/k8s-hostpath/immich/library
+        hostPath: /store/k8s-hostpath/immich/library
       syncthing-library:
         enabled: true
         type: hostPath
-        mountPath: /store/backups/syncthings/Pictures
+        hostPath: /store/backups/syncthings/Pictures
 
     immich:
       metrics:
