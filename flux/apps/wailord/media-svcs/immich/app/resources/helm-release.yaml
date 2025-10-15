@@ -4,6 +4,7 @@ metadata:
   name: immich
 spec:
   interval: 1h
+  timeout: 30m
   chartRef:
     kind: OCIRepository
     name: immich
