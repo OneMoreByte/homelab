@@ -51,6 +51,8 @@ spec:
                     values:
                       - bulk-datastore
       securityContext:
+        runAsUser: 11337
+        runAsGroup: 11337
         fsGroup: 11337
 
     persistence:
@@ -59,7 +61,7 @@ spec:
       library:
         enabled: true
         type: hostPath
-        hostPath: /store/k8s-hostpath/immich/library
+        hostPath: /store/k8s-hostpath/immich
         advancedMounts:
           main:
             main:
