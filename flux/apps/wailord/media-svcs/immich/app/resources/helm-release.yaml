@@ -115,7 +115,7 @@ spec:
         cache:
           enabled: true
           size: 16Gi
-          type: pvc
+          type: persistentVolumeClaim
           accessMode: ReadWriteMany
       affinity:
         nodeAffinity:
