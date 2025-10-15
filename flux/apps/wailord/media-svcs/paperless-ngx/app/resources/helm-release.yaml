@@ -27,6 +27,9 @@ spec:
           name: paperless-secret-key
           key: key
       A_REDIS_PASSWORD: ''
+      PAPERLESS_ENABLE_ALLAUTH: true
+      PAPERLESS_AUTO_LOGIN: true
+      PAPERLESS_AUTO_CREATE: true
       PAPERLESS_DBENGINE: postgresql
       PAPERLESS_DBHOST: paperless-pg-cluster-rw
       PAPERLESS_DBNAME: paperless
@@ -38,9 +41,9 @@ spec:
         secretKeyRef:
           name: paperless-db-secret
           key: password
-    #envFrom:
-    #  - secretRef:
-    #      name: paperless-oicd-settings
+    envFrom:
+      - secretRef:
+          name: paperless-oicd-settings
     service:
       main:
         ports:
