@@ -71,6 +71,7 @@ spec:
       persistence:
         library:
           existingClaim: "not-used"
+        
 
       configuration: {}
 
@@ -93,6 +94,8 @@ spec:
               secretName: jackhil.de-cert
 
       persistence:
+        data:
+          enabled: false
         config:
           enabled: true
           type: secret
