@@ -30,8 +30,8 @@ spec:
               DOCKER_MODS: linuxserver/mods:universal-calibre|linuxserver/mods:calibre-web-dtrpg-metadata
               OAUTH_LIB_RELAX_TOKEN_SCOPE: '1'
             image:
-              repository: linuxserver/calibre-web
-              tag: 0.6.25
+              repository: ghcr.io/crocodilestick/calibre-web-automated
+              tag: V3.1.4
               pullPolicy: IfNotPresent
     defaultPodOptions:
       affinity:
@@ -80,5 +80,5 @@ spec:
         advancedMounts:
           main:
             main:
-              - path: /books
+              - path: /calibre-library
                 readOnly: false
