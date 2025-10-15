@@ -57,12 +57,13 @@ spec:
           enabled: true
           type: hostPath
           mountPath: /store/k8s-hostpath/immich/library
-          existingClaim: fake-value
         syncthing-library:
           enabled: true
           type: hostPath
           mountPath: /store/backups/syncthings/Pictures
       configuration: {}
+
+
     server:
       enabled: true
       ingress:
@@ -81,15 +82,6 @@ spec:
               secretName: jackhil.de-cert
 
       persistence:
-        library:
-          enabled: true
-          type: hostPath
-          hostPath: /store/k8s-hostpath/immich
-          existingClaim: ''
-        syncthing-library:
-          enabled: true
-          type: hostPath
-          hostPath: /store/backups/syncthings/Pictures
         config:
           enabled: true
           type: secret
