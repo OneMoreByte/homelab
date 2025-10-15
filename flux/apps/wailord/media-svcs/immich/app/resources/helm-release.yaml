@@ -47,8 +47,6 @@ spec:
           type: hostPath
           mountPath: /store/backups/syncthings/Pictures
       configuration: {}
-    redis:
-      enabled: false
     server:
       enabled: true
       probes:
