@@ -49,18 +49,24 @@ spec:
                     values:
                       - bulk-datastore
 
+    persistence:
+      data:
+        enabled: false
+      library:
+        enabled: true
+        type: hostPath
+        mountPath: /store/k8s-hostpath/immich/library
+      syncthing-library:
+        enabled: true
+        type: hostPath
+        mountPath: /store/backups/syncthings/Pictures
+
     immich:
       metrics:
         enabled: true
       persistence:
-        library:
-          enabled: true
-          type: hostPath
-          mountPath: /store/k8s-hostpath/immich/library
-        syncthing-library:
-          enabled: true
-          type: hostPath
-          mountPath: /store/backups/syncthings/Pictures
+        existingClaim: "not-used"
+
       configuration: {}
 
 
