@@ -69,7 +69,8 @@ spec:
       metrics:
         enabled: true
       persistence:
-        existingClaim: "not-used"
+        library:
+          existingClaim: "not-used"
 
       configuration: {}
 
