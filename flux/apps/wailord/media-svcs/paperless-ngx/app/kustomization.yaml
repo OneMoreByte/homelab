@@ -10,4 +10,5 @@ resources:
   - resources/postgres.yaml
   - resources/postgres-db-secret.yaml
   - resources/cluster-backup-creds.yaml
+  - resources/stupid-helm-chart.yaml
 

@@ -71,7 +71,7 @@ spec:
       persistence:
         library:
           existingClaim: "not-used"
-        
+
 
       configuration: {}
 
@@ -96,6 +96,10 @@ spec:
       persistence:
         data:
           enabled: false
+          advancedMounts:
+            main:
+              main:
+                - path: /unused
         config:
           enabled: true
           type: secret
