@@ -47,8 +47,6 @@ spec:
           type: hostPath
           mountPath: /store/backups/syncthings/Pictures
       configuration: {}
-    postgresql:
-      enabled: false
     redis:
       enabled: false
     server:
