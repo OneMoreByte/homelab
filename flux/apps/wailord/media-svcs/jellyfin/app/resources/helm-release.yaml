@@ -86,8 +86,12 @@ spec:
     persistence:
       config:
         enabled: true
-        accessMode: ReadWriteOnce
-        size: 16Gi
+        type: hostPath
+        hostPath: /store/k8s-hostpath/jellyfin
+        advancedMounts:
+          main:
+            main:
+              - path: /config
       cache:
         enabled: true
         accessMode: ReadWriteOnce
