@@ -75,6 +75,7 @@ spec:
     persistence:
       config:
         enabled: false
+        type: emptyDir
 
       data:
         enabled: true
