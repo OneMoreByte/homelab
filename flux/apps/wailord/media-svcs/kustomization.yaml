@@ -19,3 +19,4 @@ resources:
   - tdarr/ks.yaml
   - unpackerr/ks.yaml
   - watchstate/ks.yaml
+  - gonic/ks.yaml
