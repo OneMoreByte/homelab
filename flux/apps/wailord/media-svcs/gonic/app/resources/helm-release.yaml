@@ -1,12 +1,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: jellyfin
+  name: gonic
 spec:
   interval: 1h
   chartRef:
     kind: OCIRepository
-    name: jellyfin
+    name: gonic
   install:
     remediation:
       retries: -1
