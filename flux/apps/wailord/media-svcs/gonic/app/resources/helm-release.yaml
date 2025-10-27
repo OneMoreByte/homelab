@@ -1,0 +1,108 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: jellyfin
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: jellyfin
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/sentriz/gonic
+              tag: 0.58.0
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "America/Chicago"
+              GONIC_LISTEN_ADDR: "4747"
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bulk-datastore
+      hostNetwork: true
+      securityContext:
+        runAsUser: 11337
+        runAsGroup: 11337
+        fsGroup: 11337
+
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 4747
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        labels: {}
+        hosts:
+          - host: music.jackhil.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: 4747
+        tls:
+          - hosts:
+              - music.jackhil.de
+            secretName: music.jackhil.de-cert
+
+    persistence:
+      config:
+        enabled: false
+
+      data:
+        enabled: true
+        type: hostPath
+        hostPath: /store/k8s-hostpath/gonic/data
+        advancedMounts:
+          main:
+            main:
+              - path: /data
+
+      music:
+        enabled: true
+        type: hostPath
+        hostPath: /store/music
+        advancedMounts:
+          main:
+            main:
+              - path: /music
+
+      playlists:
+        enabled: true
+        type: hostPath
+        hostPath: /store/k8s-hostpath/gonic/playlists
+        advancedMounts:
+          main:
+            main:
+              - path: /playlists
+
+      cache:
+        enabled: true
+        type: emptyDir
