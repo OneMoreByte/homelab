@@ -30,6 +30,8 @@ spec:
             env:
               TZ: "America/Chicago"
               GONIC_LISTEN_ADDR: "0.0.0.0:4747"
+              GONIC_SCAN_AT_START_ENABLED: "true"
+              GONIC_SCAN_WATCHER_ENABLED: "true"
     defaultPodOptions:
       affinity:
         nodeAffinity:
