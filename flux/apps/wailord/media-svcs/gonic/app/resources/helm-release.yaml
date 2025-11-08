@@ -32,7 +32,7 @@ spec:
               GONIC_LISTEN_ADDR: "0.0.0.0:4747"
               GONIC_SCAN_AT_START_ENABLED: "true"
               GONIC_SCAN_WATCHER_ENABLED: "true"
-              GONIC_MULTI_VALUE_GENRE: "mulit"
+              GONIC_MULTI_VALUE_GENRE: "multi"
               GONIC_MULTI_VALUE_ARTIST: "multi"
               GONIC_MULTI_VALUE_ALBUM_ARTIST: "multi"
     defaultPodOptions:
