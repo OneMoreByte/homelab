@@ -41,10 +41,11 @@ spec:
                       - bulk-datastore
       hostNetwork: true
       securityContext:
+        privileged: true
         fsGroup: 11337
         supplementalGroups:
-          - 998
           - 39
+          - 105
     service:
       main:
         controller: main
