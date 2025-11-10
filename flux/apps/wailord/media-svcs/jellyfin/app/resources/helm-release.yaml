@@ -29,6 +29,8 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
+            securityContext:
+              privileged: true
     defaultPodOptions:
       affinity:
         nodeAffinity:
@@ -41,7 +43,6 @@ spec:
                       - bulk-datastore
       hostNetwork: true
       securityContext:
-        privileged: true
         fsGroup: 11337
         supplementalGroups:
           - 39
