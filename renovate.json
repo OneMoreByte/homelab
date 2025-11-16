@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "timezone": "America/Chicago",
   "ignorePaths": [
-    "argo/wailord/game-svcs/**"
+    "flux/apps/wailord/game-svcss/**"
   ],
   "extends": [
     "config:recommended"
@@ -53,5 +53,5 @@
       "datasourceTemplate": "docker"
     }
   ],
-  "enabled": false
+  "enabled": true
 }

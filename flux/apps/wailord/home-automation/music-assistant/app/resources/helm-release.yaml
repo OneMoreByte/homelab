@@ -1,0 +1,64 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: music-assistant
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: music-assistant
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/music-assistant/server
+              tag: 2025.8.3
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/Chicago
+              LOG_LEVEL: info
+
+    service:
+      main:
+        controller: main
+        enabled: false
+    ingress:
+      main:
+        enabled: false
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        labels: {}
+        hosts:
+          - host: home.jackhil.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: hass-main
+                  port: 8123
+        tls:
+          - hosts:
+              - home.jackhil.de
+            secretName: jackhil.de-cert
+    persistence:
+      config:
+        enabled: false
+        type: emptyDir
+
+      data:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 12Gi
