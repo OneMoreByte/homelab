@@ -23,12 +23,13 @@ spec:
           main:
             image:
               repository: ghcr.io/music-assistant/server
-              tag: 2025.8.3
+              tag: 2.6.3
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
               LOG_LEVEL: info
-
+    defaultPodOptions:
+      hostNetwork: true
     service:
       main:
         controller: main
