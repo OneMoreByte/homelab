@@ -19,7 +19,7 @@ spec:
       alwaysAppendIdentifierToResourceName: true
     controllers:
       main:
-        enabled: true
+        enabled: false
         strategy: Recreate
         containers:
           main:
