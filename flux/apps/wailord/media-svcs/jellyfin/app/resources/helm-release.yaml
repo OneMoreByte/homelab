@@ -96,8 +96,12 @@ spec:
               - path: /config
       cache:
         enabled: true
-        accessMode: ReadWriteOnce
-        size: 16Gi
+        type: hostPath
+        hostPath: /store/k8s-hostpath/jellyfin-cache
+        advancedMounts:
+          main:
+            main:
+              - path: /cache
       media:
         enabled: true
         type: hostPath
