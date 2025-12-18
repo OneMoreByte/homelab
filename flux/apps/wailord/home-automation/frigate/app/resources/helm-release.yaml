@@ -22,7 +22,7 @@ spec:
     strategyType: Recreate
     image:
       repository: ghcr.io/blakeblackshear/frigate
-      tag: 0.16.0
+      tag: 0.17.0-beta1
       pullPolicy: IfNotPresent
     imagePullSecrets: []
     env: []
@@ -36,63 +36,140 @@ spec:
         enabled: false
         runtimeClassName: null
     extraVolumes:
-      - name: coral
-        hostPath:
-          path: /dev/apex_0
       - name: recording-storage
         hostPath:
           path: /store/frigate
     extraVolumeMounts:
-      - mountPath: /dev/apex_0
-        name: coral
       - mountPath: /media/frigate
         name: recording-storage
     shmSize: 1Gi
-    config: "mqtt:\n  # Required: host name\n  host: mqtt.jsck.network\n  # Optional:\
-      \ port (default: shown below)\n  port: 1883\n  # Optional: topic prefix (default:\
-      \ shown below)\n  # WARNING: must be unique if you are running multiple instances\n\
-      \  topic_prefix: frigate\n  # Optional: client id (default: shown below)\n  #\
-      \ WARNING: must be unique if you are running multiple instances\n  client_id:\
-      \ frigate\n  # Optional: user\n  #user: '{FRIGATE_MQTT_USER}'\n  # Optional: password\n\
-      \  # NOTE: Environment variables that begin with 'FRIGATE_' may be referenced\
-      \ in {}.\n  #       eg. password: '{FRIGATE_MQTT_PASSWORD}'\n  #password: '{FRIGATE_MQTT_PASSWORD}'\n\
-      \  # Optional: interval in seconds for publishing stats (default: shown below)\n\
-      \  stats_interval: 60\nrecord:\n  enabled: true\n  alerts:\n    retain:\n    \
-      \  days: 7\n  detections:\n    retain:\n      days: 7\ndetectors:\n  coral:\n\
-      \    type: edgetpu\n    device: pci\ngo2rtc:\n  streams:\n    garage1:\n     \
-      \ - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=1\n\
-      \      - ffmpeg:garage1-high#video=h264#audio=aac\n    garage1-high:\n      -\
-      \ rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=0\n\
-      \      - ffmpeg:garage1-high#video=h264#audio=aac\n    backdoor1:\n      - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=1\n\
-      \      - ffmpeg:backdoor1-high#video=h264#audio=aac\n    backdoor1-high:\n   \
-      \   - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0\n\
-      \      - ffmpeg:backdoor1-high#video=h264#audio=aac\n    backyard1:\n      - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=1\n\
-      \      - ffmpeg:backyard1-high#video=h264#audio=aac\n    backyard1-high:\n   \
-      \   - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=0\n\
-      \      - ffmpeg:backyard1-high#video=h264#audio=aac\ncameras:\n  garage1:\n  \
-      \  ffmpeg:\n      output_args:\n        record: preset-record-generic-audio-aac\n\
-      \      inputs:\n        - path: rtsp://127.0.0.1:8554/garage1?video=copy\n   \
-      \       roles:\n            - detect\n        - path: rtsp://127.0.0.1:8554/garage1-high?video=copy\n\
-      \          roles:\n            - record\n    detect:\n      width: 704\n     \
-      \ height: 480\n    motion:\n      mask: []\n    zones:\n      driveway:\n    \
-      \    coordinates:\n          0,480,594,480,704,480,704,315,530,271,360,197,320,181,230,183,120,175,70,169,0,171,0,250\n\
-      \      front_door:\n        coordinates: 364,187,474,185,704,235,704,313,328,201\n\
-      \  backdoor1:\n    ffmpeg:\n      output_args:\n        record: preset-record-generic-audio-aac\n\
-      \      inputs:\n        - path: rtsp://127.0.0.1:8554/backdoor1?video=copy\n \
-      \         roles:\n            - detect\n        - path: rtsp://127.0.0.1:8554/backdoor1-high?video=copy\n\
-      \          roles:\n            - record\n    detect:\n      width: 704\n     \
-      \ height: 480\n    motion:\n      mask:\n        - 487,0,362,44,120,53,0,59,0,0\n\
-      \    zones:\n      backdoor:\n        coordinates: 361,52,451,0,570,0,704,47,704,480,0,480,0,77,124,51\n\
-      \  backyard1:\n    ffmpeg:\n      output_args:\n        record: preset-record-generic-audio-aac\n\
-      \      inputs:\n        - path: rtsp://127.0.0.1:8554/backyard1?video=copy\n \
-      \         roles:\n            - detect\n        - path: rtsp://127.0.0.1:8554/backyard1-high?video=copy\n\
-      \          roles:\n            - record\n    detect:\n      width: 704\n     \
-      \ height: 480\n    motion: {}\n    zones:\n      deck:\n        coordinates: 704,480,0,480,0,375,44,305,466,331,630,229\n\
-      \      yard:\n        coordinates: 232,325,482,333,608,231,704,175,704,67,322,69,52,299\n\
-      snapshots:\n  enabled: true\n  retain:\n    default: 60\nobjects:\n  # Optional:\
-      \ list of objects to track from labelmap.txt (default: shown below)\n  track:\n\
-      \    - person\n    - bicycle\n    - car\n    - motorcycle\n    - bus\n    - cat\n\
-      \    - dog\n    - hot dog\nversion: 0.15-1\n"
+    config: |
+      mqtt:
+        host: mqtt.jsck.network
+        port: 1883
+        topic_prefix: frigate
+        client_id: frigate
+        stats_interval: 60
+      record:
+        enabled: true
+        alerts:
+          retain:
+            days: 7
+        detections:
+          retain:
+            days: 7
+      ffmpeg:
+        hwaccel_args: preset-intel-qsv-h264
+
+      detectors:
+        ov:
+          type: openvino
+          device: AUTO
+
+      model:
+        width: 300
+        height: 300
+        input_tensor: nhwc
+        input_pixel_format: bgr
+        path: /openvino-model/ssdlite_mobilenet_v2.xml
+        labelmap_path: /openvino-model/coco_91cl_bkgr.txt
+      
+      go2rtc:
+        streams:
+          garage1:
+            - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=1
+          garage1-high:
+            - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=0
+          backdoor1:
+            - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=1
+          backdoor1-high:
+            - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0
+          backyard1:
+            - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=1
+          backyard1-high:
+            - rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=0
+
+      cameras:
+        garage1:
+          ffmpeg:
+            output_args:
+              record: preset-record-generic-audio-aac
+            inputs:
+              - path: rtsp://127.0.0.1:8554/garage1?video=copy
+                roles:
+                  - detect
+              - path: rtsp://127.0.0.1:8554/garage1-high?video=copy
+                roles:
+                  - record
+          detect:
+            width: 704
+            height: 480
+          motion:
+            mask: []
+          zones:
+            driveway:
+              coordinates:
+                0,480,594,480,704,480,704,315,530,271,360,197,320,181,230,183,120,175,70,169,0,171,0,250
+            front_door:
+              coordinates: 364,187,474,185,704,235,704,313,328,201
+        backdoor1:
+          ffmpeg:
+            output_args:
+              record: preset-record-generic-audio-aac
+            inputs:
+              - path: rtsp://127.0.0.1:8554/backdoor1?video=copy
+                roles:
+                  - detect
+              - path: rtsp://127.0.0.1:8554/backdoor1-high?video=copy
+                roles:
+                  - record
+          detect:
+            width: 704
+            height: 480
+          motion:
+            mask:
+              - 487,0,362,44,120,53,0,59,0,0
+          zones:
+            backdoor:
+              coordinates: 361,52,451,0,570,0,704,47,704,480,0,480,0,77,124,51
+        backyard1:
+          ffmpeg:
+            output_args:
+              record: preset-record-generic-audio-aac
+            inputs:
+              - path: rtsp://127.0.0.1:8554/backyard1?video=copy
+                roles:
+                  - detect
+              - path: rtsp://127.0.0.1:8554/backyard1-high?video=copy
+                roles:
+                  - record
+          detect:
+            width: 704
+            height: 480
+          motion: {}
+          zones:
+            deck:
+              coordinates: 704,480,0,480,0,375,44,305,466,331,630,229
+            yard:
+              coordinates: 232,325,482,333,608,231,704,175,704,67,322,69,52,299
+      snapshots:
+        enabled: true
+        retain:
+          default: 60
+      semantic_search:
+        enabled: True
+        reindex: False
+      objects:
+        # Optional: list of objects to track from labelmap.txt (default: shown below)
+        track:
+          - person
+          - bicycle
+          - car
+          - motorcycle
+          - bus
+          - cat
+          - dog
+          - hot dog
     probes:
       liveness:
         enabled: true
