@@ -77,25 +77,25 @@ spec:
         enabled: true
         retain: true
         mountPath: /usr/src/paperless/data
-        hostPath: /store/k8s-hostpath/paperless/data
+        hostPath: /var/mnt/fast-store/k8s-hostpath/paperless/data
         type: hostPath
       media:
         enabled: true
         retain: true
         mountPath: /usr/src/paperless/media
-        hostPath: /store/k8s-hostpath/paperless/media
+        hostPath: /var/mnt/fast-store/k8s-hostpath/paperless/media
         type: hostPath
       export:
         enabled: true
         retain: true
         mountPath: /usr/src/paperless/export
-        hostPath: /store/k8s-hostpath/paperless/export
+        hostPath: /var/mnt/fast-store/k8s-hostpath/paperless/export
         type: hostPath
       consume:
         enabled: true
         retain: true
         mountPath: /usr/src/paperless/consume
-        hostPath: /store/k8s-hostpath/paperless/consume
+        hostPath: /var/mnt/fast-store/k8s-hostpath/paperless/consume
         type: hostPath
     redis:
       enabled: true

@@ -89,7 +89,7 @@ spec:
       config:
         enabled: true
         type: hostPath
-        hostPath: /store/k8s-hostpath/jellyfin
+        hostPath: /var/mnt/fast-store/k8s-hostpath/jellyfin
         advancedMounts:
           main:
             main:
@@ -97,7 +97,7 @@ spec:
       cache:
         enabled: true
         type: hostPath
-        hostPath: /store/k8s-hostpath/jellyfin-cache
+        hostPath: /var/mnt/fast-store/k8s-hostpath/jellyfin-cache
         advancedMounts:
           main:
             main:

@@ -85,7 +85,7 @@ spec:
       data:
         enabled: true
         type: hostPath
-        hostPath: /store/k8s-hostpath/gonic/data
+        hostPath: /var/mnt/fast-store/k8s-hostpath/gonic/data
         advancedMounts:
           main:
             main:
@@ -103,7 +103,7 @@ spec:
       playlists:
         enabled: true
         type: hostPath
-        hostPath: /store/k8s-hostpath/gonic/playlists
+        hostPath: /var/mnt/fast-store/k8s-hostpath/gonic/playlists
         advancedMounts:
           main:
             main:

@@ -61,7 +61,7 @@ spec:
       library:
         enabled: true
         type: hostPath
-        hostPath: /store/k8s-hostpath/immich
+        hostPath: /var/mnt/fast-store/k8s-hostpath/immich
         advancedMounts:
           main:
             main:

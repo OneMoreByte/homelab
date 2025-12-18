@@ -120,7 +120,7 @@ spec:
       config:
         enabled: true
         type: hostPath
-        hostPath: /store/k8s-hostpath/plex
+        hostPath: /var/mnt/fast-store/k8s-hostpath/plex
         advancedMounts:
           main:
             main:
