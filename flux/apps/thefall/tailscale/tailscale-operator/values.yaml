@@ -1,8 +1,0 @@
-tailscale-operator:
-  oauth: {}
-  operatorConfig:
-    hostname: thefall
-  proxyConfig:
-    defaultTags: tag:k8s,tag:thefall
-  apiServerProxyConfig:
-    mode: 'true'

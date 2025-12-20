@@ -1,0 +1,93 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nut
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: nut
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            env:
+              TZ: America/Chicago
+            image:
+              repository: docker.io/instantlinux/nut-upsd
+              tag: 2.8.2-r0
+              pullPolicy: IfNotPresent
+            command: sh
+            args:
+              - -c
+              - mkdir -p -m2750 /dev/shm/nut && ln -s /dev/shm/nut /var/run && rm -rf
+                /var/run/upsmon.pid /var/run/nut/*.pid && echo 0 > /var/run/nut/upsd.pid
+                && echo 0 > /run/upsmon.pid  && /usr/sbin/upsdrvctl -u root start &&
+                /usr/sbin/upsd -u root && exec /usr/sbin/upsmon -D
+            securityContext:
+              privileged: true
+    service:
+      main:
+        controller: main
+        type: NodePort
+        ports:
+          http:
+            port: 3493
+            nodePort: 30493
+    configMaps:
+      nut-configs:
+        data:
+          ups.conf: "[network-ups]\n  driver = usbhid-ups\n  port = auto\n  desc = \"\
+            UPS for all networking gear in rack\"\n  vendorid = \"0764\"\n  productid\
+            \ = \"0501\"\n\n[server-ups]\n  driver = usbhid-ups\n  port = auto\n  desc\
+            \ = \"UPS for servers in rack\"\n  vendorid = \"0764\"\n  productid = \"\
+            0601\"\n"
+          upsd.conf: 'LISTEN 0.0.0.0
+
+            '
+    persistence:
+      nut-data:
+        enabled: false
+        type: hostPath
+        hostPath: /mnt/k8s/nut
+        advancedMounts:
+          main:
+            main:
+              - path: /etc/nut/
+      nut-configs:
+        enabled: true
+        type: configMap
+        identifier: nut-configs
+        defaultMode: 384
+        advancedMounts:
+          main:
+            main:
+              - path: /etc/nut/ups.conf
+                subPath: ups.conf
+              - path: /etc/nut/upsd.conf
+                subPath: upsd.conf
+      nut-secret-configs:
+        enabled: true
+        type: secret
+        name: nut-secret-configs
+        defaultMode: 384
+        advancedMounts:
+          main:
+            main:
+              - path: /etc/nut/upsmon.conf
+                subPath: upsmon.conf
+              - path: /etc/nut/upsd.users
+                subPath: upsd.users
+

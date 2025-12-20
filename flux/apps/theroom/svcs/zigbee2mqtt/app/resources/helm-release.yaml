@@ -1,0 +1,50 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: zigbee2mqtt
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: zigbee2mqtt
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            env:
+              TZ: America/Chicago
+            image:
+              repository: ghcr.io/koenkk/zigbee2mqtt
+              tag: 2.6.0
+              pullPolicy: IfNotPresent
+            securityContext:
+              privileged: true
+    service:
+      main:
+        controller: main
+        type: NodePort
+        ports:
+          http:
+            port: 8080
+            nodePort: 30800
+    persistence:
+      zigbee-config:
+        enabled: true
+        type: hostPath
+        hostPath: /mnt/k8s/zigbee2mqtt/
+        advancedMounts:
+          main:
+            main:
+              - path: /app/data
