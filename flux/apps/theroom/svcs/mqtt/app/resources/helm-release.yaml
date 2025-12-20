@@ -45,7 +45,7 @@ spec:
             listener 1883
             allow_anonymous true
             persistence true
-            persistence_location /mosquitto/data/
+            persistence_location /data/
     persistence:
       config:
         enabled: true
@@ -53,6 +53,5 @@ spec:
         identifier: config
       data:
         enabled: true
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 8Gi
+        type: hostPath
+        hostPath: /mnt/k8s/mqtt
