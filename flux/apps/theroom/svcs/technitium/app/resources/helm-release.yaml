@@ -44,6 +44,7 @@ spec:
             protocol: UDP
           ui:
             port: 5380
+            protocol: TCP
 
     persistence:
       config:
