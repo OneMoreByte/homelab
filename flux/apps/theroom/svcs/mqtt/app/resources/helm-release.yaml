@@ -51,6 +51,10 @@ spec:
         enabled: true
         type: configMap
         identifier: config
+        advancedMounts:
+          main:
+            main:
+              - path: /mosquitto/config/
       data:
         enabled: true
         type: hostPath
