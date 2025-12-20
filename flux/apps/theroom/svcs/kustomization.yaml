@@ -5,3 +5,4 @@ resources:
   - zigbee2mqtt/ks.yaml
   - nut/ks.yaml
   - technitium/ks.yaml
+  - mqtt/ks.yaml
