@@ -58,8 +58,12 @@ spec:
         controller: main
         type: LoadBalancer
         ports:
-          dns:
+          dns-tcp:
             port: 53
+            protocol: TCP
+          dns-udp:
+            port: 53
+            protocol: UDP
           ui:
             port: 5380
 
