@@ -4,14 +4,14 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app mqtt
-  namespace: &namespace home-automation
+  namespace: &namespace svcs
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
 
   interval: 1h
-  path: ./flux/apps/wailord/home-automation/mqtt/app
+  path: ./flux/apps/theroom/svcs/mqtt/app
   prune: true
   retryInterval: 2m
   sourceRef:
