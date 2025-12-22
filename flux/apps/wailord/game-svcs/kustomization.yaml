@@ -5,4 +5,4 @@ resources:
   - factorio/ks.yaml
   - minecraft-vanilla/ks.yaml
   - palworld/ks.yaml
-  - namespace.yaml
+  - game-svcs-ns.yaml

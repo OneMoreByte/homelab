@@ -7,4 +7,4 @@ resources:
   - hass/ks.yaml
   - xcel-itron2mqtt/ks.yaml
   - music-assistant/ks.yaml
-  - namespace.yaml
+  - home-automation-ns.yaml

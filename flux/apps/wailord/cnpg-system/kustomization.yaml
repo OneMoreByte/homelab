@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - cloudnative-pg/ks.yaml
-  - namespace.yaml
+  - cnpg-system-ns.yaml

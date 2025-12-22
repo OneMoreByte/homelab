@@ -6,4 +6,4 @@ resources:
   - hydroxide/ks.yaml
   # - jmusicbot/ks.yaml
   - actual/ks.yaml
-  - namespace.yaml
+  - svcs-ns.yaml

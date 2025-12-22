@@ -1,6 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: svcs
-  labels:
-    "test": 1123
+  name: home-automation

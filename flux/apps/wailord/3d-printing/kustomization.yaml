@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - spoolman/ks.yaml
-  - namespace.yaml
+  - 3d-printing-ns.yaml

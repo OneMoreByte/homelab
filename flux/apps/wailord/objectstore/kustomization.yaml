@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - seaweedfs/ks.yaml
-  - namespace.yaml
+  - objectstore-ns.yaml
