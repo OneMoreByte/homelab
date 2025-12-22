@@ -75,8 +75,8 @@ spec:
       media:
         enabled: true
         type: hostPath
-        hostPath: /store/plex-files/
+        hostPath: /var/mnt/store/plex-files/
       torrent:
         enabled: true
         type: hostPath
-        hostPath: /store/torrent/
+        hostPath: /var/mnt/store/torrent/

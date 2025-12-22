@@ -74,7 +74,7 @@ spec:
       books:
         enabled: true
         type: hostPath
-        hostPath: /store/text-media/
+        hostPath: /var/mnt/store/text-media/
         advancedMounts:
           main:
             main:

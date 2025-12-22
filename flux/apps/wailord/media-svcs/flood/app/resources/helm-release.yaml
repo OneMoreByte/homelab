@@ -31,7 +31,7 @@ spec:
               FLOOD_OPTION_HOST: 0.0.0.0
               FLOOD_OPTION_PORT: "3000"
               FLOOD_OPTION_RTORRENT: "true"
-              FLOOD_OPTION_ALLOWEDPATH: /store/torrent
+              FLOOD_OPTION_ALLOWEDPATH: /var/mnt/store/torrent
             probes:
               liveness:
                 enabled: false
@@ -120,8 +120,8 @@ spec:
         advancedMounts:
           main:
             main:
-              - path: /store/torrent/
-        hostPath: /store/torrent/
+              - path: /var/mnt/store/torrent/
+        hostPath: /var/mnt/store/torrent/
       rtorrent-flood-configmap:
         enabled: true
         type: configMap
@@ -159,17 +159,17 @@ spec:
 
             method.insert = cfg.basedir,  private|const|string, (cat,(fs.homedir),"/.local/share/rtorrent/")
 
-            method.insert = cfg.download, private|const|string, (cat,"/store/torrent/", "download/")
+            method.insert = cfg.download, private|const|string, (cat,"/var/mnt/store/torrent/", "download/")
 
-            method.insert = cfg.logs,     private|const|string, (cat,"/store/torrent/","log/")
+            method.insert = cfg.logs,     private|const|string, (cat,"/var/mnt/store/torrent/","log/")
 
             method.insert = cfg.logfile,  private|const|string, (cat,(cfg.logs),"rtorrent-",(system.time),".log")
 
             method.insert = cfg.session,  private|const|string, (cat,(cfg.basedir),".session/")
 
-            method.insert = cfg.watch,    private|const|string, (cat,"/store/torrent/","watch/")
+            method.insert = cfg.watch,    private|const|string, (cat,"/var/mnt/store/torrent/","watch/")
 
-            method.insert = cfg.complete,    private|const|string, (cat,"/store/torrent/","complete/")
+            method.insert = cfg.complete,    private|const|string, (cat,"/var/mnt/store/torrent/","complete/")
 
 
 
@@ -210,7 +210,7 @@ spec:
             # schedule2 = watch_start, 10, 10, ((load.start_verbose, (cat, (cfg.watch), "start/*.torrent")))
 
 
-            schedule2 = watch_morethantv, 10, 10, "load.start_verbose=/store/torrent/watch/morethantv/*.torrent,d.custom1.set=morethantvauto,d.custom3.set=/store/torrent/complete/morethantv/"
+            schedule2 = watch_morethantv, 10, 10, "load.start_verbose=/var/mnt/store/torrent/watch/morethantv/*.torrent,d.custom1.set=morethantvauto,d.custom3.set=/var/mnt/store/torrent/complete/morethantv/"
 
 
             method.insert = d.data_path, simple, "if=(d.is_multi_file), (cat,(d.directory),/),

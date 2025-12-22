@@ -94,7 +94,7 @@ spec:
       music:
         enabled: true
         type: hostPath
-        hostPath: /store/music
+        hostPath: /var/mnt/store/music
         advancedMounts:
           main:
             main:

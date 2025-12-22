@@ -116,4 +116,4 @@ spec:
       media:
         enabled: true
         type: hostPath
-        hostPath: /store/plex-files/
+        hostPath: /var/mnt/store/plex-files/

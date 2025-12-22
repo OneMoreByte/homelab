@@ -69,7 +69,7 @@ spec:
       syncthing-library:
         enabled: true
         type: hostPath
-        hostPath: /store/backups/syncthings/Pictures
+        hostPath: /var/mnt/store/backups/syncthings/Pictures
 
     immich:
       metrics:

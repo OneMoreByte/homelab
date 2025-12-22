@@ -65,7 +65,7 @@ spec:
       data:
         enabled: true
         type: hostPath
-        hostPath: /store/torrent/download
+        hostPath: /var/mnt/store/torrent/download
         advancedMounts:
           main:
             main:
@@ -73,4 +73,4 @@ spec:
       store:
         enabled: true
         type: hostPath
-        hostPath: /store/torrent/download
+        hostPath: /var/mnt/store/torrent/download

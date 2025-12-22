@@ -107,7 +107,7 @@ spec:
       data:
         enabled: true
         type: hostPath
-        hostPath: /store/backups/syncthings
+        hostPath: /var/mnt/store/backups/syncthings
         advancedMounts:
           main:
             main:
@@ -115,4 +115,4 @@ spec:
       roms:
         enabled: true
         type: hostPath
-        hostPath: /store/roms
+        hostPath: /var/mnt/store/roms
