@@ -4,19 +4,15 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app longhorn
-  namespace: &namespace longhorn-system
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
 
   dependsOn:
-    - name: sealed-secrets-controller
-      namespace: kube-system
     - name: seaweedfs
       namespace: objectstore
-    - name: tailscale-operator
-      namespace: tailscale
+
   interval: 1h
   path: ./flux/apps/wailord/longhorn-system/longhorn/app
   prune: true
@@ -25,6 +21,6 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: *namespace
+  targetNamespace: longhorn-system
   timeout: 5m
   wait: false

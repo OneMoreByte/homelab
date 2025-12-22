@@ -4,7 +4,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app spoolman
-  namespace: &namespace 3d-printing
 spec:
   commonMetadata:
     labels:
@@ -13,8 +12,6 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
-    - name: sealed-secrets-controller
-      namespace: kube-system
     - name: traefik
       namespace: traefik
     - name: cloudnative-pg
@@ -28,6 +25,6 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: *namespace
+  targetNamespace: 3d-printing
   timeout: 5m
   wait: false

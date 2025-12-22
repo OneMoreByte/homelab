@@ -4,7 +4,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app calibre-web
-  namespace: &namespace media-svcs
 spec:
   commonMetadata:
     labels:
@@ -23,6 +22,6 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: *namespace
+  targetNamespace: media-svcs
   timeout: 5m
   wait: false

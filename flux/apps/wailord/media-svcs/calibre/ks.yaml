@@ -4,7 +4,6 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app calibre
-  namespace: &namespace media-svcs
 spec:
   commonMetadata:
     labels:
@@ -13,10 +12,6 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
-    - name: sealed-secrets-controller
-      namespace: kube-system
-    - name: tailscale-operator
-      namespace: tailscale
   interval: 1h
   path: ./flux/apps/wailord/media-svcs/calibre/app
   prune: true
@@ -25,6 +20,6 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: *namespace
+  targetNamespace: media-svcs
   timeout: 5m
   wait: false

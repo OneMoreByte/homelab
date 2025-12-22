@@ -4,15 +4,14 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app cert-manager
-  namespace: &namespace cert-manager
+
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
 
-  dependsOn:
-    - name: sealed-secrets-controller
-      namespace: kube-system
+  dependsOn: []
+
   interval: 1h
   path: ./flux/apps/wailord/cert-manager/cert-manager/app
   prune: true
@@ -21,6 +20,6 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: *namespace
+  targetNamespace: cert-manager
   timeout: 5m
   wait: false
