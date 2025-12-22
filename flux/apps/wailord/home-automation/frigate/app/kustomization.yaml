@@ -5,5 +5,4 @@ resources:
   - resources/helm-release.yaml
   - resources/helm-repo.yaml
   - resources/frigate-rstp-credentials.yaml
-  - resources/ingress.yaml
 

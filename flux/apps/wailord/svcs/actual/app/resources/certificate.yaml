@@ -7,5 +7,5 @@ spec:
     - "budget.jackhil.de"
   secretName: budget.jackhil.de-cert
   issuerRef:
-    name: letsencrypt-aws-issuer
+    name: letsencrypt-cloudflare-issuer
     kind: ClusterIssuer

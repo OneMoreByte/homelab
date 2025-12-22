@@ -1,17 +1,42 @@
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
+apiVersion: v1
+kind: Secret
 metadata:
-  creationTimestamp: null
-  name: jellyseerr-backup-secret
-  namespace: media-svcs
-spec:
-  encryptedData:
-    ACCESS_KEY_ID: AgBh5HmvL0E5hVfJVi+OMf0g7eS4phNTuSfZaq5xXgpuDG6sLp/oFJDTu39jSLBmVBgrvGsCFnItKvymDadzUbWWe9y3ZKuRYk9rzStSCv+gdNnSZtFD6cr8oy6/nMjCW6hScfoq7/5usS5jrN2FHFGKhnfKcTS4UKbtY1M/YEQjKQO4mTqcxtotVFjU20PGvC/xZQwIFkSc6wNQfiiCz8+uO8lggDzeoaG54mjdGNW3mb0y+GhNSMdDOAfWzJn5vOiEn1JdVCjR+lycCpRG6P62XICwB+m0gBUYXkdTP/wERttLxhckdEra1Oa1Fc2GdltvntxrOl+E5jvUYCVI57OjhQ38duWtHTPiX85BsOtup5Nq2x3n5xLgJd7cqCjw3NjBmnpCijEJx6aAr83Kcy8Gcg1y7mjuYyM4fdxvQdFebeo6VchrpqajJ8rWZjTlhdxaOG1V60ecGwoW4wspRydIt9bLn66X3NmT4HxqjUHi9GE8pE3wyJjw7Jfu6fcYDtMWyORajObVkc3mbn89HNdA7cqIdipeKx87Wki8vCzfhrS+DnsbiRLjGYu0QZErvLIHVETFvTHj/RqQ7psOUQ0lbsb6voLlYg33h3rc4+pRK2L90hhPNGL4J64fq5RVZKyKllUxVpKeAFhhYCNDKAL5OzGgpjojs7GvFJjlyuclyzEIj0DeW7pDQYGsdy+Yd5Qjvn4dksuv
-    ACCESS_SECRET_KEY: AgBRSaXYW6twwK1FpDO4FyCmqH/A3GXHfSFTeG4lgvmBLolW0/ZeUtNswqHnylVfgJC1AqJbLT0b8RJKbHW833VbQXSM4UJVesyPp6pvQeaPXyZPFFJID28H6pJw5wS7s27HRGeuvZfxRpyIoQSqzNamejjEcB/O6tCC2lGoI8W1kGGGmHHtvbURC996suxnfd1Tjdfqi1s5wKMiMi+QmNjqUxIOj93JL09tXd7llE2+z8Uxt5tgJGapVeRFcanbz9KlrwVksYzeazXTTSboQ1My36F6RSjqOPMrLmFSqZZpLWhphWC/UEWhXq+Q3G4cCAIzY4LbDu0Dg/7Mmft4pkB+kb8+IuOnjQggSYCBtdjd/+8IGP12f4xbsiKdD1cbj0pmSBjtOnZhhHyUx9HMzBu+jWVugq4RQJOn6D5AJBpE/Lpp5utAtleO5kXcpDD/Pwp8rrW0linsTT/hQte+H42b5UpWSggZl9O3qqHeZ2hR4gKlI7O9pdx7xpYRQ3shYRQClJGzcnFdNVjufeQD0j1EaXqoQbEpc2Lq3/fQzFbEjoevdjMNw3Wf/xXUFZ7KQr3g1nlgkG5yf1DWwxIYiJiM+O0O4QMwO86SQ19Vop/FgGOapitpDRimEjdYwlK7Kkvey5E2Bve2SRzbBslSubf1aU+UWpgIduWhmvDanyfbRKRBRcCuncDmiDhQmvLkCEGpcAlTU0OcmmzF2gXiNQ5PeS3AA2FxSIQ=
-  template:
-    metadata:
-      creationTimestamp: null
-      name: jellyseerr-backup-secret
-      namespace: media-svcs
-    type: Opaque
+    name: jellyseerr-backup-secret
+stringData:
+    ACCESS_KEY_ID: ENC[AES256_GCM,data:rl4XcIa/bQ==,iv:tp98yXtW6cGoZgJlyypbJX8pqizwz48pgUH+q8I/hEs=,tag:0N89+vFDp4pbkdbfSuX7zA==,type:str]
+    ACCESS_SECRET_KEY: ENC[AES256_GCM,data:i5wJ7FCqgXNldNXDD70zkTJqYnHFbYAU,iv:7XEmVTee/EfZByHWKwHs0I0VwCJbi7wnvFzq/OCPPMg=,tag:/kzK/TWc+zvzvFmzUv+Ohw==,type:str]
+sops:
+    age:
+        - recipient: age1yubikey1qdmjd6g9zxszvw332nlw8898pl9q8tnpjv8ljjvxpau650567j5a6nlpjz8
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IEcvTERKZyBBcC9LWVhG
+            Y2k3dEFGNGt2RkNSZTREMWhxSy9XZXgvVU5QK1M3azdiK1JnTQpLbzJYQVVGZWpZ
+            dTNhRmdJOVNaa0lUbWlINFJiM3NKa2diajgrYUphNzZvCi0tLSBUZmpYNWN2TjhO
+            UjI3WmFBRm9wZUszcU5waER1SStlVXhsV1E3Z0d0ZmdVCsSdYHdoBnxOTAd90HWt
+            gv1lnwhKzKgtvDwrdpVJo6LL1nlyfbhoSVyuEQprEd1UpE1dZpwJl/OuRHf7KxTt
+            9s0=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1yubikey1qwu0zwltgvjgv7tr0qcpjw6grreja8lqwpsxdprgwyap29mrkvx6j6795r0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IE1TL0VLZyBBcVhKY05G
+            VnI5UENWbmJKeFJxTllkeTlLU1kyMzhpd3E0aGRNb1NIQ24yTApUclF2RmQ1Q3Uw
+            amw1VHFidjI3bUdQSkFpTkY0MWRzUkEwbkpPb3gzdEtZCi0tLSA4R1BPYTZNNGlH
+            OHJCTEdsVDc3STgySTRhL3lWUXZOZHQwbEJncDIyNC9ZCs2xGhFO0OhpytK5VPas
+            hM1nrQYV9xU+goJNBYASIKQzwqBGHroyfW+RQ5mQoO6JK/7plXnatGVo1uJOwMzg
+            5Z0=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1tufq3ztwqlaawpe4sd8pzh7t70fvgq8wwz7q0mka2rvrgvtngsgqhxay7r
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0c1BQNjlWOE1HMmI2bm5R
+            YWJ5cHcwQ3Z5Umx6dFBvR0xRNUlhQU02WjFvCnZXaDhmUUUwdzFibVpjdjl5Yms2
+            d2tiYzRIei9XNHBYdysrWTNZZjRtZWsKLS0tIEd3c1BTckg3VUtZMFZ4Nzlvc2NH
+            YVdLUDdOTUQwVGRsd0FMZ1J4dmNnNEEKUJ4523GWmQDTU5ZlxAKwdQrvR0Yy5fy4
+            r3P5MvZY0u3bylHkDRbWCFBZSW+lUnIyrYfgtDSK2wn6Bj6Zwcol4A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-12-22T16:32:05Z"
+    mac: ENC[AES256_GCM,data:JhqpPWIakvQDlrt2YN3j/xqvnepMfKg2ERNtFP94oifUqdxRmMD/VQDufh08fk4bqyRovyyxvRevhYeCsVR7KE3qF3qFoqMPJoF5pUSxE1kVRntpommQlBnggYq6ZDXacF3UHNC3YwNCsY+wb0zmz0WcBXVYauqCOoO+tHmeQEY=,iv:MC5EGqgx9Hopl5nsWh9eA4K5X67aK6UgZu8EbCSigEg=,tag:p6zBUSAgDEL+9KlMgRvICg==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0

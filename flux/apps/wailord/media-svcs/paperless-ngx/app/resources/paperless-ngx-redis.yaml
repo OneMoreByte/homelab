@@ -1,15 +1,41 @@
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
+apiVersion: v1
+kind: Secret
 metadata:
-  creationTimestamp: null
-  name: paperless-ngx-redis
-  namespace: media-svcs
-spec:
-  encryptedData:
-    redis-password: AgAGsPrc+Kyk6BfP5LmHFhZbNp4Cokq/qzq1+57VCowx3FiUChDwbJXKhdiTQcF+FoS/SaiWJ+O0R3Tjh7R1YM6SB68178ZzJmPeu01YNWVju1OEDL64cOXYChgQ++lcp+BrpAZ2FrX5XWYiFKCYY6awq6HidPaUKfweU8UMfEbW5bXOMQgHEhR2DCdUZyNexDT59w1QHLsxeb88wNkfkPEsBRupKJsi+oztUHDM1Zt2ebeabuokaDp2R/6RKSxniBydTK09STknhqdc6K93pb0c2m9CXec4aOwluuHhoRbEwiDyU9TzUztG7ZyuD3UPkALkZRmtbjPKSKiOWGOLvjOC6dUMMKU4EiXeo2tC/ae/9hfaEnZ3nk9K4KC+/iFv2+CIuvGlZkKR7wsk2KpWYFzoYTYN0U2EMGVXFp7fd4OTB4pyrBXnU0wqPHMVPUoLuTGXA8PYgIDS9egTFvfxxZI+yg5oNQqWOWmUZP4sUKSp0tl7Q9iLhZKUaqJjStWhyTdgdsuGGYTyweM7Nq1nccMFlceVd49Z15AcYsF69fI3bf5h+QqWfMbmghVoQHB9tBS/KCersTNtjF4V2r/UqcAyEFZf6uWjDeZW1Vpk5RwasL3VJQbiULQa7m8nwGQT4iNEKJJuj9DN2GnVTDLp8Z2wdIDHzyNNHZw6VtP043PZmTZqKYlynayiZN9us8hT5sDh/omlciYsofPbVCFt+Z4yFNL3
-  template:
-    metadata:
-      creationTimestamp: null
-      name: paperless-ngx-redis
-      namespace: media-svcs
+    name: paperless-ngx-redis
+stringData:
+    redis-password: ENC[AES256_GCM,data:bALckKloE1DoAr3LPyCkYp1grA==,iv:6BZ0cZjt5z6Yr7Vh47JbT4susERm5Swh5nhS+CH66h4=,tag:sLA5NBso8eIdVXm2cHeCIg==,type:str]
+sops:
+    age:
+        - recipient: age1yubikey1qdmjd6g9zxszvw332nlw8898pl9q8tnpjv8ljjvxpau650567j5a6nlpjz8
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IEcvTERKZyBBcTBwTEd2
+            UG5sT2ZrWXJaZHF6dm50WndGVHlMWlpXZjZZeFNQa1UrSnRGRwpDTUo0R2dRbXdL
+            Qld4UFB5N25EQVhGMUxzbjJLNnl2bUJsYkR5aW9XazIwCi0tLSBUclFmL05rN0ty
+            bzdqYnNZY0d3N3Z4L21wRW5GVzg5SzU0VkZVMzk4SjMwCvafdvIYQsh9caYn51yy
+            0mRkAEOf8WzvEF5yWv49WHhchVDonawLUaf/G5sIUKL9+KmmVl2CWaqRBOpVs4e+
+            oVQ=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1yubikey1qwu0zwltgvjgv7tr0qcpjw6grreja8lqwpsxdprgwyap29mrkvx6j6795r0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IE1TL0VLZyBBbW9YWXE1
+            OEc0Tmc1TXdTM3p3S3h5azZadVpsWEpHc3haVHRtYWtad2g2eQpZSGVWUC9kUVRh
+            Y2ZwZ2ZjVDhKQTNBK243cjVmNTJsQlNmc0ZaQzFLNng0Ci0tLSBUWGx1Mk9HSE9C
+            S0J3dGcvNFZhbG1sMmtpbW0wdXlTOG1JTkdMMC9ET2dJClI1nI15tl67SLy6zID6
+            HkOlVlU3zoz3y0UDh2iX+torr5HDRvjLxL3FHcBHSvPjgn3e7N2TMarD2rxkHuXu
+            F/A=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1tufq3ztwqlaawpe4sd8pzh7t70fvgq8wwz7q0mka2rvrgvtngsgqhxay7r
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkZnJVTUx5M1EzZmVkQWlU
+            dVBiTXFHV0hPakRUZ296SUtQQ1BjdlMzRlJJCnpWWGxmNWM1ZHJSd0JvcEZjMzgy
+            bCt3MnJhRkVIYjdCMXBkamtPZEpWeFUKLS0tIFBkRkZ3czZWSGFQeDlpM2gySDZP
+            RkF5VnFsVGhaOHltM1E0anVWT2p6QmsKWgUYOCrMX7fb1ygRv8K1bzEHfx88R6f5
+            w1+hyrFJvMHcna1J7xi5a2C9J1Qo6634sU5FmiwpNqrlYDRquw+atg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-12-22T16:29:19Z"
+    mac: ENC[AES256_GCM,data:nAPonnP48P0G0hlXBJw6fArD4+N8+2bKilmFzVuWVTzY1iuXy2kdNQDSud5gZq+Z+oLExpysBqtUZDUwG4i8my++wI4AwO2pYNRlwJt4ECgvIIA+HOcqkYu5QxMMplSaVWnItNAip0NT0FqQ1Z42PqwMGW1KIrqD410AmBLO1zc=,iv:xUyGJGd+oSKIm2uyyjOIsBA4qfEfzk7GCjEQaG+4hpY=,tag:Wf2iUC3jdGLluWaKMzK4/Q==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0

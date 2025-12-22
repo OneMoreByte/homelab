@@ -7,5 +7,5 @@ spec:
     - "music.jackhil.de"
   secretName: music.jackhil.de-cert
   issuerRef:
-    name: letsencrypt-aws-issuer
+    name: letsencrypt-cloudflare-issuer
     kind: ClusterIssuer

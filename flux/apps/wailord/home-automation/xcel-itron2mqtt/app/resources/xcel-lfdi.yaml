@@ -1,16 +1,42 @@
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
+apiVersion: v1
+kind: Secret
 metadata:
-  creationTimestamp: null
-  name: xcel-lfdi
-  namespace: home-automation
-spec:
-  encryptedData:
-    .cert.pem: AgBndRt7+t9ZvFbcw/8ErF7iRwsiKd68EQ/BKZFbQq401nJt8X6c//lWXcwoDpN0RlIozWYqJnb32LmBIgWubcF/WlYP6gFRcxJ54czxmmLj4E18NWrfthwdq4gGDCC/hzpzLJ0fSE7/5ZBLf4oWCOTN8dvYa6mxz2BM1MbZGYkW+7WObJysJZlgFKKRKmqwQafkdAsau5h4MRhZjgdbpwGrBNx4AyDTq336LETqSLDTsX9pWjY9+0d+MM2ztbaoSJDaDDcYaH5E6yVB5aeVXCvj4547JN++PAVqTRTIaSSY8LrGWwrYYKFefN2U4M2nBIArTpcRVExY7Xv21fo32Kus5ATs9sD4jjrwfNV29i4Biflr/z/PR0X8alZO0w2oUwU+XvYvTO6gzcfCEQ7e6MfyFGMf6fKlTnMMUe5vS6TVS34ora+z+e+/2BbT/W6B8oTDc6SOR6Ay3MEIFr+0mBsysr51dCo//eKmZkM4dj1JDD7/ovCx0sHMTmjKV1NXyLB49gNhH069MBPZs9wdd2uxonO0KIdexYECaeuvs+23Pq29mceckXtveTG2rYj7ILMchAzGoa1e82+7v0Sg9Yo7e7MdNgu4JIyN9K9aMcNZlpEZEkCug48mImqypnvgwScq+6RV0gN191KLXm8WBZmz2w9KKOrx/jAzSEAaVcSS82H6w6NualjUX5taQHnlsoxPpmRhNBv7u+HXy4GEZzzGeY7Pz63pt4i/VLvqrN88MAiKWpn6QdKbm4ftAWG4OPj1VHlppUSYxqzyKFLgMrxQnLEPzBu1Gil1IFLjZqc/R8OD1XBIFloBbWPcmEyX5WMsXAZuTMKb/QNngA+7ZX5Y3rKRtE06VysEgXUUMFpjabuFQsz4Y7UnjUGOXgwnuB4VSwR//apHGhCDoYo7AHSezXHuui05ajzY4s0EG3t1pIzWt+LpBP01rWhfs4e430Wj3xGDLafUuHDIUSHyZ0gW8VBA80rb9hgDZLbQ00A91hspf+I93eVyhH2HxS0a9THhwjlh+p6ajx9pn7fOEtp50gkDVDmafv8dD0q559vGJqucoh8sNRoQ9T1XwJBqwyKF9q2cBPQ5j1yyr/hXUJEY0zHxOa1VcN2LC/+yzAG00musj1Fcc7nSW5K1dufu84UDMV/5sBJW/1GnuF/zDd9c3+9A7tVvsnltGaLGQvnsVjKQVBur76EWZ7sgcHD/vwrwIWUhrVmmfdxT398aFSFuS5RhjITvNU2eUiQ577hBu4Oyj9GbpJgDwDigsu/ZbDmhng7S2Qm2qQwhrOkPvmrNxYQWlAMyZznwYBi/P/OW3Ix+h7WJ5P/HxskgSe1TmR8Bv84YiCQIlpD6tlwt+VlcP8xsJxBaYvSXkoXYPG8d2McIVhkyELhXp51DhIEasXquuCmH3gTvrbyljynRfi/oB+xwVU33lCGUh5YN1nWTzzHjRuLeKzedv5diGAKL1jjjRO3iwx+ckLr0X6pznYqKFHs5MSaGfRdLPW8/nTK+VsZxhT5WC289YhLTsYkTu8L6XsSqYBj8LCzD1aUCD0mcMdxFB92PduYwRq/gMJGxUTlyLVy6OKVdBBL94g==
-    .key.pem: AgAywp9fx4TiozW80SR+hFNLpaU6JjeIO/cNfx3nOQiZ0IuvsCDC3xX2+xJPSXsfEIbTkEpFZiAiyqWf+3gc2KXuwbkXbWBE70a3azgDacjhNhX4Ms9wpRj955V2Z63owURYShG7GGwm29pPeQMmdg77wIxmGjw9mpoaS3VZkvzOLNufcb8pt1KTnSfbd7BuRLyhOKua2T+6/CF4yXjss2qfYIShhS9mFYRCCxpno5fk5yEX55kLHvSUgoHqvDCCyoMHI9dOCbb3/dokxnNdz+80aytFBjN5q+/HoLyeF9QbnHkk3Tsbv+b1ZdsurG8FmQmrO+fMGYfidY6a0dmus8GAzepey5gnjkFR+nTCkoOEjRFG+UYfCRPOED1UuUuAPQeQ8A5lvozQNc6v7LO20uxNrJzRxoJrsbvC5RQh56ZrWdh41okfxZdQrPRjr8DBm31rD/PaGjW2fNVb6CmR+Gx4fOS9Q7lmeYY+TaZvc8R5XpoHqutQsxgv9bK4rDw1PXUwrXxjZdjmJbpWTV3LxR33ayCKQ3/1kg1Fl5rYHlFRG8bYBXlafZMFj7p4vr6OCpWDW8WqYtd5UXfhyp0qbghA4dIXWp8hm+EMsvr1m16iNyaUayNjwHue3YxICzJtKpES7AWURy0SMQTneHVN6Hsez09oGxdBURGBBelkNcLUvaUsK61Kkcfs/eaigk6uC4JGyB9rATSZRZ6Pk+l1050VdbXP02AI60Ykrgney/2/j+rqlJ9pXd8pzo7ZYtm9Ex2U2Hy1yDIJP6MAAt/Y5eFFrlMQjGkJcCc0+jnMsIdMFbJbw/9/UK7fCcMYrYBgzxXEV4TQZpC96RKPpmU/acVhA2HIGCoaVcPvYo+DAh8vx0t0/UltkEuViYPTWC5NuZeppiHDmGY+zOXMSY295K9U5uWs6GtB4zvZFshCaeBwF1eZaTF7SjeI3F/mNsL6lxieyXUtvCNU1DWNROfvJkW8gXYqLNOoIPXtQfmDJAhSx2N8+PiwNcmEG/TDccNwCLYu
-  template:
-    metadata:
-      creationTimestamp: null
-      name: xcel-lfdi
-      namespace: home-automation
+    name: xcel-lfdi
+stringData:
+    .cert.pem: ENC[AES256_GCM,data:AvD6EYdpe0+uz1ZOw6e/6sWGCOdlToolo97mcK+gNQoEze4FoGutzoQo715NhyiVQMn+nvMlksTsvw6Y0bSKr+KfpitWN+AmfWObrlwKaRT/jWS67YNZTSkgNkO79CN+x6Ag/Rmzmfon+R0Td5Q6d3NL90vUcSBUBpOVe2F41Yif3cNbt3peYKa8Cx425I6IvNYLljcB9o3WIEcdijZ7cxCSTo6kNDPVYRHTmY3nVZO3QnCjsa5CRAxV4+7TyLBh6IdqBf4Z/+n76w9KRymfTxk40pSbpMPJqJ+p6snWQF/SO+0CFTvOZegXFtv5w8kGhpwmqutoewXtmwjYz6Ee+XM6ZfnxmvA5IT88JZbglUmO3UuZYVvsaeswKThdQ7RpD2YU8w1rJGQfTujyuzSGvpbNq/fWTyt/pQyQMR7BueZmOJBU5ywBcQqQcrYD0exSz6/HS1z/2GazURgSp3feSJgXRtiiaSrZY+7s4ALZeygjnXsmIf+zEwp+YPKmbqM63xwVGGIArauMnId3a9Uo05h99FCx63tl3oDB7nCAJZ9UHUARs3p7Srlpd3up3Kc46TNsrdIZdQ63mteurU0QuEePRW83jYeSwZ/CTwupwLCSz3O9ti0I/7IRbuNahaqrog1JHGg/1X2b7xygPAsLj7CK9q9fpdSth+RfSGz3H01yAt16hZAHxduAnCu9EOu1ISLzb12bfv4iZmA6CGC7XryxlNjcrflsXAlDjMeQhzXKRfscL8uIy4TUcoPiB20hJrzY+IwZ1hq/w6N32i4R30FNRr22y8Z/IaloqAy9MbIWYvlNv9vhPuMI0FWsscPPVAM8CAsD7cltj+v4kmDysF0uBa5LLplSRjE9B0jTpujOKuZFVccop1V0dR0=,iv:NJJdBVL4UOYImPBLNFQcH9s62TiSd3fIm+Ad4QvBY8U=,tag:TIvXbEBPqhtOZ8Sq8MeDbg==,type:str]
+    .key.pem: ENC[AES256_GCM,data:SmogQeXziSnymr/KZm95BBBQqXZNBL0LZ//3l68TikDWMJvdnUpTzt8vyZWyxi+0hQavCLq3WsV/+A62UZfiJlESvVh0LkdqUp3pMJr9j0JK7Ug/RhSYKz1Wvx+oh9RdltvsumCQ2HKnKk0GR7ZLbDLdHcSbKs+RkKbQDZq6b/ovYhD8/ovZCyhL5GRAhsUmrqTpAGEvPsBAjjszYON8ORDhrWtJxP4eVK3r36oUnGi90zhLSZpomLBnqJRMeYMR8o8ZGUUGLhdbfkSVEzRtyUCoJfkuesp749KoVc9ISWRhFibBlPoS8qqE6V3ZLJz78A==,iv:J57m7b85q8iRY/AQVbfat8NrABqJrT6vfh4qdcwMeAw=,tag:cLicwKW9xrKppXzYwn1SXg==,type:str]
+sops:
+    age:
+        - recipient: age1yubikey1qdmjd6g9zxszvw332nlw8898pl9q8tnpjv8ljjvxpau650567j5a6nlpjz8
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IEcvTERKZyBBK3Z6Uzgw
+            VVpwNm5ld0RMMFhtOWxpMWYzMnFOa0doRTB5eFUwa2MyKzdsMwp5dGtLNXF5KzJ2
+            elZHOWxXWjFyWnJRSnA3anpBZVRFSzB3TWw0Wmx2SXYwCi0tLSBoUmpvaGJNM0cz
+            amY5WURyL1dVWEhqWHB5aHFtbC9HSzFRdjRxRDFSdHlZCnCFWLPu1OQbQaYAeti8
+            Zz4j1NHQaVbpczd6v6nDDk7azHezvWP5WELPrtkvliIGQTaHlk8JxA8VRP9fd7lN
+            6ZE=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1yubikey1qwu0zwltgvjgv7tr0qcpjw6grreja8lqwpsxdprgwyap29mrkvx6j6795r0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IE1TL0VLZyBBOWI0YjRi
+            V1F3Y1BEQWIxbTQ0NXBkWXF4dGZpZTFuSGxPV0NlRndRazlYOApuRk5heVFQMUNK
+            NGJHc25mUng4VzUvMm1mc2JiaExvTHd1UStORzh5bllJCi0tLSB6QmE5ZzJEL0h1
+            a05yZldVUzBKR01hS0tFbmt3YUhIVllCc2M5MEh6dXZvComAIkrNwONcKLYfwIHq
+            dqhERHdcOKhpbN/IWck8j3Z/U1y63yfEYZPzX1bo4uGTj49TaOFIDAuQ3x7+jIoq
+            1uk=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1tufq3ztwqlaawpe4sd8pzh7t70fvgq8wwz7q0mka2rvrgvtngsgqhxay7r
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBYk5Id050SXhqNFlhSzNs
+            QjFXVXpOQWlibHNyRXEwbEtXK2Q4YUhydlhjCkpTSEZxSUxiM2JyN2J6RnB2YVdP
+            WWtqeUE2WGZBYTNNVWVEK1BUWGdmc0kKLS0tIE0xeUhFdnc3cDFEK0tWNHpPTUpm
+            Q0J3WUk3RHdxQUgvRm5kZDduenpweG8KwEAPAoxmoM4LvBEpF9Oj6rLUuNJfSCuA
+            6P+4qODpSPl+t4sWPPicWbMyGIKdU5DoE2S2J5m9ftz69RhfJL9w4A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-12-22T16:53:30Z"
+    mac: ENC[AES256_GCM,data:TPRfgHWyCUfksjzkX/4nBQrSAw7LTD5T08eWY+tI2KP9tyiEao0MItJ/eIoLGmkoUxqu8/DZJGum4O4NDYTLMCq3dMV0c1n4M6riBAVv7DyEqdvfzV9HU1azb2FMkfPfErxdBcmEMdKpPhPgCbh5PpKZHMVwVGLdyByETu9NexY=,iv:8XYGYaSD7sCEnpdjj0oqVnc+vZNjap79jXtZTRXcu7k=,tag:qQpR5SdjrDAya/N5AJDPPg==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0

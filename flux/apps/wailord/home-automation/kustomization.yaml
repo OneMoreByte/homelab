@@ -5,7 +5,5 @@ resources:
   - esphome/ks.yaml
   - frigate/ks.yaml
   - hass/ks.yaml
-  - mqtt/ks.yaml
-  - nodered/ks.yaml
   - xcel-itron2mqtt/ks.yaml
   - music-assistant/ks.yaml

@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   distribution:
-    version: "2.6.4"
+    version: "2.7.5"
     registry: "ghcr.io/fluxcd"
     artifact: "oci://ghcr.io/controlplaneio-fluxcd/flux-operator-manifests:latest"
   components:
@@ -18,7 +18,7 @@ spec:
     size: medium
     multitenant: false
     networkPolicy: true
-    domain: "cluster.local" # TODO: I'd like to change this when we're in talos
+    domain: "cluster.local"
   sync:
     kind: GitRepository
     url: "https://github.com/OneMoreByte/homelab.git"

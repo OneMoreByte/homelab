@@ -1,21 +1,43 @@
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
+apiVersion: v1
+kind: Secret
 metadata:
-  creationTimestamp: null
-  name: authentik-api-config
-  namespace: auth
-spec:
-  encryptedData:
-    AUTHENTIK_HOST: AgCKeMV0/Pxv5JF2uux09nmZyFjJ8xLUwLs9qQrZIqckpqWk1TBuy6SDTf8cGwPuMPJfH0e2zRa3Hf5tZg2v9Cc3VGgWyk/XOxhz3ccWdy29RKxt9IHrp2Y65rf0YQJP8stG3mvalfUrBP26WrFzsZS1plGO0ND47FMHFsJTQMkxv/EF6E7B3QsQKeiHFMe/dSO7ZrPJIyERMwi+uf9sRcIBbgVyUBD+WWdfN/9+aNlLhIkUndIpWfmHaVIokqvPPAIQWdDODdxsydGY2yzGXt4bp/UOwyWfRFsLPNtGsyoz/kdGIHVZv7RC9sXY/CwqzO9zQvrEqCeO30s9GtYfJWpZD+V57CuWsIvAgSiNSzsSYe/8PjwcZRSYtNRR/n4cfqasHuDzYvXHQTLogWb1CjI2vMlnxrhbsNf2nHXo0p0CKkgwRjMKWLafShRLsXbXT8FQkuERvlpsenepaxhjiOonB7SWGHT/S76ME2e8YNHocvZ0FXPThH8lCJiqFyJFYoh7ep+dQ5mawoCSV9M9D8h+FBUaiquKekec+stN+Q/yq9anI5Aa641YFXVlIxzJ2/iQEqPnx/OS4e4/T2GWk4dQE7urL2ipf4keof5FwtgSsqckCiS2/jpW42nVt/lKNCr17PreLH9ghqQUJvgxTOoVxCd/Pq7U3/dWwB9ZtNiivHZPtEIvyJ/Th/rR6XWAEsNmbWhRYjQkbYH1v0IOSVZwdiSkAwbtbPDmaH8kdA==
-    AUTHENTIK_INSECURE: AgBqg8jL1TkG7KysMgi1EDVoh9UOMIBzpZC295X7xxg2+T02hERAwq1Cuibl2naLYUitMnDBoPt5IU2WCrRzytc+cXTBu8R3mWth5a82YmwMFnGYcQlVnnmYaHtb11UAd0hsrYn/tqTr92Mg6owZdxAnt0/NBSVJW0GQsBq5Hsqo7P928XZgeJwfB+oyAnJKB63TMbWXegy2KPYKk0H2nosgHFEupxZIXvRDerrAyq/h8ttsPpuU+nFHrm87FDKlGcCaVmqFBsUlGJxo3EB7ijQR9ED9Z8sFpaAIthOjCHWhTJG4g5whXV5+gUpiDTcp7Sx4o6ZLF4qcX8Ytl+F/j9iH/xir776QG0iXPISJb9RDHXYTSOpXyf1+yeXW8GC5YKhHAJKhyxGcigqbtBbPD/hnmrOwi6CKlEX7Olsw0S7WDXPTAdSkFv4VMvbJ3FMhErWCDjzx3sjWwmhkq50KCyMDaJ7+pxHW838W3JbXBV68e4A2Df3mguUrNXDWFglJWEHjg5Wri2j4csLznKc+8I47RM5McVXXg9TljPHfAeGpdTWK8usVNNX/wY3xwekWSWR/dKYn323mn5uA5qjhrvCVEbvgS84GRjqQMN3wZwh2PGmWbPAPvMHSq1HOwsmrh5Y46tVNJfpZ2KKd5AfEnRFdeHPJtacxv49za/94QH4T4kNdTLSQnhllBg2Izwe887EwELowtA==
-    AUTHENTIK_TOKEN: AgBNWQhDLdT062/LEmOvfKM312+o/oVGclI7UmfsBRo+xXhd3dXC1nfCHg+hSuEH26Cm9e21xVefY0GM7inbWGaxWKElVQ5WzIpvDqU89rfsIan8XJbsC0nz/j5BFd0tVHwoKKeRBtHInwTyrZ+YkpNB6y0FMes3XdAe+iBCMMD2V6NgtzHwp2C5BQwPBscHyc0hJtD9tOOF0xWzUsWPEnUkOIReQ2ih1JcTlFTuDrtSUG3Rp0pqrXABELSrkTd6toQswUI2nDSwdM7QN1jjhPA1nxc+fytEMVEiUjUergpL9s2V+4qDDua7zs0d+zgr+nhqRxrtHCJQTGNNbts/QLRMvBFJDpV6CdduhxCGBrD59VTZipXYidg87t3w4ZAup1+sX0iV7LFbUqOFubt6/9i9C2cpOnWcmdH5YC83QJSBKtMsYU2NbiCJbPa399f/2dku81MZz2EyYgGncDDuk7k9xmkMdEVbnZ3oCwPeqMPE1jJ+S5/nJLLvm/b6b5Mr751R3kCrIJBdrfUwoxYdkkvqoDAwf/yUNes+GDztrn+v8c/eFVGWKXkeQIUos5783CZeS98MgmRFeGG5U3hAYzDvOkQozJuWeB+TaWEOk7cyQvEkiLtJic2W9L9x5cxO+CCN38q0yp6H5D2eq8anv1aSirskYIdJZAIwTEFM314jM1BphRns/WtqbQmwaJWdOODHRnZrIffyw88mZxAsV9ZMFENePOocyiZ5B7pKNWrLQF94Amnv7Hbp+KtZCzP0WLQuGGS63lvBwaImzGo=
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app.kubernetes.io/instance: jscknet-ldap-outpost
-        app.kubernetes.io/name: jscknet-ldap-outpost
-      name: authentik-api-config
-      namespace: auth
-    type: Opaque
+    name: authentik-api-config
+stringData:
+    AUTHENTIK_HOST: ENC[AES256_GCM,data:53r1m0lyqvgUDZyVbA51alkPX9K5UNdDqBzFY74=,iv:ufOJiFNIN8//hIxI2XT1bUqqsRUDm2bXcKNiKq1M22M=,tag:KpkYs7FNIu1tkjg7kAm+xQ==,type:str]
+    AUTHENTIK_INSECURE: ENC[AES256_GCM,data:TdgPF9k=,iv:pVQ8dnmsigoRSuTzu0bgvMETMRzRpWhbDTf/ZtoWA/Q=,tag:q39XvaYoaOzk6wWHMBwcpQ==,type:str]
+    AUTHENTIK_TOKEN: ENC[AES256_GCM,data:YtfXvZ0eXjVs9eUMLb7B8G/1GHnS/in9VHb5rK0wsoJopx+oGG+ZZvCEK0+8LBvXdcTO7fhcFtZvs3sm,iv:m1zcQv1wkH01Bo436Vp2PcriLADeiYQ+/WD2RE5IGAI=,tag:Y/l1Q9tmVss/45rT6yZKzw==,type:str]
+sops:
+    age:
+        - recipient: age1yubikey1qdmjd6g9zxszvw332nlw8898pl9q8tnpjv8ljjvxpau650567j5a6nlpjz8
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IEcvTERKZyBBcHZOMEdh
+            aUlFaEYvYVp0Rlhza2V5RlUrMWxkdEhZWUx4K3FOVS81dnFpYwpDUzBhb2VaVzdi
+            UXZnb0Z0dVMxNVZNaEZjaWp3RXJtZktjcHU3UXZXSW5nCi0tLSA1WTJRTndQNFA4
+            SmwxOWhuVFFkNGpLZVNLQThOUnRCUGRBL2hIZS84eUtZCp0jafOm/jUvA34vp5IT
+            +7VeEhxOA6UcYfbwFsQ7a7A9KeKE8xHEbSGL7kgS0MM8xOZg9h9rJMHrqdn4UL/1
+            N9s=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1yubikey1qwu0zwltgvjgv7tr0qcpjw6grreja8lqwpsxdprgwyap29mrkvx6j6795r0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IE1TL0VLZyBBbjRhMmdz
+            TWpzbWxlbWNzNnR5ODByaTQwV0hNbWJtcWRveDdaNnE3NTVCZApGU0hVNGVNZUlk
+            L25iMHNzZkxZVm1jWkxzVmY4aW9PeEVzOHppdzgrd2xZCi0tLSBTeFlwSVlqZXQ4
+            SzRqYXpTNTBoZENCT0JmbU9ueGV5ejZ6TGhzcUJHcGJJCnLZ+G7kiYplmKzkPYXd
+            KM53vWeKZ3jp+hEp22FLh7mTm5tDTL7NvvN6SiuqePB7SfMLqzCYbtKrfAczh9Hr
+            gMs=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1tufq3ztwqlaawpe4sd8pzh7t70fvgq8wwz7q0mka2rvrgvtngsgqhxay7r
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwYk9Lb2FQQjhKZm5aWGk1
+            S2tES0JLVnVvMlp3WmZ5T1ZGNnJLcEkzVWtnCmNIU0hYaEx5RHJIa1pRaDBKNFlP
+            aUhQYWUzTG9TTXR4bS9PVXM4UnlNUzAKLS0tIDFTd0oyMSt3UUNQdlVnZ3FSQmo2
+            TXBCckVHdlNzM1BEWUw4V0NCOGpuem8KNe+Jslfwc9VJ2HLjp5LLJ9QHSB+yVkoy
+            UA7+KfZfqjT8OWgm8BWJR9qne39n3O8ElwtwbPks8APxzxOoKh/jSg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-12-22T17:07:13Z"
+    mac: ENC[AES256_GCM,data:RBOY4gW41EfvrqIHbQWXN5LuNrpG1lBEolU4xHXysa8yOrlvGqiT8qteDHxLVCZtOMZuwFQhbOTuW2+1YZyq0RhtOIX5RJv32Xyfjt/6t0xbzT2GdJA4nN0/TO+0jAho87wcaThuPvATtJa6QI5oBNY3ghJtdJ47vp9Kn9pqCSE=,iv:+B307yES8YYwI6UGAQuGOK6ZWHtPz0yTpIAbkGe2ILY=,tag:F34m6IdRrBtJXuaGFk1I7g==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0

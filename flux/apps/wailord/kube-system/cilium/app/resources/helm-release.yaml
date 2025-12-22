@@ -1,0 +1,99 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cilium
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: cilium
+      version:  1.18.5
+      sourceRef:
+        kind: HelmRepository
+        name: cilium-repo
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    ipam:
+      mode: kubernetes
+    kubeProxyReplacement: true
+
+
+    # These are "recommended performance tuning" settings.
+    # https://docs.cilium.io/en/stable/operations/performance/tuning/
+    # I don't think my 10g nics need this, but it's fun!
+    bpf:
+      masquerade: true
+
+
+      # Hypster veth with ebpf magic
+      datapathMode: "netkit"
+
+      # ?
+      distributedLRU:
+        enabled: true
+      mapDynamicSizeRatio: "0.08"
+
+    localRedirectPolicies:
+      enabled: true
+    routingMode: "native"
+    ipv4NativeRoutingCIDR: "10.0.0.0/8"
+
+    autoDirectNodeRoutes: true
+    annotateK8sNode: true
+
+    ipMasqAgent:
+      config:
+        nonMasqueradeCIDRs:
+          - 10.0.0.0/8
+        masqLinkLocal: false
+
+    # Use a better clock algo
+    bpfClockProbe: true
+
+    # QoS
+    bandwidthManager:
+      enabled: true
+      bbr: true
+
+    ###################3
+
+    # This slows cilium down but it's fun!
+    hubble:
+      enabled: true
+      metrics:
+        enableOpenMetrics: true
+        # I don't understand why there isn't a default?
+        enabled:
+          - "dns"
+          - "drop"
+          - "tcp"
+          - "flow"
+          - "port-distribution"
+          - "icmp"
+          - "httpV2:exemplars=true;labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction"
+
+
+    # LoadBalancer stuff
+    bgpControlPlane:
+      enabled: true
+
+    # Talos specific settings
+    securityContext:
+      capabilities:
+        ciliumAgent: ["CHOWN","KILL","NET_ADMIN","NET_RAW","IPC_LOCK","SYS_ADMIN","SYS_RESOURCE","DAC_OVERRIDE","FOWNER","SETGID","SETUID"]
+        cleanCiliumState: ["NET_ADMIN","SYS_ADMIN","SYS_RESOURCE"]
+    cgroup:
+      autoMount:
+        enabled: false
+      hostRoot: "/sys/fs/cgroup"
+
+    # Use kubeprism (which is enabled by default) to hit the api-server
+    k8sServiceHost: localhost
+    k8sServicePort: "7445"
+

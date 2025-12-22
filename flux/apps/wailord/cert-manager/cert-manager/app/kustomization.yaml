@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - resources/helm-release.yaml
   - resources/oci-repo.yaml
-  - resources/aws-route53-creds.yaml
   - resources/certficiates.yaml
   - resources/cloudflare-api-token-secret.yaml
-  - resources/letsencrypt-aws-issuer.yaml
+  - resources/letsencrypt-cloudflare-issuer.yaml

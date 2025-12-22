@@ -1,15 +1,42 @@
----
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
+apiVersion: v1
+kind: Secret
 metadata:
-  name: paperless-oicd-settings
-  namespace: media-svcs
-spec:
-  encryptedData:
-    PAPERLESS_APPS: AgBNHD71J4qAZGES8bmGtN6LX4tFcZpsf0ShHj2RY4gDK74Xy3n1tmHINhepxIHdIgelO0i1rAcURpf1FcY86JoBETzny7vS9j1bwDxz4X3eQ4vu7hcAlD/t1TxQ+QYMUX+4tBc7veel7MzTc6JsleUNiF66nBZH7vUM+mZlOT9j8IPnl1mH9B3jr5azFbpdJleQAkXwmwK0tddzdb1cMO2Ge0EbgGF+5MMJtQIzrqhlJ4KoZ1VDumT3bvD4qhKPY0Up8HrUJu0vNxucvFjAdPtqdlS2kgQj18OP2IIiXdmslC6TZXhcPKx2iayzS/NqpK7agwH6Px0EuMGBKLG5wNV8akw/xsDjVypF4d481MiVv+in+rsCTyAUj67s+EU3WlRs/lYfM12xgAgSNlTQDrJw+JHKHILyTsUmb4h5NBZgRNC4eSNZ2+/0WoB0Mqqe1ZB+pKdL1l2MirGrq15Hknpn7CIuVBW8N4cK4QBMnKIpyVQ9W8RudS+fyzsRTM2pXe/dWj927C5gr94Rf8rBXObqEECJG2zwQ5y06kqSOfmsl+3ZO/bNF9iD+WbZNhHKls88eP2qAS3wgEUQ6jypRjKRcuFiEL4Iaz+DGaMUBZ+SP8S9ANVlaWWAaQmd26byEOxjt/Lu9ZNCMtBVcq+ou1yGP+K4Pv052//0iwpL/DbE82mbyk6HBX+8rMXnLPo/ZaYs84i1LclB/Q0gTAsLlBxmwQZrlm+Tu5okIC6QLYRiAk11137Fl//0dxU9K7tb
-    PAPERLESS_SOCIALACCOUNT_PROVIDERS: AgAUM7aBwDoCHPEPXkYHTvP6rRxuHMcyLKjXlizR+wJS6W/chF6awjB/fHxFVN6TabG0GLmWYbrViXjk0i++P9/Zr6CP9NV7dUjolIZ4c3kY5BjjmFZpiRSToG0ccFxVdmpvHK0yes7Tqe63TUqczFm0afaWuMi+SEmzMWi1FWhUKPx82gSp9O4SSGH0B2oJ9AaM3FneUVbUNCYvKVdeueDc87Y+qfTnL5RVbyxZhAu8jMHlpr5jRrzETki+uwhBe3uYcxM34ChECJTWlpGvfx0SL4qR5fxREJ0RGfMYOttl1SWs6tD8BsQOmCajIrgAkoWST32knHlIdiufFv2pVqve5S/mXIVjX9SBcnHrLCDoeQa4AQBeqEaVpaion/r+nkgD9HsOktqd6Lgp1A6XN/Vjg3GjrBgbtMs5mdlhKK8OweG+qqjNOITXxEm9c0/6lv0kBsUJ+cy4vfdiVJvKAJKdRc+v9pawk5gbhsAtbW7ppoMX4SY9w5jjKFaxzNW27QfG1MZ8S6nsVpL/hyTuXCFNp1Cxa5AoWY9zhHI4BWNU4bTemzWV98wULqaPDfwxgkHV4x/LaNpgcAJKVXEn5KQbVxnb+fzI9zUQU+poKHQLXhNqvwIkm+GBzBahA/IFo61EluZLmyTCIwGXU756WJiQEQ8uiLsN3sU9bEvn47VNTVE/NzwdbAOixRarNMsvImwzihxjmQRYyHbNcGTnpTmPfWDM/N424X5Kpt5MCdZQa4uNpdoNhPDuOPl4IJi9dIY+mbMuIJagic5fiJ1Y/S9PDE7389n/QIrfja3lsCFbu01Bz1txN2oP4Fja1JlK/Uokgbh0lcmnwMCs4N0ry93GzSp89o8fqMufdwlBGtiFyN48kur8IJPi4hn82zH/+F56arQCVI8huMVkeZDgadp3DpivJHKTn7ehrPQmcLWz01ICZmpK0A3U53sSFy7ON6N9frwMuE986jTbqxAKJvgGEWNw0qVzdvP4OQYOZmpylXsQ+DOL7H2cd6QQN06O7xo7H+DlWCZPyVmNbF0l4defq6YBVDr3fvqVr92X6mrrqD+THLrnk8K973xhS19WbKfBQ1d67Vn6hEufQFtSUNONdmIUNXkJeSJATDo7+LWXe5hsBgOAcoOS8lycvk3ypuzTYoY1rPzm89LgfJ9NEjIRzCth3knGQObxzZ/3KYPGzJcSaXfhFGtL2w9vSnqihhwTFp5LLZzPSgdyQesTK0WCyeGYJQsG/UPdkfpoPagcHXR5bPjF2zt9XoUwfXJu8sEX4eItbwHV7bz3zd4l1KNAPm2KKsDUOhICIK+Sv9ZaNs+zbntMXSKgRC5c+/DsQvAJImKPCoRB8M5T0Ds2qOE2DhmaWfPitYx2VPEifC3jeRnQNK7IjEOHkau6x1eKNOcc0edT8STXpcNR5Numl4HY95SPJLK4/l28eKaoZJy4snjsmlhAsS929wXvd/5O1eYUPYdEpsnN9j19c/lWmT0Uy2KBtQ1Zf9XoCbF89QSqeDqZDlWl6AqFF22Fvrm+
-  template:
-    metadata:
-      name: paperless-oicd-settings
-      namespace: media-svcs
-    type: Opaque
+    name: paperless-oicd-settings
+stringData:
+    PAPERLESS_APPS: ENC[AES256_GCM,data:/iZmPPKHtNWtLHm5dE+knynL/JglKA+t2l9KSParbd0FIAxe5mMCypj17KBbqA==,iv:fTwgKRwIxe8xwEXIvpXBIuN/xj+tXxqNfJNLEGRUr18=,tag:7CBB/6YswDjNWzQFp7wOmA==,type:str]
+    PAPERLESS_SOCIALACCOUNT_PROVIDERS: ENC[AES256_GCM,data:WsyJnSwO6EDADTn2jpaNoCknpTmtble3dUkbjySGgfdPH9lEQghCLwv268rjWbmU13/EPMONx5SGoFJ/djgyrKk+89u36qk4CQpCs9/98JX07xsGV6+FSwCpxoDSdUosME871XzUNJP2+Chj8gN9dYUcxOZT3ZsdSKhRHBBd6Ww3P/dLOgh2n68MZ2F5u+A6pDpRwtf0YQS3jKy+1uJWMgMtl+5rQTBesqyAaB6WGELjmS7r7DgT0EIdX4A8+/n8mf/JtOLtgkEE9ysu/zc9JEzBaz0QI+XfwMl68V3dvF6UFTgj7nIqm/FLbFjyMQ4jTQwihu7yYsxUxIrp2eIqDDDGAJdldWneRBI8adh3VBtgWuOWG/Vh2oOex3ajTOqWLR73KupCNelFAN8Tztf9xbuy6FUROZWpf8TqAmXTlUR2EGjeKq4ZnQBu33eMVRgGn5KlvvXCxoH8N+168UlRxQCX4ZLnYiSed+stBWHnw2Q4cfHD1P6ZJkUC23RO3xthzd6HdxevRtSFxKXT5twILMXmV9nTKk/72lFkZiOS+fqt7J9EJSBe0lKDBg3dCJYhrFI53HimhohgCQyF4gspLhOrCicAsjO6l/Oaa7svytDs0AneZn0HE1j6Y5vGGNcsjhzGoBB/hAt6XI4L34X3SVwVdq88zpmQj0DHyqHBImoJfB2/SWqHCmB+Rmp5AV1dQNRdZnO7l6OHQ2or+ldYLclzLSnkrKh+Bq8AYvpo+/UARGfN1pAhXLLPfCiy7UkNySo2mwtldL5a8B2n46Wf7J9a8k0WSyaHXUKdTGxxUOVdlkR+qxvdZEu3p/wYyA==,iv:wNYF0umxRdQjan9gf7HeewvkNKhaUnVf76Jbm8jB57I=,tag:8UiuZNnIiXNganY14HLSYQ==,type:str]
+sops:
+    age:
+        - recipient: age1yubikey1qdmjd6g9zxszvw332nlw8898pl9q8tnpjv8ljjvxpau650567j5a6nlpjz8
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IEcvTERKZyBBeWwraU44
+            eVBpenBPT3V6bEdQd1hIand2OEFMcm5URmU2Wkc4bEc1SWxkcwp0TkU5N2F5UU82
+            QUo0cXVSY2UvUFQvV1BXK0xTQ0JlWGZHcmdvSlBKZy9NCi0tLSBUUTZKUVFhQ3Fh
+            TzlNRGFwaVdpN1R2SnZubnk2NTFRR0pKZ09TOENQczdvCsjT72mUiM/LRrDzKUdX
+            VVbThCIwGCIss28lrtvS2Zj+n/L/aGlofVzhRxh5CTK4gY3STUYxQVjfs3fLNqfE
+            QDo=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1yubikey1qwu0zwltgvjgv7tr0qcpjw6grreja8lqwpsxdprgwyap29mrkvx6j6795r0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IE1TL0VLZyBBMzFJTkhQ
+            NG9BdzMwZGpoYVN4THNGWTEwbFF4L0F6MlpwQXZjYTlvNmF2SQp5V0paaUl5MXFE
+            ZEY0c3hNeFdLTFVkdmdPQVV0Z01xWGllSyt4SnowUnNZCi0tLSBMbTA0bE9BRk40
+            aVpFSVBRMFQybU03WlU1dGszckJmQmpWS2RXdUV0WHQ0CpRDBV/4A0M/HF6dV/0c
+            i6DZKgNeAF015ZTHivUsqwy6hR45BoYiJbg2YcwpM4jzx8sl80HODkLcWP1MVrCg
+            zWc=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1tufq3ztwqlaawpe4sd8pzh7t70fvgq8wwz7q0mka2rvrgvtngsgqhxay7r
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKbmI0V0xKb2N0aVQ4VkR6
+            MmcvalhhZy8vcnV5cm5UcERuelFWeVhOVVIwCnZKVjQxOEhPeUdjN2xxRy82djlW
+            bDQwcnNqT1ZZeXBzVjhBbzh0eWdUVFUKLS0tIHlSclBXQW4xWml1aERCOXdRVkhE
+            VkZFQzNWU3NSRzNCTVpmVEd1emxuSUEKTOHbdlgEQZvqPSjdMxFlCSETf/Tk5RVn
+            YIcWgrvMbktddAHfLS4fs9RwwQq8NPNwn/1pZvi0EltSsDuNdIxWZg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-12-22T16:29:50Z"
+    mac: ENC[AES256_GCM,data:gGoopLZvTDnv2fXtI9b4F43ELvzZTnCADNUP6Dq4cLr/QD5CsnwtvswaRoYVaVunyJkfBpTsL3SEKiKZC62HuaNN5Ss1wuviBIKVbj3/vIQqUKvJj3sChh/GD5Y4mNlAYf/LvJ7FsI5Cp3kH77bZI2YhFIWsKP9POhO0PBn2mqc=,iv:fC6h6JYcKlDp1tBjrd42bC+iGrsBr9xBwLihNBpSUcI=,tag:vq6IUuPtRnbFQEv31yj22Q==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0

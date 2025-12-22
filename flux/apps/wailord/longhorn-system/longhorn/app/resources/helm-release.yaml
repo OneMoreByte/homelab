@@ -19,42 +19,18 @@ spec:
     remediation:
       retries: 3
   values:
-    global:
-      cattle:
-        systemDefaultRegistry: ''
-    service:
-      ui:
-        type: ClusterIP
-        nodePort: null
-      manager:
-        type: ClusterIP
-        nodePort: ''
+    longhornManager:
+      log:
+        format: json
+    longhornDriver:
+      log:
+        format: json
     persistence:
       defaultClass: true
       defaultFsType: ext4
       defaultClassReplicaCount: 3
-      reclaimPolicy: Delete
-      recurringJobSelector:
-        enable: false
-        jobList: []
-      backingImage:
-        enable: false
-        name: null
-        dataSourceType: null
-        dataSourceParameters: null
-        expectedChecksum: null
-    longhornUI:
-      priorityClass: null
-      tolerations: []
-      nodeSelector: {}
-    resources: {}
-    ingress:
-      # Tailscale's ingress is too unconventional for restrictive helm chart templating
-      enabled: false
-
-    enablePSP: false
-    namespaceOverride: ''
-    annotations: {}
-    metrics:
-      serviceMonitor:
-        enabled: false
+      defaultDataLocality: best-effort
+    preUpgradeChecker:
+      jobEnabled: false
+    defaultSettings:
+      defaultDataPath: "/var/mnt/longhorn"
