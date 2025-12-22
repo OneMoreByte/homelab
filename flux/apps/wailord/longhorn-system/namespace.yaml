@@ -9,3 +9,4 @@ metadata:
     pod-security.kubernetes.io/enforce-version: latest
     pod-security.kubernetes.io/warn: privileged
     pod-security.kubernetes.io/warn-version: latest
+    "test": 7
