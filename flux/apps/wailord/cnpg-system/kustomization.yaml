@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: cnpg-system
 resources:
   - cloudnative-pg/ks.yaml
+  - namespace.yaml

@@ -13,8 +13,6 @@ spec:
   dependsOn:
     - name: sealed-secrets-controller
       namespace: kube-system
-    - name: mqtt
-      namespace: home-automation
   interval: 1h
   path: ./flux/apps/wailord/home-automation/xcel-itron2mqtt/app
   prune: true

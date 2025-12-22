@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: longhorn-system
 resources:
   - longhorn/ks.yaml
+  - namespace.yaml

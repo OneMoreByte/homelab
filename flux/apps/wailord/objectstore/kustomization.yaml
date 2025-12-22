@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: objectstore
 resources:
   - seaweedfs/ks.yaml
+  - namespace.yaml

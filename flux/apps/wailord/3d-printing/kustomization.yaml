@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: 3d-printing
 resources:
   - spoolman/ks.yaml
+  - namespace.yaml
