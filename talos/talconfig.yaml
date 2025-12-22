@@ -1,0 +1,230 @@
+clusterName: wailord
+talosVersion: v1.12.0-rc.1
+kubernetesVersion: 1.35.0-rc.0
+endpoint: "https://kube.wailord.jsck.network:6443"
+allowSchedulingOnMasters: true
+clusterPodNets:
+  - 10.244.0.0/16
+clusterSvcNets:
+  - 10.96.0.0/12
+additionalApiServerCertSans:
+  - kube.wailord.jsck.network
+
+cniConfig:
+  name: none
+
+patches:
+  - |-
+    cluster:
+      proxy:
+        disabled: true
+
+    machine:
+      kubelet:    
+        # Add longhorn's default mount. I'm not sure why this needs to be re-mounted? 
+        # The docs said so though so ¯\_(ツ)_/¯
+        extraMounts:
+          - destination: /var/mnt/longhorn
+            type: bind
+            source: /var/mnt/longhorn
+            options:
+              - bind
+              - rshared
+              - rw
+    
+      # Give cilium a route to our dns server
+      network:
+        interfaces:
+          - interface: lo
+            addresses:
+              - 169.254.116.108/32
+    
+      # Requirements for longhorn v2
+      sysctls:
+        vm.nr_hugepages: "1024"
+      kernel:
+        modules:
+          - name: nvme_tcp
+          - name: uio_pci_generic
+          # We need that zfs
+          - name: zfs
+
+controlPlane:
+  schematic:
+    customization:
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/amd-ucode
+          - siderolabs/amdgpu
+          - siderolabs/iscsi-tools
+          - siderolabs/nvme-cli
+          - siderolabs/util-linux-tools
+          - siderolabs/zfs
+          - siderolabs/ctr
+worker:
+  schematic:
+    customization:
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/amd-ucode
+          - siderolabs/amdgpu
+          - siderolabs/iscsi-tools
+          - siderolabs/nvme-cli
+          - siderolabs/util-linux-tools
+          - siderolabs/zfs
+          - siderolabs/ctr
+
+nodes:
+  - hostname: fateful.jsck.network
+    ipAddress: 192.168.13.11
+    controlPlane: false
+    nodeLabels:
+      app: "fastclock"
+      weed: "yes"
+    installDiskSelector:
+      wwid: "eui.000000000000000100a0752449579213"
+    userVolumes:
+      - name: longhorn
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "eui.000000000000000100a0752448c2286c"
+        filesystem:
+          type: xfs
+      - name: weed-1
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "eui.e8238fa6bf530001001b448b4d6b75f7"
+        filesystem:
+          type: xfs
+      - name: weed-2
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "eui.e8238fa6bf530001001b448b4d1904e7"
+        filesystem:
+          type: xfs
+
+  - hostname: producers.jsck.network
+    ipAddress: 192.168.13.12
+    controlPlane: true
+    nodeLabels:
+      app: "bulk-datastore"
+    installDiskSelector:
+      wwid: "eui.e8238fa6bf530001001b448b49bfa58c"
+    userVolumes:
+      - name: longhorn
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "eui.002538b81150ece2"
+        filesystem:
+          type: xfs
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/amd-ucode
+            - siderolabs/amdgpu
+            - siderolabs/iscsi-tools
+            - siderolabs/nvme-cli
+            - siderolabs/util-linux-tools
+            - siderolabs/zfs
+            - siderolabs/ctr
+            - siderolabs/xe
+
+  - hostname: findings.jsck.network
+    ipAddress: 192.168.13.13
+    controlPlane: true
+    nodeLabels:
+      app: "fastclock"
+      weed: "yes"
+      weed-filer: "yes"
+    installDiskSelector:
+      wwid: "eui.000000000000000100a075244d2eb934"
+    userVolumes:
+      - name: longhorn
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "eui.000000000000000100a075244d2eed97"
+        filesystem:
+          type: xfs
+      - name: weed-1
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "eui.e8238fa6bf530001001b448b4d841c20"
+        filesystem:
+          type: xfs
+      - name: weed-2
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "eui.e8238fa6bf530001001b448b4d841741"
+        filesystem:
+          type: xfs
+
+  - hostname: twisted-pair-1.jsck.network
+    ipAddress: 192.168.13.14
+    controlPlane: true
+    nodeLabels:
+      app: "fastclock"
+      weed: "yes"
+    installDiskSelector:
+      wwid: "nvme.c0a9-323331304536423834424330-4354353030503353534438-00000001"
+    userVolumes:
+      - name: longhorn
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "naa.500a0751e69f5cd8"
+        filesystem:
+          type: xfs
+      - name: weed-1
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "naa.500a0751e8a09577"
+        filesystem:
+          type: xfs
+      - name: weed-2
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "naa.500a0751e8ab1847"
+        filesystem:
+          type: xfs
+
+  - hostname: twisted-pair-2.jsck.network
+    ipAddress: 192.168.13.15
+    controlPlane: false
+    nodeLabels:
+      app: "fastclock"
+      weed: "yes"
+      weed-master: "yes"
+    installDiskSelector:
+      wwid: "nvme.c0a9-323331304536423736333239-4354353030503353534438-00000001"
+    userVolumes:
+      - name: longhorn
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "naa.500a0751e69f5cd9"
+        filesystem:
+          type: xfs
+      - name: weed-1
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "naa.500a0751e8ab17fb"
+        filesystem:
+          type: xfs
+      - name: weed-2
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "naa.500a0751e8ab1b70"
+        filesystem:
+          type: xfs
