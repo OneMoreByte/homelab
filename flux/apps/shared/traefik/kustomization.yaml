@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: traefik
 resources:
   - traefik/ks.yaml
+  - namespace.yaml
