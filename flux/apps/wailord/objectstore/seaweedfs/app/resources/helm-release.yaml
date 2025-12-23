@@ -79,6 +79,16 @@ spec:
       nodeSelector: 'weed: "yes"'
     filer:
       enabled: true
+      initContainers: |
+        - name: set-volume-ownership
+          image: busybox:1.37
+          command: [ "sh", "-c", "chown -R 10774:10774 /data" ]
+          volumeMounts:
+            - name: data-filer
+              mountPath: /data
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
       podSecurityContext:
         enabled: true
         runAsUser: 10774
