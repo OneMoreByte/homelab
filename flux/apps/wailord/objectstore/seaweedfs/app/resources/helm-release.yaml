@@ -23,6 +23,17 @@ spec:
     global:
       replicationPlacement: '002'
     master:
+      initContainers:
+        - name: set-volume-ownership
+          image: busybox:1.37
+          command: [ "sh", "-c", "chown -R 10774:10774 /data" ]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+
       podSecurityContext:
         enabled: true
         runAsUser: 10774
@@ -36,6 +47,18 @@ spec:
         type: "emptyDir"
       nodeSelector: 'weed-master: "yes"'
     volume:
+      initContainers:
+        - name: set-volume-ownership
+          image: busybox:1.37
+          command: [ "sh", "-c", "chown -R 10774:10774 /mnt/data*" ]
+          volumeMounts:
+            - name: data1
+              mountPath: /mnt/data1
+            - name: data2
+              mountPath: /mnt/data2
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
       podSecurityContext:
         enabled: true
         runAsUser: 10774
