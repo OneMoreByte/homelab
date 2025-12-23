@@ -12,7 +12,7 @@ spec:
 
   dependsOn:
     - name: cilium
-      namespace: kube-system
+
   interval: 1h
   path: ./flux/apps/wailord/kube-system/cilium-bgp/app
   prune: true

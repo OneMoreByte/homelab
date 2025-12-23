@@ -11,7 +11,7 @@ spec:
 
   dependsOn:
     - name: traefik
-      namespace: traefik
+
   interval: 1h
   path: ./flux/apps/wailord/media-svcs/jellyfin/app
   prune: true

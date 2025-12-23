@@ -11,11 +11,9 @@ spec:
 
   dependsOn:
     - name: longhorn
-      namespace: longhorn-system
     - name: traefik
-      namespace: traefik
     - name: cloudnative-pg
-      namespace: cnpg-system
+
 
   interval: 1h
   path: ./flux/apps/wailord/3d-printing/spoolman/app

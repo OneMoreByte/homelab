@@ -11,9 +11,9 @@ spec:
 
   dependsOn:
     - name: longhorn
-      namespace: longhorn-system
+
     - name: cilium-bgp
-      namespace: kube-system
+
   interval: 1h
   path: ./flux/apps/wailord/game-svcs/factorio/app
   prune: true

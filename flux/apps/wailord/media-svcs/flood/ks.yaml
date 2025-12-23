@@ -11,9 +11,9 @@ spec:
 
   dependsOn:
     - name: longhorn
-      namespace: longhorn-system
+
     - name: traefik
-      namespace: traefik
+
   interval: 1h
   path: ./flux/apps/wailord/media-svcs/flood/app
   prune: true

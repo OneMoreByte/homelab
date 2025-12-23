@@ -11,7 +11,7 @@ spec:
 
   dependsOn:
     - name: seaweedfs
-      namespace: objectstore
+
   interval: 1h
   path: ./flux/apps/wailord/cnpg-system/cloudnative-pg/app
   prune: true

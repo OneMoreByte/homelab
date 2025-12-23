@@ -12,7 +12,7 @@ spec:
 
   dependsOn:
     - name: longhorn
-      namespace: longhorn-system
+
 
   interval: 1h
   path: ./flux/apps/wailord/home-automation/esphome/app
