@@ -30,10 +30,10 @@ spec:
         allowExternalNameServices: true
     deployment:
       annotations: {}
-      additionalVolumes:
-        - name: traefik-logs
-          persistentVolumeClaim:
-            claimName: traefik-logs
+      #additionalVolumes:
+      #  - name: traefik-logs
+      #    persistentVolumeClaim:
+      #      claimName: traefik-logs
     securityContext:
       securityContext:
         seccompProfile:
@@ -73,10 +73,10 @@ spec:
     logs:
       general:
         level: INFO
-      access:
-        enabled: true
-        format: json
-        filePath: /var/log/traefik/access.log
+      #access:
+      #  enabled: true
+      #  format: json
+      #  filePath: /var/log/traefik/access.log
       maxSize: 1000
       maxAge: 3
       maxBackups: 3
