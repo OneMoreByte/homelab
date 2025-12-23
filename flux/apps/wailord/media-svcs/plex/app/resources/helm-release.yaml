@@ -35,6 +35,8 @@ spec:
               repository: ghcr.io/onemorebyte/plex
               tag: 1.42.1-10054
               pullPolicy: IfNotPresent
+            securityContext:
+              privileged: truev
     defaultPodOptions:
       affinity:
         nodeAffinity:
@@ -126,16 +128,6 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /var/mnt/store/plex-files
-      
-      gpu:
-        enabled: true
-        type: hostPath
-        hostPath: /dev/dri/
-        advancedMounts:
-          main:
-            main:
-              - path: /dev/dri/
-     
 
       transcode:
         enabled: true
