@@ -6,4 +6,4 @@ resources:
   - nut/ks.yaml
   - technitium/ks.yaml
   - mqtt/ks.yaml
-  - namespace.yaml
+  - ns.yaml

@@ -20,4 +20,4 @@ resources:
   - unpackerr/ks.yaml
   - watchstate/ks.yaml
   - gonic/ks.yaml
-  - media-svcs-ns.yaml
+

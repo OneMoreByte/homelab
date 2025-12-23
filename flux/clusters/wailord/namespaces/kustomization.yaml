@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - 3d-printing.yaml
+  - auth.yaml
+  - cert-manager.yaml
+  - cnpg-system.yaml
+  - game-svcs.yaml
+  - home-automation.yaml
+  - longhorn-system.yaml
+  - media-svcs.yaml
+  - metrics.yaml
+  - objectstore.yaml
+  - svcs.yaml

@@ -4,3 +4,4 @@ resources:
   - apps.yaml
   - flux-instance.yaml
   - flux-operator.yaml
+  - namespaces.yaml

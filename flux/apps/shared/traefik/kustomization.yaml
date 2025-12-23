@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - traefik/ks.yaml
-  - traefik-ns.yaml
+  - ns.yaml

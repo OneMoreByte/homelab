@@ -5,4 +5,4 @@ resources: []
 #  - grafana/ks.yaml
 #  - prometheus/ks.yaml
 #  - unipoller/ks.yaml
-#  - namespace.yaml
+
