@@ -23,7 +23,7 @@ spec:
     global:
       replicationPlacement: '002'
     master:
-      initContainers:
+      initContainers: |
         - name: set-volume-ownership
           image: busybox:1.37
           command: [ "sh", "-c", "chown -R 10774:10774 /data" ]
@@ -47,7 +47,7 @@ spec:
         type: "emptyDir"
       nodeSelector: 'weed-master: "yes"'
     volume:
-      initContainers:
+      initContainers: |
         - name: set-volume-ownership
           image: busybox:1.37
           command: [ "sh", "-c", "chown -R 10774:10774 /mnt/data*" ]
