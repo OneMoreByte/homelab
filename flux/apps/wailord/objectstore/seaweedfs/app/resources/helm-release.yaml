@@ -23,6 +23,11 @@ spec:
     global:
       replicationPlacement: '002'
     master:
+      podSecurityContext:
+        enabled: true
+        runAsUser: 10774
+        runAsGroup: 10774
+        fsGroup: 10774
       data:
         type: hostPath
         storageClass: ''
@@ -34,6 +39,11 @@ spec:
         hostPathPrefix: /mnt/weed-1
       nodeSelector: 'weed-master: "yes"'
     volume:
+      podSecurityContext:
+        enabled: true
+        runAsUser: 10774
+        runAsGroup: 10774
+        fsGroup: 10774
       dataCenter: home
       rack: wailord
       replicas: 4
@@ -49,6 +59,11 @@ spec:
       nodeSelector: 'weed: "yes"'
     filer:
       enabled: true
+      podSecurityContext:
+        enabled: true
+        runAsUser: 10774
+        runAsGroup: 10774
+        fsGroup: 10774
       data:
         type: hostPath
         storageClass: ''
