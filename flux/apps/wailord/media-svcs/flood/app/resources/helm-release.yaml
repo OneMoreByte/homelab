@@ -137,7 +137,7 @@ spec:
         enabled: true
         data:
           .rtorrent.rc: |
-            '#############################################################################
+            #############################################################################
 
             # A minimal rTorrent configuration that provides the basic features
 
@@ -351,5 +351,3 @@ spec:
             session.use_lock.set = no
 
             ### END of rtorrent.rc ###
-
-            '
