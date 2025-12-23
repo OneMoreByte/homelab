@@ -11,5 +11,7 @@ resources:
   - resources/postgres-db-secret.yaml
   - resources/cluster-backup-creds.yaml
   - resources/certificate.yaml
+  - resources/valkey-helm-release.yaml
+  - resources/valkey-helm-repo.yaml
 
 
