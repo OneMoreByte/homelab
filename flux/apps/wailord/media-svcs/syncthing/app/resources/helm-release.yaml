@@ -86,7 +86,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        enabled: true
+        enabled: false
         hosts:
           - host: syncthings.wailord.jackhil.de
             paths:

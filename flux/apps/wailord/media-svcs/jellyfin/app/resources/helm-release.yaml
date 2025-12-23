@@ -71,7 +71,7 @@ spec:
         tls:
           - hosts:
               - jelly.jackhil.de
-            secretName: jackhil.de-cert
+            secretName: jelly.jackhil.de-cert
       ssl-redirect:
         enabled: true
         annotations:

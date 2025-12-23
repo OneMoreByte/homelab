@@ -67,7 +67,7 @@ spec:
         tls:
           - hosts:
               - sonarr.jackhil.de
-            secretName: jackhil.de-cert
+            secretName: sonarr.jackhil.de-cert
     persistence:
       config:
         enabled: true

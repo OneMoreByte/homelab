@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: calibre.jackhil.de-cert
+spec:
+  dnsNames:
+    - "calibre.jackhil.de"
+  secretName: calibre.jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-cloudflare-issuer
+    kind: ClusterIssuer

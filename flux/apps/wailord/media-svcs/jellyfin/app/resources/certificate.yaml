@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jelly.jackhil.de-cert
+spec:
+  dnsNames:
+    - "jelly.jackhil.de"
+  secretName: jelly.jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-cloudflare-issuer
+    kind: ClusterIssuer

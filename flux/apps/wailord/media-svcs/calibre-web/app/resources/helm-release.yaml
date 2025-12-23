@@ -67,7 +67,7 @@ spec:
         tls:
           - hosts:
               - calibre.jackhil.de
-            secretName: jackhil.de-cert
+            secretName: calibre.jackhil.de-cert
     persistence:
       config:
         enabled: true

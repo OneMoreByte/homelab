@@ -61,7 +61,7 @@ spec:
         tls:
           - hosts:
               - requests.jackhil.de
-            secretName: jackhil.de-cert
+            secretName: requests.jackhil.de-cert
     persistence:
       config:
         enabled: true

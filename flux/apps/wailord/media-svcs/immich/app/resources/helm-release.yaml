@@ -24,7 +24,6 @@ spec:
               tag: v2.0.0
             env:
               REDIS_HOSTNAME: "immich-valkey"
-              BLAH: "blah"
               UID: 11337
               PID: 11337
               DB_HOSTNAME: '{{ .Release.Name }}-pg-cluster-rw'
@@ -97,7 +96,7 @@ spec:
           tls:
             - hosts:
                 - photos.jackhil.de
-              secretName: jackhil.de-cert
+              secretName: photos.jackhil.de-cert
 
       persistence:
         data:

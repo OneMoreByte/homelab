@@ -101,7 +101,7 @@ spec:
         tls:
           - hosts:
               - plex.jackhil.de
-            secretName: jackhil.de-cert
+            secretName: plex.jackhil.de-cert
       ssl-redirect:
         enabled: true
         annotations:

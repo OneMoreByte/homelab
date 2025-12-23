@@ -52,7 +52,7 @@ spec:
         tls:
           - hosts:
               - home.jackhil.de
-            secretName: jackhil.de-cert
+            secretName: home.jackhil.de-cert
     persistence:
       config:
         enabled: true

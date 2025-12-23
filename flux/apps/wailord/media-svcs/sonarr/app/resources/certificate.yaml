@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: sonarr.jackhil.de-cert
+spec:
+  dnsNames:
+    - "sonarr.jackhil.de"
+  secretName: sonarr.jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-cloudflare-issuer
+    kind: ClusterIssuer

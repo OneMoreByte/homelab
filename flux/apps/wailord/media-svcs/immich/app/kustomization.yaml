@@ -11,3 +11,4 @@ resources:
   - resources/valkey-helm-release.yaml
   - resources/valkey-helm-repo.yaml
   - resources/stupid-helm-chart.yaml
+  - resources/certificate.yaml

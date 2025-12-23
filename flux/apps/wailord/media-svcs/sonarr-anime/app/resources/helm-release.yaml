@@ -67,7 +67,7 @@ spec:
         tls:
           - hosts:
               - sonarr-anime.jackhil.de
-            secretName: jackhil.de-cert
+            secretName: sonarr-anime.jackhil.de-cert
     persistence:
       config:
         enabled: true

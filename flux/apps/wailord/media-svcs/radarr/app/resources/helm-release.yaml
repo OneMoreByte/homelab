@@ -66,7 +66,7 @@ spec:
         tls:
           - hosts:
               - radarr.jackhil.de
-            secretName: jackhil.de-cert
+            secretName: radarr.jackhil.de-cert
     persistence:
       config:
         enabled: true

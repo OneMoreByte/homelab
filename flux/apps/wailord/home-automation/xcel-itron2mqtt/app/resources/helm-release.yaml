@@ -24,7 +24,7 @@ spec:
         containers:
           main:
             env:
-              MQTT_SERVER: mqtt-mosquitto
+              MQTT_SERVER: mqtt.jsck.network
               METER_IP: 192.168.60.102
               METER_PORT: 8081
             image:

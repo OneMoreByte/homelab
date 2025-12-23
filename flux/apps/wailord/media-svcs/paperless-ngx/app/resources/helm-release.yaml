@@ -69,7 +69,7 @@ spec:
             paths:
               - path: /
         tls:
-          - secretName: jackhil.de-cert
+          - secretName: paper.jackhil.de-cert
             hosts:
               - paper.jackhil.de
     persistence:
