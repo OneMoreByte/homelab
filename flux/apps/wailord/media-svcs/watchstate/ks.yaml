@@ -21,6 +21,6 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: objectstore
+  targetNamespace: media-svcs
   timeout: 5m
   wait: false
