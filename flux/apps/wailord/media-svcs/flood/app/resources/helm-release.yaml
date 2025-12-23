@@ -23,7 +23,7 @@ spec:
           main:
             image:
               repository: ghcr.io/jesec/rtorrent-flood
-              tag: latest@sha256:539b0f4291cfa7b448d5c46cc737d63a5b690390152d64a812d1b1c0c2873790
+              tag: master-dbg
               pullPolicy: IfNotPresent
             env:
               TZ: UTC
