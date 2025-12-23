@@ -1,0 +1,6 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - resources/cloudflare-api-token-secret.yaml
+  - resources/letsencrypt-cloudflare-issuer.yaml
