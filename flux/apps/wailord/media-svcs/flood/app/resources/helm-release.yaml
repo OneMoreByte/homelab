@@ -125,7 +125,7 @@ spec:
       rtorrent-flood-configmap:
         enabled: true
         type: configMap
-        name: rtorrent-config
+        id: rtorrent-config
         advancedMounts:
           main:
             main:
