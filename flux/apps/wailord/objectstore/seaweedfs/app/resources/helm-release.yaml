@@ -78,6 +78,8 @@ spec:
         enabled: true
         enableAuth: true
         existingConfigSecret: seaweedfs-s3-config
+        logs:
+          hostPathPrefix: /var/mnt/weed-2
         createBuckets:
           - name: smoked-mutex
             anonymousRead: false
