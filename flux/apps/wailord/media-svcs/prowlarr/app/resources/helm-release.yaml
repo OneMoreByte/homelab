@@ -29,7 +29,7 @@ spec:
               PUID: 11337
               PGID: 11337
             image:
-              repository: hotio/prowlarr
+              repository: ghcr.io/hotio/prowlarr
               tag: release-2.3.0.5236
               pullPolicy: IfNotPresent
     defaultPodOptions:

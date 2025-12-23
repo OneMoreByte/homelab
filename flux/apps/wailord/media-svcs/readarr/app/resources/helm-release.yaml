@@ -28,7 +28,7 @@ spec:
               PUID: 11337
               PGID: 11337
             image:
-              repository: hotio/readarr
+              repository: ghcr.io/hotio/readarr
               tag: testing-0.4.4.2686
               pullPolicy: IfNotPresent
     defaultPodOptions:

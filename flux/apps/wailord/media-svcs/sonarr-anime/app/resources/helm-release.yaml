@@ -29,7 +29,7 @@ spec:
               PUID: 11337
               PGID: 11337
             image:
-              repository: hotio/sonarr
+              repository: ghcr.io/hotio/sonarr
               tag: release-4.0.15.2941
               pullPolicy: IfNotPresent
     defaultPodOptions:
