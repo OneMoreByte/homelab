@@ -106,7 +106,3 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /var/mnt/store/plex-files
-      certs:
-        enabled: true
-        type: configMap
-        name: wailord-bundle
