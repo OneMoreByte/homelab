@@ -33,10 +33,7 @@ spec:
         storageClass: ''
         hostPathPrefix: /var/mnt/weed-1
       logs:
-        type: hostPath
-        size: ''
-        storageClass: ''
-        hostPathPrefix: /var/mnt/weed-1
+        type: "emptyDir"
       nodeSelector: 'weed-master: "yes"'
     volume:
       podSecurityContext:
@@ -70,10 +67,7 @@ spec:
         hostPathPrefix: /var/mnt/weed-1
       nodeSelector: 'weed-filer: "yes"'
       logs:
-        type: hostPath
-        size: ''
-        storageClass: ''
-        hostPathPrefix: /var/mnt/weed-1
+        type: "emptyDir"
       s3:
         enabled: true
         enableAuth: true
@@ -91,6 +85,5 @@ spec:
       enabled: true
       enableAuth: true
       existingConfigSecret: seaweedfs-s3-config
-
       logs:
         type: "emptyDir"
