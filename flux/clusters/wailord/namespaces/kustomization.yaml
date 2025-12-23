@@ -12,3 +12,4 @@ resources:
   - metrics.yaml
   - objectstore.yaml
   - svcs.yaml
+  - node-feature-discovery.yaml
