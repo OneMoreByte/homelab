@@ -34,7 +34,7 @@ spec:
               SPOOLMAN_DB_TYPE: postgres
               SPOOLMAN_DB_HOST: spoolman-pg-cluster-rw
               SPOOLMAN_DB_PORT: 5432
-              sPOOLMAN_DB_NAME: spoolman
+              SPOOLMAN_DB_NAME: spoolman
               SPOOLMAN_DB_USERNAME: spoolman
               SPOOLMAN_DB_PASSWORD:
                 valueFrom:
