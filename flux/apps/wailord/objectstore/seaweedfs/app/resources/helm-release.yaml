@@ -28,7 +28,7 @@ spec:
           image: busybox:1.37
           command: [ "sh", "-c", "chown -R 10774:10774 /data" ]
           volumeMounts:
-            - name: data-objectstore
+            - name: data-{{ .Release.Namespace }}
               mountPath: /data
           securityContext:
             runAsUser: 0
