@@ -12,7 +12,7 @@ resources:
   - plex/ks.yaml
   - prowlarr/ks.yaml
   - radarr/ks.yaml
-  - readarr/ks.yaml
+  - recyclarr/ks.yaml
   - sonarr/ks.yaml
   - sonarr-anime/ks.yaml
   - syncthing/ks.yaml
