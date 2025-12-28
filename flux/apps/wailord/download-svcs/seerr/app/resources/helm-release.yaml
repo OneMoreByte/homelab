@@ -27,12 +27,12 @@ spec:
               TZ: America/Chicago
               PORT: 5055
               DB_TYPE: postgres
-              DB_HOST: jellyseerr-pg-cluster-rw
-              DB_USER: jellyseerr
+              DB_HOST: seerr-pg-cluster-rw
+              DB_USER: seerr
               DB_PASS:
                 valueFrom:
                   secretKeyRef:
-                    name: jellyseerr-db-secret
+                    name: seerr-db-secret
                     key: password
             image:
               repository: docker.io/fallenbagel/jellyseerr
@@ -56,7 +56,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: overseerr-main
+                  name: seerr-main
                   port: 5055
         tls:
           - hosts:
