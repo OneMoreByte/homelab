@@ -1,0 +1,100 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: booklore
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: booklore
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/booklore/booklore
+              tag: v1.16.0
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "America/Chicago"
+
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bulk-datastore
+      hostNetwork: true
+      securityContext:
+        runAsUser: 11337
+        runAsGroup: 11337
+        fsGroup: 11337
+
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 4747
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        labels: {}
+        hosts:
+          - host: books.jackhil.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: 4747
+        tls:
+          - hosts:
+              - books.jackhil.de
+            secretName: books.jackhil.de-cert
+
+    persistence:
+      config:
+        enabled: false
+        type: emptyDir
+
+      data:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/fast-store/k8s-hostpath/booklore/data
+        advancedMounts:
+          main:
+            main:
+              - path: /data
+
+      music:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/store/music
+        advancedMounts:
+          main:
+            main:
+              - path: /music
+
+      cache:
+        enabled: true
+        type: emptyDir

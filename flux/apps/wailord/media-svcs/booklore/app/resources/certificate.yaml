@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: books.jackhil.de-cert
+spec:
+  dnsNames:
+    - "books.jackhil.de"
+  secretName: books.jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-cloudflare-issuer
+    kind: ClusterIssuer
