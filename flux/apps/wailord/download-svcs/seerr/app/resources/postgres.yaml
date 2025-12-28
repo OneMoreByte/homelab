@@ -1,25 +1,25 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: jellyseerr-pg-cluster
+  name: seerr-pg-cluster
 spec:
   instances: 1
   bootstrap:
     initdb:
-      database: jellyseerr
-      owner: jellyseerr
+      database: seerr
+      owner: seerr
       secret:
-        name: jellyseerr-db-secret
+        name: seerr-db-secret
   backup:
     barmanObjectStore:
-      destinationPath: s3://cnpg-backup/jellyseerr/
+      destinationPath: s3://cnpg-backup/seerr/
       endpointURL: http://seaweedfs-s3.objectstore.svc.cluster.local:8333
       s3Credentials:
         accessKeyId:
-          name: jellyseerr-backup-secret
+          name: seerr-backup-secret
           key: ACCESS_KEY_ID
         secretAccessKey:
-          name: jellyseerr-backup-secret
+          name: seerr-backup-secret
           key: ACCESS_SECRET_KEY
       wal:
         compression: bzip2

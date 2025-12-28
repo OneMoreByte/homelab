@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-    name: jellyseerr-backup-secret
+    name: seerr-backup-secret
 stringData:
     ACCESS_KEY_ID: ENC[AES256_GCM,data:rl4XcIa/bQ==,iv:tp98yXtW6cGoZgJlyypbJX8pqizwz48pgUH+q8I/hEs=,tag:0N89+vFDp4pbkdbfSuX7zA==,type:str]
     ACCESS_SECRET_KEY: ENC[AES256_GCM,data:i5wJ7FCqgXNldNXDD70zkTJqYnHFbYAU,iv:7XEmVTee/EfZByHWKwHs0I0VwCJbi7wnvFzq/OCPPMg=,tag:/kzK/TWc+zvzvFmzUv+Ohw==,type:str]
@@ -36,7 +36,7 @@ sops:
             YVdLUDdOTUQwVGRsd0FMZ1J4dmNnNEEKUJ4523GWmQDTU5ZlxAKwdQrvR0Yy5fy4
             r3P5MvZY0u3bylHkDRbWCFBZSW+lUnIyrYfgtDSK2wn6Bj6Zwcol4A==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-12-22T16:32:05Z"
-    mac: ENC[AES256_GCM,data:JhqpPWIakvQDlrt2YN3j/xqvnepMfKg2ERNtFP94oifUqdxRmMD/VQDufh08fk4bqyRovyyxvRevhYeCsVR7KE3qF3qFoqMPJoF5pUSxE1kVRntpommQlBnggYq6ZDXacF3UHNC3YwNCsY+wb0zmz0WcBXVYauqCOoO+tHmeQEY=,iv:MC5EGqgx9Hopl5nsWh9eA4K5X67aK6UgZu8EbCSigEg=,tag:p6zBUSAgDEL+9KlMgRvICg==,type:str]
+    lastmodified: "2025-12-28T22:11:39Z"
+    mac: ENC[AES256_GCM,data:rKXPkRDb2+moGedl/ahvXwz7rJGjWUepQ0Ex/RjA9wd3GtB9QEJyi6m7lXD4Eb0ewH/ooj4Xhit7noUH+taq70MaHbn43VM8YeXrbCPAlfGBVtsgFlfwKpw5GJ7eykzQUAVxcwSHpH9jpxJFBmoXFbZpnawETyCHE8KzMuqLCKA=,iv:Mg3DXp00GNO316s9S1QtyQYB5/vE4Sen06g8w6gSTCs=,tag:CDEvHdXgwprcizH0upUWqQ==,type:str]
     encrypted_regex: ^(data|stringData)$
     version: 3.11.0
