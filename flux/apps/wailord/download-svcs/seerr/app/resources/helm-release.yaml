@@ -66,7 +66,7 @@ spec:
       config:
         enabled: true
         accessMode: ReadWriteOnce
-        size: 16Gi
+        size: 4Gi
         advancedMounts:
           main:
             main:
