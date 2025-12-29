@@ -4,11 +4,17 @@ metadata:
   name: immich-pg-cluster
 spec:
   instances: 1
-  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.3-v0.2.1
+  imageName: ghcr.io/duvholt/cloudnative-vectorchord-pgvecto.rs:16-0.3.0-v0.3.0@sha256:0456bb83c28ce3f3815b7ae5e2dfc5e21c3483b13ed30af4d6c46e56808e0b06
   postgresql:
     shared_preload_libraries:
-      - vectors.so
+      - "vectors.so"
+      - "vchord.so"
     enableAlterSystem: true
+  managed:
+    roles:
+      - name: immich
+        superuser: true
+        login: true
   bootstrap:
     initdb:
       database: immich
@@ -19,11 +25,10 @@ spec:
       encoding: UTF8
       postInitApplicationSQL:
         - CREATE EXTENSION IF NOT EXISTS "vectors";
-        - CREATE EXTENSION IF NOT EXISTS "cube";
+        - CREATE EXTENSION IF NOT EXISTS "cube" CASCADE;
         - CREATE EXTENSION IF NOT EXISTS "earthdistance" CASCADE;
-        - ALTER DATABASE immich SET search_path TO "$user", public, vectors;
-        - GRANT ALL ON SCHEMA vectors TO immich;
-        - GRANT SELECT ON TABLE pg_vector_index_stat to immich;
+        - CREATE EXTENSION IF NOT EXISTS "vchord" CASCADE;
+
   backup:
     barmanObjectStore:
       destinationPath: s3://cnpg-backup/immich/
