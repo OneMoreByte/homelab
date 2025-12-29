@@ -1,3 +1,0 @@
-[default]
-aws_access_key_id={{route_53_key_id}}
-aws_secret_access_key={{route_53_secret_key}}

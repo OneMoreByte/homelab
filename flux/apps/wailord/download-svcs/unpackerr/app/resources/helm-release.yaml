@@ -50,6 +50,8 @@ spec:
                     values:
                       - bulk-datastore
       securityContext:
+        runAsUser: 11337
+        runAsGroup: 11337
         fsGroup: 11337
     service:
       main:
@@ -60,8 +62,20 @@ spec:
     persistence:
       config:
         enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 8Gi
+
+      configfile:
+        enabled: true
         type: secret
         name: unpackerr-config
+        advancedMounts:
+          main:
+            main:
+              - path: /config/unpackerr.conf
+                subPath: unpackerr.conf
+
       data:
         enabled: true
         type: hostPath
