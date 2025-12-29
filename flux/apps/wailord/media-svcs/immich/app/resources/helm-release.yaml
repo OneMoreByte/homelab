@@ -115,15 +115,18 @@ spec:
         main:
           containers:
             main:
+              image:
+                repository: ghcr.io/immich-app/immich-machine-learning
+                tag: v2.4.1-openvino
               securityContext:
                 privileged: true
               env:
                 TRANSFORMERS_CACHE: /cache
-                NVIDIA_DRIVER_CAPABILITIES: all
+
       persistence:
         cache:
           enabled: true
-          size: 16Gi
+          size: 32Gi
           type: persistentVolumeClaim
           accessMode: ReadWriteMany
 
