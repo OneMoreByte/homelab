@@ -67,12 +67,11 @@ spec:
           type: onnx
 
       model:
-        width: 300
-        height: 300
-        input_tensor: nhwc
+        width: 320
+        height: 320
+        input_tensor: nchw
         input_pixel_format: bgr
-        path: /openvino-model/ssdlite_mobilenet_v2.xml
-        labelmap_path: /openvino-model/coco_91cl_bkgr.txt
+        labelmap_path: /labelmap/coco-80.txt
 
       cameras:
         garage1:
