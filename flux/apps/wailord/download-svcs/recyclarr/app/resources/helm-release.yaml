@@ -53,5 +53,4 @@ spec:
           main:
             main:
               - path: /config/recyclarr.yml
-                readOnly: true
                 subPath: recyclarr.yml
