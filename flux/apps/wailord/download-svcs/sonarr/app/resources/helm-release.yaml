@@ -33,7 +33,21 @@ spec:
               tag: release-4.0.16.2944
               pullPolicy: IfNotPresent
     initContainers:
-      image: docker.io/python:3.14
+      image:
+        repository: ghcr.io/onemorebyte/arr-pg-configure
+        tag: 0.1.0
+      env:
+        POSTGRESHOST: "sonarr-pg-cluster-rw"
+        POSTGRESUSER:
+          valueFrom:
+            secretKeyRef:
+              name: sonarr-db-secret
+              key: username
+        POSTGRESPASSWORD:
+          valueFrom:
+            secretKeyRef:
+              name: sonarr-db-secret
+              key: password
 
     defaultPodOptions:
       affinity:
