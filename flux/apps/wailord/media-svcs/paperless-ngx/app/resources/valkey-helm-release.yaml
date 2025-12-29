@@ -21,7 +21,7 @@ spec:
   values:
     auth:
       enabled: true
-      userExistingSecret: "paperless-ngx-redis"
+      usersExistingSecret: "paperless-ngx-redis"
       aclUsers:
         default:
           permissions: "~* &* +@all"
