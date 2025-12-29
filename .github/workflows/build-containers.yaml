@@ -20,7 +20,6 @@ jobs:
       - name: Get container version and current talos version
         shell: bash
         run: |
-          apt install -y yq
           cat containers/${{matrix.container}}/.version >> "$GITHUB_ENV"
           TALOS_VERSION=$(yq -r '.talosVersion' talos/talconfig.yaml)
           echo "TALOS_VERSION=${TALOS_VERSION}" >> "$GITHUB_ENV" 
