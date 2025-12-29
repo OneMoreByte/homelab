@@ -22,7 +22,7 @@ jobs:
         run: |
           cat containers/${{matrix.container}}/.version >> "$GITHUB_ENV"
           TALOS_VERSION=$(yq -r '.talosVersion' talos/talconfig.yaml)
-          echo "TALOS_VERSION=${TALOS_VERSION}" >> "$GITHUB_ENV" 
+          printf "\nTALOS_VERSION=${TALOS_VERSION}" >> "$GITHUB_ENV" 
 
       - name: build container ${{ matrix.container }}
         id: build-container
