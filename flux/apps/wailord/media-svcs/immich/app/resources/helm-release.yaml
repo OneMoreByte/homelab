@@ -120,9 +120,9 @@ spec:
                 tag: v2.4.1-openvino
               securityContext:
                 privileged: true
-                runAsUser: 1
-                runAsGroup: 1
-                fsGroup: 1
+                runAsUser: 0
+                runAsGroup: 0
+                fsGroup: 0
               env:
                 TRANSFORMERS_CACHE: /cache
                 HF_XET_CACHE: /cache/huggingface-xet
