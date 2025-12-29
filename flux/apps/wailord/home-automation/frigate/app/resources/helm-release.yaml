@@ -28,6 +28,7 @@ spec:
     env: []
     envFromSecrets:
       - frigate-rstp-credentials
+      - frigate-plus-key
     coral:
       enabled: false
       hostPath: /dev/apex_0
@@ -62,9 +63,8 @@ spec:
         hwaccel_args: preset-vaapi
 
       detectors:
-        ov:
-          type: openvino
-          device: AUTO
+        onnx_0:
+          type: onnx
 
       model:
         width: 300
