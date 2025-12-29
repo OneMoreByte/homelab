@@ -32,6 +32,23 @@ spec:
               repository: ghcr.io/hotio/prowlarr
               tag: release-2.3.0.5236
               pullPolicy: IfNotPresent
+        initContainers:
+          configure-postgres:
+            image:
+              repository: ghcr.io/onemorebyte/arr-pg-configure
+              tag: 0.1.0
+            env:
+              POSTGRESHOST: "prowlarr-pg-cluster-rw"
+              POSTGRESUSER:
+                valueFrom:
+                  secretKeyRef:
+                    name: prowlarr-db-secret
+                    key: username
+              POSTGRESPASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: prowlarr-db-secret
+                    key: password
     defaultPodOptions:
       securityContext:
         fsGroup: 11337

@@ -31,6 +31,23 @@ spec:
               repository: ghcr.io/hotio/radarr
               tag: release-6.0.4.10291
               pullPolicy: IfNotPresent
+        initContainers:
+          configure-postgres:
+            image:
+              repository: ghcr.io/onemorebyte/arr-pg-configure
+              tag: 0.1.0
+            env:
+              POSTGRESHOST: "radarr-pg-cluster-rw"
+              POSTGRESUSER:
+                valueFrom:
+                  secretKeyRef:
+                    name: radarr-db-secret
+                    key: username
+              POSTGRESPASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: radarr-db-secret
+                    key: password
     defaultPodOptions:
       affinity:
         nodeAffinity:

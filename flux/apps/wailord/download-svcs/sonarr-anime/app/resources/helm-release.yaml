@@ -32,6 +32,23 @@ spec:
               repository: ghcr.io/hotio/sonarr
               tag: release-4.0.16.2944
               pullPolicy: IfNotPresent
+        initContainers:
+          configure-postgres:
+            image:
+              repository: ghcr.io/onemorebyte/arr-pg-configure
+              tag: 0.1.0
+            env:
+              POSTGRESHOST: "sonarr-anime-pg-cluster-rw"
+              POSTGRESUSER:
+                valueFrom:
+                  secretKeyRef:
+                    name: sonarr-anime-db-secret
+                    key: username
+              POSTGRESPASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: sonarr-anime-db-secret
+                    key: password
     defaultPodOptions:
       affinity:
         nodeAffinity:
