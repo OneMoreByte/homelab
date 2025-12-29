@@ -37,6 +37,7 @@ spec:
             image:
               repository: ghcr.io/onemorebyte/arr-pg-configure
               tag: 0.1.0
+            workingDir: "/config"
             env:
               POSTGRESHOST: "sonarr-pg-cluster-rw"
               POSTGRESUSER:
