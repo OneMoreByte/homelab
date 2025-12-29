@@ -4,10 +4,9 @@ metadata:
   name: immich-pg-cluster
 spec:
   instances: 1
-  imageName: ghcr.io/duvholt/cloudnative-vectorchord-pgvecto.rs:16-0.3.0-v0.3.0@sha256:0456bb83c28ce3f3815b7ae5e2dfc5e21c3483b13ed30af4d6c46e56808e0b06
+  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16.11
   postgresql:
     shared_preload_libraries:
-      - "vectors.so"
       - "vchord.so"
     enableAlterSystem: true
   managed:
@@ -24,7 +23,6 @@ spec:
       dataChecksums: true
       encoding: UTF8
       postInitApplicationSQL:
-        - CREATE EXTENSION IF NOT EXISTS "vectors";
         - CREATE EXTENSION IF NOT EXISTS "cube" CASCADE;
         - CREATE EXTENSION IF NOT EXISTS "earthdistance" CASCADE;
         - CREATE EXTENSION IF NOT EXISTS "vchord" CASCADE;
