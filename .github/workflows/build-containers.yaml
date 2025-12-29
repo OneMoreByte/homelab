@@ -3,7 +3,7 @@ name: Build containers
 on:
   push:
     paths:
-      - "containers/"
+      - "containers/*/.version"
   workflow_dispatch: {}
 
 jobs:
