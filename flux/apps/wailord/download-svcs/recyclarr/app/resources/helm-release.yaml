@@ -25,6 +25,8 @@ spec:
         containers:
           main:
             env:
+              UID: 1000
+              GID: 1000
               TZ: America/Chicago
             image:
               repository: ghcr.io/recyclarr/recyclarr
@@ -37,7 +39,11 @@ spec:
                 enabled: false
               startup:
                 enabled: false
-
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
     persistence:
       config:
         enabled: true
