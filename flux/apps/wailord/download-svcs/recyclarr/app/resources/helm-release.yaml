@@ -44,3 +44,14 @@ spec:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 8Gi
+
+      configfile:
+        enabled: true
+        type: secret
+        name: recyclarr-config
+        advancedMounts:
+          main:
+            main:
+              - path: /config/recyclarr.yml
+                readOnly: true
+                subPath: recyclarr.yml
