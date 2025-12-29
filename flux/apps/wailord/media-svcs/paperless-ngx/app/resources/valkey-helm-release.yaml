@@ -23,6 +23,6 @@ spec:
       enabled: true
       userExistingSecret: "paperless-ngx-redis"
       aclUsers:
-        paperless:
+        default:
           permissions: "~* &* +@all"
           passwordKey: "redis-password"

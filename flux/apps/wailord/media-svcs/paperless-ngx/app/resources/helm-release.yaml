@@ -30,7 +30,7 @@ spec:
         secretKeyRef:
           name: paperless-ngx-redis
           key: redis-password
-      PAPERLESS_REDIS: redis://paperless:$(A_REDIS_PASSWORD)@paperless-ngx-valkey
+      PAPERLESS_REDIS: redis://default:$(A_REDIS_PASSWORD)@paperless-ngx-valkey
       PAPERLESS_ENABLE_ALLAUTH: true
       PAPERLESS_AUTO_LOGIN: true
       PAPERLESS_AUTO_CREATE: true
