@@ -27,7 +27,7 @@ jobs:
           image: ghcr.io/onemorebyte/${{ matrix.container }}
           tags: "latest ${{ env.VERSION }}"
           context: "containers/${{matrix.container}}"
-          containerfiles: "Containerfile"
+          containerfiles: "containers/${{matrix.container}}/Containerfile"
       - name: push to image repo
         uses: redhat-actions/push-to-registry@v2
         with:
