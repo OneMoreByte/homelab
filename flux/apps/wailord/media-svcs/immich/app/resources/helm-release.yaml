@@ -120,8 +120,13 @@ spec:
                 tag: v2.4.1-openvino
               securityContext:
                 privileged: true
+                runAsUser: 1
+                runAsGroup: 1
+                fsGroup: 1
               env:
                 TRANSFORMERS_CACHE: /cache
+                HF_XET_CACHE: /cache/huggingface-xet
+                MPLCONFIGDIR: /cache/matplotlib-config
 
       persistence:
         cache:
