@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "containers/*/.version"
+      - "talos"
   workflow_dispatch: {}
 
 jobs:
@@ -16,10 +17,14 @@ jobs:
         container: ["arr-pg-configure", "talos-shell"]
     steps:
       - uses: actions/checkout@v4
-      - name: Get version
+      - name: Get container version and current talos version
         shell: bash
         run: |
+          apt install -y yq
           cat containers/${{matrix.container}}/.version >> "$GITHUB_ENV"
+          TALOS_VERSION=$(yq -r '.talosVersion' talos/talconfig.yaml)
+          echo "TALOS_VERSION=${TALOS_VERSION}" >> "$GITHUB_ENV" 
+
       - name: build container ${{ matrix.container }}
         id: build-container
         uses: redhat-actions/buildah-build@v2

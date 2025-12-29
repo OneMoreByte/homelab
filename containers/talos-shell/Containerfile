@@ -2,12 +2,15 @@ FROM alpine:3.23.2
 
 
 # Preinstall tools 
-RUN apk add rsync neovim curl wget git shadow uv fish kubectl 
+RUN apk add rsync neovim curl wget git shadow uv fish kubectl bash crane cosign libuuid libblkid
 
 # Give the system users a real username to see when checking out filesystems
 RUN adduser -u 1000 -g 1000 --disabled-password default-user && \
     adduser -u 11337 -g 11337 --disabled-password media-svcs && \
     adduser -u 10774 -g 10774 --disabled-password seaweedfs-user
+
+# Add ZFS extension into the image so we can run zfs commands without the host namespace
+RUN
 
 # Get the tide shell
 RUN fish -c 'set -l _tide_tmp_dir (command mktemp -d) && \
