@@ -1,0 +1,5 @@
+FROM ghcr.io/astral-sh/uv:trixie-slim
+
+COPY update-config.py /bin/update-config
+
+CMD update-config

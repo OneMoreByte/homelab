@@ -1,0 +1,37 @@
+---
+name: Build containers
+on:
+  push:
+    paths:
+      - "containers/"
+  workflow_dispatch: {}
+
+jobs:
+  build-container:
+    name: Build containers
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        container: ["arr-pg-configure", "talos-shell"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get version
+        shell: bash
+        run: |
+          cat containers/${{matrix.container}}/.version >> "$GITHUB_ENV"
+      - name: build container ${{ matrix.container }}
+        id: build-container
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: ghcr.io/onemorebyte/${{ matrix.container }}
+          tags: "latest ${{ env.VERSION }}"
+          context: "containers/${{matrix.container}}"
+      - name: push to image repo
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-container.outputs.image }}
+          tags: ${{ steps.build-container.outputs.tags }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}

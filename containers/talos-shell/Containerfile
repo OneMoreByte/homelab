@@ -1,0 +1,24 @@
+FROM alpine:3.23.2
+
+
+# Preinstall tools 
+RUN apk add rsync neovim curl wget git shadow uv fish kubectl 
+
+# Give the system users a real username to see when checking out filesystems
+RUN adduser -u 1000 -g 1000 --disabled-password default-user && \
+    adduser -u 11337 -g 11337 --disabled-password media-svcs && \
+    adduser -u 10774 -g 10774 --disabled-password seaweedfs-user
+
+# Get the tide shell
+RUN fish -c 'set -l _tide_tmp_dir (command mktemp -d) && \
+    curl https://codeload.github.com/ilancosman/tide/tar.gz/v6 | tar -xzC $_tide_tmp_dir && \
+    command cp -R $_tide_tmp_dir/*/{completions,conf.d,functions} $__fish_config_dir && \
+    fish_path=(status fish-path) exec $fish_path -C "emit _tide_init_install" && \
+    rm -rf $_tide_tmp_dir'
+
+# Change the default shell so we drop into fish
+RUN chsh -s /usr/bin/fish root
+ENTRYPOINT /usr/bin/fish
+
+# Setup tide
+# RUN fish -c 'su - root && tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time='24-hour format' --lean_prompt_height='Two lines' --prompt_connection=Dotted --prompt_spacing=Compact --icons='Few icons' --transient=Yes'
