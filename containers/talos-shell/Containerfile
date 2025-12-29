@@ -1,5 +1,6 @@
 FROM alpine:3.23.2
 
+ARG TALOS_VERSION
 
 # Preinstall tools 
 RUN apk add rsync neovim curl wget git shadow uv fish kubectl bash crane cosign libuuid libblkid
@@ -9,8 +10,11 @@ RUN adduser -u 1000 -g 1000 --disabled-password default-user && \
     adduser -u 11337 -g 11337 --disabled-password media-svcs && \
     adduser -u 10774 -g 10774 --disabled-password seaweedfs-user
 
+# Copy in some of our scripts
+COPY install-zfs.sh entrypoint.sh /usr/local/bin/
+
 # Add ZFS extension into the image so we can run zfs commands without the host namespace
-RUN
+RUN /usr/local/bin/install-zfs.sh
 
 # Get the tide shell
 RUN fish -c 'set -l _tide_tmp_dir (command mktemp -d) && \
@@ -21,7 +25,4 @@ RUN fish -c 'set -l _tide_tmp_dir (command mktemp -d) && \
 
 # Change the default shell so we drop into fish
 RUN chsh -s /usr/bin/fish root
-ENTRYPOINT /usr/bin/fish
-
-# Setup tide
-# RUN fish -c 'su - root && tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time='24-hour format' --lean_prompt_height='Two lines' --prompt_connection=Dotted --prompt_spacing=Compact --icons='Few icons' --transient=Yes'
+CMD /usr/local/bin/entrypoint.sh
