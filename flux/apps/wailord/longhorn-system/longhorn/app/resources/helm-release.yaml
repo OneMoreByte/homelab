@@ -30,7 +30,11 @@ spec:
       defaultFsType: ext4
       defaultClassReplicaCount: 3
       defaultDataLocality: best-effort
+      storageOverProvisioningPercentage: "300"
     preUpgradeChecker:
       jobEnabled: false
     defaultSettings:
       defaultDataPath: "/var/mnt/longhorn"
+    defaultBackupStore:
+      backupTarget: "AWS"
+      backupTargetCredentialSecret: "s3-backup-secret"
