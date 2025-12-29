@@ -72,7 +72,7 @@ spec:
 
     immich:
       metrics:
-        enabled: true
+        enabled: false
       persistence:
         library:
           existingClaim: "not-used"
