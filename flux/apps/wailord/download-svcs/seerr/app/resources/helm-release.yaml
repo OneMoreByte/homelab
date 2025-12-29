@@ -35,8 +35,8 @@ spec:
                     name: seerr-db-secret
                     key: password
             image:
-              repository: docker.io/fallenbagel/jellyseerr
-              tag: 2.7.3
+              repository: ghcr.io/seerr-team/seerr
+              tag: develop
               pullPolicy: IfNotPresent
     service:
       main:
