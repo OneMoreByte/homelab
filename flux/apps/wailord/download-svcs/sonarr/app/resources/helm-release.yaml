@@ -32,6 +32,9 @@ spec:
               repository: ghcr.io/hotio/sonarr
               tag: release-4.0.16.2944
               pullPolicy: IfNotPresent
+    initContainers:
+      image: docker.io/python:3.14
+
     defaultPodOptions:
       affinity:
         nodeAffinity:
