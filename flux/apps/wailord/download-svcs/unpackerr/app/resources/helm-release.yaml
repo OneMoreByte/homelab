@@ -30,7 +30,7 @@ spec:
               PGID: 11337
             image:
               repository: ghcr.io/hotio/unpackerr
-              tag: release-0.14.5
+              tag: release-e4d26e0
               pullPolicy: IfNotPresent
             probes:
               liveness:
