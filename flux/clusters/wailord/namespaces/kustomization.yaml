@@ -14,3 +14,4 @@ resources:
   - svcs.yaml
   - node-feature-discovery.yaml
   - download-svcs.yaml
+  - mariadb-system.yaml
