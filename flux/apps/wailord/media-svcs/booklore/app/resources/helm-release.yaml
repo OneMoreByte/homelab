@@ -30,6 +30,8 @@ spec:
             env:
               TZ: "America/Chicago"
               BOOKLORE_PORT: &svc_port 6060
+              APP_USER_ID: 11337
+              APP_GROUP_ID: 11337
               DATABASE_URL: "jdbc:mariadb://booklore-db:3306/booklore"
               DATABASE_USER: "booklore"
               DATABASE_PASSWORD:
