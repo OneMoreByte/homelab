@@ -1,0 +1,41 @@
+kind: Secret
+apiVersion: v1
+metadata:
+    name: cloudflare-api-token
+stringData:
+    apiToken: ENC[AES256_GCM,data:gml2I4+EzmrcDwNSY/sgKJlAGTlqlHtowU6qHq9CdM4uf0i6yRhkKQ==,iv:1jpGXERXyReMM9o9dGfmzs2rUSI9YPqUPLQAW8mwk+o=,tag:RfZaZuy0zNF7tLFrbFvGfA==,type:str]
+sops:
+    age:
+        - recipient: age1yubikey1qdmjd6g9zxszvw332nlw8898pl9q8tnpjv8ljjvxpau650567j5a6nlpjz8
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IEcvTERKZyBBL1NUeE0y
+            MjZLZzNyMklXVENBaTZmRmNWVTNHMlRkREh0UmY1SDBMTmo5dwpoZ2ZpQXkwbnRl
+            czhXZklkT3A4NjRmNzRyL2IyM00vNVdkK0k0STJYTjZNCi0tLSByZHR3RnZMNFE5
+            akV6MjFybDh0REhEMnQrZURtRENaWTdhbDJCZU9jTkNVCn1BHMnXPP5mMVmgv1Y+
+            whhzVALW4PHyoEfAkjzNu/BxVMx2wrbzbr6bLU7yRV1vjlrpZG6Rh1v1CivWdK4L
+            kOs=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1yubikey1qwu0zwltgvjgv7tr0qcpjw6grreja8lqwpsxdprgwyap29mrkvx6j6795r0
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IE1TL0VLZyBBM2ZTRnJz
+            ZmpUaHRXZCtkb3F1Rkw4d29kL2V2amdWajRZMi9Oamx3eXFuOQpCQWRNaWljOFYr
+            TzBUZ05iaUdJTVE2d3o4WGxjRG9zNSs2Rk81V0dRNjE4Ci0tLSBkcUsxaUkwRmxx
+            WFMxLzl0emNpdFUzK1JLR05BbnpDdTFSQVF1MFlNZE5JCjzG8rrCV+bNCZVfGpXJ
+            UqfF6wz6fV/gIjgbfxNcty3qaGTOJuMg7hOmsVZSYCLdhQHko36xFeAY6HFZ+kqo
+            U+M=
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1tufq3ztwqlaawpe4sd8pzh7t70fvgq8wwz7q0mka2rvrgvtngsgqhxay7r
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCMy94S0VoTkc4TndMTmRr
+            cmJRTW0wWVpwTStMdUFMRTF2OGY2WG10WmpVCjRZdmQ2Y0ZKZDduc1c3U1NPRFRp
+            T0RYaVNXaVdMNlZXT3BidG1EMkIyQ2cKLS0tIDVHeHJHNHJEbmczdDFPeVhEMlY3
+            UGRUUGhhQjhvVk81NXV2YVVxVU9IWlkKCSPToIB+ggpyUN5WC6yh+YSGyAvfxJqh
+            2aSbkWpANCq1NMK5jhoD0E+YWSh69m9iQvjnAHRBmRO+WFJXAmv7zw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-01-02T21:24:38Z"
+    mac: ENC[AES256_GCM,data:jS6tdiireRVE6XRBBlTRN741aeOtLO+ZeAKXttI/PfoBSiqTSgIWv/kGGUIU2dhKDXpZz9J5uBT4SycEpgjPOKz1YghBexO+pzNTDug40GzqsYccxQEk6bSGi3vc+NMIQzY/+jBOO9LCjg1J8h/UwJWxCnhxmNq9UMf3n0Y2etY=,iv:X1m3UEMHYh27WE3IMG+dmmGalyfbdVwA3/kZ9/XtOAU=,tag:Nc4wauasa63Oxi+LlqR7og==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0

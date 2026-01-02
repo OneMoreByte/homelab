@@ -1,0 +1,38 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: externaldns-local
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: external-dns
+      version:  1.20.0
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn-repo
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    provider:
+      name: rfc2136
+
+    env:
+      - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: tsig-key
+            key: key
+
+    extraArgs:
+      - --rfc2136-host=192.168.13.250
+      - --rfc2136-port=53
+      - --rfc2136-zone=jsck.network
+      - --rfc2136-tsig-secret-alg=hmac-sha256
+      - --rfc2136-tsig-keyname=external-dns
+      - --rfc2136-tsig-axfr

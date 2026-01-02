@@ -1,0 +1,33 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: externaldns-cloudflare
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: external-dns
+      version:  1.20.0
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn-repo
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    provider:
+      name: cloudflare
+
+    domainFilter:
+      - "jackhil.de"
+
+    env:
+      - name: CF_API_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: cloudflare-api-token
+            key: apiToken
