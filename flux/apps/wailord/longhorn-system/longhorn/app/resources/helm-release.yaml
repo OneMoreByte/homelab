@@ -36,5 +36,5 @@ spec:
     defaultSettings:
       defaultDataPath: "/var/mnt/longhorn"
     defaultBackupStore:
-      backupTarget: "AWS"
+      backupTarget: "s3://longhorn-backup@home/"
       backupTargetCredentialSecret: "s3-backup-secret"
