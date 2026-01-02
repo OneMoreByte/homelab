@@ -22,6 +22,9 @@ spec:
     provider:
       name: rfc2136
 
+    domainFilter:
+      - "jsck.network"
+
     env:
       - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
         valueFrom:
