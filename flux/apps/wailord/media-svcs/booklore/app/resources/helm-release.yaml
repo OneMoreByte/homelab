@@ -24,8 +24,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/booklore/booklore
-              tag: v1.16.0
+              repository: ghcr.io/booklore-app/booklore
+              tag: v1.16.2
               pullPolicy: IfNotPresent
             env:
               TZ: "America/Chicago"
