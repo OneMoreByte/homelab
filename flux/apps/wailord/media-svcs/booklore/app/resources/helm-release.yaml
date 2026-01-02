@@ -33,7 +33,7 @@ spec:
               APP_USER_ID: 11337
               APP_GROUP_ID: 11337
               DATABASE_URL: "jdbc:mariadb://booklore-db:3306/booklore"
-              DATABASE_USER: "booklore"
+              DATABASE_USERNAME: "booklore"
               DATABASE_PASSWORD:
                 secretKeyRef:
                   name: booklore-user-password
