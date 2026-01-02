@@ -16,3 +16,4 @@ resources:
   - download-svcs.yaml
   - mariadb-system.yaml
   - openebs-system.yaml
+  - backups.yaml
