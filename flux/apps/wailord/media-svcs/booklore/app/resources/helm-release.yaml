@@ -65,6 +65,8 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+
         labels: {}
         hosts:
           - host: books.jackhil.de
