@@ -28,3 +28,11 @@ spec:
       replicated:
         mayastor:
           enabled: false
+
+    # Why is all of this already packed in?
+    loki:
+      enabled: false
+    minio:
+      enabled: false
+    alloy:
+      enabled: false
