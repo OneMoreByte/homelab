@@ -32,7 +32,9 @@ spec:
     # Why is all of this already packed in?
     loki:
       enabled: false
-    minio:
-      enabled: false
+      localpvScConfig:
+        enabled: false
+      minio:
+        enabled: false
     alloy:
       enabled: false
