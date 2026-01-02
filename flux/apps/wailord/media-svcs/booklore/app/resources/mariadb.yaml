@@ -1,7 +1,7 @@
 apiVersion: k8s.mariadb.com/v1alpha1
 kind: MariaDB
 metadata:
-  name: &name booklore-db
+  name: booklore-db
 spec:
   timeZone: "UTC"
   replicas: 1
@@ -31,7 +31,7 @@ spec:
 apiVersion: k8s.mariadb.com/v1alpha1
 kind: PhysicalBackup
 metadata:
-  name: *name
+  name: &name booklore-db
 spec:
   mariaDbRef:
     name: *name
