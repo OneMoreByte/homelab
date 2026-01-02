@@ -15,5 +15,5 @@ resources:
   - node-feature-discovery.yaml
   - download-svcs.yaml
   - mariadb-system.yaml
-  - openebs-system.yaml
+  - zfs-system.yaml
   - backups.yaml

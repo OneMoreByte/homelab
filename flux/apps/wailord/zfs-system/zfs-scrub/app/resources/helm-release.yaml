@@ -1,0 +1,58 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: zfs-scrub
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: zfs-scrub
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      zfs-scrub-store:
+        type: cronjob
+        cronjob:
+          schedule: "0 0 1,15 * *"
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+          concurrencyPolicy: Forbid
+          timeZone: UTC
+          backoffLimit: 0
+        containers:
+          app:
+            image:
+              repository: ghcr.io/onemorebyte/talos-shell
+              tag: 0.3.0
+            command: ["zpool", "scrub", "-w", "store"]
+            securityContext:
+              privileged: true
+      zfs-scrub-speed-store:
+        type: cronjob
+        cronjob:
+          schedule: "0 0 1,15 * *"
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+          concurrencyPolicy: Forbid
+          timeZone: UTC
+          backoffLimit: 0
+        containers:
+          app:
+            image:
+              repository: ghcr.io/onemorebyte/talos-shell
+              tag: 0.3.0
+            command: ["zpool", "scrub", "-w", "fast-store"]
+            securityContext:
+              privileged: true
+    persistence:
+      dev:
+        type: hostPath
+        hostPath: /dev/zfs
+        globalMounts:
+          - path: /dev/zfs
