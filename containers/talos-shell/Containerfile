@@ -3,7 +3,9 @@ FROM alpine:3.23.2
 ARG TALOS_VERSION
 
 # Preinstall tools 
-RUN apk add rsync neovim curl wget git shadow uv fish kubectl bash crane cosign libuuid libblkid losetup
+RUN apk add rsync neovim curl wget git shadow uv fish kubectl bash crane cosign libuuid libblkid losetup cargo libudev-zero-dev pkgconfig
+
+RUN cargo install --locked --root /usr/local/bin qmassa
 
 # Give the system users a real username to see when checking out filesystems
 RUN adduser -u 1000 -g 1000 --disabled-password default-user && \
