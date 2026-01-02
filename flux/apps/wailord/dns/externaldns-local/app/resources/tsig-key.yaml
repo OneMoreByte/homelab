@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
     name: tsig-key
 stringData:
-    key: ENC[AES256_GCM,data:ly6P59Gs60/Q88jqUjQuguv1E4+f4SrDf2Let8IodA==,iv:TL2myAPZ+pUCl8K5FzUccpNZSiRFxDDJiQw2Ah5JE44=,tag:8whGnVv2QbP/oxK2Vth7VQ==,type:str]
+    key: ENC[AES256_GCM,data:bWdlUo/89SYrpK0ysll/DP9f9kVQlCUbPuU7kZnpjZNDZb0HMq1j03DqFk8=,iv:WmPpTenOyS+CaxDkha+2TGojkys8Zijpxe3fXj3efUA=,tag:4t3uiRLxjaW/NqL0dQp+RQ==,type:str]
 sops:
     age:
         - recipient: age1yubikey1qdmjd6g9zxszvw332nlw8898pl9q8tnpjv8ljjvxpau650567j5a6nlpjz8
@@ -35,7 +35,7 @@ sops:
             dVlRYkRQc2paNnZ3QUcxL0VoTXBKRmcKX4HlUDonXwpR729RkUcU9v1oT1gRKBeO
             9ZNWhQMbHVWzauyngClUvg0ThiMjh7p8GSvanb2GtBFADQhtHqaPJg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-01-02T21:24:57Z"
-    mac: ENC[AES256_GCM,data:BrBY8lwOxReHCOXOdQNaSIsf8Z9grDQOwuCd3NgrTDzAjFAOubT2SNeXJzziJ6VXSvdDOHj3xF96BikqkEQmHllfaXXF5VaLmtuGziqxMjVJk0L29rgZvZdT3rKw5lvPEmIzjNLFpE73gtzp76hn0PE6fcHSri+wLlPxGGsecSE=,iv:+m9X3t4TIJOukQc2/0c1WW30X5/ueJWuytSke9ed3+w=,tag:ccwbT6O7kQzr5oje5pEgeg==,type:str]
+    lastmodified: "2026-01-02T21:40:03Z"
+    mac: ENC[AES256_GCM,data:uuNNBKMi6Sq3mnEwMPYze5EctX02ifeTeUOsz51GaZPwjeye4+VL4H1XgE0bHIA2Xv8gw+F+OX6sT67TzXyknOGJ1GkxQljY55OUmO95jUaFyVgl2ufrI2UmRql+oCznQqt4AGgRnKN30jAVs/UPkwbQ18LYSm0cF9FDp9luVpQ=,iv:ww7WUzP5/3bs5GwohMS/H/A4nBi2rxnuMzGTxgqsEo0=,tag:OZM3+RsoH6nzyHHWTBZ3AA==,type:str]
     encrypted_regex: ^(data|stringData)$
     version: 3.11.0
