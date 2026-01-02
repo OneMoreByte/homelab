@@ -29,6 +29,13 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: "America/Chicago"
+              BOOKLORE_PORT: &svc_port 6060
+              DATABASE_URL: "jdbc:mariadb://booklore-db:3306/booklore"
+              DATABASE_USER: "booklore"
+              DATABASE_PASSWORD:
+                secretKeyRef:
+                  name: booklore-user-password
+                  key: password
 
     defaultPodOptions:
       affinity:
@@ -51,7 +58,7 @@ spec:
         controller: main
         ports:
           http:
-            port: 4747
+            port: *svc_port
     ingress:
       main:
         enabled: true
@@ -66,7 +73,7 @@ spec:
                 pathType: Prefix
                 service:
                   identifier: main
-                  port: 4747
+                  port: *svc_port
         tls:
           - hosts:
               - books.jackhil.de
@@ -80,21 +87,21 @@ spec:
       data:
         enabled: true
         type: hostPath
-        hostPath: /var/mnt/fast-store/k8s-hostpath/booklore/data
+        hostPath: /var/mnt/fast-store/k8s-hostpath/booklore
         advancedMounts:
           main:
             main:
-              - path: /data
+              - path: /app/data
 
-      music:
+      books:
         enabled: true
         type: hostPath
-        hostPath: /var/mnt/store/music
+        hostPath: /var/mnt/store/store/text-media
         advancedMounts:
           main:
             main:
-              - path: /music
+              - path: /books
 
-      cache:
+      bookdrop:
         enabled: true
         type: emptyDir

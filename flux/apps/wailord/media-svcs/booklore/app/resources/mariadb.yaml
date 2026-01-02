@@ -1,0 +1,47 @@
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: MariaDB
+metadata:
+  name: &name booklore-db
+spec:
+  timeZone: "UTC"
+  replicas: 1
+  port: 3306
+  storage:
+    size: 32Gi
+  myCnf: |
+    [mariadb]
+    bind-address=*
+    default_storage_engine=InnoDB
+    binlog_format=row
+    innodb_autoinc_lock_mode=2
+    innodb_buffer_pool_size=800M
+    max_allowed_packet=256M
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      memory: 1Gi
+  username: booklore
+  passwordSecretKeyRef:
+    name: booklore-user-password
+    key: password
+  database: booklore
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: PhysicalBackup
+metadata:
+  name: *name
+spec:
+  mariaDbRef:
+    name: *name
+  storage:
+    s3:
+      bucket: mariadb-backup
+      endpoint: seaweedfs-s3.objectstore.svc.cluster.local:8333
+      accessKeyIdSecretKeyRef:
+        name: &backup-secret booklore-db-backup
+        key: access-key-id
+      secretAccessKeySecretKeyRef:
+        name: *backup-secret
+        key: secret-access-key
