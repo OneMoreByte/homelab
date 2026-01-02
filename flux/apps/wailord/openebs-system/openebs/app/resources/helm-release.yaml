@@ -19,6 +19,9 @@ spec:
     remediation:
       retries: 3
   values:
+    zfs-localpv:
+      zfsNode:
+        encrKeysDir: /var/openebs/keys
     engines:
       local:
         zfs:
