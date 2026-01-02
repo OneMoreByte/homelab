@@ -1,0 +1,21 @@
+FROM alpine:3.23.2
+
+ARG TALOS_VERSION
+
+# Preinstall tools
+RUN apk add rsync curl wget git shadow bash crane cosign libuuid libblkid openssh
+
+# Give the system users a real username to see when checking out filesystems
+RUN adduser -u 1000 -g 1000 --disabled-password default-user && \
+    adduser -u 11337 -g 11337 --disabled-password media-svcs && \
+    adduser -u 10774 -g 10774 --disabled-password seaweedfs-user
+
+# Copy in some of our scripts
+COPY install-zfs.sh /usr/local/bin/
+
+COPY sshd_config /etc/ssh/sshd_config.d/extra_settings.conf
+
+# Add ZFS extension into the image so we can run zfs commands without the host namespace
+RUN /usr/local/bin/install-zfs.sh
+
+CMD sshd -D

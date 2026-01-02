@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        container: ["arr-pg-configure", "talos-shell"]
+        container: ["arr-pg-configure", "backup-target", "talos-shell"]
     steps:
       - uses: actions/checkout@v4
       - name: Get container version and current talos version

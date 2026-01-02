@@ -3,5 +3,6 @@ kind: Kustomization
 
 resources:
   - resources/helm-release.yaml
-  - resources/helm-repo.yaml
-  - resources/backup-storage-class.yaml
+  - resources/oci-repo.yaml
+  - resources/certificate.yaml
+

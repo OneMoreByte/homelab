@@ -1,0 +1,70 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: test
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: test
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onemorebyte/backup-target
+              tag: 0.1.0
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/Chicago
+
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bulk-datastore
+      hostNetwork: true
+      securityContext:
+        fsGroup: 11337
+
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 22
+    ingress:
+      main:
+        enabled: false
+
+    persistence:
+      config:
+        enabled: false
+        type: emptyDir
+
+      ssh:
+        enabled: true
+        type: emptyDir
+
+      home:
+        enabled: true
+        storageClass: openebs-zfs-backuppv
+        size: 20Gi
+        retain: true
