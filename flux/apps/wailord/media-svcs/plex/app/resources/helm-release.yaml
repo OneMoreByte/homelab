@@ -89,6 +89,7 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.tls: "true"
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
         labels: {}
         hosts:
           - host: plex.jackhil.de
@@ -102,19 +103,6 @@ spec:
           - hosts:
               - plex.jackhil.de
             secretName: plex.jackhil.de-cert
-      ssl-redirect:
-        enabled: true
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: web
-        labels: {}
-        hosts:
-          - host: plex.jackhil.de
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: plex-main
-                  port: 32400
     persistence:
       config:
         enabled: true

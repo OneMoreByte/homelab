@@ -23,7 +23,10 @@ spec:
       name: cloudflare
 
     domainFilter:
-      - "jackhil.de"
+      - "*.jackhil.de"
+
+    excludeDomains:
+      - "home.jackhil.de" # Managed with ddns
 
     env:
       - name: CF_API_TOKEN
