@@ -114,6 +114,8 @@ spec:
             anonymousRead: false
           - name: cnpg-backup
             anonymousRead: false
+          - name: mariadb-backup
+            anonymousRead: false
     s3:
       enabled: true
       enableAuth: true

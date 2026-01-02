@@ -5,4 +5,7 @@ resources:
   - resources/helm-release.yaml
   - resources/oci-repo.yaml
   - resources/certificate.yaml
+  - resources/mariadb.yaml
+  - resources/mariadb-backup.yaml
+  - resources/mariadb-user-password.yaml
 
