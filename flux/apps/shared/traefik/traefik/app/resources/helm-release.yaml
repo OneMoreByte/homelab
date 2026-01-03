@@ -19,14 +19,25 @@ spec:
       - --serverstransport.insecureskipverify=true
 
     ports:
-      proxyProtocol:
-        trustedIPs:
-          - 192.168.0.0/24
-          - 10.0.0.0/8
-      forwardHeaders:
-        trustedIPs:
-          - 192.168.0.0/24
-          - 10.0.0.0/8
+      web:
+        proxyProtocol:
+          trustedIPs:
+            - 192.168.0.0/24
+            - 10.0.0.0/8
+        forwardHeaders:
+          trustedIPs:
+            - 192.168.0.0/24
+            - 10.0.0.0/8
+
+      websecure:
+        proxyProtocol:
+          trustedIPs:
+            - 192.168.0.0/24
+            - 10.0.0.0/8
+        forwardHeaders:
+          trustedIPs:
+            - 192.168.0.0/24
+            - 10.0.0.0/8
     providers:
       kubernetesIngress:
         publishedService:
