@@ -18,6 +18,7 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
+  # https://lmno.pk/post/configuring-external-dns-technitium/
   values:
     provider:
       name: rfc2136

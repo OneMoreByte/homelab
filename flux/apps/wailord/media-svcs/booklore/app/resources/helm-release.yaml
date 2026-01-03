@@ -98,7 +98,7 @@ spec:
       books:
         enabled: true
         type: hostPath
-        hostPath: /var/mnt/store/store/text-media
+        hostPath: /var/mnt/store/text-media
         advancedMounts:
           main:
             main:
