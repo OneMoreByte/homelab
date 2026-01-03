@@ -57,6 +57,7 @@ spec:
     service:
       main:
         controller: main
+        type: LoadBalancer
         ports:
           http:
             port: *svc_port
