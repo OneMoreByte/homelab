@@ -35,7 +35,7 @@ spec:
               repository: ghcr.io/onemorebyte/backup-target
               tag: 0.1.1
               pullPolicy: IfNotPresent
-            command: [""]
+            command: ["ssh-keygen", "-A", "-f", "/ssh"]
 
     defaultPodOptions:
       affinity:
