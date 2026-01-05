@@ -67,3 +67,4 @@ spec:
         enabled: true
         storageClass: openebs-zfs-backuppv
         size: 20Gi
+        accessMode: ReadWriteOnce
