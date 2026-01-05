@@ -29,6 +29,13 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
+        initContainers:
+          create-host-keys:
+            image:
+              repository: ghcr.io/onemorebyte/backup-target
+              tag: 0.1.1
+              pullPolicy: IfNotPresent
+            command: [""]
 
     defaultPodOptions:
       affinity:
