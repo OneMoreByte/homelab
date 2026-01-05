@@ -35,7 +35,8 @@ spec:
               repository: ghcr.io/onemorebyte/backup-target
               tag: 0.1.1
               pullPolicy: IfNotPresent
-            command: ["ssh-keygen", "-A", "-f", "/ssh"]
+            # This is a really stupid way to do this...
+            command: ["bash", "-c", "mkdir /ssh/etc/ && ln /ssh/etc/ssh /ssh && ssh-keygen -A -f /ssh"]
 
     defaultPodOptions:
       affinity:
