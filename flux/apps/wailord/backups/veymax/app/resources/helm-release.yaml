@@ -27,25 +27,29 @@ spec:
           main:
             image:
               repository: ghcr.io/onemorebyte/backup-target
-              tag: 0.1.2
+              tag: 0.1.3
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
+            securityContext:
+              privileged: true
         initContainers:
           create-host-keys:
             image:
               repository: ghcr.io/onemorebyte/backup-target
-              tag: 0.1.2
+              tag: 0.1.3
               pullPolicy: IfNotPresent
-            command: ["ssh-keygen" "-A"]
+            command: ["bash", "-c", "mkdir -p /ssh/etc/ && ln -s /ssh /ssh/etc/ssh && ssh-keygen -A -f /ssh"]
           init-permissions:
             image:
               repository: ghcr.io/onemorebyte/backup-target
-              tag: 0.1.2
+              tag: 0.1.3
               pullPolicy: IfNotPresent
             command:
-              - /usr/local/bin/configure-zfs.sh
+              - /usr/local/bin/configure-user.sh
               - *username
+            securityContext:
+              privileged: true
 
     defaultPodOptions:
       affinity:
@@ -57,9 +61,6 @@ spec:
                     operator: In
                     values:
                       - bulk-datastore
-      hostNetwork: true
-      securityContext:
-        privileged: true
 
     service:
       main:
@@ -91,11 +92,12 @@ spec:
 
       home:
         enabled: true
-        existingClaim: veymax-backup-vol
+        type: hostPath
+        hostPath: /var/mnt/store/backups/foreign/veymax
         advancedMounts:
           main:
             main:
-              - path: /home/user/
+              - path: /home/veymax/
 
       home-ssh:
         enabled: true
@@ -103,16 +105,16 @@ spec:
         advancedMounts:
           main:
             main:
-              - path: /home/user/.ssh
-                defaultMode: 0700
+              - path: /home/veymax/.ssh
 
       home-ssh-keys:
         enabled: true
         type: configMap
-        name: flood-rtorrent-config
+        identifier: ssh-config
+        defaultMode: 0600
         advancedMounts:
           main:
             main:
-              - path: /home/user/.ssh/authorized_keys
+              - path: /home/veymax/.ssh/authorized_keys
                 subPath: authorized_keys
-                defaultMode: 0600
+

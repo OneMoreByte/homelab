@@ -20,3 +20,5 @@ if ! zfs allow $DATASET | grep -q "${USER}"; then
   zfs allow "${USER}" "${DATASET_PERMISSIONS}" "${DATASET}"
   zfs allow -d "${USER}" "${CHILDREN_ONLY_PERMISSIONS}" "${DATASET}"
 fi
+
+chown -R "${USER}:${USER}" "/home/${USER}"

@@ -4,5 +4,4 @@ kind: Kustomization
 resources:
   - resources/helm-release.yaml
   - resources/oci-repo.yaml
-  - resources/backup-pv.yaml
 
