@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app test
+  name: &app veymax
 spec:
   commonMetadata:
     labels:
@@ -13,7 +13,7 @@ spec:
     - name: openebs
 
   interval: 1h
-  path: ./flux/apps/wailord/backups/test/app
+  path: ./flux/apps/wailord/backups/veymax/app
   prune: true
   retryInterval: 2m
   sourceRef:

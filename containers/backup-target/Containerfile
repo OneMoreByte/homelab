@@ -8,10 +8,12 @@ RUN apk add rsync curl wget git shadow bash crane cosign libuuid libblkid openss
 # Give the system users a real username to see when checking out filesystems
 RUN adduser -u 1000 -g 1000 --disabled-password default-user && \
     adduser -u 11337 -g 11337 --disabled-password media-svcs && \
-    adduser -u 10774 -g 10774 --disabled-password seaweedfs-user
+    adduser -u 10774 -g 10774 --disabled-password seaweedfs-user && \
+    adduser -u 20653 -g 20653 --disabled-password exposedbuckle48 && \
+    adduser -u 20422 -g 20422 --disabled-password veymax
 
 # Copy in some of our scripts
-COPY install-zfs.sh /usr/local/bin/
+COPY install-zfs.sh configure-user.sh /usr/local/bin/
 
 COPY sshd_config /etc/ssh/sshd_config.d/extra_settings.conf
 

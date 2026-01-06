@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: veymax
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 20Gi
+  claimRef:
+    name: veymax-backup-vol
+    namespace: backups
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: openebs.io/nodeid
+          operator: In
+          values:
+          - producers
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: openebs-zfs-backuppv
+  volumeMode: Filesystem
+
+---
+
+ kind: PersistentVolumeClaim
+ apiVersion: v1
+ metadata:
+   name: veymax-backup-vol
+ spec:
+   storageClassName: openebs-zfs-backuppv
+   accessModes:
+     - ReadWriteOnce
+   resources:
+     requests:
+       storage: 20Gi

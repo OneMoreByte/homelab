@@ -1,12 +1,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: test
+  name: veymax-backup-target
+  labels:
+    backup-user: &username veymax
 spec:
   interval: 1h
   chartRef:
     kind: OCIRepository
-    name: test
+    name: veymax-backup-target
   install:
     remediation:
       retries: -1
@@ -25,7 +27,7 @@ spec:
           main:
             image:
               repository: ghcr.io/onemorebyte/backup-target
-              tag: 0.1.1
+              tag: 0.1.2
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
@@ -33,10 +35,17 @@ spec:
           create-host-keys:
             image:
               repository: ghcr.io/onemorebyte/backup-target
-              tag: 0.1.1
+              tag: 0.1.2
               pullPolicy: IfNotPresent
-            # This is a really stupid way to do this...
-            command: ["bash", "-c", "mkdir -p /ssh/etc/ && ln -s /ssh /ssh/etc/ssh && ssh-keygen -A -f /ssh"]
+            command: ["ssh-keygen" "-A"]
+          init-permissions:
+            image:
+              repository: ghcr.io/onemorebyte/backup-target
+              tag: 0.1.2
+              pullPolicy: IfNotPresent
+            command:
+              - /usr/local/bin/configure-zfs.sh
+              - *username
 
     defaultPodOptions:
       affinity:
@@ -51,7 +60,6 @@ spec:
       hostNetwork: true
       securityContext:
         privileged: true
-        fsGroup: 11337
 
     service:
       main:
@@ -63,6 +71,13 @@ spec:
       main:
         enabled: false
 
+    configMaps:
+      ssh-config:
+        enabled: true
+        data:
+          authorized_keys: |
+            ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKUO6bPf+7vFzN6cVbUwtT2Cc0YpkUCWZzUHSYlAo0Zx jsck@doubledown.jsck.network
+
     persistence:
       config:
         enabled: false
@@ -70,10 +85,34 @@ spec:
 
       ssh:
         enabled: true
-        type: emptyDir
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
 
       home:
         enabled: true
-        storageClass: openebs-zfs-backuppv
-        size: 20Gi
-        accessMode: ReadWriteOnce
+        existingClaim: veymax-backup-vol
+        advancedMounts:
+          main:
+            main:
+              - path: /home/user/
+
+      home-ssh:
+        enabled: true
+        type: emptyDir
+        advancedMounts:
+          main:
+            main:
+              - path: /home/user/.ssh
+                defaultMode: 0700
+
+      home-ssh-keys:
+        enabled: true
+        type: configMap
+        name: flood-rtorrent-config
+        advancedMounts:
+          main:
+            main:
+              - path: /home/user/.ssh/authorized_keys
+                subPath: authorized_keys
+                defaultMode: 0600
