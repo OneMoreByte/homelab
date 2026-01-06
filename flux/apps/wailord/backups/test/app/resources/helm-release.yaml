@@ -50,6 +50,7 @@ spec:
                       - bulk-datastore
       hostNetwork: true
       securityContext:
+        privileged: true
         fsGroup: 11337
 
     service:
@@ -76,9 +77,3 @@ spec:
         storageClass: openebs-zfs-backuppv
         size: 20Gi
         accessMode: ReadWriteOnce
-
-      dev:
-        type: hostPath
-        hostPath: /dev/zfs
-        globalMounts:
-          - path: /dev/zfs
