@@ -10,21 +10,5 @@ spec:
       owner: spoolman
       secret:
         name: spoolman-db-secret
-  backup:
-    barmanObjectStore:
-      destinationPath: s3://cnpg-backup/spoolman/
-      endpointURL: http://seaweedfs-s3.objectstore.svc.cluster.local:8333
-      s3Credentials:
-        accessKeyId:
-          name: pg-backup-secret-key
-          key: ACCESS_KEY_ID
-        secretAccessKey:
-          name: pg-backup-secret-key
-          key: ACCESS_SECRET_KEY
-      wal:
-        compression: bzip2
-      data:
-        compression: bzip2
-    retentionPolicy: 7d
   storage:
     size: 40Gi
