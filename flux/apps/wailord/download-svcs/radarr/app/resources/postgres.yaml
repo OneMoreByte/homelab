@@ -13,21 +13,5 @@ spec:
       postInitSQL:
         - CREATE DATABASE "radarr-log"
         - ALTER DATABASE "radarr-log" OWNER TO radarr
-  backup:
-    barmanObjectStore:
-      destinationPath: s3://cnpg-backup/radarr/
-      endpointURL: http://seaweedfs-s3.objectstore.svc.cluster.local:8333
-      s3Credentials:
-        accessKeyId:
-          name: radarr-backup-secret
-          key: ACCESS_KEY_ID
-        secretAccessKey:
-          name: radarr-backup-secret
-          key: ACCESS_SECRET_KEY
-      wal:
-        compression: bzip2
-      data:
-        compression: bzip2
-    retentionPolicy: 7d
   storage:
     size: 50Gi

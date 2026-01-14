@@ -13,31 +13,5 @@ spec:
       postInitSQL:
         - CREATE DATABASE "prowlarr-log"
         - ALTER DATABASE "prowlarr-log" OWNER TO prowlarr
-  plugins:
-  - name: barman-cloud.cloudnative-pg.io
-    isWALArchiver: true
-    parameters:
-      barmanObjectName: prowlarr-store
   storage:
     size: 50Gi
----
-apiVersion: barmancloud.cnpg.io/v1
-kind: ObjectStore
-metadata:
-  name: prowlarr-store
-spec:
-  configuration:
-    destinationPath: s3://cnpg-backup/prowlarr/
-    endpointURL: http://seaweedfs-s3.objectstore.svc.cluster.local:8333
-    s3Credentials:
-      accessKeyId:
-        name: prowlarr-backup-secret
-        key: ACCESS_KEY_ID
-      secretAccessKey:
-        name: prowlarr-backup-secret
-        key: ACCESS_SECRET_KEY
-    wal:
-      compression: bzip2
-    data:
-      compression: bzip2
-  retentionPolicy: 7d
