@@ -1,0 +1,68 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: feishin
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: feishin
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/jeffvli/feishin
+              tag: 1.2.0
+              pullPolicy: IfNotPresent
+            env:
+              TZ: "America/Chicago"
+              SERVER_NAME: "gonic"
+              SERVER_URL: "https://music.jackhil.de"
+              SERVER_TYPE: "subsonic"
+              SERVER_LOCK: "true"
+
+
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 9180
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+        labels: {}
+        hosts:
+          - host: app.music.jackhil.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: 9180
+        tls:
+          - hosts:
+              - app.music.jackhil.de
+            secretName: app.music.jackhil.de-cert
+
+    persistence:
+      config:
+        enabled: false
+        type: emptyDir

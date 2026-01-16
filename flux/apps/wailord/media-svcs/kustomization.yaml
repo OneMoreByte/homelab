@@ -9,4 +9,5 @@ resources:
   - syncthing/ks.yaml
   - watchstate/ks.yaml
   - gonic/ks.yaml
+  - feishin/ks.yaml
   - booklore/ks.yaml

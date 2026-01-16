@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: app.music.jackhil.de-cert
+spec:
+  dnsNames:
+    - "app.music.jackhil.de"
+  secretName: app.music.jackhil.de-cert
+  issuerRef:
+    name: letsencrypt-cloudflare-issuer
+    kind: ClusterIssuer
