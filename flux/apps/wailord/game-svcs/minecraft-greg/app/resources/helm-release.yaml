@@ -18,6 +18,7 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
+      tag: java25
     replicaCount: 1
     resources:
       requests:
