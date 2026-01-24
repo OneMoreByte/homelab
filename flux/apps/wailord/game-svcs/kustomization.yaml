@@ -4,6 +4,5 @@ namespace: flux-system
 resources:
   - factorio/ks.yaml
   - minecraft-vanilla/ks.yaml
-  - minecraft-greg/ks.yaml
   - palworld/ks.yaml
 
