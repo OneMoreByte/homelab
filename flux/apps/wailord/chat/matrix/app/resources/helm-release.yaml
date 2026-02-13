@@ -29,6 +29,14 @@ spec:
     networking:
       ipFamily: ipv4
 
+    elementAdmin:
+      ingress:
+        host: "admin.matrix-test.jackhil.de"
+
+    matrixRTC:
+      ingress:
+        host: "rtc.matrix-test.jackhil.de"
+
     # Maybe?
     elementWeb:
       enabled: false
