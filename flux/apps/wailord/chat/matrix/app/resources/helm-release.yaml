@@ -35,6 +35,9 @@ spec:
         host: "admin.matrix-test.jackhil.de"
 
     matrixRTC:
+      livekitAuth:
+        secret: {}
+
       sfu:
         exposedServices:
           turn:
