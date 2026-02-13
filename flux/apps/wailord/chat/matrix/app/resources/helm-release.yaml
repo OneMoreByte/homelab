@@ -35,10 +35,6 @@ spec:
         host: "admin.matrix-test.jackhil.de"
 
     matrixRTC:
-      livekitAuth:
-        key:
-          secret: {} # generate the key with the initSecrets job
-
       sfu:
         exposedServices:
           turn:
