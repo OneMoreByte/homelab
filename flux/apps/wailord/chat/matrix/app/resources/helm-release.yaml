@@ -35,8 +35,20 @@ spec:
         host: "admin.matrix-test.jackhil.de"
 
     matrixRTC:
+      livekitAuth:
+        key:
+          secret: {} # generate the key with the initSecrets job
+
+      sfu:
+        exposedServices:
+          turn:
+            enabled: true
+          turnTLS:
+            enabled: true
+
       ingress:
         host: "rtc.matrix-test.jackhil.de"
+
 
     # Maybe?
     elementWeb:
