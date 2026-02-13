@@ -35,15 +35,15 @@ spec:
         host: "admin.matrix-test.jackhil.de"
 
     matrixRTC:
-      livekitAuth:
-        key: ""
-        secret: {}
-
       sfu:
         exposedServices:
+          rtcUdp:
+            enabled: true
+
           turn:
             enabled: true
           turnTLS:
+            domain: turn.{{ $.Values.serverName }}
             enabled: true
 
       ingress:
