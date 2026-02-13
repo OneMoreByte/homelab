@@ -18,3 +18,4 @@ resources:
   - zfs-system.yaml
   - backups.yaml
   - dns.yaml
+  - chat.yaml

@@ -1,0 +1,74 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: matrix
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: matrix
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    certManager:
+      clusterIssuer: letsencrypt-cloudflare-issuer
+
+    serverName: matrix-test.jackhil.de
+
+    ingress:
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      tlsEnabled: true
+
+    networking:
+      ipFamily: ipv4
+
+    # Maybe?
+    elementWeb:
+      enabled: false
+
+    # We have OCID at home
+    matrixAuthenticationService:
+      enabled: false
+
+    # Use cnpg
+    postgres:
+      enabled: false
+
+
+    redis:
+      enabled: true
+      # use valkey
+      image:
+        registry: ghcr.io
+        repository: valkey-io/valkey
+        tag: 9.0.2
+
+
+    synapse:
+      additional:
+        0-customConfig:
+          configSecret: science-team-oicd
+          configSecretKey: oicd-config.yaml
+
+      postgres:
+        host: "test-matrix-pg-cluster-rw"
+        user: "synapse"
+        database: "synapse"
+        password:
+          secret: matrix-test-db-secret
+          secretKey: passowrd
+
+      media:
+        storage:
+          size: 50Gi
+        maxUploadSize: 100M
+
+      ingress:
+        host: matrix-test.jackhil.de

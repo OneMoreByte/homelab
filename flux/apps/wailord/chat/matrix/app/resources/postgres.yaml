@@ -1,0 +1,15 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: test-matrix-pg-cluster
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: synapse
+      owner: synapse
+      secret:
+        name: matrix-test-db-secret
+
+  storage:
+    size: 50Gi
