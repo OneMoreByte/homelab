@@ -39,7 +39,9 @@ spec:
         exposedServices:
           rtcUdp:
             enabled: true
-
+            portRange:
+              endPort: 30050
+              startPort: 30000
           turn:
             enabled: true
           turnTLS:
