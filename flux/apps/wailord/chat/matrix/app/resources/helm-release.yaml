@@ -36,6 +36,7 @@ spec:
 
     matrixRTC:
       livekitAuth:
+        key: ""
         secret: {}
 
       sfu:
