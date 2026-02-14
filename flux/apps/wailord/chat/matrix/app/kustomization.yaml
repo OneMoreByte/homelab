@@ -4,7 +4,9 @@ kind: Kustomization
 resources:
   - resources/helm-release.yaml
   - resources/oci-repo.yaml
-  - resources/postgres.yaml
-  - resources/postgres-db-secret.yaml
+  - resources/synapse-pg/postgres.yaml
+  - resources/synapse-pg/db-secret.yaml
+  - resources/mas-pg/postgres.yaml
+  - resources/mas-pg/db-secret.yaml
   - resources/science-team-oicd.yaml
   - resources/turn-tls-ingress-route.yaml

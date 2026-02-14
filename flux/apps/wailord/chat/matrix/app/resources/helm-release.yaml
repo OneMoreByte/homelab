@@ -63,11 +63,11 @@ spec:
       enabled: true
       
       postgres:
-        host: "test-matrix-pg-cluster-rw"
-        user: "synapse"
-        database: "synapse"
+        host: "mas-pg-cluster-rw"
+        user: "mas"
+        database: "mas"
         password:
-          secret: matrix-test-db-secret
+          secret: mas-db-secret
           secretKey: password
 
       additional:

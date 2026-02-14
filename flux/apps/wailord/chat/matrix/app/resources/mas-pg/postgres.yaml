@@ -1,0 +1,15 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: mas-pg-cluster
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: mas
+      owner: mas
+      secret:
+        name: mas-db-secret
+
+  storage:
+    size: 20Gi
