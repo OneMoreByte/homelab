@@ -61,7 +61,10 @@ spec:
 
     matrixAuthenticationService:
       enabled: true
-      
+
+      ingress:
+        host: "mas.matrix-test.jackhil.de"
+
       postgres:
         host: "mas-pg-cluster-rw"
         user: "mas"
