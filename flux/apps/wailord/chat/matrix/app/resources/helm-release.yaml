@@ -37,13 +37,6 @@ spec:
     matrixRTC:
       sfu:
         exposedServices:
-          rtcUdp:
-            enabled: true
-            portRange:
-              endPort: 30050
-              startPort: 30000
-          turn:
-            enabled: true
           turnTLS:
             domain: turn.{{ $.Values.serverName }}
             enabled: true

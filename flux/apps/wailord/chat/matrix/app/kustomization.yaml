@@ -7,3 +7,4 @@ resources:
   - resources/postgres.yaml
   - resources/postgres-db-secret.yaml
   - resources/science-team-oicd.yaml
+  - resources/turn-tls-ingress-route.yaml
