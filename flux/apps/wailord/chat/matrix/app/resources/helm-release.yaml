@@ -44,19 +44,9 @@ spec:
       ingress:
         host: "rtc.matrix-test.jackhil.de"
 
-
-    # Maybe?
-    elementWeb:
-      enabled: false
-
-    # We have OCID at home
-    matrixAuthenticationService:
-      enabled: false
-
     # Use cnpg
     postgres:
       enabled: false
-
 
     redis:
       # use valkey
@@ -65,12 +55,32 @@ spec:
         repository: valkey-io/valkey
         tag: 9.0.2
 
+    # Maybe?
+    elementWeb:
+      enabled: false
 
-    synapse:
+    matrixAuthenticationService:
+      enabled: true
+      
+      postgres:
+        host: "test-matrix-pg-cluster-rw"
+        user: "synapse"
+        database: "synapse"
+        password:
+          secret: matrix-test-db-secret
+          secretKey: password
+
       additional:
         0-customConfig:
           configSecret: science-team-oicd
           configSecretKey: oicd-config.yaml
+
+
+    synapse:
+      additional: {}
+      #  0-customConfig:
+      #    configSecret: science-team-oicd
+      #    configSecretKey: oicd-config.yaml
 
       postgres:
         host: "test-matrix-pg-cluster-rw"
