@@ -80,10 +80,71 @@ spec:
 
 
     synapse:
-      additional: {}
-      #  0-customConfig:
-      #    configSecret: science-team-oicd
-      #    configSecretKey: oicd-config.yaml
+      additional:
+        0-customConfig:
+          config: |
+            media_retention:
+              local_media_lifetime: 1y
+              remote_media_lifetime: 14d
+            
+            retention:
+              enabled: true
+              default_policy:
+                min_lifetime: 1d
+                max_lifetime: 1y
+              allowed_lifetime_min: 1d
+              allowed_lifetime_max: 1y
+              purge_jobs:
+              - longest_max_lifetime: 3d
+                interval: 12h
+              - shortest_max_lifetime: 3d
+                interval: 1d
+            
+            server_notices:
+              system_mxid_localpart: notices
+              system_mxid_display_name: Server Notices
+              room_name: Server Notices
+              room_topic: Room used by your server admin to notice you of important information
+              auto_join: true
+            
+            url_preview_enabled: true
+            
+            url_preview_ip_range_blacklist:
+            - 127.0.0.0/8
+            - 10.0.0.0/8
+            - 100.64.0.0/10 
+            - 169.254.0.0/16 
+            - 172.16.0.0/12 
+            - 192.0.0.0/24
+            - 192.0.2.0/24 
+            - 192.168.0.0/16
+            - 198.51.100.0/24 
+            - 198.18.0.0/15
+            - 203.0.113.0/24 
+            - 224.0.0.0/4 
+            - 233.252.0.0/24 
+            - 240.0.0.0/4 
+            - 255.255.255.255/32
+            
+            url_preview_url_blacklist:
+            - username: '*'
+            - password: '*'
+            - netloc: *.local
+            
+            user_directory:
+              enabled: true
+              search_all_users: true
+              perfer_local_user: true
+            
+            enable_room_list_search: true
+            
+            encryption_enabled_by_default_for_room_type: all
+            
+            admin_contact: mailto:admin@bingbong.chat
+
+        #1-customConfig:
+        #  configSecret: smtp-config
+        #  configSecretKey: smtp-config.yaml
 
       postgres:
         host: "test-matrix-pg-cluster-rw"
