@@ -129,7 +129,7 @@ spec:
             url_preview_url_blacklist:
             - username: '*'
             - password: '*'
-            - netloc: *.local
+            - netloc: '*.local'
             
             user_directory:
               enabled: true
@@ -140,7 +140,7 @@ spec:
             
             encryption_enabled_by_default_for_room_type: all
             
-            admin_contact: mailto:admin@bingbong.chat
+            admin_contact: 'mailto:admin@bingbong.chat'
 
         #1-customConfig:
         #  configSecret: smtp-config
