@@ -75,14 +75,29 @@ spec:
         path: plus://b83061512206a1c411c2f4a88358381b
         labelmap_path: /labelmap/coco-80.txt
 
+      go2rtc:
+        streams:
+          garage1_cam: # <- for RTSP streams
+            -  rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=0
+            - "ffmpeg:garage1_cam#audio=opus" 
+
+          backdoor1_cam: # <- for RTSP streams
+            -   rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0
+            - "ffmpeg:backdoor1_cam#audio=opus" 
+
+          backyard1_cam: # <- for RTSP streams
+            -  rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=0
+            - "ffmpeg:backyard1_cam#audio=opus" 
+
       cameras:
-        garage1:
+        garage1:      
           ffmpeg:
 
             output_args:
               record: preset-record-generic-audio-aac
             inputs:
-              - path: rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.42:554/cam/realmonitor?channel=1&subtype=0
+              - path: rtsp://127.0.0.1:8554/garage1_cam
+                input_args: preset-rtsp-restream
                 roles:
                   - audio
                   - record
@@ -102,7 +117,8 @@ spec:
             output_args:
               record: preset-record-generic-audio-aac
             inputs:
-              - path: rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0
+              - path: rtsp://127.0.0.1:8554/backdoor1_cam
+                input_args: preset-rtsp-restream
                 roles:
                   - audio
                   - record
@@ -120,7 +136,8 @@ spec:
             output_args:
               record: preset-record-generic-audio-aac
             inputs:
-              - path: rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=0
+              - path: rtsp://127.0.0.1:8554/backyard1_cam
+                input_args: preset-rtsp-restream
                 roles:
                   - audio
                   - record
@@ -139,6 +156,16 @@ spec:
       semantic_search:
         enabled: True
         reindex: False
+
+      face_recognition:
+        enabled: true
+        model_size: large
+      lpr:
+        enabled: true
+      classification:
+        bird:
+          enabled: false
+
       objects:
         # Optional: list of objects to track from labelmap.txt (default: shown below)
         track:
