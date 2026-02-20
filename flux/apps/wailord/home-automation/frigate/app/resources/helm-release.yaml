@@ -71,7 +71,7 @@ spec:
         height: 320
         input_tensor: nchw
         input_pixel_format: bgr
-        labelmap_path: /labelmap/coco-80.txt
+        path: plus://b83061512206a1c411c2f4a88358381b
 
       cameras:
         garage1:
