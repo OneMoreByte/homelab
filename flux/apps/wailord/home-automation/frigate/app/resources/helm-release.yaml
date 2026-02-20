@@ -72,6 +72,7 @@ spec:
         input_tensor: nchw
         input_pixel_format: bgr
         path: plus://b83061512206a1c411c2f4a88358381b
+        labelmap_path: /labelmap/coco-80.txt
 
       cameras:
         garage1:
@@ -144,10 +145,9 @@ spec:
           - bicycle
           - car
           - motorcycle
-          - bus
           - cat
           - dog
-          - hot dog
+
     probes:
       liveness:
         enabled: false
