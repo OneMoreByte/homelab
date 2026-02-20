@@ -165,6 +165,12 @@ spec:
       classification:
         bird:
           enabled: false
+      
+      detect:
+        enabled: true
+      
+      motion:
+        enabled: true
 
       objects:
         # Optional: list of objects to track from labelmap.txt (default: shown below)
@@ -175,6 +181,28 @@ spec:
           - motorcycle
           - cat
           - dog
+      
+      review:
+        alerts:
+          enabled: True
+          labels:
+            - person
+            - bicycle
+            - car
+            - motorcycle
+            - cat
+            - dog
+       
+        detections:
+          enabled: True
+          labels:
+            - person
+            - bicycle
+            - car
+            - motorcycle
+            - cat
+            - dog
+  
 
     probes:
       liveness:
