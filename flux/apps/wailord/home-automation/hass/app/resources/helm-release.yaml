@@ -23,7 +23,7 @@ spec:
           main:
             image:
               repository: ghcr.io/home-assistant/home-assistant
-              tag: 2025.10.1
+              tag: 2026.2.2
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
