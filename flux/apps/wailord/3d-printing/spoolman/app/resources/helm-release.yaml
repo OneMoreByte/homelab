@@ -74,6 +74,25 @@ spec:
           - hosts:
               - spoolman.jsck.network
             secretName: spoolman.jsck.network-cert
+
+    route:
+      kind: HTTPRoute
+      parentRefs:
+        name: "internal"
+        namespace: "gateway-svcs"
+      hostnames:
+        - "spoolman.jsck.network"
+      rules:
+        - name: "default"
+          backendRefs:
+            - name: spoolman-main
+              port: 7912
+          matches:
+            - path:
+                value: /
+                type: PathPrefix
+
+
     persistence:
       config:
         enabled: true
