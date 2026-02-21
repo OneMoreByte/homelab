@@ -1,0 +1,23 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: internal
+spec:
+  addresses:
+  - type: IPAddress
+    value: 192.168.42.67
+  gatewayClassName: cilium-internal
+  listeners:
+  - allowedRoutes:
+      namespaces:
+        from: Same
+    name: web-gw
+    port: 80
+    protocol: HTTP
+  - name: websecure-gw
+    protocol: HTTPS
+    port: 443
+    hostname: ".jsck.network"
+    tls:
+      certificateRefs:
+      - kind: Secret
