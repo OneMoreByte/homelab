@@ -2,6 +2,8 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: internal
+  annotations:
+    cert-manager.io/issuer: letsencrypt-cloudflare-issuer
 spec:
   addresses:
   - type: IPAddress
@@ -20,4 +22,4 @@ spec:
     hostname: ".jsck.network"
     tls:
       certificateRefs:
-      - kind: Secret
+      - name: jsck-network-tls
