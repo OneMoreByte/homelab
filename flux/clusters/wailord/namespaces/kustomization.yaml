@@ -17,5 +17,5 @@ resources:
   - mariadb-system.yaml
   - zfs-system.yaml
   - backups.yaml
-  - dns.yaml
+  - gateway-svcs.yaml
   - chat.yaml
