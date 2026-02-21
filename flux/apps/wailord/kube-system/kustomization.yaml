@@ -4,4 +4,4 @@ namespace: flux-system
 resources:
   - cilium/ks.yaml
   - cilium-bgp/ks.yaml
-  - cilium-gateways/ks.yaml
+

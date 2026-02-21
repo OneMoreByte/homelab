@@ -3,20 +3,23 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app externaldns-repo
+  name: &app externaldns-local
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
 
+  dependsOn:
+    - name: externaldns-repo
+
   interval: 1h
-  path: ./flux/apps/wailord/dns/externaldns-repo/app
+  path: ./flux/apps/wailord/gateway-svcs/externaldns-local/app
   prune: true
   retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: dns
+  targetNamespace: gateway-svcs
   timeout: 5m
   wait: false

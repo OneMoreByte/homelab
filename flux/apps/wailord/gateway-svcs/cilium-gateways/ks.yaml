@@ -3,23 +3,25 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app externaldns-local
+  name: &app cilium-gateways
+
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
 
   dependsOn:
-    - name: externaldns-repo
+    - name: cilium
+    - name: cilium-bgp
 
   interval: 1h
-  path: ./flux/apps/wailord/dns/externaldns-local/app
+  path: ./flux/apps/wailord/gateway-svcs/cilium-gateways/app
   prune: true
   retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: dns
+  targetNamespace: gateway-svcs
   timeout: 5m
   wait: false

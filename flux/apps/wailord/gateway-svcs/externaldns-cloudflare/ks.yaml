@@ -13,13 +13,13 @@ spec:
     - name: externaldns-repo
 
   interval: 1h
-  path: ./flux/apps/wailord/dns/externaldns-cloudflare/app
+  path: ./flux/apps/wailord/gateway-svcs/externaldns-cloudflare/app
   prune: true
   retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: dns
+  targetNamespace: gateway-svcs
   timeout: 5m
   wait: false

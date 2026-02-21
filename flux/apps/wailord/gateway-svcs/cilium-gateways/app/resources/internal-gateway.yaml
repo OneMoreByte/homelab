@@ -1,3 +1,12 @@
+kind: GatewayClass
+metadata:
+  name: cilium-internal
+spec:
+  controllerName: io.cilium/gateway-controller
+  description: "The internal gateway. Isn't externally accessible."
+
+---
+
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
@@ -10,10 +19,7 @@ spec:
     value: 192.168.42.67
   gatewayClassName: cilium-internal
   listeners:
-  - allowedRoutes:
-      namespaces:
-        from: Same
-    name: web-gw
+  - name: web-gw
     port: 80
     protocol: HTTP
   - name: websecure-gw
