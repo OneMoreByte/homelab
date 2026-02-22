@@ -4,7 +4,6 @@ metadata:
   name: paperless-ngx
 spec:
   interval: 1h
-  timeout: 15m
   chartRef:
     kind: OCIRepository
     name: paperless-ngx
@@ -16,52 +15,79 @@ spec:
     remediation:
       retries: 3
   values:
-    image:
-      repository: ghcr.io/paperless-ngx/paperless-ngx
-      pullPolicy: IfNotPresent
-      tag: 2.18.2
-    env:
-      TZ: UTC
-      PAPERLESS_SECRET_KEY:
-        secretKeyRef:
-          name: paperless-secret-key
-          key: key
-      A_REDIS_PASSWORD:
-        secretKeyRef:
-          name: paperless-ngx-redis
-          key: redis-password
-      PAPERLESS_REDIS: redis://default:$(A_REDIS_PASSWORD)@paperless-ngx-valkey
-      PAPERLESS_ENABLE_ALLAUTH: true
-      PAPERLESS_AUTO_LOGIN: true
-      PAPERLESS_AUTO_CREATE: true
-      PAPERLESS_DBENGINE: postgresql
-      PAPERLESS_DBHOST: paperless-pg-cluster-rw
-      PAPERLESS_DBNAME: paperless
-      PAPERLESS_DBUSER:
-        secretKeyRef:
-          name: paperless-db-secret
-          key: username
-      PAPERLESS_DBPASS:
-        secretKeyRef:
-          name: paperless-db-secret
-          key: password
-    envFrom:
-      - secretRef:
-          name: paperless-oicd-settings
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/paperless-ngx/paperless-ngx
+              tag: 2.20.8
+              pullPolicy: IfNotPresent
+            env:
+              TZ: UTC
+              PAPERLESS_SECRET_KEY:
+                secretKeyRef:
+                  name: paperless-secret-key
+                  key: key
+              A_REDIS_PASSWORD:
+                secretKeyRef:
+                  name: paperless-ngx-redis
+                  key: redis-password
+              PAPERLESS_REDIS: redis://default:$(A_REDIS_PASSWORD)@paperless-ngx-valkey
+              PAPERLESS_ENABLE_ALLAUTH: true
+              PAPERLESS_AUTO_LOGIN: true
+              PAPERLESS_AUTO_CREATE: true
+              PAPERLESS_DBENGINE: postgresql
+              PAPERLESS_DBHOST: paperless-pg-cluster-rw
+              PAPERLESS_DBNAME: paperless
+              PAPERLESS_DBUSER:
+                secretKeyRef:
+                  name: paperless-db-secret
+                  key: username
+              PAPERLESS_DBPASS:
+                secretKeyRef:
+                  name: paperless-db-secret
+                  key: password
+            envFrom:
+              - secretRef:
+                  name: paperless-oicd-settings
+        initContainers:
+          wait-for-zfs:
+            image:
+              repository: busybox
+              tag: latest
+            command:
+              - /bin/sh
+              - -c
+              - |
+                until [ -f /var/mnt/fast-store/mount-state/.mounted ]; do
+                  echo "Waiting for ZFS mount..."
+                  sleep 2
+                done
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bulk-datastore
+      hostNetwork: true
+      securityContext:
+        fsGroup: 11337
+
     service:
       main:
+        controller: main
         ports:
           http:
             port: 8000
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                    - bulk-datastore
     ingress:
       main:
         enabled: true
@@ -69,15 +95,24 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
           external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+        labels: {}
         hosts:
           - host: paper.jackhil.de
             paths:
               - path: /
+                pathType: Prefix
+                service:
+                  name: paperless-ngx-main
+                  port: 8000
         tls:
-          - secretName: paper.jackhil.de-cert
-            hosts:
+          - hosts:
               - paper.jackhil.de
+            secretName: paper.jackhil.de-cert
     persistence:
+      config:
+        enabled: false
+        type: emptyDir
+
       data:
         enabled: true
         retain: true
@@ -102,5 +137,8 @@ spec:
         mountPath: /usr/src/paperless/consume
         hostPath: /var/mnt/fast-store/k8s-hostpath/paperless/consume
         type: hostPath
-    redis:
-      enabled: false
+
+      mountstate-fast:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/fast-store/mount-state

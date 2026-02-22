@@ -32,6 +32,18 @@ spec:
               tag: release-6.0.4.10291
               pullPolicy: IfNotPresent
         initContainers:
+          wait-for-zfs:
+            image:
+              repository: busybox
+              tag: latest
+            command:
+              - /bin/sh
+              - -c
+              - |
+                until [ -f /var/mnt/store/mount-state/.mounted ]; do
+                  echo "Waiting for ZFS mount..."
+                  sleep 2
+                done
           configure-postgres:
             image:
               repository: ghcr.io/onemorebyte/arr-pg-configure
@@ -98,3 +110,7 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /var/mnt/store/torrent/
+      mountstate:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/store/mount-state

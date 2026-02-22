@@ -38,6 +38,24 @@ spec:
                   secretKeyRef:
                     name: immich-db-secret
                     key: password
+        initContainers:
+          wait-for-zfs:
+            image:
+              repository: busybox
+              tag: latest
+            command:
+              - /bin/sh
+              - -c
+              - |
+                until [ -f /var/mnt/store/mount-state/.mounted ]; do
+                  echo "Waiting for ZFS mount..."
+                  sleep 2
+                done
+                
+                until [ -f /var/mnt/fast-store/mount-state/.mounted ]; do
+                  echo "Waiting for ZFS mount..."
+                  sleep 2
+                done
 
     defaultPodOptions:
       affinity:
@@ -68,7 +86,17 @@ spec:
       syncthing-library:
         enabled: true
         type: hostPath
-        hostPath: /var/mnt/store/backups/syncthings/Pictures
+        hostPath: /var/mnt/store/backups/syncthing/Pictures
+
+      mountstate:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/store/mount-state
+
+      mountstate-fast:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/fast-store/mount-state
 
     immich:
       metrics:

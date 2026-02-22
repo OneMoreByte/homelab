@@ -38,6 +38,24 @@ spec:
                 secretKeyRef:
                   name: booklore-user-password
                   key: password
+        initContainers:
+          wait-for-zfs:
+            image:
+              repository: busybox
+              tag: latest
+            command:
+              - /bin/sh
+              - -c
+              - |
+                until [ -f /var/mnt/store/mount-state/.mounted ]; do
+                  echo "Waiting for ZFS mount..."
+                  sleep 2
+                done
+                
+                until [ -f /var/mnt/fast-store/mount-state/.mounted ]; do
+                  echo "Waiting for ZFS mount..."
+                  sleep 2
+                done
 
     defaultPodOptions:
       affinity:
@@ -108,3 +126,13 @@ spec:
       bookdrop:
         enabled: true
         type: emptyDir
+
+      mountstate:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/store/mount-state
+
+      mountstate-fast:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/fast-store/mount-state

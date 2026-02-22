@@ -39,6 +39,19 @@ spec:
                 enabled: false
               startup:
                 enabled: false
+        initContainers:
+          wait-for-zfs:
+            image:
+              repository: busybox
+              tag: latest
+            command:
+              - /bin/sh
+              - -c
+              - |
+                until [ -f /var/mnt/store/mount-state/.mounted ]; do
+                  echo "Waiting for ZFS mount..."
+                  sleep 2
+                done
     defaultPodOptions:
       affinity:
         nodeAffinity:
@@ -105,6 +118,10 @@ spec:
       config:
         enabled: false
         type: emptyDir
+      mountstate:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/store/mount-state
       rtorrent-home:
         enabled: true
         type: persistentVolumeClaim

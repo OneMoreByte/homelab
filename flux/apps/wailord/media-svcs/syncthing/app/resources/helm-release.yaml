@@ -31,8 +31,21 @@ spec:
               PGID: 11337
             image:
               repository: syncthing/syncthing
-              tag: 2.0.3
+              tag: 2.0.15
               pullPolicy: IfNotPresent
+        initContainers:
+          wait-for-zfs:
+            image:
+              repository: busybox
+              tag: latest
+            command:
+              - /bin/sh
+              - -c
+              - |
+                until [ -f /var/mnt/store/mount-state/.mounted ]; do
+                  echo "Waiting for ZFS mount..."
+                  sleep 2
+                done
     defaultPodOptions:
       affinity:
         nodeAffinity:
@@ -81,24 +94,26 @@ spec:
             port: 21027
             protocol: UDP
         type: NodePort
-    ingress:
+
+    route:
       main:
-        annotations:
-          traefik.ingress.kubernetes.io/router.tls: 'true'
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        enabled: false
-        hosts:
-          - host: syncthings.wailord.jackhil.de
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: webui
-                  port: 8384
-        tls:
-          - hosts:
-              - syncthings.wailord.jackhil.de
-            secretName: jackhil.de-cert
+        kind: HTTPRoute
+        parentRefs:
+          - name: "internal"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "syncthing.jsck.network"
+        rules:
+          - name: "default"
+            backendRefs:
+              - name: syncthing-main
+                port: 8384
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
     persistence:
       config:
         enabled: false
@@ -107,7 +122,7 @@ spec:
       data:
         enabled: true
         type: hostPath
-        hostPath: /var/mnt/store/backups/syncthings
+        hostPath: /var/mnt/store/backups/syncthing
         advancedMounts:
           main:
             main:
@@ -116,3 +131,13 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /var/mnt/store/roms
+
+      music:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/store/music
+
+      mountstate:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/sore/mount-state

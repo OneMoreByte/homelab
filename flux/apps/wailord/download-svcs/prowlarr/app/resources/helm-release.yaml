@@ -33,6 +33,18 @@ spec:
               tag: release-2.3.0.5236
               pullPolicy: IfNotPresent
         initContainers:
+          wait-for-zfs:
+            image:
+              repository: busybox
+              tag: latest
+            command:
+              - /bin/sh
+              - -c
+              - |
+                until [ -f /var/mnt/store/mount-state/.mounted ]; do
+                  echo "Waiting for ZFS mount..."
+                  sleep 2
+                done
           configure-postgres:
             image:
               repository: ghcr.io/onemorebyte/arr-pg-configure
@@ -82,3 +94,7 @@ spec:
         enabled: true
         accessMode: ReadWriteOnce
         size: 16Gi
+      mountstate:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/store/mount-state
