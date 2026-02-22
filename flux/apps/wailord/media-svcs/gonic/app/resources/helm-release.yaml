@@ -44,15 +44,17 @@ spec:
               - /bin/sh
               - -c
               - |
-                until [ -f /var/mnt/store/mount-state/.mounted ]; do
+                if [ ! -f /var/mnt/store/mount-state/.mounted ]; then
                   echo "Waiting for ZFS mount..."
-                  sleep 2
-                done
+                  sleep 30
+                  exit 1
+                fi
                 
-                until [ -f /var/mnt/fast-store/mount-state/.mounted ]; do
+                if [ ! -f /var/mnt/fast-store/mount-state/.mounted ]; then
                   echo "Waiting for ZFS mount..."
-                  sleep 2
-                done
+                  sleep 30
+                  exit 1
+                fi
 
     defaultPodOptions:
       affinity:
