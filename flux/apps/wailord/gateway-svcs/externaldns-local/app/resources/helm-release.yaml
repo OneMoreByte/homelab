@@ -35,9 +35,6 @@ spec:
       - ingress
       - gateway-httproute
       - gateway-grpcroute
-      - gateway-tcproute
-      - gateway-tlsroute
-      - gateway-udproute
       - node
 
     extraArgs:
