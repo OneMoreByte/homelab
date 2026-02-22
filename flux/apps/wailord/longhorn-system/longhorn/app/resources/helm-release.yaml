@@ -38,3 +38,12 @@ spec:
     defaultBackupStore:
       backupTarget: "s3://longhorn-backup@home/"
       backupTargetCredentialSecret: "s3-backup-secret"
+
+    httproute:
+      enabled: true
+      parentRefs:
+        - name: "internal"
+          namespace: "gateway-svcs"
+          sectionName: websecure-gw
+      hostnames:
+        - "longhorn.jsck.network"
