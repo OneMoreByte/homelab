@@ -81,6 +81,7 @@ spec:
         parentRefs:
           - name: "internal"
             namespace: "gateway-svcs"
+            sectionName: websecure-gw
         hostnames:
           - "spoolman.jsck.network"
         rules:
