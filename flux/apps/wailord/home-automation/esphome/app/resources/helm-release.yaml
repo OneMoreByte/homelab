@@ -35,6 +35,25 @@ spec:
     defaultPodOptions:
       hostNetwork: true
 
+    route:
+      main:
+        kind: HTTPRoute
+        parentRefs:
+          - name: "internal"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "esphome.jsck.network"
+        rules:
+          - name: "default"
+            backendRefs:
+              - name: esphome-main
+                port: 6052
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
     service:
       main:
         controller: main
