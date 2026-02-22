@@ -30,6 +30,16 @@ spec:
             name: tsig-key
             key: key
 
+    sources:
+      - service
+      - ingress
+      - gateway-httproute
+      - gateway-grpcroute
+      - gateway-tcproute
+      - gateway-tlsroute
+      - gateway-udproute
+      - node
+
     extraArgs:
       - --rfc2136-host=192.168.13.250
       - --rfc2136-port=53
