@@ -13,7 +13,7 @@ kind: Gateway
 metadata:
   name: internal
   annotations:
-    cert-manager.io/issuer: letsencrypt-cloudflare-issuer
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare-issuer
 spec:
   addresses:
   - type: IPAddress
