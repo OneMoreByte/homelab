@@ -28,7 +28,8 @@ spec:
     port: 443
     hostname: "*.jsck.network"
     allowedRoutes:
-      from: "All"
+      namespaces:
+        from: "All"
     tls:
       certificateRefs:
       - name: jsck-network-tls
