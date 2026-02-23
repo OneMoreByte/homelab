@@ -142,4 +142,4 @@ spec:
       mountstate:
         enabled: true
         type: hostPath
-        hostPath: /var/mnt/sore/mount-state
+        hostPath: /var/mnt/store/mount-state
