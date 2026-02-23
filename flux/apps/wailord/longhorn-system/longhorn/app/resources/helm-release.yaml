@@ -35,9 +35,7 @@ spec:
       jobEnabled: false
     defaultSettings:
       defaultDataPath: "/var/mnt/longhorn"
-    defaultBackupStore:
-      backupTarget: "s3://longhorn-backup@home/"
-      backupTargetCredentialSecret: "s3-backup-secret"
+    defaultBackupStore: {}
 
     httproute:
       enabled: true

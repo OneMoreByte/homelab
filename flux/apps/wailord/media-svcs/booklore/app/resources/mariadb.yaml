@@ -27,21 +27,3 @@ spec:
     name: booklore-user-password
     key: password
   database: booklore
----
-apiVersion: k8s.mariadb.com/v1alpha1
-kind: PhysicalBackup
-metadata:
-  name: &name booklore-db
-spec:
-  mariaDbRef:
-    name: *name
-  storage:
-    s3:
-      bucket: mariadb-backup
-      endpoint: seaweedfs-s3.objectstore.svc.cluster.local:8333
-      accessKeyIdSecretKeyRef:
-        name: &backup-secret booklore-db-backup
-        key: access-key-id
-      secretAccessKeySecretKeyRef:
-        name: *backup-secret
-        key: secret-access-key
