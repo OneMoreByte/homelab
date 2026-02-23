@@ -109,7 +109,7 @@ spec:
         rules:
           - name: "default"
             backendRefs:
-              - name: syncthing-main
+              - name: syncthing-webui
                 port: 8384
             matches:
               - path:
