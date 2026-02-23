@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - resources/helm-release.yaml
   - resources/helm-repo.yaml
-  - resources/backup-secret.yaml
