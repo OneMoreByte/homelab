@@ -9,8 +9,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
 
-  dependsOn:
-    - name: seaweedfs
+  dependsOn: []
 
   interval: 1h
   path: ./flux/apps/wailord/cnpg-system/cloudnative-pg/app
