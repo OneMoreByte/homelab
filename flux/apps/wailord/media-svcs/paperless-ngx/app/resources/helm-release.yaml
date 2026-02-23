@@ -116,26 +116,34 @@ spec:
 
       data:
         enabled: true
-        retain: true
-        mountPath: /usr/src/paperless/data
+        advancedMounts:
+          main:
+            main:
+              - path: /usr/src/paperless/data
         hostPath: /var/mnt/fast-store/k8s-hostpath/paperless/data
         type: hostPath
       media:
         enabled: true
-        retain: true
-        mountPath: /usr/src/paperless/media
+        advancedMounts:
+          main:
+            main:
+              - path: /usr/src/paperless/media
         hostPath: /var/mnt/fast-store/k8s-hostpath/paperless/media
         type: hostPath
       export:
         enabled: true
-        retain: true
-        mountPath: /usr/src/paperless/export
+        advancedMounts:
+          main:
+            main:
+              - path: /usr/src/paperless/export
         hostPath: /var/mnt/fast-store/k8s-hostpath/paperless/export
         type: hostPath
       consume:
         enabled: true
-        retain: true
-        mountPath: /usr/src/paperless/consume
+        advancedMounts:
+          main:
+            main:
+              - path: /usr/src/paperless/consume
         hostPath: /var/mnt/fast-store/k8s-hostpath/paperless/consume
         type: hostPath
 
