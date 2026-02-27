@@ -38,7 +38,7 @@ spec:
                     key: password
             image:
               repository: ghcr.io/seerr-team/seerr
-              tag: develop
+              tag: v3.1.0
               pullPolicy: IfNotPresent
     defaultPodOptions:
       securityContext:
