@@ -39,7 +39,7 @@ spec:
                 app.kubernetes.io/name: jscknet-ldap-outpost
         spec:
             containers:
-                - image: ghcr.io/goauthentik/ldap:2025.10.2
+                - image: ghcr.io/goauthentik/ldap:2026.2.0
                   name: ldap
                   ports:
                       - containerPort: 3389
