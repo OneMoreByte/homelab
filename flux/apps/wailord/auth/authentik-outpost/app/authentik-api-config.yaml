@@ -5,7 +5,7 @@ metadata:
 stringData:
     AUTHENTIK_HOST: ENC[AES256_GCM,data:53r1m0lyqvgUDZyVbA51alkPX9K5UNdDqBzFY74=,iv:ufOJiFNIN8//hIxI2XT1bUqqsRUDm2bXcKNiKq1M22M=,tag:KpkYs7FNIu1tkjg7kAm+xQ==,type:str]
     AUTHENTIK_INSECURE: ENC[AES256_GCM,data:TdgPF9k=,iv:pVQ8dnmsigoRSuTzu0bgvMETMRzRpWhbDTf/ZtoWA/Q=,tag:q39XvaYoaOzk6wWHMBwcpQ==,type:str]
-    AUTHENTIK_TOKEN: ENC[AES256_GCM,data:YtfXvZ0eXjVs9eUMLb7B8G/1GHnS/in9VHb5rK0wsoJopx+oGG+ZZvCEK0+8LBvXdcTO7fhcFtZvs3sm,iv:m1zcQv1wkH01Bo436Vp2PcriLADeiYQ+/WD2RE5IGAI=,tag:Y/l1Q9tmVss/45rT6yZKzw==,type:str]
+    AUTHENTIK_TOKEN: ENC[AES256_GCM,data:G4ReZXBxRSk7J3mcNo85j0CJnMSW8Ihv/0zzVqzNNnqIl46t8dohMj5ElIphEW2pa+7/Jn3svcvfS1gS,iv:NGZHX/dvCHyjTcoM5Ur4M9OFR9elhQnQfH2Oubw1LcQ=,tag:lS8kUpBVf9V1jhoYXEYP6Q==,type:str]
 sops:
     age:
         - recipient: age1yubikey1qdmjd6g9zxszvw332nlw8898pl9q8tnpjv8ljjvxpau650567j5a6nlpjz8
@@ -37,7 +37,7 @@ sops:
             TXBCckVHdlNzM1BEWUw4V0NCOGpuem8KNe+Jslfwc9VJ2HLjp5LLJ9QHSB+yVkoy
             UA7+KfZfqjT8OWgm8BWJR9qne39n3O8ElwtwbPks8APxzxOoKh/jSg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-12-22T17:07:13Z"
-    mac: ENC[AES256_GCM,data:RBOY4gW41EfvrqIHbQWXN5LuNrpG1lBEolU4xHXysa8yOrlvGqiT8qteDHxLVCZtOMZuwFQhbOTuW2+1YZyq0RhtOIX5RJv32Xyfjt/6t0xbzT2GdJA4nN0/TO+0jAho87wcaThuPvATtJa6QI5oBNY3ghJtdJ47vp9Kn9pqCSE=,iv:+B307yES8YYwI6UGAQuGOK6ZWHtPz0yTpIAbkGe2ILY=,tag:F34m6IdRrBtJXuaGFk1I7g==,type:str]
+    lastmodified: "2026-03-01T03:40:37Z"
+    mac: ENC[AES256_GCM,data:BrjYs01mxAyYBXIFB/8m2231OH+aBV4xloNLS6yJlOJNEKv8ixnvGcMrjGeqqehaSkWgWKDEjcH0/HVRFgzmZXLxpM065hKiSYPQvE844aUKa0zC19MCcn1vuu7LSMim+c5fg5w2HendviPrHOGf8NXh69JbHvNn0vSA+QLfh50=,iv:5DRRdZfZ1a3LM0cTP5VMC05JQjBOM1pJ4LTbGaOsgFQ=,tag:mnUggw6MYyErZwpiHpOLTw==,type:str]
     encrypted_regex: ^(data|stringData)$
-    version: 3.11.0
+    version: 3.12.1
