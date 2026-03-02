@@ -91,14 +91,14 @@ nodes:
             match: disk.wwid == "eui.000000000000000100a0752448c2286c"
         filesystem:
           type: xfs
-      - name: weed-1
+      - name: longhorn-ext-1
         provisioning:
           minSize: 500GiB
           diskSelector:
             match: disk.wwid == "eui.e8238fa6bf530001001b448b4d6b75f7"
         filesystem:
           type: xfs
-      - name: weed-2
+      - name: longhorn-ext-2
         provisioning:
           minSize: 500GiB
           diskSelector:
@@ -130,6 +130,8 @@ nodes:
             - siderolabs/iscsi-tools
             - siderolabs/nvme-cli
             - siderolabs/util-linux-tools
+            - siderolabs/nfsd
+            - siderolabs/nfs-utils
             - siderolabs/zfs
             - siderolabs/ctr
             - siderolabs/xe
@@ -153,14 +155,14 @@ nodes:
             match: disk.wwid == "eui.000000000000000100a075244d2eed97"
         filesystem:
           type: xfs
-      - name: weed-1
+      - name: longhorn-ext-1
         provisioning:
           minSize: 500GiB
           diskSelector:
             match: disk.wwid == "eui.e8238fa6bf530001001b448b4d841c20"
         filesystem:
           type: xfs
-      - name: weed-2
+      - name: longhorn-ext-2
         provisioning:
           minSize: 500GiB
           diskSelector:
@@ -184,14 +186,14 @@ nodes:
             match: disk.wwid == "naa.500a0751e69f5cd8"
         filesystem:
           type: xfs
-      - name: weed-1
+      - name: longhorn-ext-1
         provisioning:
           minSize: 500GiB
           diskSelector:
             match: disk.wwid == "naa.500a0751e8a09577"
         filesystem:
           type: xfs
-      - name: weed-2
+      - name: longhorn-ext-2
         provisioning:
           minSize: 500GiB
           diskSelector:
@@ -216,14 +218,14 @@ nodes:
             match: disk.wwid == "naa.500a0751e69f5cd9"
         filesystem:
           type: xfs
-      - name: weed-1
+      - name: longhorn-ext-1
         provisioning:
           minSize: 500GiB
           diskSelector:
             match: disk.wwid == "naa.500a0751e8ab17fb"
         filesystem:
           type: xfs
-      - name: weed-2
+      - name: longhorn-ext-2
         provisioning:
           minSize: 500GiB
           diskSelector:
