@@ -31,6 +31,20 @@ patches:
               - bind
               - rshared
               - rw
+          - destination: /var/mnt/longhorn-1
+            type: bind
+            source: /var/mnt/longhorn-1
+            options:
+              - bind
+              - rshared
+              - rw
+          - destination: /var/mnt/longhorn-2
+            type: bind
+            source: /var/mnt/longhorn-2
+            options:
+              - bind
+              - rshared
+              - rw
     
       # Give cilium a route to our dns server
       network:
@@ -84,21 +98,14 @@ nodes:
     installDiskSelector:
       wwid: "eui.000000000000000100a0752449579213"
     userVolumes:
-      - name: longhorn
-        provisioning:
-          minSize: 500GiB
-          diskSelector:
-            match: disk.wwid == "eui.000000000000000100a0752448c2286c"
-        filesystem:
-          type: xfs
-      - name: longhorn-ext-1
+      - name: longhorn-1
         provisioning:
           minSize: 500GiB
           diskSelector:
             match: disk.wwid == "eui.e8238fa6bf530001001b448b4d6b75f7"
         filesystem:
           type: xfs
-      - name: longhorn-ext-2
+      - name: longhorn-2
         provisioning:
           minSize: 500GiB
           diskSelector:
@@ -148,21 +155,14 @@ nodes:
     installDiskSelector:
       wwid: "eui.000000000000000100a075244d2eb934"
     userVolumes:
-      - name: longhorn
-        provisioning:
-          minSize: 500GiB
-          diskSelector:
-            match: disk.wwid == "eui.000000000000000100a075244d2eed97"
-        filesystem:
-          type: xfs
-      - name: longhorn-ext-1
+      - name: longhorn-1
         provisioning:
           minSize: 500GiB
           diskSelector:
             match: disk.wwid == "eui.e8238fa6bf530001001b448b4d841c20"
         filesystem:
           type: xfs
-      - name: longhorn-ext-2
+      - name: longhorn-2
         provisioning:
           minSize: 500GiB
           diskSelector:
@@ -179,21 +179,14 @@ nodes:
     installDiskSelector:
       wwid: "nvme.c0a9-323331304536423834424330-4354353030503353534438-00000001"
     userVolumes:
-      - name: longhorn
-        provisioning:
-          minSize: 500GiB
-          diskSelector:
-            match: disk.wwid == "naa.500a0751e69f5cd8"
-        filesystem:
-          type: xfs
-      - name: longhorn-ext-1
+      - name: longhorn-1
         provisioning:
           minSize: 500GiB
           diskSelector:
             match: disk.wwid == "naa.500a0751e8a09577"
         filesystem:
           type: xfs
-      - name: longhorn-ext-2
+      - name: longhorn-2
         provisioning:
           minSize: 500GiB
           diskSelector:
@@ -211,21 +204,14 @@ nodes:
     installDiskSelector:
       wwid: "nvme.c0a9-323331304536423736333239-4354353030503353534438-00000001"
     userVolumes:
-      - name: longhorn
-        provisioning:
-          minSize: 500GiB
-          diskSelector:
-            match: disk.wwid == "naa.500a0751e69f5cd9"
-        filesystem:
-          type: xfs
-      - name: longhorn-ext-1
+      - name: longhorn-1
         provisioning:
           minSize: 500GiB
           diskSelector:
             match: disk.wwid == "naa.500a0751e8ab17fb"
         filesystem:
           type: xfs
-      - name: longhorn-ext-2
+      - name: longhorn-2
         provisioning:
           minSize: 500GiB
           diskSelector:
