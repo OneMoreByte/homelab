@@ -57,5 +57,6 @@ spec:
               - path: /mosquitto/config/
       data:
         enabled: true
-        type: hostPath
-        hostPath: /mnt/k8s/mqtt
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 8Gi
