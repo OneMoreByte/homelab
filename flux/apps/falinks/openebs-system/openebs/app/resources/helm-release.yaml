@@ -31,3 +31,5 @@ spec:
         mayastor:
           enabled: false
 
+    localpv-provisioner:
+      basePath: "/var/mnt/persistent-data"
