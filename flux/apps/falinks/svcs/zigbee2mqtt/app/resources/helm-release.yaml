@@ -31,6 +31,16 @@ spec:
               pullPolicy: IfNotPresent
             securityContext:
               privileged: true
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: zigbee
+                    operator: In
+                    values:
+                      - yes
     service:
       main:
         controller: main
