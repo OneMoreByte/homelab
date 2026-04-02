@@ -17,6 +17,8 @@ spec:
   values:
     global:
       alwaysAppendIdentifierToResourceName: true
+    defaultPodOptions:
+      hostNetwork: true
     controllers:
       main:
         containers:
