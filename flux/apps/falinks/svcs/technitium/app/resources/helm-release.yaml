@@ -34,7 +34,7 @@ spec:
     service:
       main:
         controller: main
-        type: LoadBalancer
+        type: NodePort
         ports:
           dns-tcp:
             port: 53
@@ -49,8 +49,9 @@ spec:
     persistence:
       config:
         enabled: true
-        type: hostPath
-        hostPath: /mnt/k8s/technitium
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 10Gi
         advancedMounts:
           main:
             main:
