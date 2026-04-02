@@ -32,4 +32,7 @@ spec:
           enabled: false
 
     localpv-provisioner:
-      basePath: "/var/mnt/persistent-data"
+      localpv:
+        basePath: "/var/mnt/persistent-data"
+      hostpathClass:
+        isDefaultClass: true
