@@ -49,12 +49,13 @@ spec:
           http:
             port: 8080
             nodePort: 30800
+
     persistence:
       zigbee-config:
         enabled: true
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        size: 16Gi
+        size: 10Gi
         advancedMounts:
           main:
             main:
