@@ -29,7 +29,7 @@ spec:
         enabled: false
     service:
       main:
-        enabled: true
+        enabled: false
         controller: main
         type: LoadBalancer
         ports:
