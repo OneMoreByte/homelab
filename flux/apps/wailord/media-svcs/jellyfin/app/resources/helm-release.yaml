@@ -25,7 +25,7 @@ spec:
           main:
             image:
               repository: ghcr.io/jellyfin/jellyfin
-              tag: 10.11.5
+              tag: 10.11.7
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
