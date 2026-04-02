@@ -17,17 +17,6 @@ spec:
   values:
     global:
       alwaysAppendIdentifierToResourceName: true
-    defaultPodOptions:
-      hostNetwork: true
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - theroom
     controllers:
       main:
         enabled: true
