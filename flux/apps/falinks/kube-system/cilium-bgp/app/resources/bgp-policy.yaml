@@ -5,10 +5,10 @@ metadata:
 spec:
   bgpInstances:
   - name: "udm-bgp-router"
-    localASN: 65513
+    localASN: 65523
     peers:
     - name: "unifi-udm-pro"
-      peerASN: 65521
+      peerASN: 65511
       peerAddress: 192.168.13.1
       peerConfigRef:
         name: "unifi-bgp-peer"
