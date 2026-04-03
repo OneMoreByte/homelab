@@ -10,6 +10,24 @@ clusterSvcNets:
 additionalApiServerCertSans:
   - kube.falinks.jsck.network
 
+cniConfig:
+  name: none
+
+patches:
+  - |-
+    cluster:
+      proxy:
+        disabled: true
+
+    machine:
+      kubelet:    
+      # Give cilium a route to our dns server
+      network:
+        interfaces:
+          - interface: lo
+            addresses:
+              - 169.254.116.108/32
+
 controlPlane:
   schematic:
     overlay:
@@ -17,7 +35,7 @@ controlPlane:
       image: siderolabs/sbc-raspberrypi
       options:
         configTxt: |
-          gpu_mem=128
+          gpu_mem=32
           kernel=u-boot.bin
           arm_64bit=1
           arm_boost=1
@@ -25,13 +43,13 @@ controlPlane:
           dtoverlay=disable-bt
           dtoverlay=disable-wifi
           avoid_warnings=2
-          dtoverlay=vc4-kms-v3d,noaudio
+          usb_max_current_enable=1
     customization:
       systemExtensions:
         officialExtensions:
           - siderolabs/nvme-cli
           - siderolabs/util-linux-tools
-          - siderolabs/vc4
+          - siderolabs/nut-client
 
 nodes:
   - hostname: theroom

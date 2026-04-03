@@ -33,9 +33,9 @@ spec:
               privileged: true
     service:
       main:
-        enabled: false
+        enabled: true
         controller: main
-        type: NodePort
+        type: LoadBalancer
         ports:
           dns-tcp:
             port: 53
