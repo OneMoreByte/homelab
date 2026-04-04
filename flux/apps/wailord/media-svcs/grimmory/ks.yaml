@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app booklore
+  name: &app booklore # I'm keeping this booklore, so I don't have to worry about migrating data to a new helm install.
 spec:
   commonMetadata:
     labels:
@@ -13,7 +13,7 @@ spec:
     - name: traefik
 
   interval: 1h
-  path: ./flux/apps/wailord/media-svcs/booklore/app
+  path: ./flux/apps/wailord/media-svcs/grimmory/app
   prune: true
   retryInterval: 2m
   sourceRef:

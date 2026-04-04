@@ -25,21 +25,6 @@
       ],
       "automergeType": "pr",
       "platformAutomerge": true
-    },
-    {
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchPackageNames": [
-        "/ghcr\\.io\\/onemorebyte\\/plex:\\d+\\.\\d+\\.\\d+-\\d+$/"
-      ],
-      "versioning": "semver"
-    },
-    {
-      "matchPackageNames": [
-        "linuxserver/calibre-web"
-      ],
-      "allowedVersions": "/0\\..*/"
     }
   ],
   "customManagers": [
