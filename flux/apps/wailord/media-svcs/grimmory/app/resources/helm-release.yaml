@@ -24,8 +24,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/booklore-app/booklore
-              tag: v1.16.5
+              repository: ghcr.io/grimmory-tools/grimmory
+              tag: v2.3.0
               pullPolicy: IfNotPresent
             env:
               TZ: "America/Chicago"
