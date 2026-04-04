@@ -148,7 +148,7 @@ spec:
             main:
               image:
                 repository: ghcr.io/immich-app/immich-machine-learning
-                tag: v2.4.1-openvino
+                tag: v2.6.3-openvino
               securityContext:
                 privileged: true
                 runAsUser: 0
