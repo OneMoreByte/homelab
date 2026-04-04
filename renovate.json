@@ -8,7 +8,7 @@
     "config:recommended"
   ],
     "flux": {
-    "managerFilePatterns": ["/flux/**/.+\\.yaml$/"]
+    "managerFilePatterns": ["/flux\\/**\\/.+\\.yaml$/"]
   },
   "packageRules": [
     {
