@@ -17,4 +17,3 @@ resources:
   - zfs-system.yaml
   - backups.yaml
   - gateway-svcs.yaml
-  - chat.yaml
