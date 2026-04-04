@@ -7,6 +7,9 @@
   "extends": [
     "config:recommended"
   ],
+    "flux": {
+    "managerFilePatterns": ["/flux/**/.+\\.yaml$/"]
+  },
   "packageRules": [
     {
       "matchUpdateTypes": [
