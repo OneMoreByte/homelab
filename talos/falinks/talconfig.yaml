@@ -49,7 +49,6 @@ controlPlane:
         officialExtensions:
           - siderolabs/nvme-cli
           - siderolabs/util-linux-tools
-          - siderolabs/nut-client
 
 nodes:
   - hostname: theroom
