@@ -27,7 +27,7 @@ spec:
               TZ: America/Chicago
             image:
               repository: ghcr.io/esphome/esphome
-              tag: 2026.3.2
+              tag: 2026.3.3
               pullPolicy: IfNotPresent
 
             securityContext:
