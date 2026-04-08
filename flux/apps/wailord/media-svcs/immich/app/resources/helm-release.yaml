@@ -20,8 +20,6 @@ spec:
       main:
         containers:
           main:
-            image:
-              tag: v2.4.1
             env:
               REDIS_HOSTNAME: "immich-valkey"
               UID: 11337
@@ -128,6 +126,11 @@ spec:
             - hosts:
                 - photos.jackhil.de
               secretName: photos.jackhil.de-cert
+      containers:
+        main:
+          image:
+            repository: ghcr.io/immich-app/immich-server
+            tag: v2.7.2
 
       persistence:
         data:
