@@ -130,7 +130,7 @@ spec:
         main:
           image:
             repository: ghcr.io/immich-app/immich-server
-            tag: v2.7.2
+            tag: v2.7.3
 
       persistence:
         data:
@@ -151,7 +151,7 @@ spec:
             main:
               image:
                 repository: ghcr.io/immich-app/immich-machine-learning
-                tag: v2.7.2-openvino
+                tag: v2.7.3-openvino
               securityContext:
                 privileged: true
                 runAsUser: 0
