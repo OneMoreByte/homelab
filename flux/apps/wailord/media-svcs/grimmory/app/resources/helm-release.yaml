@@ -36,6 +36,8 @@ spec:
                 secretKeyRef:
                   name: booklore-user-password
                   key: password
+              # Don't let it run the user changing code. We're doing it with the execution env
+              command: ["java", "--enable-native-access=ALL-UNNAMED", "--enable-preview", "-jar", "/app/app.jar"]
         initContainers:
           wait-for-zfs:
             image:
