@@ -20,6 +20,9 @@ spec:
       main:
         containers:
           main:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v2.7.4
             env:
               REDIS_HOSTNAME: "immich-valkey"
               UID: 11337
