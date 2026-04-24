@@ -59,6 +59,12 @@ spec:
     minio:
       enabled: false
 
+    lokiCanary:
+      enabled: false
+
+    chunksCache:
+      enabled: false
+
     deploymentMode: SingleBinary
 
     singleBinary:
