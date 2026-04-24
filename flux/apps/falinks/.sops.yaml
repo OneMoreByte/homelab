@@ -1,0 +1,9 @@
+creation_rules:
+   # blue
+   # keychain
+   # cluster
+    - encrypted_regex: ^(data|stringData)$
+      age: >-
+        age1yubikey1qdmjd6g9zxszvw332nlw8898pl9q8tnpjv8ljjvxpau650567j5a6nlpjz8,
+        age1yubikey1qwu0zwltgvjgv7tr0qcpjw6grreja8lqwpsxdprgwyap29mrkvx6j6795r0,
+        age1qx0rq7nr30zw7kjhlh5nccfj8w30hdnlc890c6hqxqack5eayevqm8wp8m

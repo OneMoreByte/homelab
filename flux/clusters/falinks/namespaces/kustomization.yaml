@@ -5,4 +5,5 @@ resources:
   - svcs.yaml
   - log-svcs.yaml
   - traefik.yaml
+  - object-store.yaml
 

@@ -1,0 +1,91 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: garage
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: garage
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: dxflrs/garage
+              tag: v2.3.0
+            envFrom:
+              - secretRef:
+                  name: garage-env
+
+    ingress:
+      main:
+        enabled: false
+
+    service:
+      main:
+        controller: main
+        ports:
+          api:
+            port: 3900
+          rpc:
+            port: 3901
+          web:
+            port: 3902
+          admin:
+            port: 3903
+
+    configMaps:
+      config:
+        enabled: true
+        data:
+          garage.toml: |
+            metadata_dir = "/storage/meta"
+            data_dir = "/storage/data"
+            db_engine = "sqlite"
+
+            replication_factor = 1
+
+            rpc_bind_addr = "[::]:3901"
+            rpc_public_addr = "127.0.0.1:3901"
+
+            [s3_api]
+            s3_region = "falinks"
+            api_bind_addr = "[::]:3900"
+
+
+            [s3_web]
+            bind_addr = "[::]:3902"
+            index = "index.html"
+
+            [admin]
+            api_bind_addr = "[::]:3903"
+
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        identifier: config
+        advancedMounts:
+          main:
+            main:
+              - path: /etc/
+                subPath: garage.toml
+
+      storage:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 8Gi
+
