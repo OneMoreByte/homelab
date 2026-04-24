@@ -18,10 +18,15 @@ spec:
   values:
     loki:
       storage:
-        type: filesystem
-        filesystem:
-          chunks_directory: /data/loki/chunks
-          rules_directory: /data/loki/rules
+        bucketNames:
+          chunks: loki-chunk
+          ruler: loki-ruler
+          admin:  loki-admin
+        type: s3
+        s3:
+          endpoint: "garage-main.object-store.svc.cluster.local:3900"
+          accessKeyId: "${LOKI_ACCESS_KEY}"
+          secretAccessKey: "${LOKI_SECRET_KEY}"
 
       # Recommended from docs for single node deployment
       commonConfig:
@@ -50,6 +55,20 @@ spec:
 
     singleBinary:
       replicas: 1
+      extraArgs:
+        - '-config.expand-env=true'
+      extraEnv:
+        - name: LOKI_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: loki-secrets
+              key: access-key
+        - name: LOKI_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: loki-secrets
+              key: secret-key
+
 
     # Zero out replica counts of other deployment modes
     backend:
