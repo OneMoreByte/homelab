@@ -48,6 +48,14 @@ spec:
       ruler:
         enable_api: true
 
+      ingester:
+        chunk_encoding: snappy
+      tracing:
+        enabled: true
+      querier:
+        # Default is 4, if you have enough memory and CPU you can increase, reduce if OOMing
+        max_concurrent: 2
+
     minio:
       enabled: false
 
@@ -55,6 +63,13 @@ spec:
 
     singleBinary:
       replicas: 1
+      resources:
+        limits:
+          cpu: 3
+          memory: 4Gi
+        requests:
+          cpu: 2
+          memory: 2Gi
       service:
         type: LoadBalancer
       extraArgs:
