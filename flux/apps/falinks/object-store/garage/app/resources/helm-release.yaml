@@ -89,5 +89,5 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        size: 8Gi
+        size: 300Gi
 

@@ -55,6 +55,8 @@ spec:
 
     singleBinary:
       replicas: 1
+      service:
+        type: LoadBalancer
       extraArgs:
         - '-config.expand-env=true'
       extraEnv:
