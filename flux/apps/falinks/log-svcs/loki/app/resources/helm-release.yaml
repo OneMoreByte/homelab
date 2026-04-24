@@ -62,12 +62,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: loki-secrets
-              key: access-key
+              key: LOKI_ACCESS_KEY
         - name: LOKI_SECRET_KEY
           valueFrom:
             secretKeyRef:
               name: loki-secrets
-              key: secret-key
+              key: LOKI_SECRET_KEY
 
 
     # Zero out replica counts of other deployment modes
