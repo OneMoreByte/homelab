@@ -63,11 +63,12 @@ spec:
             [s3_api]
             s3_region = "falinks"
             api_bind_addr = "[::]:3900"
-
+            root_domain = ".garage.falinks.jsck.network"
 
             [s3_web]
             bind_addr = "[::]:3902"
             index = "index.html"
+            root_domain = ".garage.falinks.jsck.network"
 
             [admin]
             api_bind_addr = "[::]:3903"
