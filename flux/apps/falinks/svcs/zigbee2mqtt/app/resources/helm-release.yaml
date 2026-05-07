@@ -27,7 +27,7 @@ spec:
               TZ: America/Chicago
             image:
               repository: ghcr.io/koenkk/zigbee2mqtt
-              tag: 2.10.0
+              tag: 2.10.1
               pullPolicy: IfNotPresent
             securityContext:
               privileged: true
