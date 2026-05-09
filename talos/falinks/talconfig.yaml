@@ -96,25 +96,4 @@ nodes:
           diskSelector:
             match: disk.transport == "nvme"
 
-  - hostname: brightburn
-    ipAddress: 192.168.13.69
-    installDisk: /dev/mmcblk0
-    controlPlane: false
-    nodeLabels:
-      nutty: "no"
-      zigbee: "no"
-    volumes:
-      - name: EPHEMERAL
-        provisioning:
-          diskSelector:
-            match: disk.transport == "usb"
-          minSize: 100GiB
-          maxSize: 100GiB
-    userVolumes:
-      - name: persistent-data
-        volumeType: partition
-        provisioning:
-          minSize: 100Gib
-          grow: true
-          diskSelector:
-            match: disk.transport == "usb"
+
