@@ -25,7 +25,7 @@ spec:
           main:
             image:
               repository: docker.io/actualbudget/actual-server
-              tag: 26.5.0
+              tag: 26.5.2
               pullPolicy: IfNotPresent
             env:
               ACTUAL_OPENID_SERVER_HOSTNAME: &hostname budget.jackhil.de
