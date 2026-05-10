@@ -27,7 +27,7 @@ spec:
               DNS_SERVER_DOMAIN: dns.jsck.network
             image:
               repository: docker.io/technitium/dns-server
-              tag: 15.1.0
+              tag: 15.2.0
               pullPolicy: IfNotPresent
             securityContext:
               privileged: true
