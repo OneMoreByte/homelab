@@ -30,7 +30,7 @@ spec:
               PGID: 11337
             image:
               repository: ghcr.io/hotio/prowlarr
-              tag: release-2.3.0.5236
+              tag: release-2.3.5.5327
               pullPolicy: IfNotPresent
         initContainers:
           configure-postgres:
