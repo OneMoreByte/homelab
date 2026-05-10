@@ -31,7 +31,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "values.yaml"
+        "helm-release.yaml"
       ],
       "matchStrings": [
         "repository: (?<depName>hotio\\/.*)\\n\\ *tag: \"release-(?<currentValue>.*)\"",
