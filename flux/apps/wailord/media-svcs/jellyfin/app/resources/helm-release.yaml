@@ -111,6 +111,26 @@ spec:
           main:
             main:
               - path: /cache
+
+      fonts:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/fast-store/k8s-hostpath/jellyfin-fonts
+        advancedMounts:
+          main:
+            main:
+              - path: /fonts
+
+      library-images:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/fast-store/k8s-hostpath/jellyfin-images
+        advancedMounts:
+          main:
+            main:
+              - path: /library-images
+
+
       media:
         enabled: true
         type: hostPath
