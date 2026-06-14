@@ -25,7 +25,7 @@ spec:
           main:
             image:
               repository: ghcr.io/grimmory-tools/grimmory
-              tag: v3.2.0
+              tag: v3.2.1
               pullPolicy: IfNotPresent
             env:
               TZ: "America/Chicago"
