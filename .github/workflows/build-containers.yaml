@@ -16,7 +16,7 @@ jobs:
       matrix:
         container: ["arr-pg-configure", "backup-target", "talos-shell"]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Get container version and current talos version
         shell: bash
         run: |
