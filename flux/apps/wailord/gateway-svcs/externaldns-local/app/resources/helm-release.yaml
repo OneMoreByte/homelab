@@ -20,15 +20,40 @@ spec:
       retries: 3
   # https://lmno.pk/post/configuring-external-dns-technitium/
   values:
+    fullnameOverride: external-dns-unifi
     provider:
-      name: rfc2136
+        name: webhook
+        webhook:
+            image:
+                repository: ghcr.io/home-operations/external-dns-unifi-webhook
+                tag: 0.10.7
+            env:
+                - name: UNIFI_HOST
+                  value: https://192.168.13.1
+                - name: UNIFI_API_KEY
+                  valueFrom:
+                      secretKeyRef:
+                          name: unifi-dns-secret
+                          key: UNIFI_API_KEY
+            livenessProbe:
+                httpGet:
+                    path: /healthz
+                    port: http-webhook
+                initialDelaySeconds: 10
+                timeoutSeconds: 5
+            readinessProbe:
+                httpGet:
+                    path: /readyz
+                    port: http-webhook
+                initialDelaySeconds: 10
+                timeoutSeconds: 5
+    triggerLoopOnEvent: true
+    policy: sync
 
-    env:
-      - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: tsig-key
-            key: key
+    txtOwnerId: main
+    txtPrefix: k8s.main.%{record_type}-
+    domainFilters:
+        - jsck.network
 
     sources:
       - service
@@ -37,12 +62,4 @@ spec:
       - gateway-grpcroute
       - node
 
-    extraArgs:
-      - --rfc2136-host=192.168.13.250
-      - --rfc2136-port=53
-      - --rfc2136-zone=jsck.network
-      - --rfc2136-tsig-secret-alg=hmac-sha256
-      - --rfc2136-tsig-keyname=external-dns
-      - --rfc2136-tsig-axfr
-      - --domain-filter=jsck.network
 

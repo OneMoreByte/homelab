@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
   - resources/helm-release.yaml
-  - resources/tsig-key.yaml
+  - resources/unifi-dns-secret.yaml
