@@ -31,7 +31,7 @@ spec:
               PGID: 11337
             image:
               repository: syncthing/syncthing
-              tag: 2.1.1
+              tag: 2.1.2
               pullPolicy: IfNotPresent
         initContainers:
           wait-for-zfs:
