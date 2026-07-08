@@ -1,0 +1,14 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: jellyfin-pg-cluster
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: jellyfin
+      owner: jellyfin
+      secret:
+        name: jellyfin-db-secret
+  storage:
+    size: 50Gi

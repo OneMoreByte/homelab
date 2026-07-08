@@ -5,4 +5,6 @@ resources:
   - resources/helm-release.yaml
   - resources/oci-repo.yaml
   - resources/certificate.yaml
+  - resources/postgres.yaml
+  - resources/postgres-db-secret.yaml
 

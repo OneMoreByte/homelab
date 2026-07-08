@@ -24,11 +24,19 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/jellyfin/jellyfin
-              tag: 10.11.11
+              repository: ghcr.io/jpvenson/jellyfin.pgsql
+              tag: 10.11.11-1
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
+              POSTGRES_HOST: jellyfin-pg-cluster-rw
+              POSTGRES_PORT: 5432
+              POSTGRES_DB: jellyfin
+              POSTGRES_USER: jellyfin
+              POSTGRES_PASSWORD:
+                secretKeyRef:
+                  name: jellyfin-db-secret
+                  key: password
             securityContext:
               privileged: true
         initContainers:

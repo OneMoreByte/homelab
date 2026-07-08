@@ -1,6 +1,6 @@
 clusterName: wailord
-talosVersion: "v1.13.0"
-kubernetesVersion: 1.36.0
+talosVersion: "v1.13.5"
+kubernetesVersion: 1.36.2
 endpoint: "https://kube.wailord.jsck.network:6443"
 allowSchedulingOnMasters: true
 clusterPodNets:
