@@ -26,7 +26,7 @@ spec:
     image:
       repository: factoriotools/factorio
       pullPolicy: Always
-      tag: 2.1.10
+      tag: 2.1.11
     nodeSelector: {}
     service:
       type: LoadBalancer
