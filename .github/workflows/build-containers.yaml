@@ -26,7 +26,7 @@ jobs:
 
       - name: build container ${{ matrix.container }}
         id: build-container
-        uses: redhat-actions/buildah-build@v2
+        uses: redhat-actions/buildah-build@v3
         with:
           image: ghcr.io/onemorebyte/${{ matrix.container }}
           tags: "latest ${{ env.VERSION }}"
