@@ -78,7 +78,7 @@ spec:
           memory: 2Gi
       service:
         type: NodePort
-        nodePort: 31100
+        nodePort: 30100
       extraArgs:
         - '-config.expand-env=true'
       extraEnv:
