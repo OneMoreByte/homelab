@@ -28,10 +28,6 @@ spec:
             type: loki
             access: proxy
             url: http://192.168.13.67:31000
-            jsonData:
-              httpHeaderName1: 'X-Scope-OrgID'
-            secureJsonData:
-              httpHeaderName1: 'wailord'
 
     persistence:
       enabled: true

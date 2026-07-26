@@ -138,9 +138,6 @@ spec:
             - audit_parser
             - talos_service_logs_xform
             - talos_kernel_logs_xform
-          request:
-            headers:
-              X-Scope-OrgID: "wailord"
           encoding:
             codec: json
           out_of_order_action: accept

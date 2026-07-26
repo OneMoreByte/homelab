@@ -17,6 +17,8 @@ spec:
       retries: 3
   values:
     loki:
+      auth_enabled: false
+
       storage:
         bucketNames:
           chunks: loki-chunk
