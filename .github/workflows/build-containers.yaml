@@ -34,7 +34,7 @@ jobs:
           containerfiles: "containers/${{matrix.container}}/Containerfile"
           build-args: "TALOS_VERSION=${{ env.TALOS_VERSION }}"
       - name: push to image repo
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v3
         with:
           image: ${{ steps.build-container.outputs.image }}
           tags: ${{ steps.build-container.outputs.tags }}
