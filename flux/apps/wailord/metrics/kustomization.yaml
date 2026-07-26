@@ -4,5 +4,6 @@ namespace: flux-system
 resources:
   - grafana/ks.yaml
   - prometheus/ks.yaml
+  - vector/ks.yaml
 #  - unipoller/ks.yaml
 

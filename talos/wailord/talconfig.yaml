@@ -1,5 +1,5 @@
 clusterName: wailord
-talosVersion: "v1.13.5"
+talosVersion: "v1.13.7"
 kubernetesVersion: 1.36.2
 endpoint: "https://kube.wailord.jsck.network:6443"
 allowSchedulingOnMasters: true
@@ -20,6 +20,9 @@ patches:
         disabled: true
 
     machine:
+      install:
+        grubUseUKICmdline: true
+    
       kubelet:    
         # Add longhorn's default mount. I'm not sure why this needs to be re-mounted? 
         # The docs said so though so ¯\_(ツ)_/¯
@@ -62,10 +65,15 @@ patches:
           - name: uio_pci_generic
           # We need that zfs
           - name: zfs
+          # Why is longhorn this way?
+          - name: vfio_pci
+          - name: ublk_drv
 
 controlPlane:
   schematic:
     customization:
+      extraKernelArgs:
+        - talos.logging.kernel=udp://127.0.0.1:6050/
       systemExtensions:
         officialExtensions:
           - siderolabs/amd-ucode
@@ -78,6 +86,8 @@ controlPlane:
 worker:
   schematic:
     customization:
+      extraKernelArgs:
+        - talos.logging.kernel=udp://127.0.0.1:6050/
       systemExtensions:
         officialExtensions:
           - siderolabs/amd-ucode
@@ -90,6 +100,15 @@ worker:
 
 nodes:
   - hostname: fateful.jsck.network
+    patches:
+      - |-
+        machine:
+          logging:
+            destinations:
+              - endpoint: "udp://127.0.0.1:6051/"
+                format: "json_lines"
+                extraTags:
+                  hostname: fateful
     ipAddress: 192.168.13.11
     controlPlane: false
     nodeLabels:
@@ -114,6 +133,15 @@ nodes:
           type: xfs
 
   - hostname: producers.jsck.network
+    patches:
+      - |-
+        machine:
+          logging:
+            destinations:
+              - endpoint: "udp://127.0.0.1:6051/"
+                format: "json_lines"
+                extraTags:
+                  hostname: producers
     ipAddress: 192.168.13.12
     controlPlane: true
     nodeLabels:
@@ -146,6 +174,15 @@ nodes:
             - siderolabs/mei # <- fw update interface for arc GPU
 
   - hostname: findings.jsck.network
+    patches:
+      - |-
+        machine:
+          logging:
+            destinations:
+              - endpoint: "udp://127.0.0.1:6051/"
+                format: "json_lines"
+                extraTags:
+                  hostname: findings
     ipAddress: 192.168.13.13
     controlPlane: true
     nodeLabels:
@@ -171,6 +208,15 @@ nodes:
           type: xfs
 
   - hostname: twisted-pair-1.jsck.network
+    patches:
+      - |-
+        machine:
+          logging:
+            destinations:
+              - endpoint: "udp://127.0.0.1:6051/"
+                format: "json_lines"
+                extraTags:
+                  hostname: twisted-pair-1
     ipAddress: 192.168.13.14
     controlPlane: true
     nodeLabels:
@@ -195,6 +241,15 @@ nodes:
           type: xfs
 
   - hostname: twisted-pair-2.jsck.network
+    patches:
+      - |-
+        machine:
+          logging:
+            destinations:
+              - endpoint: "udp://127.0.0.1:6051/"
+                format: "json_lines"
+                extraTags:
+                  hostname: twisted-pair-2
     ipAddress: 192.168.13.15
     controlPlane: false
     nodeLabels:

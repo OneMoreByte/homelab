@@ -1,0 +1,143 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: grafana
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: vector
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 2
+  values:
+    role: "Agent"
+
+    podMonitor:
+      enabled: true
+
+    podHostNetwork: true
+    dnsPolicy: ClusterFirstWithHostNe
+
+    customConfig:
+      data_dir: /vector-data-dir
+      api:
+        enabled: true
+        address: 0.0.0.0:8686
+      sources:
+        kubernetes_logs:
+          type: kubernetes_logs
+        host_metrics:
+          filesystem:
+            devices:
+              excludes: [ binfmt_misc ]
+            filesystems:
+              excludes: [ binfmt_misc ]
+            mountpoints:
+              excludes: [ "*/proc/sys/fs/binfmt_misc" ]
+          type: host_metrics
+        internal_metrics:
+          type: internal_metrics
+        kubernetes_audit_logs:
+          type: file
+          include:
+            - /var/log/audit/kube/*.log
+        talos_kernel_logs:
+          address: 0.0.0.0:6050
+          type: socket
+          mode: udp
+          max_length: 102400
+          decoding:
+            codec: json
+          host_key: __host
+        talos_service_logs:
+          address: 0.0.0.0:6051
+          type: socket
+          mode: udp
+          max_length: 102400
+          decoding:
+            codec: json
+          host_key: __host
+      transforms:
+        k8s_parser:
+          type: remap
+          inputs:
+            - kubernetes_logs
+          source: |
+            .log = parse_json(.message) ?? .message
+            del(.message)
+        audit_parser:
+          type: remap
+          inputs:
+            - kubernetes_audit_logs
+          source: |
+            . = parse_json(.message) ?? .message
+            parsed_timestamp, err = parse_timestamp(.requestReceivedTimestamp, format: "%Y-%m-%dT%H:%M:%S.%fZ")
+            if err == null {
+              .timestamp = to_unix_timestamp(parsed_timestamp)
+            } else {
+              .timestamp = to_unix_timestamp(now())
+            }
+            # multiline strings in VRL are weird; the escape char has to be inside an actual string and not an expression
+            composed_message, err = "User: " + .user.username + "; " + .verb + " \
+              " + .objectRef.apiGroup + "/" + .objectRef.apiVersion + ":\
+              " + .objectRef.resource + "; Decision: " + .annotations."authorization.k8s.io/decision" + "\
+              ; Reason: " + .annotations."authorization.k8s.io/reason"
+            if err == null {
+              .msg = composed_message
+            } else {
+              .msg = .message
+            }
+        talos_kernel_logs_xform:
+          type: remap
+          inputs: [talos_kernel_logs]
+          source: |
+            del(.clock)
+            parsed_timestamp, err = parse_timestamp(."talos-time", format: "%Y-%m-%dT%H:%M:%S.%fZ")
+            if err == null {
+              .timestamp = to_unix_timestamp(parsed_timestamp)
+            } else {
+              .timestamp = to_unix_timestamp(now())
+            }
+            .message = parse_json(.msg) ?? .msg
+            del(.msg)
+            del(."talos-time")
+        talos_service_logs_xform:
+          type: remap
+          inputs: [talos_service_logs]
+          source: |
+            parsed_timestamp, err = parse_timestamp(."talos-time", format: "%Y-%m-%dT%H:%M:%S.%fZ")
+            if err == null {
+              .timestamp = to_unix_timestamp(parsed_timestamp)
+            } else {
+              .timestamp = to_unix_timestamp(now())
+            }
+            .message = parse_json(.msg) ?? .msg
+            .level = ."talos-level"
+            .service = ."talos-service"
+            del(.msg)
+            del(."talos-time")
+            del(."talos-level")
+            del(."talos-service")
+      sinks:
+     #   stdout:
+     #     type: console
+     #     inputs: [ kubernetes_logs ]
+     #     encoding:
+     #       codec: json
+
+        loki:
+          type: loki
+          endpoint: http://192.168.69.3:3100
+          inputs:
+            - k8s_parser
+            - audit_parser
+            - talos_service_logs_xform
+            - talos_kernel_logs_xform
+          request:
+            headers:
+              X-Scope-OrgID: "wailord"
