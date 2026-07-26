@@ -77,7 +77,8 @@ spec:
           cpu: 2
           memory: 2Gi
       service:
-        type: LoadBalancer
+        type: NodePort
+        nodePort: 31100
       extraArgs:
         - '-config.expand-env=true'
       extraEnv:
