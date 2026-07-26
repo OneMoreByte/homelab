@@ -32,7 +32,7 @@ spec:
 
       # Recommended from docs for single node deployment
       commonConfig:
-        replication_factor: 1
+        replication_factor: 3
       schemaConfig:
         configs:
           - from: "2024-04-01"
