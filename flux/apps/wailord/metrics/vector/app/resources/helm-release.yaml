@@ -21,7 +21,7 @@ spec:
       enabled: true
 
     podHostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNe
+    dnsPolicy: ClusterFirstWithHostNet
 
     customConfig:
       data_dir: /vector-data-dir
