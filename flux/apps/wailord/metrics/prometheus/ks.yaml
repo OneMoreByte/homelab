@@ -11,7 +11,6 @@ spec:
 
   dependsOn:
     - name: longhorn
-      namespace: longhorn-system
 
   interval: 1h
   path: ./flux/apps/wailord/metrics/prometheus/app
