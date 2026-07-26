@@ -143,4 +143,6 @@ spec:
               X-Scope-OrgID: "wailord"
           encoding:
             codec: json
-
+          out_of_order_action: accept
+          labels:
+            host: hostname
