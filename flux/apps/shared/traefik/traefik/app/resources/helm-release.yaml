@@ -24,20 +24,13 @@ spec:
           trustedIPs:
             - 192.168.0.0/24
             - 10.0.0.0/8
-        forwardHeaders:
-          trustedIPs:
-            - 192.168.0.0/24
-            - 10.0.0.0/8
 
       websecure:
         proxyProtocol:
           trustedIPs:
             - 192.168.0.0/24
             - 10.0.0.0/8
-        forwardHeaders:
-          trustedIPs:
-            - 192.168.0.0/24
-            - 10.0.0.0/8
+
     providers:
       kubernetesIngress:
         publishedService:
@@ -51,56 +44,17 @@ spec:
         allowExternalNameServices: true
     deployment:
       annotations: {}
-      #additionalVolumes:
-      #  - name: traefik-logs
-      #    persistentVolumeClaim:
-      #      claimName: traefik-logs
     securityContext:
       securityContext:
         seccompProfile:
           type: "RuntimeDefault"
-#    metrics:
-#      addInternals: true
-#      prometheus:
-#        entryPoint: metrics
-#        service:
-#          enabled: true
-#        serviceMonitor:
-#          enabled: true
-#          jobLabel: traefik
-#          interval: 30s
-#        prometheusRule:
-#          enabled: true
-#          rules:
-#            - alert: TraefikDown
-#              expr: up{job="traefik"} == 0
-#              for: 5m
-#              labels:
-#                context: traefik
-#                severity: warning
-#              annotations:
-#                summary: Traefik Down
-#                description: '{{ $labels.pod }} on {{ $labels.nodename }} is down'
-#        disableAPICheck: false
     experimental:
       plugins: {}
       kubernetesGateway:
         enabled: false
         gateway:
           enabled: true
-    #additionalVolumeMounts:
-    #  - name: traefik-logs
-    #    mountPath: /var/log/traefik
-    logs:
-      general:
-        level: INFO
-      #access:
-      #  enabled: true
-      #  format: json
-      #  filePath: /var/log/traefik/access.log
-      maxSize: 1000
-      maxAge: 3
-      maxBackups: 3
+
     ingressRoute:
       dashboard:
         enabled: false
