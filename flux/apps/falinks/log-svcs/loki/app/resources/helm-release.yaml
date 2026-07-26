@@ -67,6 +67,11 @@ spec:
 
     deploymentMode: SingleBinary
 
+    gateway:
+      service:
+        nodePort: 31000
+        type: NodePort
+
     singleBinary:
       replicas: 1
       resources:
@@ -78,7 +83,6 @@ spec:
           memory: 2Gi
       service:
         type: NodePort
-        nodePort: 30100
       extraArgs:
         - '-config.expand-env=true'
       extraEnv:
