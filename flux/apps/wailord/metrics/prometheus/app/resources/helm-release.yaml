@@ -18,10 +18,20 @@ spec:
     grafana:
       enabled: false
 
+    alertmanager:
+      alertmanagerSpec:
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 5Gi
+                  selector: {}
+
     prometheus:
       prometheusSpec:
         retention: 30d
-
         storageSpec:
           volumeClaimTemplate:
             spec:
