@@ -13,10 +13,7 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
-    - name: sealed-secrets-controller
-      namespace: kube-system
-    - name: tailscale-operator
-      namespace: tailscale
+
   interval: 1h
   path: ./flux/apps/wailord/metrics/prometheus/app
   prune: true
