@@ -80,6 +80,9 @@ spec:
         limits:
           cpu: 3
           memory: 4Gi
+        requests:
+          cpu: 1
+          memory: 1Gi
       service:
         type: NodePort
       extraArgs:
