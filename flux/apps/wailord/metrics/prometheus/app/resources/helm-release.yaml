@@ -27,7 +27,7 @@ spec:
               resources:
                 requests:
                   storage: 5Gi
-                  selector: {}
+
 
     prometheus:
       prometheusSpec:
@@ -39,4 +39,4 @@ spec:
               resources:
                 requests:
                   storage: 50Gi
-                  selector: {}
+
