@@ -19,19 +19,20 @@ spec:
       datasources.yaml:
         apiVersion: 1
         datasources:
-          - name: Thanos
-            type: prometheus
-            url: http://prometheus-thanos-query-frontend.metrics.svc.cluster.local:9090
-            access: proxy
-            isDefault: false
-            jsonData:
-              prometheusType: Thanos
-              customQueryParameters: max_source_resolution=auto
           - name: Prometheus
             type: prometheus
             url: http://prometheus-kube-prometheus-prometheus.metrics.svc.cluster.local:9090
             access: proxy
             isDefault: true
+          - name: Loki
+            type: loki
+            access: proxy
+            url: http://192.168.13.67:31000
+            jsonData:
+              httpHeaderName1: 'X-Scope-OrgID'
+            secureJsonData:
+              httpHeaderName1: 'wailord'
+
     persistence:
       enabled: true
     serviceMonitor:

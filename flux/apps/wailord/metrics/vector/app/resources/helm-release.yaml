@@ -132,7 +132,7 @@ spec:
 
         loki:
           type: loki
-          endpoint: http://192.168.69.3:3100
+          endpoint: http://192.168.13.67:31000
           inputs:
             - k8s_parser
             - audit_parser
