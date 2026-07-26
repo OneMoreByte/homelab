@@ -75,14 +75,11 @@ spec:
         type: NodePort
 
     singleBinary:
-      replicas: 1
+      replicas: 3
       resources:
         limits:
           cpu: 3
           memory: 4Gi
-        requests:
-          cpu: 2
-          memory: 2Gi
       service:
         type: NodePort
       extraArgs:
