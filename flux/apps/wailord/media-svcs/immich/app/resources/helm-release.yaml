@@ -140,6 +140,7 @@ spec:
       persistence:
         data:
           enabled: false
+          type: emptyDir
           advancedMounts:
             main:
               main:
