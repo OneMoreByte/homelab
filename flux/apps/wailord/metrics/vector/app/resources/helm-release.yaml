@@ -143,3 +143,4 @@ spec:
           out_of_order_action: accept
           labels:
             host: hostname
+            job: "wailord_vector"
