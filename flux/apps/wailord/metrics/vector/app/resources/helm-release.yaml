@@ -141,3 +141,6 @@ spec:
           request:
             headers:
               X-Scope-OrgID: "wailord"
+          encoding:
+            codec: json
+
