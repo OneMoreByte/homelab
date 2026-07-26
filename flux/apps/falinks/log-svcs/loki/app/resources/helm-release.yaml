@@ -32,7 +32,7 @@ spec:
 
       # Recommended from docs for single node deployment
       commonConfig:
-        replication_factor: 3
+        replication_factor: 2
       schemaConfig:
         configs:
           - from: "2024-04-01"
@@ -75,7 +75,7 @@ spec:
         type: NodePort
 
     singleBinary:
-      replicas: 3
+      replicas: 2
       resources:
         limits:
           cpu: 3
