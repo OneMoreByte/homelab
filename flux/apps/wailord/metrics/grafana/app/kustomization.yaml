@@ -4,5 +4,3 @@ kind: Kustomization
 resources:
   - resources/helm-release.yaml
   - resources/oci-repo.yaml
-  - resources/sealed-client-secret.yaml
-
