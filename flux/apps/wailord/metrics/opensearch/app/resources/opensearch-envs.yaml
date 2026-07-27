@@ -1,0 +1,41 @@
+kind: Secret
+apiVersion: v1
+metadata:
+    name: opensearch-envs
+stringData:
+    OPENSEARCH_INITIAL_ADMIN_PASSWORD: ENC[AES256_GCM,data:9XFRAarY6QuNLuMhcbT5eUfKX0ixORXDzk4ustmvuWiIzA==,iv:yM+3C1+gOUiiH35Szl89Agkoz1WFTVjwlGkP5WxwVtw=,tag:hkfoGGThMWS/m7OuRtcK6A==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IEcvTERKZyBBcFl5NjVn
+            L29wcnZqaGEyNi9mbXRwQWU2T1RNNWhLVXFqTXBabnkrSUwzdAp4c2N1RXRQcVdU
+            UjA0RW16elZMNnhKemlkUjJrU2FyUkhIeldKU0gwRjU4Ci0tLSB3K2ExdExzRE9H
+            SEVyRFZSZlFkM2xnOVV5S05KeWVVQ2ZVK2dRUTZENlBZClYdjHuttJgKntrOjert
+            1lcj/sqSYv4SmI0F8xK3B1OKBYuPYPkrR71vdEOIuK7PM8N1n6FZ9rqvP3mRd5Zc
+            mT8=
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1yubikey1qdmjd6g9zxszvw332nlw8898pl9q8tnpjv8ljjvxpau650567j5a6nlpjz8
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IE1TL0VLZyBBbSt0azdY
+            T0NJWDRwZlBRMmV1VTJjbjVBSEMwc3NtVHpxenI0TmVCd0ppRwpycko0eXY2MzZJ
+            djl2SG5ESjdoa0R5L1VIQlNuYmlpVVl2VkIzM3FLcW8wCi0tLSAyd1QwdFQwbVdO
+            UW5Yb2pwUU5EdjJ0V0F1UmpNdkk2WElITFlTNlM4QVcwCr7yJAeWPne3mbhkqzcd
+            XcXiw914VOwHmlJ+XBRu019+CBkvuNoMXH+EHT4IRziaBcAqffiLlOdUjvU10cCq
+            klU=
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1yubikey1qwu0zwltgvjgv7tr0qcpjw6grreja8lqwpsxdprgwyap29mrkvx6j6795r0
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwNTVmaVhsSnNpbVNGRE5X
+            QmZyRzZMcGR3OHRjekJRaFVYUDVLNDVmTEZBCkZJQmVOV05iZXdzSllCNGhnV3Bk
+            dVNTNzg2QW0wcmhGUUZqb1dxd2dMTm8KLS0tIHZqUkZRQUhWenFQSm1LQlVzc3Fz
+            VldtajI2K2EweTJJSXZiYUx0b1dOWEkK6WLxOJhL2Q8HwwHZ9bsPtA5VnFSH5yQZ
+            8MiHlkKCCGEhFRa2PPnV7ANxfFUcEZZOBPEU3K8MyKJ81EHwrZcn3A==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1tufq3ztwqlaawpe4sd8pzh7t70fvgq8wwz7q0mka2rvrgvtngsgqhxay7r
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-07-27T03:18:36Z"
+    mac: ENC[AES256_GCM,data:cRUsbX82I7exvHRdB18+5Hd2zUly9FMiFpetvFSf+AECWYHwaolqUON5La+bGoDp5oSw/LXWdp/biV837lLuzupd/BoemOgC922kvtL/rT2rcNTrnnGR7BdH7iAveoaZF5BWxeovpmdhhUQcMojX9arE4n1IvaoeywWa7bfH5y8=,iv:OXA/pIgctkFqyM7LmQbmKos43aPz8luoswMYJ6dHvbk=,tag:KmhB906Wk+KwFNgbRXS1cg==,type:str]
+    version: 3.13.3
