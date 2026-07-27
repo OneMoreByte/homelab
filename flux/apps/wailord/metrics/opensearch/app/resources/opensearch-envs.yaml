@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
     name: opensearch-envs
 stringData:
-    OPENSEARCH_INITIAL_ADMIN_PASSWORD: ENC[AES256_GCM,data:9XFRAarY6QuNLuMhcbT5eUfKX0ixORXDzk4ustmvuWiIzA==,iv:yM+3C1+gOUiiH35Szl89Agkoz1WFTVjwlGkP5WxwVtw=,tag:hkfoGGThMWS/m7OuRtcK6A==,type:str]
+    OPENSEARCH_INITIAL_ADMIN_PASSWORD: ENC[AES256_GCM,data:i7XQNfVekSfo34xG1ucMe5M0rlwc+0py,iv:smiltKfjHaKgtsuQryv6qNM6wCO7VBpsZGoY9EWw2Yg=,tag:O65Cl6CVNqSdfBJAgXr3PA==,type:str]
 sops:
     age:
         - enc: |
@@ -36,6 +36,6 @@ sops:
             -----END AGE ENCRYPTED FILE-----
           recipient: age1tufq3ztwqlaawpe4sd8pzh7t70fvgq8wwz7q0mka2rvrgvtngsgqhxay7r
     encrypted_regex: ^(data|stringData)$
-    lastmodified: "2026-07-27T03:18:36Z"
-    mac: ENC[AES256_GCM,data:cRUsbX82I7exvHRdB18+5Hd2zUly9FMiFpetvFSf+AECWYHwaolqUON5La+bGoDp5oSw/LXWdp/biV837lLuzupd/BoemOgC922kvtL/rT2rcNTrnnGR7BdH7iAveoaZF5BWxeovpmdhhUQcMojX9arE4n1IvaoeywWa7bfH5y8=,iv:OXA/pIgctkFqyM7LmQbmKos43aPz8luoswMYJ6dHvbk=,tag:KmhB906Wk+KwFNgbRXS1cg==,type:str]
+    lastmodified: "2026-07-27T03:29:38Z"
+    mac: ENC[AES256_GCM,data:+CUgHIszaI3K6woQObIzF9t1y4xncga3CHXRNl66eE7v8266ShlaOPKfxiB0otRaUmFydPCnPRPouCpfqqVX8HPs8GKN1L+Sznirpu8JvE0UjSfO4qHapfPpRrAQPUfdGCXPIHAVCPKrhPwezHw4xoVLr45eIxrevpOYBeHtPuE=,iv:yh1eqftse0NNPakGubUNzBJwA9GUMZ50yJxzNN8+53w=,tag:fsIqkqcjh/Mch0N9uxqyfQ==,type:str]
     version: 3.13.3
