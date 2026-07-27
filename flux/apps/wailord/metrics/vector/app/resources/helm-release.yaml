@@ -70,6 +70,7 @@ spec:
           source: |
             .log = parse_json(.message) ?? .message
             del(.message)
+            .tags.job = "k8s-logs"
         audit_parser:
           type: remap
           inputs:
@@ -92,6 +93,7 @@ spec:
             } else {
               .msg = .message
             }
+            .tags.job = "k8s-audit"
         talos_kernel_logs_xform:
           type: remap
           inputs: [talos_kernel_logs]
@@ -106,6 +108,7 @@ spec:
             .message = parse_json(.msg) ?? .msg
             del(.msg)
             del(."talos-time")
+            .tags.job = "talos-kernel
         talos_service_logs_xform:
           type: remap
           inputs: [talos_service_logs]
@@ -123,6 +126,7 @@ spec:
             del(."talos-time")
             del(."talos-level")
             del(."talos-service")
+            .tags.job = "talos-services"
       sinks:
      #   stdout:
      #     type: console
@@ -143,4 +147,3 @@ spec:
           out_of_order_action: accept
           labels:
             host: hostname
-            job: "wailord_vector"
