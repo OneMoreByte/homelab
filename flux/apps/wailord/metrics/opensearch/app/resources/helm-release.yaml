@@ -21,16 +21,15 @@ spec:
   values:
     clusterName: "wailord-opensearch"
 
-  opensearch.yml: |
-    cluster.name: wailord-opensearch
+    opensearch.yml: |
+      cluster.name: wailord-opensearch
 
-    # Bind to all interfaces because we don't know what IP address Docker will assign to us.
-    network.host: 0.0.0.0
-    
+      # Bind to all interfaces because we don't know what IP address Docker will assign to us.
+      network.host: 0.0.0.0
 
-  envFrom:
-    - secretRef:
-        name: opensearch-envs
+    envFrom:
+      - secretRef:
+          name: opensearch-envs
 
-  persistence:
-    size: 64Gi
+    persistence:
+      size: 64Gi
