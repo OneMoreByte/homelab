@@ -80,7 +80,7 @@ spec:
           source: |
             .log = parse_json(.message) ?? .message
             del(.message)
-            .job = s'k8s-logs'
+
         audit_parser:
           type: remap
           inputs:
@@ -103,7 +103,7 @@ spec:
             } else {
               .msg = .message
             }
-            .job = s'k8s-audit'
+
         talos_kernel_logs_xform:
           type: remap
           inputs: [talos_kernel_logs]
@@ -116,9 +116,10 @@ spec:
               .timestamp = to_unix_timestamp(now())
             }
             .message = parse_json(.msg) ?? .msg
+            .level = del(."talos-level")
             del(.msg)
             del(."talos-time")
-            .job = s'talos-kernel'
+
         talos_service_logs_xform:
           type: remap
           inputs: [talos_service_logs]
@@ -136,7 +137,7 @@ spec:
             del(."talos-time")
             del(."talos-level")
             del(."talos-service")
-            .job = s'talos-services'
+
       sinks:
      #   stdout:
      #     type: console
