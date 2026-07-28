@@ -9,7 +9,7 @@ spec:
       chart: elastic-operator
       version: 3.4.1
       sourceRef:
-        kind: HelmChart
+        kind: HelmRepository
         name: elastic-repo
   install:
     remediation:
