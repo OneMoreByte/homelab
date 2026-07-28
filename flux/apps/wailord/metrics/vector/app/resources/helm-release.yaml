@@ -152,8 +152,6 @@ spec:
             verify_certificate: false
           inputs:
             - talos_kernel_logs_xform
-          encoding:
-            codec: json
           mode: "data_stream"
           datastream:
             dataset: "talos-kernel"
