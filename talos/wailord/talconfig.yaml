@@ -56,9 +56,9 @@ patches:
             addresses:
               - 169.254.116.108/32
     
-      # Requirements for longhorn v2
       sysctls:
-        vm.nr_hugepages: "1024"
+        vm.nr_hugepages: "1024"    # Requirement for longhorn v2
+        vm.max_map_count: "1048576" # Requirement for Elasticsearch/Opensearch
       kernel:
         modules:
           - name: nvme_tcp
