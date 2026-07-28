@@ -5,8 +5,11 @@ metadata:
 spec:
   interval: 1h
   chartRef:
-    kind: HelmRepository
-    name: elastic-repo
+    chart: elastic-operator
+    version: 3.4.1
+    sourceRef:
+      kind: HelmChart
+      name: elastic-repo
   install:
     remediation:
       retries: -1
