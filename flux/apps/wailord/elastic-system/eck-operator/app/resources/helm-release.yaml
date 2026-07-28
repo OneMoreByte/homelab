@@ -4,12 +4,13 @@ metadata:
   name: eck-operator
 spec:
   interval: 1h
-  chartRef:
-    chart: elastic-operator
-    version: 3.4.1
-    sourceRef:
-      kind: HelmChart
-      name: elastic-repo
+  chart:
+    spec:
+      chart: elastic-operator
+      version: 3.4.1
+      sourceRef:
+        kind: HelmChart
+        name: elastic-repo
   install:
     remediation:
       retries: -1
