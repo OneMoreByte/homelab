@@ -89,9 +89,9 @@ spec:
             . = parse_json(.message) ?? .message
             parsed_timestamp, err = parse_timestamp(.requestReceivedTimestamp, format: "%Y-%m-%dT%H:%M:%S.%fZ")
             if err == null {
-              .timestamp = to_unix_timestamp(parsed_timestamp)
+              .timestamp = to_unix_timestamp(parsed_timestamp, unit: "milliseconds")
             } else {
-              .timestamp = to_unix_timestamp(now())
+              .timestamp = to_unix_timestamp(now(), unit: "milliseconds")
             }
             # multiline strings in VRL are weird; the escape char has to be inside an actual string and not an expression
             composed_message, err = "User: " + .user.username + "; " + .verb + " \
@@ -111,9 +111,9 @@ spec:
             del(.clock)
             parsed_timestamp, err = parse_timestamp(."talos-time", format: "%Y-%m-%dT%H:%M:%S.%fZ")
             if err == null {
-              .timestamp = to_unix_timestamp(parsed_timestamp)
+              .timestamp = to_unix_timestamp(parsed_timestamp, unit: "milliseconds")
             } else {
-              .timestamp = to_unix_timestamp(now())
+              .timestamp = to_unix_timestamp(now(), unit: "milliseconds")
             }
             .message = parse_json(.msg) ?? .msg
             .level = del(."talos-level")
@@ -126,9 +126,9 @@ spec:
           source: |
             parsed_timestamp, err = parse_timestamp(."talos-time", format: "%Y-%m-%dT%H:%M:%S.%fZ")
             if err == null {
-              .timestamp = to_unix_timestamp(parsed_timestamp)
+              .timestamp = to_unix_timestamp(parsed_timestamp, unit: "milliseconds")
             } else {
-              .timestamp = to_unix_timestamp(now())
+              .timestamp = to_unix_timestamp(now(), unit: "milliseconds")
             }
             .message = parse_json(.msg) ?? .msg
             .level = ."talos-level"
