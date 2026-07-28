@@ -146,7 +146,8 @@ spec:
 
         talos-kernel-es:
           type: elasticsearch
-          endpoint: https://log-cluster-es-http:9200
+          endpoints:
+            - https://log-cluster-es-http:9200
           auth:
             strategy: "basic"
             user: "vector"
@@ -158,3 +159,52 @@ spec:
           mode: "data_stream"
           data_stream:
             dataset: "talos-kernel"
+
+
+        talos-service-es:
+          type: elasticsearch
+          endpoints:
+            - https://log-cluster-es-http:9200
+          auth:
+            strategy: "basic"
+            user: "vector"
+            password: "${ELASTICSEARCH_PASSWORD}"
+          tls:
+            verify_certificate: false
+          inputs:
+            - talos_service_logs_xform
+          mode: "data_stream"
+          data_stream:
+            dataset: "talos-service"
+
+        kubernetes-logs-es:
+          type: elasticsearch
+          endpoints:
+            - https://log-cluster-es-http:9200
+          auth:
+            strategy: "basic"
+            user: "vector"
+            password: "${ELASTICSEARCH_PASSWORD}"
+          tls:
+            verify_certificate: false
+          inputs:
+            - k8s_parser
+          mode: "data_stream"
+          data_stream:
+            dataset: "k8s-logs"
+
+        kubernetes-audit-es:
+          type: elasticsearch
+          endpoints:
+            - https://log-cluster-es-http:9200
+          auth:
+            strategy: "basic"
+            user: "vector"
+            password: "${ELASTICSEARCH_PASSWORD}"
+          tls:
+            verify_certificate: false
+          inputs:
+            - audit_parser
+          mode: "data_stream"
+          data_stream:
+            dataset: "k8s-audit"
