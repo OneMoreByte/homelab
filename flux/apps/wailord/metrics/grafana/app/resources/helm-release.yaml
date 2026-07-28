@@ -15,6 +15,18 @@ spec:
     remediation:
       retries: 2
   values:
+    env:
+      - name: ES_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: "grafana-filerealm-secret"
+            key: "username"
+      - name: ES_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: "grafana-filerealm-secret"
+            key: "password"
+
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -24,10 +36,73 @@ spec:
             url: http://prometheus-kube-prometheus-prometheus.metrics.svc.cluster.local:9090
             access: proxy
             isDefault: true
-          - name: Loki
-            type: loki
+
+          - name: k8s-logs
+            type: elasticsearch
             access: proxy
-            url: http://192.168.13.67:31000
+            url: https://log-cluster-es-http:9200
+            basicAuth: true
+            isDefault: false
+            basicAuthUser: $ES_USERNAME
+            secureJsonData:
+              basicAuthPassword: $ES_PASSWORD
+            jsonData:
+              index: logs-k8s-logs-default
+              logLevelField: ''
+              logMessageField: log
+              maxConcurrentShardRequests: 5
+              timeField: '@timestamp'
+              tlsSkipVerify: true
+          - name: k8s-audit
+            type: elasticsearch
+            access: proxy
+            url: https://log-cluster-es-http:9200
+            basicAuth: true
+            isDefault: false
+            basicAuthUser: $ES_USERNAME
+            secureJsonData:
+              basicAuthPassword: $ES_PASSWORD
+            jsonData:
+              index: logs-k8s-audit-default
+              logLevelField: level
+              logMessageField: message
+              maxConcurrentShardRequests: 5
+              timeField: '@timestamp'
+              tlsSkipVerify: true
+
+          - name: talos-kernel
+            type: elasticsearch
+            access: proxy
+            url: https://log-cluster-es-http:9200
+            basicAuth: true
+            isDefault: false
+            basicAuthUser: $ES_USERNAME
+            secureJsonData:
+              basicAuthPassword: $ES_PASSWORD
+            jsonData:
+              index: logs-talos-kernel-default
+              logLevelField: level
+              logMessageField: message
+              maxConcurrentShardRequests: 5
+              timeField: '@timestamp'
+              tlsSkipVerify: true
+
+          - name: talos-service
+            type: elasticsearch
+            access: proxy
+            url: https://log-cluster-es-http:9200
+            basicAuth: true
+            isDefault: false
+            basicAuthUser: $ES_USERNAME
+            secureJsonData:
+              basicAuthPassword: $ES_PASSWORD
+            jsonData:
+              index: logs-talos-service-default
+              logLevelField: level
+              logMessageField: message
+              maxConcurrentShardRequests: 5
+              timeField: '@timestamp'
+            tlsSkipVerify: true
 
     persistence:
       enabled: true
