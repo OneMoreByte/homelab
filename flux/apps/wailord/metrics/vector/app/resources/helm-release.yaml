@@ -23,6 +23,13 @@ spec:
     podHostNetwork: true
     dnsPolicy: ClusterFirstWithHostNet
 
+    env:
+      - name: ELASTICSEARCH_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: "vector-filerealm-secret"
+            key: "password"
+
     customConfig:
       data_dir: /vector-data-dir
       api:
@@ -134,12 +141,19 @@ spec:
      #     encoding:
      #       codec: json
 
-        test-os:
+        talos-kernel-es:
           type: elasticsearch
-          endpoint: http://opensearch-cluster-master:9200
+          endpoint: https://log-cluster-es-http:9200
+          auth:
+            strategy: "basic"
+            user: "vector"
+            password: "${ELASTICSEARCH_PASSWORD}"
+          tls:
+            verify_certificate: false
           inputs:
             - talos_kernel_logs_xform
           encoding:
             codec: json
-          bulk:
-            index: ""
+          mode: "data_stream"
+          datastream:
+            dataset: "talos-kernel"
