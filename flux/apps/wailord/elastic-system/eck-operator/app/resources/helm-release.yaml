@@ -5,8 +5,8 @@ metadata:
 spec:
   interval: 1h
   chartRef:
-    kind: OCIRepository
-    name: eck-operator
+    kind: HelmRepository
+    name: elastic-repo
   install:
     remediation:
       retries: -1
