@@ -17,11 +17,11 @@ spec:
   - name: data
     count: 3
     config:
-      - node.roles:
-          - "data"
-          - "ingest"
-          - "ml"
-          - "transform"
+      node.roles:
+        - "data"
+        - "ingest"
+        - "ml"
+        - "transform"
     volumeClaimTemplates:
       - metadata:
           name: elasticsearch-data
