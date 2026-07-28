@@ -6,7 +6,7 @@ spec:
   interval: 1h
   chart:
     spec:
-      chart: elastic-operator
+      chart: eck-operator
       version: 3.4.1
       sourceRef:
         kind: HelmRepository
