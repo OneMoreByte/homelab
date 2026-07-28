@@ -24,6 +24,9 @@ spec:
     dnsPolicy: ClusterFirstWithHostNet
 
     env:
+      # I'm sure this is fine :)
+      - name: VECTOR_DANGEROUSLY_ALLOW_ENV_VAR_INTERPOLATION
+        value: "true"
       - name: ELASTICSEARCH_PASSWORD
         valueFrom:
           secretKeyRef:
