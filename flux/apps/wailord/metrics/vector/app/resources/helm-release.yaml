@@ -134,16 +134,12 @@ spec:
      #     encoding:
      #       codec: json
 
-        loki:
-          type: loki
-          endpoint: http://192.168.13.67:31000
+        test-os:
+          type: elasticsearch
+          endpoint: http://opensearch-cluster-master:9200
           inputs:
-            - k8s_parser
-            - audit_parser
-            - talos_service_logs_xform
             - talos_kernel_logs_xform
           encoding:
             codec: json
-          out_of_order_action: accept
-          labels:
-            host: hostname
+          bulk:
+            index: ""

@@ -17,3 +17,4 @@ resources:
   - zfs-system.yaml
   - backups.yaml
   - gateway-svcs.yaml
+  - elastic-system.yaml

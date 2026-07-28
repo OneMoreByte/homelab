@@ -3,7 +3,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: opensearch-repo
+  name: elastic-repo
 spec:
   interval: 1m
-  url: "https://opensearch-project.github.io/helm-charts/"
+  url: https://helm.elastic.co

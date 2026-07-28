@@ -1,0 +1,34 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: log-cluster
+spec:
+  version: 9.4.4
+  auth:
+    fileRealm:
+      - secretName: vector-filerealm-secret
+      - secretName: grafana-filerealm-secret
+  nodeSets:
+  - name: master
+    count: 1
+    config:
+      node.roles: ["master"]
+      xpack.ml.enabled: true
+  - name: data
+    count: 3
+    config:
+      - node.roles:
+          - "data"
+          - "ingest"
+          - "ml"
+          - "transform"
+    volumeClaimTemplates:
+      - metadata:
+          name: elasticsearch-data
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 64Gi
+          storageClassName: longhorn

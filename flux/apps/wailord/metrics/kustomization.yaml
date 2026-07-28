@@ -5,6 +5,6 @@ resources:
   - grafana/ks.yaml
   - prometheus/ks.yaml
   - vector/ks.yaml
-  - opensearch/ks.yaml
+  - elasticsearch/ks.yaml
 #  - unipoller/ks.yaml
 
