@@ -210,7 +210,7 @@ spec:
     persistence:
       config:
         enabled: true
-        type: configMap
+        type: secret
         name: immich-config
         advancedMounts:
           main:
