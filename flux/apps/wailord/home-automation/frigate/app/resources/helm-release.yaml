@@ -111,7 +111,7 @@ spec:
 
       tmpfs:
         enable: true
-        type: EmptyDir
+        type: emptyDir
         medium: Memory
         sizeLimit: "1G"
         advancedMounts:
@@ -121,7 +121,7 @@ spec:
 
       shmem:
         enable: true
-        type: EmptyDir
+        type: emptyDir
         medium: Memory
         sizeLimit: "1G"
         advancedMounts:
