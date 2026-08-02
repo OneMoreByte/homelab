@@ -111,16 +111,17 @@ spec:
       enabled: true
 
     route:
-      enabled: true
-      kind: HTTPRoute
-      annotations:
-        external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
-      parentRefs:
-        - name: "external"
-          namespace: "gateway-svcs"
-          sectionName: websecure-gw
-      hostnames:
-        - "grafana.jackhil.de"
+      main:
+        enabled: true
+        kind: HTTPRoute
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+        parentRefs:
+          - name: "external"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "grafana.jackhil.de"
 
     envFromSecrets:
       - name: grafana-client-secret
