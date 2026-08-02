@@ -108,13 +108,14 @@ spec:
         enabled: true
 
       configuration: {}
-      configurationKind: secret
+      configurationKind: Secret
       existingConfiguration: immich-config
 
       persistence:
         library:
           existingClaim: "not-used"
 
+    server:
       route:
         main:
           kind: HTTPRoute
@@ -129,7 +130,7 @@ spec:
           rules:
             - name: "default"
               backendRefs:
-                - identifier: main
+                - name: immich-server
                   port: 2283
               matches:
                 - path:

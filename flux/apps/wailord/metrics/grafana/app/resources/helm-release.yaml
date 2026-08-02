@@ -109,21 +109,9 @@ spec:
       enabled: true
     serviceMonitor:
       enabled: true
-    ingress:
-      enabled: true
-      annotations:
-        traefik.ingress.kubernetes.io/router.tls: 'true'
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      labels: {}
-      path: /
-      hosts:
-        - grafana.jackhil.de
-      tls:
-        - hosts:
-            - grafana.jackhil.de
-          secretName: jackhil.de-cert
 
     route:
+      enabled: true
       kind: HTTPRoute
       annotations:
         external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
