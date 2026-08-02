@@ -28,9 +28,28 @@ spec:
                 requests:
                   storage: 5Gi
 
+        alertmanagerConfigSelectorNilUsesHelmValues: false
+        alertmanagerConfigSelector: {}
+        alertmanagerConfigNamespaceSelector: {}
 
     prometheus:
       prometheusSpec:
+        enableOTLPReceiver: true
+        enableFeatures:
+          - exemplar-storage
+
+        serviceMonitorSelectorNilUsesHelmValues: false
+        serviceMonitorSelector: { }
+        serviceMonitorNamespaceSelector: { }
+
+        podMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelector: {}
+        podMonitorNamespaceSelector: {}
+
+        ruleSelectorNilUsesHelmValues: false
+        ruleSelector: {}
+        ruleNamespaceSelector: {}
+
         retention: 30d
         storageSpec:
           volumeClaimTemplate:
