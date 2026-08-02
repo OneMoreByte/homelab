@@ -69,9 +69,19 @@ spec:
     # This slows cilium down but it's fun!
     hubble:
       enabled: true
+
+      relay:
+        enabled: true
+
+      ui:
+        enabled: true
+
       metrics:
         enableOpenMetrics: true
         # I don't understand why there isn't a default?
+        serviceMonitor:
+          enabled: true
+
         enabled:
           - "dns"
           - "drop"
