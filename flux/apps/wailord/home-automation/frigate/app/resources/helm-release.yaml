@@ -59,10 +59,10 @@ spec:
             port: 8554
           webrtc-tcp:
             port: 8555
-            protocol: "tcp"
+            protocol: "TCP"
           webrtc-udp:
             port: 8555
-            protocol: "udp"
+            protocol: "UDP"
 
     route:
       main:
