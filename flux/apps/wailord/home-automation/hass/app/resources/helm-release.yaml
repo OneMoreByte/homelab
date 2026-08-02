@@ -34,25 +34,28 @@ spec:
         ports:
           http:
             port: 8123
-    ingress:
+
+    route:
       main:
-        enabled: true
+        kind: HTTPRoute
         annotations:
-          traefik.ingress.kubernetes.io/router.tls: 'true'
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        labels: {}
-        hosts:
-          - host: home.jackhil.de
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: hass-main
-                  port: 8123
-        tls:
-          - hosts:
-              - home.jackhil.de
-            secretName: home.jackhil.de-cert
+          external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+        parentRefs:
+          - name: "external"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "home.jackhil.de"
+        rules:
+          - name: "default"
+            backendRefs:
+              - name: hass-main
+                port: 8123
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
     persistence:
       config:
         enabled: true

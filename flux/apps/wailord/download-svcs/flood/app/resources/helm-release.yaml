@@ -83,38 +83,26 @@ spec:
             port: 10181
             protocol: TCP
             targetPort: 10181
-    ingress:
+
+    route:
       main:
-        enabled: true
-        annotations:
-          traefik.ingress.kubernetes.io/router.tls: "true"
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        labels: {}
-        hosts:
-          - host: flood.jackhil.de
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: flood-main
-                  port: 3000
-        tls:
-          - hosts:
-              - flood.jackhil.de
-            secretName: flood.jackhil.de-cert
-      ssl-redirect:
-        enabled: true
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: web
-        labels: {}
-        hosts:
-          - host: flood.jackhil.de
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: flood-main
-                  port: 3000
+        kind: HTTPRoute
+        parentRefs:
+          - name: "internal"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "flood.jsck.network"
+        rules:
+          - name: "default"
+            backendRefs:
+              - name: flood-main
+                port: 3000
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
     persistence:
       config:
         enabled: false

@@ -106,31 +106,30 @@ spec:
     immich:
       metrics:
         enabled: false
-      persistence:
-        library:
-          existingClaim: "not-used"
-
 
       configuration: {}
 
-
-    server:
-      enabled: true
-      ingress:
+      route:
         main:
-          enabled: true
+          kind: HTTPRoute
           annotations:
-            traefik.ingress.kubernetes.io/router.tls: 'true'
-            traefik.ingress.kubernetes.io/router.entrypoints: websecure
             external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
-          hosts:
-            - host: photos.jackhil.de
-              paths:
-                - path: /
-          tls:
-            - hosts:
-                - photos.jackhil.de
-              secretName: photos.jackhil.de-cert
+          parentRefs:
+            - name: "external"
+              namespace: "gateway-svcs"
+              sectionName: websecure-gw
+          hostnames:
+            - "photos.jackhil.de"
+          rules:
+            - name: "default"
+              backendRefs:
+                - identifier: main
+                  port: 2283
+              matches:
+                - path:
+                    value: /
+                    type: PathPrefix
+
       containers:
         main:
           image:
@@ -138,6 +137,8 @@ spec:
             tag: v3.1.0
 
       persistence:
+        library:
+          existingClaim: "not-used"
         data:
           enabled: false
           type: emptyDir
@@ -149,6 +150,7 @@ spec:
           enabled: true
           type: secret
           name: immich-config
+
     machine-learning:
       enabled: true
       controllers:

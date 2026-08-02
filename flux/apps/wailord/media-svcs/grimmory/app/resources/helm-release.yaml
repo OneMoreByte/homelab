@@ -82,27 +82,27 @@ spec:
         ports:
           http:
             port: *svc_port
-    ingress:
-      main:
-        enabled: true
-        annotations:
-          traefik.ingress.kubernetes.io/router.tls: 'true'
-          traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-          external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
 
-        labels: {}
-        hosts:
-          - host: books.jackhil.de
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: main
-                  port: *svc_port
-        tls:
-          - hosts:
-              - books.jackhil.de
-            secretName: books.jackhil.de-cert
+    route:
+      main:
+        kind: HTTPRoute
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+        parentRefs:
+          - name: "external"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "books.jackhil.de"
+        rules:
+          - name: "default"
+            backendRefs:
+              - identifier: main
+                port: *svc_port
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
 
     persistence:
       config:

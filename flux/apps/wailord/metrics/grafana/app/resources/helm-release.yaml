@@ -121,6 +121,18 @@ spec:
         - hosts:
             - grafana.jackhil.de
           secretName: jackhil.de-cert
+
+    route:
+      kind: HTTPRoute
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+      parentRefs:
+        - name: "external"
+          namespace: "gateway-svcs"
+          sectionName: websecure-gw
+      hostnames:
+        - "grafana.jackhil.de"
+
     envFromSecrets:
       - name: grafana-client-secret
         optional: true

@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - 3d-printing.yaml
   - auth.yaml
-  - cert-manager.yaml
   - cnpg-system.yaml
   - game-svcs.yaml
   - home-automation.yaml

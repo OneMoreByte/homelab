@@ -7,5 +7,4 @@ resources:
   - paperless-ngx/ks.yaml
   - syncthing/ks.yaml
   - gonic/ks.yaml
-  - feishin/ks.yaml
   - grimmory/ks.yaml

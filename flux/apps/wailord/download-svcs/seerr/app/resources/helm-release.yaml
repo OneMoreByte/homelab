@@ -51,24 +51,27 @@ spec:
         ports:
           http:
             port: 5055
-    ingress:
+    route:
       main:
+        kind: HTTPRoute
         annotations:
-          traefik.ingress.kubernetes.io/router.tls: 'true'
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        enabled: true
-        hosts:
-          - host: requests.jackhil.de
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: seerr-main
-                  port: 5055
-        tls:
-          - hosts:
-              - requests.jackhil.de
-            secretName: requests.jackhil.de-cert
+          external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+        parentRefs:
+          - name: "external"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "requests.jackhil.de"
+        rules:
+          - name: "default"
+            backendRefs:
+              - name: seerr-main
+                port: 5055
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
     persistence:
       config:
         enabled: true

@@ -80,24 +80,25 @@ spec:
         ports:
           http:
             port: 7878
-    ingress:
+    route:
       main:
-        annotations:
-          traefik.ingress.kubernetes.io/router.tls: 'true'
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        enabled: true
-        hosts:
-          - host: radarr.jackhil.de
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: radarr-main
-                  port: 7878
-        tls:
-          - hosts:
-              - radarr.jackhil.de
-            secretName: radarr.jackhil.de-cert
+        kind: HTTPRoute
+        parentRefs:
+          - name: "internal"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "radarr.jsck.network"
+        rules:
+          - name: "default"
+            backendRefs:
+              - name: radarr-main
+                port: 7878
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
     persistence:
       config:
         enabled: true

@@ -6,3 +6,5 @@ resources:
   - externaldns-cloudflare/ks.yaml
   - externaldns-local/ks.yaml
   - externaldns-repo/ks.yaml
+  - cert-manager/ks.yaml
+  - cert-manager-issuer/ks.yaml

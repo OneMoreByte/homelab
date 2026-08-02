@@ -3,7 +3,4 @@ kind: Kustomization
 resources:
   - openebs-system.yaml
   - svcs.yaml
-  - log-svcs.yaml
-  - traefik.yaml
-  - object-store.yaml
 

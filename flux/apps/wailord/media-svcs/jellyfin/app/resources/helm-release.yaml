@@ -81,27 +81,29 @@ spec:
         controller: main
         ports:
           http:
-            port: 8096
-    ingress:
+            port: &svc_port 8096
+
+    route:
       main:
-        enabled: true
+        kind: HTTPRoute
         annotations:
-          traefik.ingress.kubernetes.io/router.tls: 'true'
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
           external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
-        labels: {}
-        hosts:
-          - host: jelly.jackhil.de
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: jellyfin-main
-                  port: 8096
-        tls:
-          - hosts:
-              - jelly.jackhil.de
-            secretName: jelly.jackhil.de-cert
+        parentRefs:
+          - name: "external"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "jelly.jackhil.de"
+        rules:
+          - name: "default"
+            backendRefs:
+              - identifier: main
+                port: *svc_port
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
     persistence:
       config:
         enabled: true

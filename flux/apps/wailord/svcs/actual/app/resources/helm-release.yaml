@@ -35,27 +35,28 @@ spec:
         controller: main
         ports:
           http:
-            port: 5006
+            port: &svc_port 5006
 
-    ingress:
+    route:
       main:
+        kind: HTTPRoute
         annotations:
-          traefik.ingress.kubernetes.io/router.tls: 'true'
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        enabled: true
-        hosts:
-          - host: *hostname
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: main
-                  port: 5006
-        tls:
-          - hosts:
-              - *hostname
-            secretName: budget.jackhil.de-cert
-
+          external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+        parentRefs:
+          - name: "external"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - *hostname
+        rules:
+          - name: "default"
+            backendRefs:
+              - identifier: main
+                port: *svc_port
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
 
     persistence:
       config:

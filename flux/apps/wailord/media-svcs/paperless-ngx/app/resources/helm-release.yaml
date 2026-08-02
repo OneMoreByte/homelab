@@ -89,27 +89,29 @@ spec:
         controller: main
         ports:
           http:
-            port: 8000
-    ingress:
+            port: &svc_port 8000
+
+    route:
       main:
-        enabled: true
+        kind: HTTPRoute
         annotations:
-          traefik.ingress.kubernetes.io/router.tls: 'true'
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
           external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
-        labels: {}
-        hosts:
-          - host: paper.jackhil.de
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: paperless-ngx-main
-                  port: 8000
-        tls:
-          - hosts:
-              - paper.jackhil.de
-            secretName: paper.jackhil.de-cert
+        parentRefs:
+          - name: "external"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "paper.jackhil.de"
+        rules:
+          - name: "default"
+            backendRefs:
+              - identifier: main
+                port: *svc_port
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
     persistence:
       config:
         enabled: false
