@@ -92,12 +92,13 @@ spec:
 
       config-file:
         enabled: true
-        type: ConfigMap
+        type: configMap
         identifier: config
         advancedMounts:
           main:
             main:
               - path: /config/config.yml
+                subPath: config.yml
 
       recording-storage:
         enabled: true
@@ -132,7 +133,7 @@ spec:
     configMaps:
       config:
         data:
-          config.yaml: |-
+          config.yml: |-
             mqtt:
               host: mqtt.jsck.network
               port: 1883
