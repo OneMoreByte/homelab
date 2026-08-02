@@ -27,7 +27,6 @@ spec:
               REDIS_HOSTNAME: "immich-valkey"
               UID: 11337
               PID: 11337
-              TEST: "me"
               DB_HOSTNAME: '{{ .Release.Name }}-pg-cluster-rw'
               DB_DATABASE_NAME: immich
               DB_USERNAME:
@@ -40,6 +39,47 @@ spec:
                   secretKeyRef:
                     name: immich-db-secret
                     key: password
+              IMMICH_TELEMETRY_INCLUDE: all
+              IMMICH_CONFIG_FILE: /config/immich-config.yaml
+            ports:
+              - name: http
+                containerPort: 2283
+                protocol: TCP
+              - name: metrics-api
+                containerPort: 8081
+                protocol: TCP
+              - name: metrics-ms
+                containerPort: 8082
+                protocol: TCP
+
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/server/ping
+                    port: http
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/server/ping
+                    port: http
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 30
+            securityContext:
+              runAsUser: 11337
+              runAsGroup: 11337
+              fsGroup: 11337
         initContainers:
           wait-for-zfs:
             image:
@@ -61,6 +101,54 @@ spec:
                   exit 1
                 fi
 
+      machine-learning:
+        enabled: true
+        type: deployment
+        strategy: RollingUpdate
+        containers:
+          main:
+            ports:
+              - name: http
+                containerPort: 3003
+                protocol: TCP
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: http
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: http
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 60
+
+            image:
+              repository: ghcr.io/immich-app/immich-machine-learning
+              tag: v3.1.0-openvino
+            securityContext:
+              privileged: true
+              runAsUser: 0
+              runAsGroup: 0
+              fsGroup: 0
+            env:
+              TRANSFORMERS_CACHE: /cache
+              HF_XET_CACHE: /cache/huggingface-xet
+              MPLCONFIGDIR: /cache/matplotlib-config
+
     defaultPodOptions:
       affinity:
         nodeAffinity:
@@ -71,15 +159,62 @@ spec:
                     operator: In
                     values:
                       - bulk-datastore
-      securityContext:
-        runAsUser: 11337
-        runAsGroup: 11337
-        fsGroup: 11337
+
+    service:
+      main:
+        enabled: true
+        controller: main
+        primary: true
+        type: ClusterIP
+        ports:
+          http:
+            enabled: true
+            primary: true
+            port: 2283
+            targetPort: http
+            protocol: HTTP
+            appProtocol: kubernetes.io/ws
+          metrics-api:
+            enabled: true
+            port: 8081
+            targetPort: metrics-api
+            protocol: HTTP
+          metrics-ms:
+            enabled: true
+            port: 8082
+            targetPort: metrics-ms
+            protocol: HTTP
+      machine-learning:
+        enabled: true
+        controller: main
+        primary: true
+        type: ClusterIP
+        ports:
+          http:
+            enabled: true
+            primary: true
+            port: 3003
+            targetPort: http
+            protocol: HTTP
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: metrics-api
+            scheme: http
+          - port: metrics-ms
+            scheme: http
 
     persistence:
-      data:
-        enabled: false
-        type: emptyDir
+      config:
+        enabled: true
+        type: configMap
+        name: immich-config
+        advancedMounts:
+          main:
+            main:
+              - path: /config/immich-config.yaml
+                subPath: immich-config.yaml
 
       library:
         enabled: true
@@ -89,6 +224,7 @@ spec:
           main:
             main:
               - path: /data
+
       syncthing-library:
         enabled: true
         type: hostPath
@@ -104,70 +240,37 @@ spec:
         type: hostPath
         hostPath: /var/mnt/fast-store/mount-state
 
-    immich:
-      metrics:
+      cache:
         enabled: true
-
-      configuration: {}
-      configurationKind: Secret
-      existingConfiguration: immich-config
-
-      persistence:
-        library:
-          existingClaim: "not-used"
-
-    server:
-      route:
-        main:
-          kind: HTTPRoute
-          annotations:
-            external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
-          parentRefs:
-            - name: "external"
-              namespace: "gateway-svcs"
-              sectionName: websecure-gw
-          hostnames:
-            - "photos.jackhil.de"
-          rules:
-            - name: "default"
-              backendRefs:
-                - name: immich-server
-                  port: 2283
-              matches:
-                - path:
-                    value: /
-                    type: PathPrefix
-
-      containers:
-        main:
-          image:
-            repository: ghcr.io/immich-app/immich-server
-            tag: v3.1.0
-
-    machine-learning:
-      enabled: true
-      controllers:
-        main:
-          containers:
+        size: 32Gi
+        type: persistentVolumeClaim
+        accessMode: ReadWriteMany
+        advancedMounts:
+          machine-learning:
             main:
-              image:
-                repository: ghcr.io/immich-app/immich-machine-learning
-                tag: v3.1.0-openvino
-              securityContext:
-                privileged: true
-                runAsUser: 0
-                runAsGroup: 0
-                fsGroup: 0
-              env:
-                TRANSFORMERS_CACHE: /cache
-                HF_XET_CACHE: /cache/huggingface-xet
-                MPLCONFIGDIR: /cache/matplotlib-config
+              - path: /cache
 
-      persistence:
-        cache:
-          enabled: true
-          size: 32Gi
-          type: persistentVolumeClaim
-          accessMode: ReadWriteMany
+
+    route:
+      main:
+        kind: HTTPRoute
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+        parentRefs:
+          - name: "external"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "photos.jackhil.de"
+        rules:
+          - name: "default"
+            backendRefs:
+              - name: immich-server
+                port: 2283
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
 
 ---
