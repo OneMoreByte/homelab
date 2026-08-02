@@ -170,7 +170,7 @@ spec:
           http:
             enabled: true
             primary: true
-            port: 2283
+            port: &svc_port 2283
             targetPort: http
             protocol: HTTP
             appProtocol: kubernetes.io/ws
@@ -265,8 +265,8 @@ spec:
         rules:
           - name: "default"
             backendRefs:
-              - name: immich-server
-                port: 2283
+              - identifier: main
+                port: *svc_port
             matches:
               - path:
                   value: /
