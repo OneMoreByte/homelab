@@ -26,6 +26,8 @@ spec:
           secretKeyRef:
             name: "grafana-filerealm-secret"
             key: "password"
+      - name: GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION
+        value: true
 
     datasources:
       datasources.yaml:
