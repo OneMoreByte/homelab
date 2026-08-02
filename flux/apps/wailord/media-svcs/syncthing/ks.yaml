@@ -11,7 +11,7 @@ spec:
 
   dependsOn:
     - name: longhorn
-    - name: cilium-gateway
+    - name: cilium-gateways
 
   interval: 1h
   path: ./flux/apps/wailord/media-svcs/syncthing/app

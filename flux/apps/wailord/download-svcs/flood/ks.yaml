@@ -12,7 +12,7 @@ spec:
   dependsOn:
     - name: longhorn
 
-    - name: cilium-gateway
+    - name: cilium-gateways
 
   interval: 1h
   path: ./flux/apps/wailord/download-svcs/flood/app
