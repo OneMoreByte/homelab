@@ -11,7 +11,7 @@ spec:
 
   dependsOn:
     - name: longhorn
-    - name: traefik
+    - name: cilium-gateway
     - name: cloudnative-pg
 
 

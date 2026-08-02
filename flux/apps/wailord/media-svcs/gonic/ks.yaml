@@ -10,7 +10,7 @@ spec:
       app.kubernetes.io/name: *app
 
   dependsOn:
-    - name: traefik
+    - name: cilium-gateway
 
   interval: 1h
   path: ./flux/apps/wailord/media-svcs/gonic/app

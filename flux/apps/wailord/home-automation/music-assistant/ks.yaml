@@ -12,7 +12,7 @@ spec:
   dependsOn:
     - name: longhorn
 
-    - name: traefik
+    - name: cilium-gateway
 
 
 
