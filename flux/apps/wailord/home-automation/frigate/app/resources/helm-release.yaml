@@ -110,7 +110,7 @@ spec:
               - path: /media/frigate
 
       tmpfs:
-        enable: true
+        enabled: true
         type: emptyDir
         medium: Memory
         sizeLimit: "1G"
@@ -120,7 +120,7 @@ spec:
               - path: /tmp/cache
 
       shmem:
-        enable: true
+        enabled: true
         type: emptyDir
         medium: Memory
         sizeLimit: "1G"
