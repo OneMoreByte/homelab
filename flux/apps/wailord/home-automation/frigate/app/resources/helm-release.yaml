@@ -52,9 +52,9 @@ spec:
         type: LoadBalancer
         ports:
           http:
-            port: &svc_port 8971
+            port: 8971
           unauth:
-            port: 5000
+            port: &svc_port 5000
           rtsp:
             port: 8554
           webrtc-tcp:
