@@ -83,6 +83,16 @@ spec:
           http:
             port: &svc_port 8096
 
+
+    serviceMonitor:
+      main:
+        enabled: true
+        service:
+          identifier: main
+        endpoints:
+          - port: http
+            scheme: http
+
     route:
       main:
         kind: HTTPRoute
@@ -100,9 +110,14 @@ spec:
               - identifier: main
                 port: *svc_port
             matches:
-              - path:
-                  value: /
-                  type: PathPrefix
+            - path:
+                value: /
+                type: PathPrefix
+          - name: "no-metrics"
+            matches:
+                - path:
+                    value: /metrics
+                    type: Exact
 
     persistence:
       config:
