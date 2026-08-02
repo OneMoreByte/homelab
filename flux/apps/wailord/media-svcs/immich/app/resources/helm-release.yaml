@@ -105,9 +105,15 @@ spec:
 
     immich:
       metrics:
-        enabled: false
+        enabled: true
 
       configuration: {}
+      configurationKind: secret
+      existingConfiguration: immich-config
+
+      persistence:
+        library:
+          existingClaim: "not-used"
 
       route:
         main:
@@ -135,21 +141,6 @@ spec:
           image:
             repository: ghcr.io/immich-app/immich-server
             tag: v3.1.0
-
-      persistence:
-        library:
-          existingClaim: "not-used"
-        data:
-          enabled: false
-          type: emptyDir
-          advancedMounts:
-            main:
-              main:
-                - path: /unused
-        config:
-          enabled: true
-          type: secret
-          name: immich-config
 
     machine-learning:
       enabled: true
