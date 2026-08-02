@@ -4,13 +4,9 @@ metadata:
   name: frigate
 spec:
   interval: 1h
-  chart:
-    spec:
-      chart: frigate
-      version:  7.8.0
-      sourceRef:
-        kind: HelmRepository
-        name: blakeshome-charts
+  chartRef:
+    kind: OCIRepository
+    name: hass
   install:
     remediation:
       retries: -1
@@ -19,241 +15,278 @@ spec:
     remediation:
       retries: 3
   values:
-    strategyType: Recreate
-    image:
-      repository: ghcr.io/blakeblackshear/frigate
-      tag: 0.17.2
-      pullPolicy: IfNotPresent
-    imagePullSecrets: []
-    env: []
-    envFromSecrets:
-      - frigate-rstp-credentials
-      - frigate-plus-key
-    coral:
-      enabled: false
-      hostPath: /dev/apex_0
-    gpu:
-      nvidia:
-        enabled: false
-        runtimeClassName: null
-    extraVolumes:
-      - name: recording-storage
-        hostPath:
-          path: /var/mnt/store/frigate
-    extraVolumeMounts:
-      - mountPath: /media/frigate
-        name: recording-storage
-    shmSize: 1Gi
-    config: |
-      mqtt:
-        host: mqtt.jsck.network
-        port: 1883
-        topic_prefix: frigate
-        client_id: frigate
-        stats_interval: 60
-      record:
-        enabled: true
-        alerts:
-          retain:
-            days: 7
-        detections:
-          retain:
-            days: 7
-      ffmpeg:
-        hwaccel_args: preset-vaapi
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/blakeblackshear/frigate
+              tag: 0.17.2
+              pullPolicy: IfNotPresent
+            env: []
+            envFrom:
+              - secretRef:
+                  name: frigate-rstp-credentials
+              - secretRef:
+                  name: frigate-plus-key
+            securityContext:
+              privileged: true
 
-      detectors:
-        onnx_0:
-          type: onnx
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bulk-datastore
 
-      model:
-        model_type: yolo-generic
-        width: 320
-        height: 320
-        input_tensor: nchw
-        input_pixel_format: bgr
-        path: plus://b83061512206a1c411c2f4a88358381b
-        labelmap_path: /labelmap/coco-80.txt
-
-      go2rtc:
-        streams:
-          garage1_cam: # <- for RTSP streams
-            -  rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.17:554/cam/realmonitor?channel=1&subtype=0
-            - "ffmpeg:garage1_cam#audio=opus" 
-
-          backdoor1_cam: # <- for RTSP streams
-            -   rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0
-            - "ffmpeg:backdoor1_cam#audio=opus" 
-
-          backyard1_cam: # <- for RTSP streams
-            -  rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=0
-            - "ffmpeg:backyard1_cam#audio=opus" 
-
-      cameras:
-        garage1:      
-          ffmpeg:
-
-            output_args:
-              record: preset-record-generic-audio-aac
-            inputs:
-              - path: rtsp://127.0.0.1:8554/garage1_cam
-                input_args: preset-rtsp-restream
-                roles:
-                  - audio
-                  - record
-                  - detect
-
-          motion:
-            mask: []
-          zones:
-            driveway:
-              coordinates:
-                0,480,594,480,704,480,704,315,530,271,360,197,320,181,230,183,120,175,70,169,0,171,0,250
-            front_door:
-              coordinates: 364,187,474,185,704,235,704,313,328,201
-        backdoor1:
-          ffmpeg:
-
-            output_args:
-              record: preset-record-generic-audio-aac
-            inputs:
-              - path: rtsp://127.0.0.1:8554/backdoor1_cam
-                input_args: preset-rtsp-restream
-                roles:
-                  - audio
-                  - record
-                  - detect
-
-          motion:
-            mask:
-              - 487,0,362,44,120,53,0,59,0,0
-          zones:
-            backdoor:
-              coordinates: 361,52,451,0,570,0,704,47,704,480,0,480,0,77,124,51
-        backyard1:
-          ffmpeg:
-
-            output_args:
-              record: preset-record-generic-audio-aac
-            inputs:
-              - path: rtsp://127.0.0.1:8554/backyard1_cam
-                input_args: preset-rtsp-restream
-                roles:
-                  - audio
-                  - record
-                  - detect
-
-          motion: {}
-          zones:
-            deck:
-              coordinates: 704,480,0,480,0,375,44,305,466,331,630,229
-            yard:
-              coordinates: 232,325,482,333,608,231,704,175,704,67,322,69,52,299
-      snapshots:
-        enabled: true
-        retain:
-          default: 60
-      semantic_search:
-        enabled: True
-        reindex: False
-
-      face_recognition:
-        enabled: true
-        model_size: large
-      lpr:
-        enabled: true
-      classification:
-        bird:
-          enabled: false
-      
-      detect:
-        enabled: true
-      
-      motion:
-        enabled: true
-
-      objects:
-        # Optional: list of objects to track from labelmap.txt (default: shown below)
-        track:
-          - person
-          - bicycle
-          - car
-          - motorcycle
-          - cat
-          - dog
-      
-      review:
-        alerts:
-          enabled: True
-          labels:
-            - person
-            - bicycle
-            - car
-            - motorcycle
-            - cat
-            - dog
-       
-        detections:
-          enabled: True
-          labels:
-            - person
-            - bicycle
-            - car
-            - motorcycle
-            - cat
-            - dog
-  
-
-    probes:
-      liveness:
-        enabled: false
-        initialDelaySeconds: 30
-        failureThreshold: 5
-        timeoutSeconds: 10
-      readiness:
-        enabled: false
-        initialDelaySeconds: 30
-        failureThreshold: 5
-        timeoutSeconds: 10
-      startup:
-        enabled: false
-        failureThreshold: 30
-        periodSeconds: 10
     service:
-      type: LoadBalancer
-      port: 5000
-    ingress:
-      enabled: false
-      ingressClassName: tailscale
-      annotations: {}
-      hosts:
-        - host: frigate
-          paths:
-            - /
-      tls:
-        - hosts:
-            - frigate
+      main:
+        controller: main
+        enabled: true
+        type: LoadBalancer
+        ports:
+          http:
+            port: &svc_port 8971
+          unauth:
+            port: 5000
+          rtsp:
+            port: 8554
+          webrtc-tcp:
+            port: 8555
+            protocol: "tcp"
+          webrtc-udp:
+            port: 8555
+            protocol: "udp"
+
+    route:
+      main:
+        kind: HTTPRoute
+        parentRefs:
+          - name: "internal"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "frigate.jsck.network"
+        rules:
+          - name: "default"
+            backendRefs:
+              - identifier: main
+                port: *svc_port
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
     persistence:
       config:
         enabled: true
+        type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        size: 32Gi
-        skipuninstall: false
-    resources:
-      requests:
-        cpu: 200m
-        memory: 128Mi
-    securityContext:
-      privileged: true
-    nodeSelector: {}
-    tolerations: []
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                    - bulk-datastore
-    podAnnotations: {}
+        size: 8Gi
+
+      config-file:
+        enabled: true
+        type: ConfigMap
+        identifier: config
+        advancedMounts:
+          main:
+            main:
+              - path: /config/config.yml
+
+      recording-storage:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/store/frigate
+        advancedMounts:
+          main:
+            main:
+              - path: /media/frigate
+
+      tmpfs:
+        enable: true
+        type: EmptyDir
+        medium: Memory
+        sizeLimit: "1G"
+        advancedMounts:
+          main:
+            main:
+              - path: /tmp/cache
+
+      shmem:
+        enable: true
+        type: EmptyDir
+        medium: Memory
+        sizeLimit: "1G"
+        advancedMounts:
+          main:
+            main:
+              - path: /dev/shm
+
+
+    configMaps:
+      config:
+        data:
+          config.yaml: |-
+            mqtt:
+              host: mqtt.jsck.network
+              port: 1883
+              topic_prefix: frigate
+              client_id: frigate
+              stats_interval: 60
+            record:
+              enabled: true
+              alerts:
+                retain:
+                  days: 7
+              detections:
+                retain:
+                  days: 7
+            ffmpeg:
+              hwaccel_args: preset-vaapi
+
+            detectors:
+              onnx_0:
+                type: onnx
+
+            model:
+              model_type: yolo-generic
+              width: 320
+              height: 320
+              input_tensor: nchw
+              input_pixel_format: bgr
+              path: plus://b83061512206a1c411c2f4a88358381b
+              labelmap_path: /labelmap/coco-80.txt
+
+            go2rtc:
+              streams:
+                garage1_cam: # <- for RTSP streams
+                  -  rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.17:554/cam/realmonitor?channel=1&subtype=0
+                  - "ffmpeg:garage1_cam#audio=opus"
+                
+                backdoor1_cam: # <- for RTSP streams
+                  -   rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.43:554/cam/realmonitor?channel=1&subtype=0
+                  - "ffmpeg:backdoor1_cam#audio=opus"
+                
+                backyard1_cam: # <- for RTSP streams
+                  -  rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.50.44:554/cam/realmonitor?channel=1&subtype=0
+                  - "ffmpeg:backyard1_cam#audio=opus"
+            
+            cameras:
+              garage1:
+                ffmpeg:
+
+                  output_args:
+                    record: preset-record-generic-audio-aac
+                  inputs:
+                    - path: rtsp://127.0.0.1:8554/garage1_cam
+                      input_args: preset-rtsp-restream
+                      roles:
+                        - audio
+                        - record
+                        - detect
+
+                motion:
+                  mask: []
+                zones:
+                  driveway:
+                    coordinates:
+                      0,480,594,480,704,480,704,315,530,271,360,197,320,181,230,183,120,175,70,169,0,171,0,250
+                  front_door:
+                    coordinates: 364,187,474,185,704,235,704,313,328,201
+              backdoor1:
+                ffmpeg:
+
+                  output_args:
+                    record: preset-record-generic-audio-aac
+                  inputs:
+                    - path: rtsp://127.0.0.1:8554/backdoor1_cam
+                      input_args: preset-rtsp-restream
+                      roles:
+                        - audio
+                        - record
+                        - detect
+
+                motion:
+                  mask:
+                    - 487,0,362,44,120,53,0,59,0,0
+                zones:
+                  backdoor:
+                    coordinates: 361,52,451,0,570,0,704,47,704,480,0,480,0,77,124,51
+              backyard1:
+                ffmpeg:
+
+                  output_args:
+                    record: preset-record-generic-audio-aac
+                  inputs:
+                    - path: rtsp://127.0.0.1:8554/backyard1_cam
+                      input_args: preset-rtsp-restream
+                      roles:
+                        - audio
+                        - record
+                        - detect
+
+                motion: {}
+                zones:
+                  deck:
+                    coordinates: 704,480,0,480,0,375,44,305,466,331,630,229
+                  yard:
+                    coordinates: 232,325,482,333,608,231,704,175,704,67,322,69,52,299
+            snapshots:
+              enabled: true
+              retain:
+                default: 60
+            semantic_search:
+              enabled: True
+              reindex: False
+
+            face_recognition:
+              enabled: true
+              model_size: large
+            lpr:
+              enabled: true
+            classification:
+              bird:
+                enabled: false
+            
+            detect:
+              enabled: true
+            
+            motion:
+              enabled: true
+
+            objects:
+              # Optional: list of objects to track from labelmap.txt (default: shown below)
+              track:
+                - person
+                - bicycle
+                - car
+                - motorcycle
+                - cat
+                - dog
+            
+            review:
+              alerts:
+                enabled: True
+                labels:
+                  - person
+                  - bicycle
+                  - car
+                  - motorcycle
+                  - cat
+                  - dog
+              
+              detections:
+                enabled: True
+                labels:
+                  - person
+                  - bicycle
+                  - car
+                  - motorcycle
+                  - cat
+                  - dog

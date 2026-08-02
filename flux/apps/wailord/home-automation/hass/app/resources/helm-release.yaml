@@ -33,7 +33,7 @@ spec:
         controller: main
         ports:
           http:
-            port: 8123
+            port: &svc_port 8123
 
     route:
       main:
@@ -49,8 +49,8 @@ spec:
         rules:
           - name: "default"
             backendRefs:
-              - name: hass-main
-                port: 8123
+              - identifier: main
+                port: *svc_port
             matches:
               - path:
                   value: /

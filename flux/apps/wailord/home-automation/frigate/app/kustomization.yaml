@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - resources/helm-release.yaml
-  - resources/helm-repo.yaml
+  - resources/oci-repo.yaml
   - resources/frigate-rstp-credentials.yaml
   - resources/frigate-plus-key.yaml
 
