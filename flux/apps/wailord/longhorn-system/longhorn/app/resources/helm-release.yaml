@@ -45,3 +45,7 @@ spec:
           sectionName: websecure-gw
       hostnames:
         - "longhorn.jsck.network"
+
+    metrics:
+      serviceMonitor:
+        enabled: true
