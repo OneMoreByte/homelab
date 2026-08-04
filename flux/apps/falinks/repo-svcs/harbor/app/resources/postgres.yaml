@@ -10,9 +10,9 @@ spec:
       owner: harbor
       secret:
         name: harbor-db-secret
-    config:
-      parameters:
-        max_connections: 1000
+  postgresql:
+    parameters:
+      max_connections: 1000
 
   storage:
     size: 32Gi
