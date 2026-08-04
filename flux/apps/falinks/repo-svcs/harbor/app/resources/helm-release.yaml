@@ -37,6 +37,11 @@ spec:
 
     externalURL: https://harbor.jsck.network
 
+    portal:
+      image:
+        repository: docker.io/goharbor/harbor-portal
+        tag: dev-arm64
+
     core:
       image:
         repository: docker.io/goharbor/harbor-core
