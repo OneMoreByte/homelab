@@ -51,5 +51,9 @@ spec:
 
     persistence:
       enabled: true
+
+      registry:
+        size: 256Gi
+
       imageChartStorage:
         type: filesystem
