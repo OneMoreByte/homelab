@@ -5,4 +5,5 @@ resources:
   - svcs.yaml
   - repo-svcs.yaml
   - gateway-svcs.yaml
+  - cnpg-system.yaml
 

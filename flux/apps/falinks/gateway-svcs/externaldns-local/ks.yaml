@@ -9,9 +9,6 @@ spec:
     labels:
       app.kubernetes.io/name: *app
 
-  dependsOn:
-    - name: externaldns-repo
-
   interval: 1h
   path: ./flux/apps/falinks/gateway-svcs/externaldns-local/app
   prune: true
