@@ -26,11 +26,15 @@ spec:
               tag: main
               pullPolicy: IfNotPresent
             env:
-              OPENARC_API_KEY:
+              HF_API_KEY:
                 secretKeyRef:
                   name: huggingface
                   key: token
-              OPENARC_AUTOLOAD_MODEL: "Wondernutts/gemma-4-26B-A4B-it-qat-q4_0-unquantized-uncensored-heretic-int4-ov"
+              OPENARC_API_KEY:
+                secretKeyRef:
+                  name: auth-token
+                  key: token
+              OPENARC_AUTOLOAD_MODEL: "/model-cache/Wondernutts/gemma-4-26B-A4B-it-qat-q4_0-unquantized-uncensored-heretic-int4-ov"
               MODEL_PATH: "/model-cache"
             securityContext:
               privileged: true
