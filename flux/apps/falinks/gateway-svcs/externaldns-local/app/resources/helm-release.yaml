@@ -50,8 +50,8 @@ spec:
     triggerLoopOnEvent: true
     policy: sync
 
-    txtOwnerId: main
-    txtPrefix: k8s.main.%{record_type}-
+    txtOwnerId: falinks
+    txtPrefix: k8s.falinks.%{record_type}-
     domainFilters:
         - jsck.network
 
