@@ -19,6 +19,8 @@ spec:
     remediation:
       retries: 3
   values:
+    existingSecretAdminPassword: "harbor-inital-password"
+
     enableMigrateHelmHook: true
 
     ipFamily:
