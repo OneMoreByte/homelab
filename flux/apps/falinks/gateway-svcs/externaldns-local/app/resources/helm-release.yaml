@@ -21,6 +21,7 @@ spec:
   # https://lmno.pk/post/configuring-external-dns-technitium/
   values:
     fullnameOverride: external-dns-unifi
+    logLevel: debug
     provider:
         name: webhook
         webhook:
