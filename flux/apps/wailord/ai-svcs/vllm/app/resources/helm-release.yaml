@@ -26,6 +26,9 @@ spec:
               tag: main
               pullPolicy: IfNotPresent
             env:
+              NEOReadDebugKeys: "1"
+              OverrideGpuAddressSpace: "48"
+              EnableImplicitScaling: "1"
               HF_API_KEY:
                 secretKeyRef:
                   name: huggingface
@@ -84,6 +87,13 @@ spec:
       config:
         enabled: false
         type: emptyDir
+
+
+      persist:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 4Gi
 
       model-cache:
         enabled: true
