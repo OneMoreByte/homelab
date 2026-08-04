@@ -99,4 +99,4 @@ spec:
         advancedMounts:
           main:
             main:
-              path: /root/.cache/huggingface
+              - path: /root/.cache/huggingface
