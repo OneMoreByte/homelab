@@ -1,0 +1,41 @@
+kind: Secret
+apiVersion: v1
+metadata:
+    name: huggingface
+stringData:
+    token: ENC[AES256_GCM,data:yiVkxTR/8trJtnbr2qjOF+SzQeiakQgimjW6ltElntc3S0845g==,iv:LVQbegPyCUjVvFGHVMY7AXkKm7KP6HXzocERrMQZo9o=,tag:qQDSqTuOJ5WW9h5M4mOxmg==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IEcvTERKZyBBNzV5TmJM
+            Z0JNMTRPa0Q0aTdZUldCM0JEaWE3ZXoreUlITSs1VDVSSUNWQwpFRGtBWlM0cVc5
+            dHN6R0VoME41bnNqdlhya0RMSXJsNHZpSG9zdEdaR28wCi0tLSBSekN0Rll3TUhw
+            SlhxRUdxT283UEFtOG02blhadndjSzRrRWh1ZXk2UVc0CsyKU5XQ6Kp3cEEcb7wS
+            kn+RaGeRchQP2o/1Flqo//xJhxXoxW2J2w66bBSNrtAWPgiTmhSxYD55frThRgCb
+            2pc=
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1yubikey1qdmjd6g9zxszvw332nlw8898pl9q8tnpjv8ljjvxpau650567j5a6nlpjz8
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHBpdi1wMjU2IE1TL0VLZyBBcC81T0dP
+            eExIYWo0ckQ5S3lRelhkUjhEZzFPMWNDcnhYRllJZ3NkSUdYVQphNFowR2ozc1Zp
+            YVNNZXlYNlltVkU4RWEvSzFHV1Nkc0xROElmT1NvdGJVCi0tLSBEUEloQlNhR1B0
+            OTlWQmhGZDBFOGtpUXlEa3FUd0pITHB2aTY4QVZPdDBzCty9nwaOh882RqpcioAl
+            6EHA+/BAoo5kVWPc5b3FD2TXNqmogZLzb0VGB3b/WdP9qhCjErEi/tP1FVzONV8V
+            aFY=
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1yubikey1qwu0zwltgvjgv7tr0qcpjw6grreja8lqwpsxdprgwyap29mrkvx6j6795r0
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBKTERuV05CVHZyQktXMmkw
+            bDFDTzN3ZHY3bmtuVVN1cGhDaEw0WkVicnc0CnJEMHN1WnRGN1RJaFdlU2EwMHRS
+            Qjd1eDdna0laSENUWFpMLy9zRFBZOUUKLS0tIEJsVGNvL3ZLRkhPdit5dlVVK2RS
+            cDJDdlVKM3RLb1AvMmJ0SHZ4M3JicDAKw3RgHfCazlAZM2GFOWdxi3KL3Vd2uiO8
+            REarSa5VHmfwbKnt+PaqS+TH375YfSnIYIo76O+xKezammBbuaKC8w==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1tufq3ztwqlaawpe4sd8pzh7t70fvgq8wwz7q0mka2rvrgvtngsgqhxay7r
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-08-04T16:22:12Z"
+    mac: ENC[AES256_GCM,data:MU4o5XJNof42RCXX5/kZqqM/k7tB/aKXAC8hxWn3phmttfOghLIT27z7lm9wlBlnGxiZeCRbNK3U5OcBFdjIVNftB+UtXbvGxGpwUth69J6iEf0wYCg8Te4WDwrr99SW0Pj7EWKCrU9UEEbpkIcbEt1v/cqq5dqay09V3lO0S5I=,iv:vDT/SexeOlcok47qUbJ8W9PQt4vcwd5Ivgn2w0D73oI=,tag:Aj/R8dLv2n3d4mREhLZx/g==,type:str]
+    version: 3.13.3

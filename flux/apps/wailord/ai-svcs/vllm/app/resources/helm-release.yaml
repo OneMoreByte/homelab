@@ -1,0 +1,88 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vllm
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: vllm
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/searchsavior/openarc-battlemage
+              tag: v0.26.0
+              pullPolicy: IfNotPresent
+            env:
+              OPENARC_API_KEY:
+                secretKeyRef:
+                  name: huggingface
+                  key: token
+              OPENARC_AUTOLOAD_MODEL: "Wondernutts/gemma-4-26B-A4B-it-qat-q4_0-unquantized-uncensored-heretic-int4-ov"
+              MODEL_PATH: "/model-cache"
+            securityContext:
+              privileged: true
+
+
+
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bulk-datastore
+
+    service:
+      main:
+        controller: main
+        enabled: true
+        type: LoadBalancer
+        ports:
+          http:
+            port: 8000
+
+    route:
+      main:
+        kind: HTTPRoute
+        parentRefs:
+          - name: "internal"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "ai.jsck.network"
+        rules:
+          - name: "default"
+            backendRefs:
+              - identifier: main
+                port: 8800
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
+    persistence:
+      config:
+        enabled: false
+        type: emptyDir
+
+      model-cache:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 100Gi
