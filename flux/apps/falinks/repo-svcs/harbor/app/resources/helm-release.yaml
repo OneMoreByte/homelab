@@ -52,4 +52,4 @@ spec:
     persistence:
       enabled: true
       imageChartStorage:
-      type: filesystem
+        type: filesystem
