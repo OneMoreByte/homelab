@@ -22,7 +22,7 @@ spec:
         containers:
           main:
             image:
-              repository: vllm/vllm-openai-xpu
+              repository: docker.io/vllm/vllm-openai-xpu
               tag: v0.26.0
               pullPolicy: IfNotPresent
             env:
@@ -44,8 +44,6 @@ spec:
             ]
             securityContext:
               privileged: true
-
-
 
     defaultPodOptions:
       affinity:
