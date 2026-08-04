@@ -15,7 +15,7 @@ spec:
     - name: cilium-bgp
 
   interval: 1h
-  path: ./flux/apps/wailord/gateway-svcs/cilium-gateways/app
+  path: ./flux/apps/falinks/gateway-svcs/cilium-gateways/app
   prune: true
   retryInterval: 2m
   sourceRef:

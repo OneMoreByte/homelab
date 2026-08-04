@@ -13,7 +13,7 @@ spec:
     - name: externaldns-repo
 
   interval: 1h
-  path: ./flux/apps/wailord/gateway-svcs/externaldns-local/app
+  path: ./flux/apps/falinks/gateway-svcs/externaldns-local/app
   prune: true
   retryInterval: 2m
   sourceRef:
