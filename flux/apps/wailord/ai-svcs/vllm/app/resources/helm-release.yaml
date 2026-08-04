@@ -26,6 +26,7 @@ spec:
               tag: main
               pullPolicy: IfNotPresent
             env:
+              TEST: test
               HF_API_KEY:
                 secretKeyRef:
                   name: huggingface
