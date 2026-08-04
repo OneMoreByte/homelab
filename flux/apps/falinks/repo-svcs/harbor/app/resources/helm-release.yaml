@@ -26,6 +26,8 @@ spec:
         enabled: false
 
     expose:
+      tls:
+        enabled: false
       type: route
       route:
         parentRefs:
