@@ -3,21 +3,24 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app harbor
+  name: &app cert-manager-issuer
+
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
 
+  dependsOn:
+    - name: cert-manager
+
   interval: 1h
-  path: ./flux/apps/falinks/repo-svcs/harbor/app
+  path: ./flux/apps/falinks/gateway-svcs/cert-manager-issuer/app
   prune: true
   retryInterval: 2m
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: harbor-svcs
+  targetNamespace: gateway-svcs
   timeout: 5m
   wait: false
-

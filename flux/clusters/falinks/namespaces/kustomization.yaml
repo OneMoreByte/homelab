@@ -3,4 +3,6 @@ kind: Kustomization
 resources:
   - openebs-system.yaml
   - svcs.yaml
+  - repo-svcs.yaml
+  - gateway-svcs.yaml
 

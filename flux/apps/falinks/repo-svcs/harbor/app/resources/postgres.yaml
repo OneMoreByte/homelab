@@ -1,0 +1,18 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: harbor-pg-cluster
+spec:
+  instances: 1
+  bootstrap:
+    initdb:
+      database: registry
+      owner: harbor
+      secret:
+        name: harbor-db-secret
+    config:
+      parameters:
+        max_connections: 1000
+
+  storage:
+    size: 32Gi

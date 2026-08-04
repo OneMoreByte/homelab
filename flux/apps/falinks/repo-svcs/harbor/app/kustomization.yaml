@@ -3,5 +3,8 @@ kind: Kustomization
 
 resources:
   - resources/helm-release.yaml
-  - resources/oci-repo.yaml
-  - resources/nut-secret-configs.yaml
+  - resources/helm-repo.yaml
+  - resources/postgres.yaml
+  - resources/postgres-db-secret.yaml
+  - resources/valkey-helm-release.yaml
+  - resources/valkey-helm-repo.yaml

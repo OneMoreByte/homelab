@@ -1,0 +1,65 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: externaldns-local
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: external-dns
+      version:  1.21.1
+      sourceRef:
+        kind: HelmRepository
+        name: external-dns
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  # https://lmno.pk/post/configuring-external-dns-technitium/
+  values:
+    fullnameOverride: external-dns-unifi
+    provider:
+        name: webhook
+        webhook:
+            image:
+                repository: ghcr.io/home-operations/external-dns-unifi-webhook
+                tag: 0.10.9
+            env:
+                - name: UNIFI_HOST
+                  value: https://192.168.13.1
+                - name: UNIFI_API_KEY
+                  valueFrom:
+                      secretKeyRef:
+                          name: unifi-dns-secret
+                          key: UNIFI_API_KEY
+            livenessProbe:
+                httpGet:
+                    path: /healthz
+                    port: http-webhook
+                initialDelaySeconds: 10
+                timeoutSeconds: 5
+            readinessProbe:
+                httpGet:
+                    path: /readyz
+                    port: http-webhook
+                initialDelaySeconds: 10
+                timeoutSeconds: 5
+    triggerLoopOnEvent: true
+    policy: sync
+
+    txtOwnerId: main
+    txtPrefix: k8s.main.%{record_type}-
+    domainFilters:
+        - jsck.network
+
+    sources:
+      - service
+      - ingress
+      - gateway-httproute
+      - gateway-grpcroute
+      - node
+
+
