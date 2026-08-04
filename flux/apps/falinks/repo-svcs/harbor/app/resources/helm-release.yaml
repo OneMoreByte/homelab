@@ -37,6 +37,35 @@ spec:
 
     externalURL: https://harbor.jsck.network
 
+    core:
+      image:
+        repository: docker.io/goharbor/harbor-core
+        tag: dev-arm64
+
+    jobservice:
+      image:
+        repository: docker.io/goharbor/harbor-jobservice
+        tag: dev-arm64
+
+    registry:
+      registry:
+        image:
+          repository: docker.io/goharbor/registry-photon
+          tag: dev-arm64
+      controller:
+        image:
+          repository: docker.io/goharbor/harbor-registryctl
+          tag: dev-arm64
+
+    trivy:
+      # enabled the flag to enable Trivy scanner
+      enabled: true
+      image:
+        # repository the repository for Trivy adapter image
+        repository: docker.io/goharbor/trivy-adapter-photon
+        # tag the tag for Trivy adapter image
+        tag: dev-arm64
+
     database:
       type: external
       external:
