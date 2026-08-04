@@ -5,4 +5,5 @@ resources:
   - resources/helm-release.yaml
   - resources/oci-repo.yaml
   - resources/huggingface.yaml
+  - resources/auth-token.yaml
 
