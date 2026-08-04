@@ -23,7 +23,7 @@ spec:
           main:
             image:
               repository: ghcr.io/searchsavior/openarc-battlemage
-              tag: v0.26.0
+              tag: main
               pullPolicy: IfNotPresent
             env:
               OPENARC_API_KEY:
