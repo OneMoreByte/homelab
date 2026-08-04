@@ -22,8 +22,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/searchsavior/openarc-battlemage
-              tag: main
+              repository: vllm/vllm-openai-xpu
+              tag: v0.26.0
               pullPolicy: IfNotPresent
             env:
               NEOReadDebugKeys: "1"
@@ -33,12 +33,15 @@ spec:
                 secretKeyRef:
                   name: huggingface
                   key: token
-              OPENARC_API_KEY:
+              AUTH_API_KEY:
                 secretKeyRef:
                   name: auth-token
                   key: token
-              OPENARC_AUTOLOAD_MODEL: "Wondernutts/gemma-4-26B-A4B-it-qat-q4_0-unquantized-uncensored-heretic-int4-ov"
-              MODEL_PATH: "/model-cache"
+              MODEL: "Wondernutts/gemma-4-26B-A4B-it-qat-q4_0-unquantized-uncensored-heretic-int4-ov"
+            command: ["/bin/sh", "-c"]
+            args: [
+                "vllm serve $MODEL --trust-remote-code --enable-chunked-prefill --max-num-batched-tokens 1024"
+            ]
             securityContext:
               privileged: true
 
@@ -88,15 +91,12 @@ spec:
         enabled: false
         type: emptyDir
 
-
-      persist:
-        enabled: true
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 4Gi
-
       model-cache:
         enabled: true
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 100Gi
+        advancedMounts:
+          main:
+            main:
+              path: /root/.cache/huggingface
