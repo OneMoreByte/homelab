@@ -36,6 +36,7 @@ spec:
             sectionName: websecure-gw
         hosts:
           - "harbor.jsck.network"
+          - "wumbo.jsck.network"
 
     externalURL: https://harbor.jsck.network
 
