@@ -19,16 +19,6 @@ spec:
     remediation:
       retries: 3
   values:
-    # One of the PIs is 1G which is not a lot
-    cni:
-      resources:
-        limits:
-          cpu: 1
-          memory: 256Mi
-        requests:
-          cpu: 100m
-          memory: 10Mi
-
     gatewayAPI:
       enabled: true
 
