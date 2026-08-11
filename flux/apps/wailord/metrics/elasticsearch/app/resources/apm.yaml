@@ -1,0 +1,11 @@
+apiVersion: apm.k8s.elastic.co/v1
+kind: ApmServer
+metadata:
+  name: log-apm
+spec:
+  version: 8.19.20
+  count: 1
+  elasticsearchRef:
+    name: log-cluster
+  kibanaRef:
+    name: log-kibana

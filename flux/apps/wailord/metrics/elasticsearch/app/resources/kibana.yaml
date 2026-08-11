@@ -1,0 +1,13 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: log-kibana
+spec:
+  version: 8.19.20
+  count: 1
+  elasticsearchRef:
+    name: log-cluster
+config:
+  xpack.fleet.packages:
+  - name: apm
+    version: latest

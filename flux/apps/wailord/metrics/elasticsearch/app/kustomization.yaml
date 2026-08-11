@@ -3,5 +3,7 @@ kind: Kustomization
 
 resources:
   - resources/elasticsearch.yaml
+  - resources/apm.yaml
+  - resources/kibana.yaml
   - resources/grafana-filerealm-secret.yaml
   - resources/vector-filerealm-secret.yaml
