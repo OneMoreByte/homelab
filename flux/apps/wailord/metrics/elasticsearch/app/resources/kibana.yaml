@@ -7,7 +7,7 @@ spec:
   count: 1
   elasticsearchRef:
     name: log-cluster
-config:
-  xpack.fleet.packages:
-  - name: apm
-    version: latest
+  config:
+    xpack.fleet.packages:
+    - name: apm
+      version: latest
