@@ -154,4 +154,4 @@ spec:
         auth_url: https://auth.thescience.team/application/o/authorize/
         token_url: https://auth.thescience.team/application/o/token/
         api_url: https://auth.thescience.team/application/o/userinfo/
-        role_attribute_path: contains(groups[*], 'grafana-jscknet-admin') && 'Admin' || contains(groups[*], 'grafana-jscknet-editor') && 'Editor' || 'Viewer'
+        role_attribute_path: contains(groups[*], 'infra-jscknet-admin') && 'Admin' || contains(groups[*], 'infra-jscknet-editor') && 'Editor' || 'Viewer'
