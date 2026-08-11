@@ -86,7 +86,7 @@ spec:
           - "dns"
           - "drop"
           - "tcp"
-          - "flow:sourceContext=app|pod|ip;destinationContext=app|pod|ip;labelsContext=source_namespace,destination_namespace,traffic_direction"
+          - "flow:sourceContext=app|pod|dns|ip;destinationContext=app|pod|dns|ip;labelsContext=source_namespace,destination_namespace,traffic_direction"
           - "port-distribution"
           - "icmp"
           - "httpV2:exemplars=true;labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction"
