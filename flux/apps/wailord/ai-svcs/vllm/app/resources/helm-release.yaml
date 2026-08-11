@@ -23,7 +23,7 @@ spec:
           main:
             image:
               repository: docker.io/vllm/vllm-openai-xpu
-              tag: v0.27.0
+              tag: v0.27.1
               pullPolicy: IfNotPresent
             env:
               NEOReadDebugKeys: "1"
