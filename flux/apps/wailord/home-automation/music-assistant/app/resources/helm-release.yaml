@@ -23,7 +23,7 @@ spec:
           main:
             image:
               repository: ghcr.io/music-assistant/server
-              tag: 2.9.11
+              tag: 2.9.13
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
