@@ -54,10 +54,10 @@ spec:
         controller:
           identifier: smart-exporter
         podMetricsEndpoints:
-          - port: 9633
+          - port: "9633"
       zfs-exporter:
         enabled: true
         controller:
           identifier: zfs-exporter
         podMetricsEndpoints:
-          - port: 9134
+          - port: "9134"
