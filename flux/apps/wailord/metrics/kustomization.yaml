@@ -6,5 +6,6 @@ resources:
   - prometheus/ks.yaml
   - vector/ks.yaml
   - elasticsearch/ks.yaml
+  - disk-monitoring/ks.yaml
 #  - unipoller/ks.yaml
 

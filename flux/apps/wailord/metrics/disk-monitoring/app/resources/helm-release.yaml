@@ -21,54 +21,52 @@ spec:
       smart-exporter:
         enabled: true
         strategy: Recreate
+        type: daemonset
         containers:
           main:
             image:
               repository: prometheuscommunity/smartctl-exporter
               tag: 10.11.11-1
               pullPolicy: IfNotPresent
-            env:
-              TZ: America/Chicago
 
             securityContext:
               privileged: true
         initContainers: []
 
-    defaultPodOptions:
-      affinity:
-        nodeAffinity:
+      zfs-exporter:
+        enabled: true
+        strategy: Recreate
+        type: daemonset
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onemorebyte/zfs_exporter_talos
+              tag: v2.4.1
+              pullPolicy: IfNotPresent
+            port:
+
+            securityContext:
+              privileged: true
+        initContainers: []
+        nodeSelector:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-              - matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - bulk-datastore
+            - matchExpressions:
+              - key: zfs
+                operator: In
+                values:
+                - yes
 
-    service:
-      main:
-        controller: main
-        ports:
-          http:
-            port: &svc_port 8096
-
-    serviceMonitor:
-      main:
+    podMonitor:
+      smart-exporter:
         enabled: true
-        service:
-          identifier: main
-        endpoints:
-          - port: http
-            scheme: http
-
-
-
-    persistence:
-      library-images:
+        controller:
+          identifier: smart-exporter
+        podMetricsEndpoint:
+          - port: 9633
+      zfs-exporter:
         enabled: true
-        type: hostPath
-        hostPath: /var/mnt/fast-store/k8s-hostpath/jellyfin-images
-        advancedMounts:
-          main:
-            main:
-              - path: /library-images
+        controller:
+          identifier: zfs-exporter
+        podMetricsEndpoint:
+          - port: 9134
