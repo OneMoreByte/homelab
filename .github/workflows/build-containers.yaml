@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        container: ["arr-pg-configure", "backup-target", "talos-shell"]
+        container: ["arr-pg-configure", "backup-target", "talos-shell", "zfs_exporter_talos"]
     steps:
       - uses: actions/checkout@v7
       - name: Get container version and current talos version
@@ -32,7 +32,9 @@ jobs:
           tags: "latest ${{ env.VERSION }}"
           context: "containers/${{matrix.container}}"
           containerfiles: "containers/${{matrix.container}}/Containerfile"
-          build-args: "TALOS_VERSION=${{ env.TALOS_VERSION }}"
+          build-args: |
+            TALOS_VERSION=${{ env.TALOS_VERSION }}
+            VERSION=${{ env.VERSION }}
       - name: push to image repo
         uses: redhat-actions/push-to-registry@v3
         with:

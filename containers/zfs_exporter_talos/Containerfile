@@ -1,0 +1,18 @@
+FROM alpine:3.24.1
+
+ARG TALOS_VERSION
+ARG VERSION
+
+# Preinstall tools 
+RUN apk add neovim curl wget git shadow bash crane cosign libuuid libblkid go
+
+# Copy in zfs installer
+COPY install-zfs.sh /usr/local/bin/
+
+# Add ZFS extension into the image so we can run zfs commands
+RUN /usr/local/bin/install-zfs.sh
+
+# Get ZFS exporter
+RUN go install github.com/pdf/zfs_exporter/v2@$VERSION
+
+CMD zfs_exporter
