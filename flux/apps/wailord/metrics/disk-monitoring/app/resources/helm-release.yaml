@@ -29,6 +29,9 @@ spec:
               tag: latest@sha256:4e61f74379c91ee832b9fa3e65e65e6a14ef436d3736cf83279e76208d17dd01
               pullPolicy: IfNotPresent
 
+            ports:
+              - name: "metrics"
+                containerPort: 9633
             securityContext:
               privileged: true
 
@@ -44,6 +47,9 @@ spec:
               pullPolicy: IfNotPresent
             securityContext:
               privileged: true
+            ports:
+              - name: "metrics"
+                containerPort: 9134
         pod:
           nodeSelector:
             zfs: yes
@@ -54,10 +60,10 @@ spec:
         controller:
           identifier: smart-exporter
         podMetricsEndpoints:
-          - port: "9633"
+          - port: "metrics"
       zfs-exporter:
         enabled: true
         controller:
           identifier: zfs-exporter
         podMetricsEndpoints:
-          - port: "9134"
+          - port: "metrics"
