@@ -1,0 +1,74 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: disk-monitoring
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: disk-monitoring
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      smart-exporter:
+        enabled: true
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: prometheuscommunity/smartctl-exporter
+              tag: 10.11.11-1
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/Chicago
+
+            securityContext:
+              privileged: true
+        initContainers: []
+
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bulk-datastore
+
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: &svc_port 8096
+
+    serviceMonitor:
+      main:
+        enabled: true
+        service:
+          identifier: main
+        endpoints:
+          - port: http
+            scheme: http
+
+
+
+    persistence:
+      library-images:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/fast-store/k8s-hostpath/jellyfin-images
+        advancedMounts:
+          main:
+            main:
+              - path: /library-images
