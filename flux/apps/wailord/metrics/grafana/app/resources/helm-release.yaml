@@ -78,7 +78,7 @@ spec:
             jsonData:
               index: logs-k8s-audit-default
               logLevelField: level
-              logMessageField: message
+              logMessageField: msg
               maxConcurrentShardRequests: 5
               timeField: '@timestamp'
               tlsSkipVerify: true
@@ -115,7 +115,7 @@ spec:
               logMessageField: message
               maxConcurrentShardRequests: 5
               timeField: '@timestamp'
-            tlsSkipVerify: true
+              tlsSkipVerify: true
 
     persistence:
       enabled: true

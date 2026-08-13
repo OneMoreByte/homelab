@@ -32,7 +32,10 @@ spec:
           secretKeyRef:
             name: "vector-filerealm-secret"
             key: "password"
-
+      - name: NODE_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
     customConfig:
       data_dir: /vector-data-dir
       api:
@@ -117,6 +120,7 @@ spec:
             }
             .message = parse_json(.msg) ?? .msg
             .level = del(."talos-level")
+            .node = "${NODE_NAME}"
             del(.msg)
             del(."talos-time")
 
@@ -133,6 +137,7 @@ spec:
             .message = parse_json(.msg) ?? .msg
             .level = ."talos-level"
             .service = ."talos-service"
+            .node = "${NODE_NAME}"
             del(.msg)
             del(."talos-time")
             del(."talos-level")
