@@ -28,7 +28,7 @@ jobs:
         id: build-container
         uses: redhat-actions/buildah-build@v3
         with:
-          image: ghcr.io/onemorebyte/${{ matrix.container }}
+          image: ${{ matrix.container }}
           tags: "latest ${{ env.VERSION }}"
           context: "containers/${{matrix.container}}"
           containerfiles: "containers/${{matrix.container}}/Containerfile"
@@ -40,6 +40,6 @@ jobs:
         with:
           image: ${{ steps.build-container.outputs.image }}
           tags: ${{ steps.build-container.outputs.tags }}
-          registry: ghcr.io
+          registry: ghcr.io/onemorebyte
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
