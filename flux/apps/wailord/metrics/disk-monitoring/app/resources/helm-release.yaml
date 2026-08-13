@@ -43,8 +43,6 @@ spec:
               repository: ghcr.io/onemorebyte/zfs_exporter_talos
               tag: v2.4.1
               pullPolicy: IfNotPresent
-            port:
-
             securityContext:
               privileged: true
         initContainers: []
