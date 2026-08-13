@@ -13,6 +13,6 @@ COPY install-zfs.sh /usr/local/bin/
 RUN /usr/local/bin/install-zfs.sh
 
 # Get ZFS exporter
-RUN go install github.com/pdf/zfs_exporter/v2@$VERSION
+RUN GOBIN=/usr/local/bin go install github.com/pdf/zfs_exporter/v2@$VERSION
 
 CMD zfs_exporter
