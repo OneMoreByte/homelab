@@ -46,13 +46,7 @@ spec:
               privileged: true
         pod:
           nodeSelector:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-              - matchExpressions:
-                - key: zfs
-                  operator: In
-                  values:
-                  - yes
+            zfs: yes
 
     podMonitor:
       smart-exporter:
