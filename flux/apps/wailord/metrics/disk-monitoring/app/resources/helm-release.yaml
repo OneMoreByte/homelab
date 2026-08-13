@@ -31,7 +31,6 @@ spec:
 
             securityContext:
               privileged: true
-        initContainers: []
 
       zfs-exporter:
         enabled: true
@@ -45,26 +44,26 @@ spec:
               pullPolicy: IfNotPresent
             securityContext:
               privileged: true
-        initContainers: []
-        nodeSelector:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: zfs
-                operator: In
-                values:
-                - yes
+        pod:
+          nodeSelector:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: zfs
+                  operator: In
+                  values:
+                  - yes
 
     podMonitor:
       smart-exporter:
         enabled: true
         controller:
           identifier: smart-exporter
-        podMetricsEndpoint:
+        podMetricsEndpoints:
           - port: 9633
       zfs-exporter:
         enabled: true
         controller:
           identifier: zfs-exporter
-        podMetricsEndpoint:
+        podMetricsEndpoints:
           - port: 9134
