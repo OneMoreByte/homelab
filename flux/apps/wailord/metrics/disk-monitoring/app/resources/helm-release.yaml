@@ -33,6 +33,9 @@ spec:
               - name: "metrics"
                 containerPort: 9633
             securityContext:
+              # Hate this
+              runAsUser: 1
+              runAsGroup: 1
               privileged: true
 
       zfs-exporter:
