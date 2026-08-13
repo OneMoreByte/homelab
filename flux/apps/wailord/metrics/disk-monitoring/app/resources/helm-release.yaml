@@ -41,7 +41,7 @@ spec:
             image:
               repository: ghcr.io/onemorebyte/zfs_exporter_talos
               tag: v2.4.1
-              pullPolicy: Always
+              pullPolicy: IfNotPresent
             securityContext:
               privileged: true
         pod:
