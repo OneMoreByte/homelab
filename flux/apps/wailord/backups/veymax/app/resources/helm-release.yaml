@@ -38,7 +38,7 @@ spec:
               repository: *backup_img
               tag: *backup_tag
               pullPolicy: IfNotPresent
-            command: ["bash", "-c", "ssh-keygen -A -f /ssh"]
+            command: ["bash", "-c", "ssh-keygen -A"]
           init-permissions:
             image:
               repository: *backup_img
@@ -89,6 +89,10 @@ spec:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 1Gi
+        advancedMounts:
+          main:
+            create-host-keys:
+              - path: /etc/ssh
 
       backup-dataset:
         enabled: true
