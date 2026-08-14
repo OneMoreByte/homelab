@@ -92,6 +92,8 @@ spec:
           main:
             create-host-keys:
               - path: /etc/ssh
+            main:
+              - path: /ssh
 
       backup-dataset:
         enabled: true
