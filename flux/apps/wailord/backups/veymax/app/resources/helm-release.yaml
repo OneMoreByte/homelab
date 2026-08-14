@@ -31,6 +31,7 @@ spec:
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
+              OTHER: test
 
         initContainers:
           create-host-keys:
