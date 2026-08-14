@@ -116,6 +116,8 @@ spec:
           main:
             main:
               - path: /home/veymax/
+            init-permissions:
+              - path: /home/veymax/
 
       home-ssh:
         enabled: true
@@ -123,6 +125,8 @@ spec:
         advancedMounts:
           main:
             main:
+              - path: /home/veymax/.ssh
+            init-permissions:
               - path: /home/veymax/.ssh
 
       home-ssh-keys:
@@ -136,3 +140,6 @@ spec:
               - path: /home/veymax/.ssh/authorized_keys
                 subPath: authorized_keys
                 readOnly: true
+            init-permissions:
+              - path: /home/veymax/.ssh/authorized_keys
+                subPath: authorized_keys
