@@ -48,8 +48,7 @@ spec:
               - /usr/local/bin/configure-user.sh
               - *username
             securityContext:
-
-
+              privileged: true
 
     defaultPodOptions:
       affinity:
