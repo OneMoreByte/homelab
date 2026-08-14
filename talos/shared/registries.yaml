@@ -14,9 +14,9 @@ endpoints:
 ---
 apiVersion: v1alpha1
 kind: RegistryMirrorConfig
-name: gcr.io
+name: ghcr.io
 endpoints:
-  - url: https://harbor.jsck.network/v2/proxy-gcr.io
+  - url: https://harbor.jsck.network/v2/proxy-ghcr.io
     overridePath: true
 ---
 apiVersion: v1alpha1
@@ -25,9 +25,4 @@ name: quay.io
 endpoints:
   - url: https://harbor.jsck.network/v2/proxy-quay.io
     overridePath: true
----
-apiVersion: v1alpha1
-kind: RegistryAuthConfig
-name: harbor.jsck.network
-username: 
-password: 
+

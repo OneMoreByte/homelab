@@ -23,6 +23,21 @@ patches:
       install:
         grubUseUKICmdline: true
     
+      registries:
+        mirrors:
+          docker.io:
+            endpoints:
+              - https://harbor.jsck.network/v2/proxy-docker.io
+          ghcr.io:
+            endpoints:
+              - https://harbor.jsck.network/v2/proxy-ghcr.io
+          registry.k8s.io:
+            endpoints:
+              - https://harbor.jsck.network/v2/proxy-registry.k8s.io
+          quay.io:
+            endpoints:
+              - https://harbor.jsck.network/v2/proxy-quay.io
+    
       kubelet:    
         # Add longhorn's default mount. I'm not sure why this needs to be re-mounted? 
         # The docs said so though so ¯\_(ツ)_/¯
