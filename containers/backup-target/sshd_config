@@ -1,6 +1,28 @@
-HostKey /ssh/ssh_host_rsa_key
-HostKey /ssh/ssh_host_ecdsa_key
+Port 22
+AddressFamily inet
+ListenAddress 0.0.0.0
+
 HostKey /ssh/ssh_host_ed25519_key
+HostKey /ssh/ssh_host_ecdsa_key
 PidFile /ssh/sshd.pid
 
+KexAlgorithms mlkem768x25519-sha256,sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org
+HostKeyAlgorithms ssh-ed25519,ecdsa-sha2-nistp256
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
+
+PermitRootLogin no
+PubkeyAuthentication yes
 PasswordAuthentication no
+KbdInteractiveAuthentication no
+ChallengeResponseAuthentication no
+PermitEmptyPasswords no
+AuthenticationMethods publickey
+MaxAuthTries 3
+LoginGraceTime 20
+
+AllowAgentForwarding no
+AllowTcpForwarding no
+X11Forwarding no
+PermitTunnel no
+GatewayPorts no

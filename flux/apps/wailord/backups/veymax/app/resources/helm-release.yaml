@@ -26,8 +26,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/onemorebyte/backup-target
-              tag: 0.2.1
+              repository: &backup_img ghcr.io/onemorebyte/backup-target
+              tag: &backup_tag 0.2.2
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
@@ -35,18 +35,20 @@ spec:
         initContainers:
           create-host-keys:
             image:
-              repository: ghcr.io/onemorebyte/backup-target
-              tag: 0.2.1
+              repository: *backup_img
+              tag: *backup_tag
               pullPolicy: IfNotPresent
             command: ["bash", "-c", "ssh-keygen -A -f /ssh"]
           init-permissions:
             image:
-              repository: ghcr.io/onemorebyte/backup-target
-              tag: 0.2.1
+              repository: *backup_img
+              tag: *backup_tag
               pullPolicy: IfNotPresent
             command:
               - /usr/local/bin/configure-user.sh
               - *username
+            securityContext:
+
 
 
     defaultPodOptions:
