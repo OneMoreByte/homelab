@@ -32,7 +32,9 @@ spec:
             env:
               TZ: America/Chicago
               OTHER: test
-
+            securityContext:
+              privileged: true
+              fsGroup: 20422
         initContainers:
           create-host-keys:
             image:
@@ -108,6 +110,7 @@ spec:
       home:
         enabled: true
         type: hostPath
+        accessMode: 0700
         hostPath: *backup_dir
         advancedMounts:
           main:
@@ -117,6 +120,7 @@ spec:
       home-ssh:
         enabled: true
         type: emptyDir
+        accessMode: 0700
         advancedMounts:
           main:
             main:
