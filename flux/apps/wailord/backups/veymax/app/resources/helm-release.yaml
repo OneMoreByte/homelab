@@ -131,4 +131,3 @@ spec:
             main:
               - path: /home/veymax/.ssh/authorized_keys
                 subPath: authorized_keys
-
