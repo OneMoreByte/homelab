@@ -146,6 +146,7 @@ nodes:
     controlPlane: true
     nodeLabels:
       app: "bulk-datastore"
+      zfs: "yes"
     installDiskSelector:
       wwid: "eui.e8238fa6bf530001001b448b49bfa58c"
     userVolumes:
