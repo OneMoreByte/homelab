@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version:  1.12.0
+      version:  1.12.1
       sourceRef:
         kind: HelmRepository
         name: longhorn-repo
@@ -32,7 +32,7 @@ spec:
       defaultDataLocality: best-effort
       storageOverProvisioningPercentage: "300"
     preUpgradeChecker:
-      jobEnabled: false
+      jobEnabled: true
     defaultSettings:
       defaultDataPath: "/var/mnt/longhorn"
     defaultBackupStore: {}
