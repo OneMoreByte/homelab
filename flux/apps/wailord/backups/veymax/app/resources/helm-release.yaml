@@ -143,3 +143,4 @@ spec:
             init-permissions:
               - path: /home/veymax/.ssh/authorized_keys
                 subPath: authorized_keys
+                readOnly: false
