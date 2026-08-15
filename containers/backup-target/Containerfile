@@ -6,10 +6,10 @@ ARG TALOS_VERSION
 RUN apk add rsync curl wget git shadow bash crane cosign libuuid libblkid openssh
 
 # Give the system users a real username to see when checking out filesystems
-RUN adduser -u 1000 -g 1000 --disabled-password default-user && \
-    adduser -u 11337 -g 11337 --disabled-password media-svcs && \
-    adduser -u 20653 -g 20653 --disabled-password exposedbuckle48 && \
-    adduser -u 20422 -g 20422 --disabled-password veymax
+RUN adduser -u 1000 -g 1000 --system default-user && \
+    adduser -u 11337 -g 11337 --system media-svcs && \
+    adduser -u 20653 -g 20653 --password '*' exposedbuckle48 && \
+    adduser -u 20422 -g 20422 --password '*' veymax
 
 # Copy in some of our scripts
 COPY install-zfs.sh configure-user.sh /usr/local/bin/
