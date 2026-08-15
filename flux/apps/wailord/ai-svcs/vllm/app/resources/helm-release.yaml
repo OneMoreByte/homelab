@@ -26,10 +26,6 @@ spec:
               tag: v0.27.1
               pullPolicy: IfNotPresent
             env:
-              NEOReadDebugKeys: "1"
-              OverrideGpuAddressSpace: "48"
-              EnableImplicitScaling: "1"
-              VLLM_XPU_ENABLE_XPU_GRAPH: "1"
               HF_TOKEN:
                 secretKeyRef:
                   name: huggingface
