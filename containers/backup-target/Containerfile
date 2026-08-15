@@ -19,4 +19,4 @@ COPY sshd_config /etc/ssh/sshd_config
 # Add ZFS extension into the image so we can run zfs commands without the host namespace
 RUN /usr/local/bin/install-zfs.sh
 
-CMD /usr/sbin/sshd -D
+CMD /usr/sbin/sshd -D -e
