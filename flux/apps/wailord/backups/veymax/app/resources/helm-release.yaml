@@ -27,7 +27,7 @@ spec:
           main:
             image:
               repository: &backup_img ghcr.io/onemorebyte/backup-target
-              tag: &backup_tag 0.2.2
+              tag: &backup_tag 0.2.3
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
