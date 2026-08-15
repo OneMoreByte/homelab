@@ -37,7 +37,7 @@ spec:
               MODEL: "OpenVINO/gemma-4-E2B-it-int4-ov"
             command: ["/bin/sh", "-c"]
             args: [
-                "vllm serve $MODEL --trust-remote-code --enable-chunked-prefill --max-num-batched-tokens 1024"
+                "vllm serve $MODEL --trust-remote-code --max-model-len 8192"
             ]
             securityContext:
               privileged: true
