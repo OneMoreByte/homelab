@@ -26,3 +26,5 @@ AllowTcpForwarding no
 X11Forwarding no
 PermitTunnel no
 GatewayPorts no
+
+LogLevel VERBOSE
