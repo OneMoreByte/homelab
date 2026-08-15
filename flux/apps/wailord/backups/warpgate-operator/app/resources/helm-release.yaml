@@ -1,0 +1,18 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: warpgate-operator
+
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: warpgate-operator
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values: {}

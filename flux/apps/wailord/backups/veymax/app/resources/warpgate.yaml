@@ -1,0 +1,61 @@
+apiVersion: warpgate.warpgate.warp.tech/v1alpha1
+kind: WarpgateTarget
+metadata:
+  name: veymax-backup-target
+spec:
+  connectionRef: warpgate-ssh
+  name: veymax-backup-target
+  ssh:
+    host: veymax-backup-target-main
+    port: 22
+    username: veymax
+    authKind: PublicKey
+
+---
+
+apiVersion: warpgate.warpgate.warp.tech/v1alpha1
+kind: WarpgateTargetRole
+metadata:
+  name: veymax-to-backup
+spec:
+  connectionRef: warpgate-ssh
+  targetName: veymax-backup-target
+  roleName: veymax-backup
+
+---
+
+apiVersion: warpgate.warpgate.warp.tech/v1alpha1
+kind: WarpgateRole
+metadata:
+  name: veymax-backup
+spec:
+  connectionRef: warpgate-ssh
+  name: veymax-backup
+
+---
+
+apiVersion: warpgate.warpgate.warp.tech/v1alpha1
+kind: WarpgateUser
+metadata:
+  name: veymax
+spec:
+  connectionRef: warpgate-ssh
+  username: veymax
+  generatePassword: false
+  credentialPolicy:
+    ssh:
+      - PublicKey
+
+---
+
+
+
+apiVersion: warpgate.warpgate.warp.tech/v1alpha1
+kind: WarpgatePublicKeyCredential
+metadata:
+  name: veymax-ssh-key
+spec:
+  connectionRef: warpgate-ssh
+  username: veymax
+  label: veymax-ssh
+  opensshPublicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKUO6bPf+7vFzN6cVbUwtT2Cc0YpkUCWZzUHSYlAo0Zx

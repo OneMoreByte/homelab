@@ -3,17 +3,17 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app veymax
+  name: &app warpgate
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
 
   dependsOn:
-    - name: warpgate-operator
+    - name: "warpgate-operator"
 
   interval: 1h
-  path: ./flux/apps/wailord/backups/veymax/app
+  path: ./flux/apps/wailord/backups/warpgate/app
   prune: true
   retryInterval: 2m
   sourceRef:

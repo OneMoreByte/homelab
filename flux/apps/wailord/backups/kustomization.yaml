@@ -3,3 +3,5 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - veymax/ks.yaml
+  - warpgate/ks.yaml
+  - warpgate-operator/ks.yaml
