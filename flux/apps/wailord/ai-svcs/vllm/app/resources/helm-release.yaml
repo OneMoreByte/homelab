@@ -29,7 +29,8 @@ spec:
               NEOReadDebugKeys: "1"
               OverrideGpuAddressSpace: "48"
               EnableImplicitScaling: "1"
-              HF_API_KEY:
+              VLLM_XPU_ENABLE_XPU_GRAPH: "1"
+              HF_TOKEN:
                 secretKeyRef:
                   name: huggingface
                   key: token
@@ -37,7 +38,7 @@ spec:
                 secretKeyRef:
                   name: auth-token
                   key: token
-              MODEL: "Wondernutts/gemma-4-26B-A4B-it-qat-q4_0-unquantized-uncensored-heretic-int4-ov"
+              MODEL: "OpenVINO/gemma-4-E2B-it-int4-ov"
             command: ["/bin/sh", "-c"]
             args: [
                 "vllm serve $MODEL --trust-remote-code --enable-chunked-prefill --max-num-batched-tokens 1024"
