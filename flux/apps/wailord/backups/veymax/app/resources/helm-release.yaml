@@ -119,28 +119,3 @@ spec:
             init-permissions:
               - path: /home/veymax/
 
-      home-ssh:
-        enabled: true
-        type: emptyDir
-        advancedMounts:
-          main:
-            main:
-              - path: /home/veymax/.ssh
-            init-permissions:
-              - path: /home/veymax/.ssh
-
-      home-ssh-keys:
-        enabled: true
-        type: configMap
-        identifier: ssh-config
-        defaultMode: 0600
-        advancedMounts:
-          main:
-            main:
-              - path: /home/veymax/.ssh/authorized_keys
-                subPath: authorized_keys
-                readOnly: true
-            init-permissions:
-              - path: /home/veymax/.ssh/authorized_keys
-                subPath: authorized_keys
-                readOnly: false
