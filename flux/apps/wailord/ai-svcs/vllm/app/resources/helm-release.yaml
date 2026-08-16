@@ -26,6 +26,7 @@ spec:
               tag: v0.27.1
               pullPolicy: IfNotPresent
             env:
+              VLLM_XPU_ENABLE_XPU_GRAPH: "1"
               HF_TOKEN:
                 secretKeyRef:
                   name: huggingface
@@ -37,7 +38,7 @@ spec:
               MODEL: "OpenVINO/gemma-4-E2B-it-int4-ov"
             command: ["/bin/sh", "-c"]
             args: [
-                "vllm serve $MODEL --trust-remote-code --max-model-len 8192"
+                "vllm serve $MODEL --trust-remote-code --gpu-memory-utilization 0.7"
             ]
             securityContext:
               privileged: true
