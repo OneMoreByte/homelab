@@ -3,7 +3,7 @@ kind: Cluster
 metadata:
   name: immich-pg-cluster
 spec:
-  instances: 1
+  instances: 3
   imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16.10-0.5.3
   postgresql:
     shared_preload_libraries:
