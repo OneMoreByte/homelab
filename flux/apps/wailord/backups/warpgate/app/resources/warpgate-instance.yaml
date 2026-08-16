@@ -3,7 +3,7 @@ kind: WarpgateInstance
 metadata:
   name: warpgate-ssh
 spec:
-  version: "0.27.6"
+  version: "v0.27.6"
   adminPasswordSecretRef:
     name: warpgate-admin
     key: password
