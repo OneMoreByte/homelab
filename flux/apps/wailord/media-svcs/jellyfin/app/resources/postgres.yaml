@@ -11,4 +11,4 @@ spec:
       secret:
         name: jellyfin-db-secret
   storage:
-    size: 50Gi
+    size: 150Gi
