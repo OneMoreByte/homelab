@@ -23,7 +23,7 @@ spec:
           main:
             image:
               repository: docker.io/vllm/vllm-openai-xpu
-              tag: v0.27.1
+              tag: v0.29.0
               pullPolicy: IfNotPresent
             env:
               VLLM_XPU_ENABLE_XPU_GRAPH: "1"
