@@ -14,4 +14,4 @@ spec:
         - CREATE DATABASE "radarr-log"
         - ALTER DATABASE "radarr-log" OWNER TO radarr
   storage:
-    size: 50Gi
+  size: 16Gi
