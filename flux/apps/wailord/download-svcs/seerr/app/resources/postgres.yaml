@@ -11,4 +11,4 @@ spec:
       secret:
         name: seerr-db-secret
   storage:
-    size: 40Gi
+    size: 16Gi
