@@ -11,4 +11,4 @@ spec:
       secret:
         name: spoolman-db-secret
   storage:
-    size: 40Gi
+    size: 30Gi

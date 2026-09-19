@@ -14,4 +14,4 @@ spec:
         - CREATE DATABASE "prowlarr-log"
         - ALTER DATABASE "prowlarr-log" OWNER TO prowlarr
   storage:
-    size: 50Gi
+    size: 30Gi
