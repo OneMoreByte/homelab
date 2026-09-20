@@ -28,15 +28,19 @@ patches:
           docker.io:
             endpoints:
               - https://harbor.jsck.network/v2/proxy-docker.io
+            overridePath: true
           ghcr.io:
             endpoints:
               - https://harbor.jsck.network/v2/proxy-ghcr.io
+            overridePath: true
           registry.k8s.io:
             endpoints:
               - https://harbor.jsck.network/v2/proxy-registry.k8s.io
+            overridePath: true
           quay.io:
             endpoints:
               - https://harbor.jsck.network/v2/proxy-quay.io
+            overridePath: true
     
       kubelet:    
         # Add longhorn's default mount. I'm not sure why this needs to be re-mounted? 
@@ -170,6 +174,13 @@ nodes:
           minSize: 500GiB
           diskSelector:
             match: disk.wwid == "eui.002538b81150ece2"
+        filesystem:
+          type: xfs
+      - name: longhorn-2
+        provisioning:
+          minSize: 500GiB
+          diskSelector:
+            match: disk.wwid == "eui.e8238fa6bf530001001b448b4f5916b7"
         filesystem:
           type: xfs
     schematic:
