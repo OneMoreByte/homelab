@@ -22,7 +22,7 @@ spec:
           main:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v3.1.0
+              tag: v3.2.2
             env:
               REDIS_HOSTNAME: "immich-valkey"
               UID: 11337
@@ -138,7 +138,7 @@ spec:
 
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v3.1.0-openvino
+              tag: v3.2.2-openvino
             securityContext:
               privileged: true
               runAsUser: 0
