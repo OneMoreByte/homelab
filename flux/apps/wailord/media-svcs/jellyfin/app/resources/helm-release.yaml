@@ -12,6 +12,7 @@ spec:
       retries: -1
   upgrade:
     cleanupOnFail: true
+    timeout: 1h
     remediation:
       retries: 3
   values:
@@ -25,7 +26,7 @@ spec:
           main:
             image:
               repository: ghcr.io/jpvenson/jellyfin.pgsql
-              tag: 10.11.11-1
+              tag: 12.1-1
               pullPolicy: IfNotPresent
             env:
               TZ: America/Chicago
