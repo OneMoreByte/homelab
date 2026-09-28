@@ -25,7 +25,7 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/jpvenson/jellyfin.pgsql
+              repository: harbor.jsck.network/jsck/jellyfin-pgsql
               tag: 12.1-1
               pullPolicy: IfNotPresent
             env:
