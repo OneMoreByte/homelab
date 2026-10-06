@@ -30,7 +30,7 @@ spec:
               TZ: America/Chicago
             image:
               repository: ghcr.io/recyclarr/recyclarr
-              tag: 8.7.2
+              tag: 8.7.3
               pullPolicy: IfNotPresent
             probes:
               liveness:
