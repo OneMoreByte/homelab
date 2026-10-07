@@ -26,7 +26,7 @@ spec:
           main:
             image:
               repository: prometheuscommunity/smartctl-exporter
-              tag: latest@sha256:cfe22c36d7d2fac48ebf619707305acb65eb0fb670656eb80f356e606d782bc1
+              tag: latest@sha256:a76e08dbf5db4781fefd1ed81c65ad46ae8d2849dae6b6d3acebcde2fc4e59d6
               pullPolicy: IfNotPresent
 
             ports:
