@@ -1,0 +1,19 @@
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: longhorn-1
+provisioning:
+  minSize: 500GiB
+  diskSelector:
+    match: disk.wwid == "naa.500a0751e8a09577"
+filesystem:
+  type: xfs
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: longhorn-2
+provisioning:
+  minSize: 500GiB
+  diskSelector:
+    match: disk.wwid == "naa.500a0751e8ab1847"
+filesystem:
+  type: xfs

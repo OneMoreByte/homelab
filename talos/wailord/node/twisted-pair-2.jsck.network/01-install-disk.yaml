@@ -1,0 +1,4 @@
+machine:
+  install:
+    diskSelector:
+      wwid: "nvme.c0a9-323331304536423736333239-4354353030503353534438-00000001"

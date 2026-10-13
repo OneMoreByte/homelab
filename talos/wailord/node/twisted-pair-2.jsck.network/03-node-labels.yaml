@@ -1,0 +1,5 @@
+machine:
+  nodeLabels:
+    app: "fastclock"
+    weed: "yes"
+    weed-master: "yes"

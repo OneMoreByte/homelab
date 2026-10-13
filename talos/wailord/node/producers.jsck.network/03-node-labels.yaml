@@ -1,0 +1,4 @@
+machine:
+  nodeLabels:
+    app: "bulk-datastore"
+    zfs: "yes"

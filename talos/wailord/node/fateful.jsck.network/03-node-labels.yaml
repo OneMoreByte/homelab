@@ -1,0 +1,4 @@
+machine:
+  nodeLabels:
+    app: "fastclock"
+    weed: "yes"

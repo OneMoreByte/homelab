@@ -1,0 +1,68 @@
+machine:
+  install:
+    grubUseUKICmdline: true
+
+  registries:
+    mirrors:
+      docker.io:
+        endpoints:
+          - https://harbor.jsck.network/v2/proxy-docker.io
+        overridePath: true
+      ghcr.io:
+        endpoints:
+          - https://harbor.jsck.network/v2/proxy-ghcr.io
+        overridePath: true
+      registry.k8s.io:
+        endpoints:
+          - https://harbor.jsck.network/v2/proxy-registry.k8s.io
+        overridePath: true
+      quay.io:
+        endpoints:
+          - https://harbor.jsck.network/v2/proxy-quay.io
+        overridePath: true
+
+  kubelet:
+    # Add longhorn's default mount. I'm not sure why this needs to be re-mounted?
+    # The docs said so though so ¯\_(ツ)_/¯
+    extraMounts:
+      - destination: /var/mnt/longhorn
+        type: bind
+        source: /var/mnt/longhorn
+        options:
+          - bind
+          - rshared
+          - rw
+      - destination: /var/mnt/longhorn-1
+        type: bind
+        source: /var/mnt/longhorn-1
+        options:
+          - bind
+          - rshared
+          - rw
+      - destination: /var/mnt/longhorn-2
+        type: bind
+        source: /var/mnt/longhorn-2
+        options:
+          - bind
+          - rshared
+          - rw
+
+  # Give cilium a route to our dns server
+  network:
+    interfaces:
+      - interface: lo
+        addresses:
+          - 169.254.116.108/32
+
+  sysctls:
+    vm.nr_hugepages: "1024" # Requirement for longhorn v2
+    vm.max_map_count: "1048576" # Requirement for Elasticsearch/Opensearch
+  kernel:
+    modules:
+      - name: nvme_tcp
+      - name: uio_pci_generic
+      # We need that zfs
+      - name: zfs
+      # Why is longhorn this way?
+      - name: vfio_pci
+      - name: ublk_drv

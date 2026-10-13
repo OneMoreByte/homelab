@@ -1,0 +1,7 @@
+machine:
+  logging:
+    destinations:
+      - endpoint: "udp://127.0.0.1:6051/"
+        format: "json_lines"
+        extraTags:
+          hostname: {{ .Node.Host | splitList "." | first }}

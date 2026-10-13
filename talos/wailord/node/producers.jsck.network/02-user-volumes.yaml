@@ -1,0 +1,19 @@
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: longhorn
+provisioning:
+  minSize: 500GiB
+  diskSelector:
+    match: disk.wwid == "eui.002538b81150ece2"
+filesystem:
+  type: xfs
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: longhorn-2
+provisioning:
+  minSize: 500GiB
+  diskSelector:
+    match: disk.wwid == "eui.e8238fa6bf530001001b448b4f5916b7"
+filesystem:
+  type: xfs
