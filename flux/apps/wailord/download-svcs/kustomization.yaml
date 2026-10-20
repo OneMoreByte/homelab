@@ -10,3 +10,4 @@ resources:
   - sonarr/ks.yaml
   - sonarr-anime/ks.yaml
   - unpackerr/ks.yaml
+  - qbittorrent/ks.yaml

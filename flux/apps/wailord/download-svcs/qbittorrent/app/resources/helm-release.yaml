@@ -1,0 +1,153 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: flood
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    global:
+      alwaysAppendIdentifierToResourceName: true
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository:  ghcr.io/autobrr/qui
+              tag: v1.33.0
+              pullPolicy: IfNotPresent
+            env:
+              TZ: UTC
+              QUI__DATABASE_ENGINE: postgres
+              QUI__DATABASE_HOST: "qui-pg-cluster-rw"
+              QUI__DATABASE_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: qui-db-secret
+                    key: username
+              QUI__DATABASE_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: qui-db-secret
+                    key: password
+              QUI__METRICS_ENABLED: true
+              QUI__OIDC_ENABLED: true
+              QUI__OIDC_ISSUER: "https://auth.thescience.team/application/o/jsck-qui/"
+              QUI__OIDC_CLIENT_ID:
+               valueFrom:
+                  secretKeyRef:
+                    name: qui-oidc-secret
+                    key: client_id
+              QUI__OIDC_CLIENT_SECRET:
+               valueFrom:
+                  secretKeyRef:
+                    name: qui-oidc-secret
+                    key: client_secret
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+        initContainers:
+          wait-for-zfs:
+            image:
+              repository: busybox
+              tag: latest
+            command:
+              - /bin/sh
+              - -c
+              - |
+                if [ ! -f /var/mnt/store/mount-state/.mounted ]; then
+                  echo "Waiting for ZFS mount..."
+                  sleep 30
+                  exit 1
+                fi
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - bulk-datastore
+      securityContext:
+        runAsUser: 11337
+        runAsGroup: 11337
+        fsGroup: 11337
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 7476
+      bittorrent:
+        enabled: false
+        controller: main
+        type: LoadBalancer
+        ports:
+          bittorrent:
+            enabled: true
+            port: 10181
+            protocol: TCP
+            targetPort: 10181
+
+    route:
+      main:
+        kind: HTTPRoute
+        parentRefs:
+          - name: "internal"
+            namespace: "gateway-svcs"
+            sectionName: websecure-gw
+        hostnames:
+          - "qui.jsck.network"
+        rules:
+          - name: "default"
+            backendRefs:
+              - name: qui-main
+                port: 7476
+            matches:
+              - path:
+                  value: /
+                  type: PathPrefix
+
+    persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 8Gi
+      mountstate:
+        enabled: true
+        type: hostPath
+        hostPath: /var/mnt/store/mount-state
+      downloads:
+        enabled: true
+        type: hostPath
+        advancedMounts:
+          main:
+            main:
+              - path: /var/mnt/store/torrent/
+        hostPath: /var/mnt/store/torrent/
+
+      rtorrent-data:
+        type: persistentVolumeClaim
+        volumeName: pvc-7b75e602-83b6-4d34-86b5-f2a58be758fd
+        accessMode: ReadWriteOnce
+        size: 8Gi
+        storageClass: longhorn
+        globalMounts:
+          - path: /old-data
+
