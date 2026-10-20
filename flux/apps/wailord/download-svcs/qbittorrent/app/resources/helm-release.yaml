@@ -51,7 +51,7 @@ spec:
                valueFrom:
                   secretKeyRef:
                     name: qui-oidc-secret
-                    key: client_secret
+                    key: secret_id
             probes:
               liveness:
                 enabled: false
