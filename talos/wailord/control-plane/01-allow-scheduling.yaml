@@ -7,3 +7,13 @@ kind: KubeNodeConfig
 taints:
   node-role.kubernetes.io/control-plane:
     $patch: delete
+---
+apiVersion: v1alpha1
+kind: KubeAPIServerConfig
+certExtraSANs:
+  - kube.wailord.jsck.network
+---
+apiVersion: v1alpha1
+kind: KubeProxyConfig
+enabled: false
+---

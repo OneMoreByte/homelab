@@ -22,8 +22,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/jesec/rtorrent-flood
-              tag: master-dbg
+              repository: ghcr.io/jesec/flood
+              tag: 4.16.3
               pullPolicy: IfNotPresent
             env:
               TZ: UTC

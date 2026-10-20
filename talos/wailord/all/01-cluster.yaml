@@ -1,9 +1,3 @@
----
-apiVersion: v1alpha1
-kind: KubeAPIServerConfig
-certExtraSANs:
-  - kube.wailord.jsck.network
----
 apiVersion: v1alpha1
 kind: KubeNetworkConfig
 podSubnets:
@@ -16,10 +10,6 @@ serviceSubnets:
 apiVersion: v1alpha1
 kind: KubeFlannelCNIConfig
 $patch: delete
----
-apiVersion: v1alpha1
-kind: KubeProxyConfig
-enabled: false
 ---
 # Pinned off: v1.14 defaults workloadIsolation to true (sandboxd PID/mount
 # namespaces for containerd/kubelet/pods). Keep current behavior for the
