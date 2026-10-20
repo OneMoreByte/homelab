@@ -6,7 +6,7 @@ spec:
   interval: 1h
   chartRef:
     kind: OCIRepository
-    name: flood
+    name: qbittorrent
   install:
     remediation:
       retries: -1
