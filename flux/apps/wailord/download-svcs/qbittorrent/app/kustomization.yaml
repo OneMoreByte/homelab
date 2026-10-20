@@ -4,5 +4,7 @@ kind: Kustomization
 resources:
   - resources/helm-release.yaml
   - resources/oci-repo.yaml
-  - resources/certificate.yaml
+  - resources/oidc-secret.yaml
+  - resources/postgres-db-secret.yaml
+  - resources/postgres.yaml
 
