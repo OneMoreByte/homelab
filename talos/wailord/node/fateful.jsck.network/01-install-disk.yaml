@@ -1,4 +1,5 @@
-machine:
-  install:
-    diskSelector:
-      wwid: "eui.000000000000000100a0752449579213"
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+provisioning:
+  diskSelector:
+    match: disk.wwid == "eui.000000000000000100a0752449579213"

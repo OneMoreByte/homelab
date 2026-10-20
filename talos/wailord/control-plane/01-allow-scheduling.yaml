@@ -1,0 +1,9 @@
+# Scoped to control-plane nodes only: worker configs have no
+# node-role.kubernetes.io/control-plane taint, and $patch: delete on a
+# missing path is a hard error (lookup failed), not a no-op.
+---
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+taints:
+  node-role.kubernetes.io/control-plane:
+    $patch: delete

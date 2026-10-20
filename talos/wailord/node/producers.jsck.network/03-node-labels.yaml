@@ -1,4 +1,5 @@
-machine:
-  nodeLabels:
-    app: "bulk-datastore"
-    zfs: "yes"
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+labels:
+  app: "bulk-datastore"
+  zfs: "yes"

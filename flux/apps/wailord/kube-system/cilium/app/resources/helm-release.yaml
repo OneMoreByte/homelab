@@ -21,6 +21,8 @@ spec:
   values:
     gatewayAPI:
       enabled: true
+      enableAlpn: true
+      enableAppProtocol: true
 
     ipam:
       mode: kubernetes

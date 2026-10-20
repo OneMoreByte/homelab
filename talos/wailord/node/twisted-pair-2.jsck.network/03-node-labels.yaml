@@ -1,5 +1,6 @@
-machine:
-  nodeLabels:
-    app: "fastclock"
-    weed: "yes"
-    weed-master: "yes"
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+labels:
+  app: "fastclock"
+  weed: "yes"
+  weed-master: "yes"

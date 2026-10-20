@@ -1,4 +1,5 @@
-machine:
-  install:
-    diskSelector:
-      wwid: "nvme.c0a9-323331304536423834424330-4354353030503353534438-00000001"
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+provisioning:
+  diskSelector:
+    match: disk.wwid == "nvme.c0a9-323331304536423834424330-4354353030503353534438-00000001"
