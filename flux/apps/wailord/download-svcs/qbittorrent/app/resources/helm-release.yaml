@@ -90,6 +90,7 @@ spec:
         fsGroup: 11337
     service:
       main:
+        enabled: true
         controller: main
         ports:
           http:
