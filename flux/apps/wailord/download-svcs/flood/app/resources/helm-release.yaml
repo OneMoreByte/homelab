@@ -22,7 +22,7 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/jesec/flood
+              repository: ghcr.io/jesec/rtorrent-flood
               tag: 4.16.3
               pullPolicy: IfNotPresent
             env:
