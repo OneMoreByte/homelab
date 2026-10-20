@@ -52,6 +52,7 @@ spec:
                   secretKeyRef:
                     name: qui-oidc-secret
                     key: secret_id
+              QUI__OIDC_REDIRECT_URL: "https://qui.jsck.network/api/auth/oidc/callback"
             probes:
               liveness:
                 enabled: false
