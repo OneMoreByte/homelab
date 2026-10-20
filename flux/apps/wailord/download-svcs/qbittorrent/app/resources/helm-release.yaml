@@ -118,7 +118,7 @@ spec:
         rules:
           - name: "default"
             backendRefs:
-              - name: qui-main
+              - name: qbittorrent-main
                 port: 7476
             matches:
               - path:
