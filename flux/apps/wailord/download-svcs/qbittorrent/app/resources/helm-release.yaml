@@ -107,7 +107,7 @@ spec:
           http:
             port: 7476
       bittorrent:
-        enabled: false
+        enabled: true
         controller: main
         type: LoadBalancer
         ports:
