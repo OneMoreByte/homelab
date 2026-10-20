@@ -22,8 +22,8 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/jesec/flood
-              tag: 4.16.3
+              repository: ghcr.io/jesec/flood-rutorrent
+              tag: 4.14.2
               pullPolicy: IfNotPresent
             env:
               TZ: UTC
