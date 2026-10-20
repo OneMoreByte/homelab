@@ -60,6 +60,17 @@ spec:
                 enabled: false
               startup:
                 enabled: false
+
+          qbittorrent:
+            image:
+              repository:  ghcr.io/qbittorrent/docker-qbittorrent-nox
+              tag: 5.3.0-2
+              pullPolicy: IfNotPresent
+            env:
+              QBT_LEGAL_NOTICE: "confirm"
+              QBT_TORRENTING_PORT: &bittorrent_port 10181
+              QBT_DOWNLOADS_PATH: "/var/mnt/store/torrent/download"
+
         initContainers:
           wait-for-zfs:
             image:
@@ -100,11 +111,16 @@ spec:
         controller: main
         type: LoadBalancer
         ports:
-          bittorrent:
+          bittorrent-tcp:
             enabled: true
-            port: 10181
+            port: *bittorrent_port
             protocol: TCP
-            targetPort: 10181
+            targetPort: *bittorrent_port
+          bittorrent-udp:
+            enabled: true
+            port: *bittorrent_port
+            protocol: UDP
+            targetPort: *bittorrent_port
 
     route:
       main:
