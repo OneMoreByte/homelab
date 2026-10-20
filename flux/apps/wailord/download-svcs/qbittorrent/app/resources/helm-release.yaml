@@ -158,6 +158,8 @@ spec:
           main:
             main:
               - path: /var/mnt/store/torrent/
+            qbittorrent:
+              - path: /var/mnt/store/torrent/
         hostPath: /var/mnt/store/torrent/
 
       rtorrent-data:
