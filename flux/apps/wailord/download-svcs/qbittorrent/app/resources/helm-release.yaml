@@ -121,6 +121,13 @@ spec:
             port: *bittorrent_port
             protocol: UDP
             targetPort: *bittorrent_port
+      api:
+        enabled: true
+        controller: main
+        ports:
+          http:
+            port: 8080
+
 
     route:
       main:
