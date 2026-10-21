@@ -64,7 +64,7 @@ spec:
           qbittorrent:
             image:
               repository:  ghcr.io/qbittorrent/docker-qbittorrent-nox
-              tag: 5.2.4-1
+              tag: 5.3.0-1
               pullPolicy: IfNotPresent
             env:
               QBT_LEGAL_NOTICE: "confirm"
