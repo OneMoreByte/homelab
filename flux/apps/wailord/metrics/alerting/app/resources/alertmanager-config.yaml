@@ -1,0 +1,40 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: discord
+  namespace: metrics
+  labels:
+    app.kubernetes.io/name: alerting
+spec:
+  route:
+    groupBy: ['alertname', 'pool']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 4h
+    receiver: discord
+    routes:
+      - matchers:
+          - name: alertname
+            value: ZfsPoolUnhealthy
+        receiver: discord
+  receivers:
+    - name: discord
+      discordConfigs:
+        - webhookUrl:
+            name: discord-webhook
+            key: url
+          title: '{{ .CommonLabels.alertname }}'
+          message: |
+            {{ range .Alerts }}
+            **Pool:** {{ .Labels.pool }}
+            **Summary:** {{ .Annotations.summary }}
+            **Description:** {{ .Annotations.description }}
+            {{ end }}
+  inhibitRules:
+    - sourceMatch:
+        - name: severity
+          value: critical
+      targetMatch:
+        - name: severity
+          value: warning
+      equal: ['pool', 'alertname']

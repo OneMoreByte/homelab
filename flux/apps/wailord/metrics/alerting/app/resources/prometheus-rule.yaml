@@ -1,0 +1,73 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: wailord-alerts
+  namespace: metrics
+  labels:
+    app.kubernetes.io/name: alerting
+spec:
+  groups:
+    - name: zfs.pool.health
+      rules:
+        - alert: ZfsPoolUnhealthy
+          # zfs_pool_health is 0 only when the pool is ONLINE.
+          # Any other value (1=DEGRADED, 2=FAULTED, 3=OFFLINE,
+          # 4=UNAVAIL, 5=REMOVED, 6=SUSPENDED, -1=unknown) is not healthy.
+          expr: zfs_pool_health != 0
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "ZFS pool {{ $labels.pool }} is not healthy"
+            description: >-
+              Pool {{ $labels.pool }} health status code is {{ $value }}
+              (0 = ONLINE). Investigate with `zpool status {{ $labels.pool }}`.
+            runbook_url: "https://openzfs.github.io/openzfs-docs/"
+
+    - name: node.health
+      rules:
+        - alert: NodeOffline
+          # Fires once per node if it is not Ready in Kubernetes OR not ready/offline
+          # in Longhorn. The three conditions are ORed on the `node` label so a node
+          # that is down in both systems only produces a single alert.
+          expr: >-
+            (max by (node) (kube_node_status_condition{condition="Ready",status="true"}) == 0)
+            or on(node)
+            (max by (node) (longhorn_node_status{condition="ready"}) == 0)
+            or on(node)
+            (max by (node) (up{job="longhorn-backend"} * on(pod) group_left(node) kube_pod_info{pod=~"longhorn-manager.*"}) == 0)
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Node {{ $labels.node }} is offline"
+            description: >-
+              Node {{ $labels.node }} is not Ready in Kubernetes and/or not ready in Longhorn.
+              Check `kubectl get node {{ $labels.node }}` and the Longhorn UI.
+
+    - name: postgres.health
+      rules:
+        - alert: PostgresClusterUnhealthy
+          # Fires for any CloudNativePG instance pod that is not Ready.
+          expr: kube_pod_status_ready{condition="true"} == 0 and on(pod, namespace) kube_pod_info{created_by_kind="Cluster", created_by_name=~".*-pg-cluster"}
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Postgres instance {{ $labels.pod }} is not ready"
+            description: >-
+              CloudNativePG instance pod {{ $labels.pod }} in namespace {{ $labels.namespace }}
+              is not Ready. Check the cluster status with `kubectl -n {{ $labels.namespace }} get cluster`.
+
+    - name: gateway.health
+      rules:
+        - alert: GatewayRouteUnhealthy
+          expr: probe_success{job="blackbox-gateway-routes"} == 0
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Gateway route {{ $labels.instance }} is unhealthy"
+            description: >-
+              Blackbox HTTP probe failed for {{ $labels.instance }}.
+              Check the route, backend, and gateway."

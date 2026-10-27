@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - resources/prometheus-rule.yaml
+  - resources/alertmanager-config.yaml
+  - resources/discord-webhook-secret.yaml
+  - resources/blackbox-exporter.yaml
+  - resources/gateway-probe.yaml

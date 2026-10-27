@@ -1,0 +1,37 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: gateway-routes
+  namespace: metrics
+  labels:
+    app.kubernetes.io/name: alerting
+spec:
+  jobName: blackbox-gateway-routes
+  prober:
+    url: blackbox-exporter.metrics.svc.cluster.local:9115
+  module: http_2xx
+  interval: 2m
+  targets:
+    staticConfig:
+      static:
+        - https://books.jackhil.de
+        - https://budget.jackhil.de
+        - https://esphome.jsck.network
+        - https://frigate.jsck.network
+        - https://grafana.jackhil.de
+        - https://home.jackhil.de
+        - https://jelly.jackhil.de
+        - https://longhorn.jsck.network
+        - https://music.jackhil.de
+        - https://music.jsck.network
+        - https://paper.jackhil.de
+        - https://photos.jackhil.de
+        - https://prowlarr.jsck.network
+        - https://qui.jsck.network
+        - https://radarr.jsck.network
+        - https://requests.jackhil.de
+        - https://sonarr-anime.jsck.network
+        - https://sonarr.jsck.network
+        - https://spoolman.jsck.network
+        - https://syncthing.jsck.network
