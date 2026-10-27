@@ -20,7 +20,7 @@ spec:
   receivers:
     - name: discord
       discordConfigs:
-        - webhookUrl:
+        - apiURL:
             name: discord-webhook
             key: url
           title: '{{ .CommonLabels.alertname }}'
