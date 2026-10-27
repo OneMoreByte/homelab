@@ -92,14 +92,6 @@ data:
               select:
                 - 839bea857ed2c0a8e084f3cbdbd65ecb  # x265 (no HDR/DV)
             - trash_id: a3ac6af01d78e4f21fcb75f601ac96df  # [Unwanted] Unwanted Formats
-              select:
-                - trash_id: bc3c13e52f2971319bc1748ffa3d1078  # [Optional] Accessibility
-                  select:
-                   - 127bdbadcf3e4463a8c707759fbaad75  # WiTH AD
-                   - 09c60ba54fadb511c6986a7edec4da4b  # WiTH ASL
-                   - 41e4baea7b10ddefc6609d52f742dacd  # WiTH BASL
-                   - e205c5ba6be76b472903f4aec97fdb4b  # WiTH BSL
-
             - trash_id: f4f1474b963b24cf983455743aa9906c  # [Optional] Movie Versions
               select:
                 - e0c07d59beb37348e975a930d5e50319  # Criterion Collection
