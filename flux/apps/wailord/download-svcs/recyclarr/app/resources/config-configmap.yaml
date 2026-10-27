@@ -6,8 +6,8 @@ data:
   recyclarr.yml: |-
     sonarr:
       sonarr:
-        base_url: !secret sonarr.sonarr.base_url
-        api_key: !secret sonarr.sonarr.api_key
+        base_url: !secret sonarr_base_url
+        api_key: !secret sonarr_api_key
   
         media_naming:
           series: jellyfin-tvdb
@@ -35,8 +35,8 @@ data:
             - trash_id: d920fd959d220306888f40b6f38e1578  # [Optional] Season Packs
 
       sonarr-anime:
-        base_url: !secret sonarr."sonarr-anime".base_url
-        api_key: !secret sonarr."sonarr-anime".api_key
+        base_url: !secret sonarr_anime_base_url
+        api_key: !secret sonarr_anime_api_key
 
         media_naming:
           series: jellyfin-tvdb
@@ -70,8 +70,8 @@ data:
 
     radarr:
       radarr:
-        base_url: !secret radarr.radarr.base_url
-        api_key: !secret radarr.radarr.api_key
+        base_url: !secret radarr_base_url
+        api_key: !secret radarr_api_key
 
         media_naming:
           folder: jellyfin-imdb
