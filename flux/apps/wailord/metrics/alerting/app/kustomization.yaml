@@ -5,5 +5,6 @@ resources:
   - resources/prometheus-rule.yaml
   - resources/alertmanager-config.yaml
   - resources/discord-webhook-secret.yaml
-  - resources/blackbox-exporter.yaml
+  - resources/helm-release.yaml
+  - resources/oci-repo.yaml
   - resources/gateway-probe.yaml
