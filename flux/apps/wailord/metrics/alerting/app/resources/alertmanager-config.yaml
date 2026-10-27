@@ -30,21 +30,21 @@ spec:
             value: GatewayRouteUnhealthy
         receiver: discord-gateway
   receivers:
-    - name: discord
-      discordConfigs:
-        - apiURL:
-            name: discord-webhook
-            key: url
-          title: '{{ .CommonLabels.alertname }}'
-          message: |
-            {{ range .Alerts }}
-            {{ if .Labels.pool }}**Pool:** {{ .Labels.pool }}
-            {{ end }}{{ if .Labels.node }}**Node:** {{ .Labels.node }}
-            {{ end }}{{ if .Labels.pod }}**Pod:** {{ .Labels.pod }}
-            {{ end }}{{ if .Labels.instance }}**Instance:** {{ .Labels.instance }}
-            {{ end }}**Summary:** {{ .Annotations.summary }}
-            **Description:** {{ .Annotations.description }}
-            {{ end }}
+#    - name: discord
+#      discordConfigs:
+#        - apiURL:
+#            name: discord-webhook
+#            key: url
+#          title: '{{ .CommonLabels.alertname }}'
+#          message: |
+#            {{ range .Alerts }}
+#            {{ if .Labels.pool }}**Pool:** {{ .Labels.pool }}
+#            {{ end }}{{ if .Labels.node }}**Node:** {{ .Labels.node }}
+#            {{ end }}{{ if .Labels.pod }}**Pod:** {{ .Labels.pod }}
+#            {{ end }}{{ if .Labels.instance }}**Instance:** {{ .Labels.instance }}
+#            {{ end }}**Summary:** {{ .Annotations.summary }}
+#            **Description:** {{ .Annotations.description }}
+#            {{ end }}
     - name: discord-zfs
       discordConfigs:
         - apiURL:
