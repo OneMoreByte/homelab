@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: alerting
 spec:
   route:
-    groupBy: ['alertname', 'pool']
+    groupBy: ['alertname']
     groupWait: 30s
     groupInterval: 5m
     repeatInterval: 4h
@@ -16,7 +16,19 @@ spec:
       - matchers:
           - name: alertname
             value: ZfsPoolUnhealthy
-        receiver: discord
+        receiver: discord-zfs
+      - matchers:
+          - name: alertname
+            value: NodeOffline
+        receiver: discord-node
+      - matchers:
+          - name: alertname
+            value: PostgresClusterUnhealthy
+        receiver: discord-postgres
+      - matchers:
+          - name: alertname
+            value: GatewayRouteUnhealthy
+        receiver: discord-gateway
   receivers:
     - name: discord
       discordConfigs:
@@ -26,7 +38,60 @@ spec:
           title: '{{ .CommonLabels.alertname }}'
           message: |
             {{ range .Alerts }}
+            {{ if .Labels.pool }}**Pool:** {{ .Labels.pool }}
+            {{ end }}{{ if .Labels.node }}**Node:** {{ .Labels.node }}
+            {{ end }}{{ if .Labels.pod }}**Pod:** {{ .Labels.pod }}
+            {{ end }}{{ if .Labels.instance }}**Instance:** {{ .Labels.instance }}
+            {{ end }}**Summary:** {{ .Annotations.summary }}
+            **Description:** {{ .Annotations.description }}
+            {{ end }}
+    - name: discord-zfs
+      discordConfigs:
+        - apiURL:
+            name: discord-webhook
+            key: url
+          title: 'ZFS pool {{ .CommonLabels.pool }} is unhealthy'
+          message: |
+            {{ range .Alerts }}
             **Pool:** {{ .Labels.pool }}
+            **Summary:** {{ .Annotations.summary }}
+            **Description:** {{ .Annotations.description }}
+            **Runbook:** {{ .Annotations.runbook_url }}
+            {{ end }}
+    - name: discord-node
+      discordConfigs:
+        - apiURL:
+            name: discord-webhook
+            key: url
+          title: 'Node {{ .CommonLabels.node }} is offline'
+          message: |
+            {{ range .Alerts }}
+            **Node:** {{ .Labels.node }}
+            **Summary:** {{ .Annotations.summary }}
+            **Description:** {{ .Annotations.description }}
+            {{ end }}
+    - name: discord-postgres
+      discordConfigs:
+        - apiURL:
+            name: discord-webhook
+            key: url
+          title: 'Postgres {{ .CommonLabels.pod }} is not ready'
+          message: |
+            {{ range .Alerts }}
+            **Pod:** {{ .Labels.pod }}
+            **Namespace:** {{ .Labels.namespace }}
+            **Summary:** {{ .Annotations.summary }}
+            **Description:** {{ .Annotations.description }}
+            {{ end }}
+    - name: discord-gateway
+      discordConfigs:
+        - apiURL:
+            name: discord-webhook
+            key: url
+          title: 'Gateway route {{ .CommonLabels.instance }} is unhealthy'
+          message: |
+            {{ range .Alerts }}
+            **Instance:** {{ .Labels.instance }}
             **Summary:** {{ .Annotations.summary }}
             **Description:** {{ .Annotations.description }}
             {{ end }}
