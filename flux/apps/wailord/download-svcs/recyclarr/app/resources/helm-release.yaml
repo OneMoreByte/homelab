@@ -53,10 +53,20 @@ spec:
 
       configfile:
         enabled: true
-        type: secret
+        type: configmap
         name: recyclarr-config
         advancedMounts:
           main:
             main:
               - path: /config/recyclarr.yml
                 subPath: recyclarr.yml
+                
+      secretfile:
+        enabled: true
+        type: configmap
+        name: recyclarr-secrets-config
+        advancedMounts:
+          main:
+            main:
+              - path: /config/secrets.yml
+                subPath: secrets.yml
