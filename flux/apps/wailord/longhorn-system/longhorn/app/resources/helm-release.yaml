@@ -31,10 +31,10 @@ spec:
       defaultClassReplicaCount: 3
       defaultDataLocality: best-effort
       storageOverProvisioningPercentage: "300"
-    preUpgradeChecker:
-      jobEnabled: true
     defaultSettings:
       defaultDataPath: "/var/mnt/longhorn"
+      V2DataEngine: false
+      allowInstanceManagerAutomaticUpgrade: true
     defaultBackupStore: {}
 
     httproute:
