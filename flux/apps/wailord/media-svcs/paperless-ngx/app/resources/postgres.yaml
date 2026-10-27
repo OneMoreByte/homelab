@@ -11,4 +11,4 @@ spec:
       secret:
         name: paperless-db-secret
   storage:
-    size: 32Gi
+    size: 40Gi
