@@ -15,7 +15,6 @@ spec:
     remediation:
       retries: 3
   values:
-
     global:
       alwaysAppendIdentifierToResourceName: true
     controllers:
