@@ -27,6 +27,7 @@ spec:
               UID: 1000
               GID: 1000
               TZ: America/Chicago
+              IDK: man
             image:
               repository: ghcr.io/recyclarr/recyclarr
               tag: 8.8.0
