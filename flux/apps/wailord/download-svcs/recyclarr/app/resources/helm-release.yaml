@@ -30,7 +30,7 @@ spec:
               IDK: man
             image:
               repository: ghcr.io/recyclarr/recyclarr
-              tag: 8.8.0
+              tag: 8.8.1
               pullPolicy: IfNotPresent
             probes:
               liveness:
