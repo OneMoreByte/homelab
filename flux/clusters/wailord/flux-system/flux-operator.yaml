@@ -38,3 +38,13 @@ spec:
         values:
           reporting:
             interval: 45s
+          web:
+            enabled: true
+            httpRoute:
+              enabled: true
+              parentRefs:
+                - name: "internal"
+                  namespace: "gateway-svcs"
+                  sectionName: websecure-gw
+              hostnames:
+                - "flux.jsck.network"
