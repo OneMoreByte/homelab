@@ -1,0 +1,19 @@
+overlay:
+  name: rpi_5
+  image: siderolabs/sbc-raspberrypi
+  options:
+    configTxt: |
+      gpu_mem=32
+      kernel=u-boot.bin
+      arm_64bit=1
+      arm_boost=1
+      enable_uart=0
+      dtoverlay=disable-bt
+      dtoverlay=disable-wifi
+      avoid_warnings=2
+      usb_max_current_enable=1
+customization:
+  systemExtensions:
+    officialExtensions:
+      - siderolabs/nvme-cli
+      - siderolabs/util-linux-tools

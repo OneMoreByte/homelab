@@ -1,0 +1,19 @@
+---
+apiVersion: v1alpha1
+kind: VolumeConfig
+name: EPHEMERAL
+provisioning:
+  diskSelector:
+    match: disk.transport == "nvme"
+  minSize: 100GiB
+  maxSize: 100GiB
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: persistent-data
+volumeType: partition
+provisioning:
+  minSize: 100Gib
+  grow: true
+  diskSelector:
+    match: disk.transport == "nvme"

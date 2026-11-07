@@ -1,0 +1,28 @@
+---
+apiVersion: v1alpha1
+kind: SysctlConfig
+params:
+  vm.nr_hugepages: "1024" # Requirement for longhorn v2
+  vm.max_map_count: "1048576" # Requirement for Elasticsearch/Opensearch
+---
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: nvme_tcp
+---
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: uio_pci_generic
+---
+# We need that zfs
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: zfs
+---
+# Why is longhorn this way?
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: vfio_pci
+---
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: ublk_drv

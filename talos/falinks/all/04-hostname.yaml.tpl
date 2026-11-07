@@ -1,0 +1,1 @@
+../../shared/all/05-hostname.yaml.tpl
