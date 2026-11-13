@@ -12,8 +12,6 @@ coder:
 
   httproute:
     enable: true
-    annotations:
-      external-dns.kubernetes.io/target: "home.jackhil.de"
     parentRefs:
       - name: "external"
         namespace: "gateway-svcs"

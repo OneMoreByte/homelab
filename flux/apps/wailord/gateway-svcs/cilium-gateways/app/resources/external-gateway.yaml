@@ -14,6 +14,7 @@ metadata:
   name: external
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-cloudflare-issuer
+    external-dns.kubernetes.io/target: "home.jackhil.de"
 spec:
   addresses:
   - type: IPAddress
