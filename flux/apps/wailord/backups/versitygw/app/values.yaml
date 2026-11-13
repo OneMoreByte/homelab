@@ -73,6 +73,7 @@ iam:
 
 persistence:
   enabled: true
+  create: false
   hostPath: "/var/mnt/store/backups/obj-store-backups"
 
 affinity:
