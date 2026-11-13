@@ -28,6 +28,13 @@ spec:
     excludeDomains:
       - "home.jackhil.de" # Managed with ddns
 
+    sources:
+      - service
+      - ingress
+      - gateway-httproute
+      - gateway-grpcroute
+      - node
+
     env:
       - name: CF_API_TOKEN
         valueFrom:
