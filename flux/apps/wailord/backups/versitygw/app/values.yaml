@@ -29,7 +29,6 @@ auth:
 gateway:
   backend:
     type: posix
-    args: /var/mnt/store/backups/obj-store-backups/vgw
   region: central-1
 
 admin:
@@ -69,7 +68,6 @@ webui:
 iam:
   enabled: true
   type: internal
-  dir: /var/mnt/store/backups/obj-store-backups/accounts
 
 persistence:
   enabled: true
