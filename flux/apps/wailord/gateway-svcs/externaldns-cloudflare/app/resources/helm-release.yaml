@@ -35,6 +35,11 @@ spec:
       - gateway-grpcroute
       - node
 
+    triggerLoopOnEvent: true
+    txtOwnerId: main
+    txtPrefix: k8s.main.%{record_type}-
+    policy: "upsert-only"
+
     env:
       - name: CF_API_TOKEN
         valueFrom:
