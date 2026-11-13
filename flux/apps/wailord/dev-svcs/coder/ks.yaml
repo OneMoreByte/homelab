@@ -1,0 +1,27 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app coder
+spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+
+  dependsOn:
+    - name: "cilium-gateways"
+    - name: "cloudnative-pg"
+
+  interval: 1h
+  path: ./flux/apps/falinks/dev-svcs/coder/app
+  prune: true
+  retryInterval: 2m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: dev-svcs
+  timeout: 5m
+  wait: false
+

@@ -1,0 +1,14 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: coder-pg-cluster
+spec:
+  instances: 3
+  bootstrap:
+    initdb:
+      database: coder
+      owner: coder
+      secret:
+        name: coder-db-secret
+  storage:
+    size: 10Gi

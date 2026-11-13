@@ -1,0 +1,21 @@
+coder:
+  env:
+    - name: "CODER_ACCESS_URL"
+      value : &hostname "coder.jackhil.de"
+  serviceAccount:
+    workspacePerms: false
+    enableDeployments: false
+    workspaceNamespaces:
+      - name: dev-spaces
+        workspacePerms: true
+        enableDeployments: true
+
+  httproute:
+    enabled: true
+    annotations:
+      external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+    parentRefs:
+      - name: "external"
+        namespace: "gateway-svcs"
+        sectionName: websecure-gw
+    host: *hostname

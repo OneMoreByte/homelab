@@ -18,3 +18,5 @@ resources:
   - backups.yaml
   - gateway-svcs.yaml
   - elastic-system.yaml
+  - dev-spaces.yaml
+  - dev-svcs.yaml
