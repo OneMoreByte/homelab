@@ -11,7 +11,7 @@ coder:
         enableDeployments: true
 
   httproute:
-    enabled: true
+    enable: true
     annotations:
       external-dns.kubernetes.io/target: "home.jackhil.de"
     parentRefs:
