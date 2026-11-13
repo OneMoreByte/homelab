@@ -55,7 +55,7 @@ spec:
       main:
         kind: HTTPRoute
         annotations:
-          external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+          external-dns.kubernetes.io/target: "home.jackhil.de"
         parentRefs:
           - name: "external"
             namespace: "gateway-svcs"
