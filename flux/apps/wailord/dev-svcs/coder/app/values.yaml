@@ -1,7 +1,7 @@
 coder:
   env:
     - name: "CODER_ACCESS_URL"
-      value : &hostname "coder.jackhil.de"
+      value: "https://coder.jackhil.de"
   serviceAccount:
     workspacePerms: false
     enableDeployments: false
@@ -18,4 +18,4 @@ coder:
       - name: "external"
         namespace: "gateway-svcs"
         sectionName: websecure-gw
-    host: *hostname
+    host: "coder.jackhil.de"
