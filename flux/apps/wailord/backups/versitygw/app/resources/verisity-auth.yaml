@@ -1,0 +1,7 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: verisity-auth
+stringData:
+  accessKey: "pusher-reassign-plated-gauging-expansive"
+  secretKey: "gratified-swivel-playtime-estimate-unwary"

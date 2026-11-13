@@ -1,0 +1,86 @@
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 10774
+  runAsGroup: 10774
+
+httpRoute:
+  enabled: true
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "home.jackhil.de"
+  parentRefs:
+    - name: "external"
+      namespace: "gateway-svcs"
+      sectionName: websecure-gw
+  hostnames:
+    - "obj.jackhil.de"
+  rules:
+    - matches:
+        - path:
+            value: /
+            type: PathPrefix
+auth:
+  existingSecret: "verisity-auth"
+
+gateway:
+  backend:
+    type: posix
+    args: /var/mnt/store/backups/obj-store-backups/vgw
+  region: central-1
+
+admin:
+  enabled: true
+  httpRoute:
+    enabled: true
+    parentRefs:
+      - name: "internal"
+        namespace: "gateway-svcs"
+        sectionName: websecure-gw
+    hostnames:
+      - "obj-admin.jsck.network"
+    rules:
+      - matches:
+          - path:
+              value: /
+              type: PathPrefix
+
+webui:
+  enabled: true
+  apiGateways: ["obj.jackhil.de"]
+  adminGateways: ["obj-admin.jsck.network"]
+  httpRoute:
+    enabled: true
+    parentRefs:
+      - name: "internal"
+        namespace: "gateway-svcs"
+        sectionName: websecure-gw
+    hostnames:
+      - "obj-ui.jsck.network"
+    rules:
+      - matches:
+          - path:
+              value: /
+              type: PathPrefix
+
+iam:
+  enabled: true
+  type: internal
+  dir: /var/mnt/store/backups/obj-store-backups/accounts
+
+persistence:
+  enabled: true
+  hostPath: "/var/mnt/store/backups/obj-store-backups"
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: app
+              operator: In
+              values:
+                - bulk-datastore
