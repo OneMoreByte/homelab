@@ -3,8 +3,8 @@ apiVersion: v1
 metadata:
     name: verisity-auth
 stringData:
-    accessKey: ENC[AES256_GCM,data:lasPE2wb25wf8mxWIUC95MNAVEZnAzbbLjCEnAi22lINiVW3i2Y=,iv:g+a6qfAZDg5pTpxwa3Motztes9KJsTf0xbuHtM1Nlho=,tag:AKoihCfJeYx/wu6GA54WYw==,type:str]
-    secretKey: ENC[AES256_GCM,data:9DOucRInaXnA4dfAyOQAfhcjp/p9mGk9kHW+B4yTX60Acrk5Rv0=,iv:QlXWmsTIuDZmgUgXTgMkMQDCPKKQzfFr6ZUQVwBNZAE=,tag:zoERMFbYgvg6do0TuVl8lg==,type:str]
+    rootAccessKeyId: ENC[AES256_GCM,data:dH0AKWRicR7y+iy+Yyd5QFWMrbqiedGMrMGPXG3Vpo33Za8NTdU=,iv:OVuGJfOV7bgwv2ys45TA29NHtKVQWYm2q7n+xaEnpww=,tag:Bp3NkNR9ShBiI3v9PHdevA==,type:str]
+    rootSecretAccessKey: ENC[AES256_GCM,data:gFG7vFlUuLdqilrrzLgsyzv0kGA6zPZQUkjCoqoigk2HXYZigz8=,iv:mJwuX7QeqiVuIR7P19S35cFvGPHvTSXD+MXsw31Bz60=,tag:H5YYhUSuq2rmRIzvnB628A==,type:str]
 sops:
     age:
         - enc: |
@@ -37,6 +37,6 @@ sops:
             -----END AGE ENCRYPTED FILE-----
           recipient: age1tufq3ztwqlaawpe4sd8pzh7t70fvgq8wwz7q0mka2rvrgvtngsgqhxay7r
     encrypted_regex: ^(data|stringData)$
-    lastmodified: "2026-11-13T00:42:46Z"
-    mac: ENC[AES256_GCM,data:DSoUd5T8+t47sMCxbC/rH30PgH5WlU57jQgcGgKD59yc4rMSQLb3nal5XixhBLJuqsxUwdEuHELH2DTFhEvkErtIxqHgdTpxmFvUZ1DZ7Yqm5NjSPYUUaOljfY9TBOgOgC7MDfDNFTgo1/Ls0Xp8NkE8S8S6xydvR9VBkvrFHnM=,iv:BVAQmR+uVuKyMzxA7yb3YcDdff2dawPbQfj2uuwCS18=,tag:psGPPYJostL4ztxERewgfg==,type:str]
+    lastmodified: "2026-11-13T14:47:06Z"
+    mac: ENC[AES256_GCM,data:rXqK/s66jrLWlJBECu9X12gd1DGXHBNBOKrHhoNzK6HpmOJ8Spij+aAYjRR/50raTJcnJYkM7TIfPeAyKFg01qawBmVL+V+zf1mDWTN6A5Ehh+Q+jD3wsXqhsQMB3KpTwC1xlpyKZoCkyBymEWLtTgU+zfkj46MbLoox6dRXw8s=,iv:I5WuG4KqWlXkMsZM8uMTBfROpi2V6yf5pBiJrAtU0Yo=,tag:w8T99ycQqoHh+6WZYnAzeA==,type:str]
     version: 3.13.3
