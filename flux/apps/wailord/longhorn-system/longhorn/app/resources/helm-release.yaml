@@ -35,7 +35,9 @@ spec:
       defaultDataPath: "/var/mnt/longhorn"
       V2DataEngine: false
       allowInstanceManagerAutomaticUpgrade: true
-    defaultBackupStore: {}
+    defaultBackupStore:
+      backupTarget: "s3://longhorn-backups@central-1/"
+      backupTargetCredentialsSecret: "longhorn-backup-secret"
 
     httproute:
       enabled: true
