@@ -49,8 +49,8 @@ admin:
 
 webui:
   enabled: true
-  apiGateways: ["obj.jackhil.de"]
-  adminGateways: ["obj-admin.jsck.network"]
+  apiGateways: ["https://obj.jackhil.de"]
+  adminGateways: ["https://obj-admin.jsck.network"]
   httpRoute:
     enabled: true
     parentRefs:
