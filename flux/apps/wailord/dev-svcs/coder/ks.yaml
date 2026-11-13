@@ -14,7 +14,7 @@ spec:
     - name: "cloudnative-pg"
 
   interval: 1h
-  path: ./flux/apps/falinks/dev-svcs/coder/app
+  path: ./flux/apps/wailord/dev-svcs/coder/app
   prune: true
   retryInterval: 2m
   sourceRef:
