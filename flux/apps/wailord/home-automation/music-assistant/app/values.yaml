@@ -6,7 +6,7 @@ controllers:
       main:
         image:
           repository: ghcr.io/music-assistant/server
-          tag: 2.10.9
+          tag: 3.10.12
           pullPolicy: IfNotPresent
         env:
           TZ: America/Chicago

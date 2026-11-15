@@ -14,59 +14,6 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  values:
-    global:
-      alwaysAppendIdentifierToResourceName: true
-    controllers:
-      main:
-        containers:
-          main:
-            image:
-              repository: ghcr.io/music-assistant/server
-              tag: 2.10.12
-              pullPolicy: IfNotPresent
-            env:
-              TZ: America/Chicago
-              LOG_LEVEL: info
-    defaultPodOptions:
-      hostNetwork: true
-    service:
-      main:
-        controller: main
-        enabled: true
-        type: LoadBalancer
-        ports:
-          http:
-            port: 8095
-          stream:
-            port: 8097
-
-    route:
-      main:
-        kind: HTTPRoute
-        parentRefs:
-          - name: "internal"
-            namespace: "gateway-svcs"
-            sectionName: websecure-gw
-        hostnames:
-          - "music.jsck.network"
-        rules:
-          - name: "default"
-            backendRefs:
-              - name: music-assistant-main
-                port: 8095
-            matches:
-              - path:
-                  value: /
-                  type: PathPrefix
-
-    persistence:
-      config:
-        enabled: false
-        type: emptyDir
-
-      data:
-        enabled: true
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 12Gi
+  valuesFrom:
+    - kind: ConfigMap
+      name: music-assistant-values
