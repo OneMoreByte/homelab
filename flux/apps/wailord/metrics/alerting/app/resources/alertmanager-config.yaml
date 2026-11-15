@@ -29,6 +29,11 @@ spec:
           - name: alertname
             value: GatewayRouteUnhealthy
         receiver: discord-gateway
+      - matchers:
+          - name: alertname
+            matchType: "=~"
+            value: Prometheus(SizeRetentionActive|NotCompacting|StorageNearlyFull)
+        receiver: discord-prometheus
   receivers:
     # Catch-all: drop anything not matched by a specific route below
     - name: "null"
@@ -94,6 +99,17 @@ spec:
           message: |
             {{ range .Alerts }}
             **Instance:** {{ .Labels.instance }}
+            **Summary:** {{ .Annotations.summary }}
+            **Description:** {{ .Annotations.description }}
+            {{ end }}
+    - name: discord-prometheus
+      discordConfigs:
+        - apiURL:
+            name: discord-webhook
+            key: url
+          title: '{{ .CommonLabels.alertname }}'
+          message: |
+            {{ range .Alerts }}
             **Summary:** {{ .Annotations.summary }}
             **Description:** {{ .Annotations.description }}
             {{ end }}

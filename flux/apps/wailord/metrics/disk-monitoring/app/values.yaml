@@ -3,7 +3,7 @@ global:
 controllers:
   smart-exporter:
     enabled: true
-    strategy: Recreate
+    strategy: RollingUpdate
     type: daemonset
     containers:
       main:
@@ -21,7 +21,7 @@ controllers:
           privileged: true
   zfs-exporter:
     enabled: true
-    strategy: Recreate
+    strategy: RollingUpdate
     type: daemonset
     containers:
       main:
@@ -36,7 +36,7 @@ controllers:
             containerPort: 9134
     pod:
       nodeSelector:
-        zfs: yes
+        zfs: "yes"
 podMonitor:
   smart-exporter:
     enabled: true

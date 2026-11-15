@@ -59,6 +59,50 @@ spec:
               CloudNativePG instance pod {{ $labels.pod }} in namespace {{ $labels.namespace }}
               is not Ready. Check the cluster status with `kubectl -n {{ $labels.namespace }} get cluster`.
 
+    - name: prometheus.storage
+      rules:
+        - alert: PrometheusSizeRetentionActive
+          # Prometheus deleted blocks because it hit retentionSize, i.e. we are
+          # keeping less than the 30d time-based retention.
+          expr: increase(prometheus_tsdb_size_retentions_total[1h]) > 0
+          labels:
+            severity: warning
+          annotations:
+            summary: "Prometheus is dropping data due to the size cap"
+            description: >-
+              {{ $labels.pod }} deleted blocks because it hit retentionSize before the
+              30d time limit. Currently retaining
+              {{ with printf "(time() - prometheus_tsdb_lowest_timestamp_seconds{pod='%s'}) / 86400" $labels.pod | query }}{{ . | first | value | printf "%.1f" }}{{ end }}
+              days. Consider growing the PVC and retentionSize.
+
+        - alert: PrometheusNotCompacting
+          # The in-memory head block normally spans ~2-3h. If it grows far beyond
+          # that, Prometheus is not persisting blocks to disk (this is what
+          # silently filled the PVC in Nov 2026).
+          expr: (prometheus_tsdb_head_max_time - prometheus_tsdb_head_min_time) / 1000 > 6 * 3600
+          for: 1h
+          labels:
+            severity: critical
+          annotations:
+            summary: "Prometheus is not compacting its head block"
+            description: >-
+              {{ $labels.pod }} head block spans {{ $value | humanizeDuration }}.
+              Blocks are not being written to disk; WAL and memory will grow until
+              the PVC fills or the pod OOMs.
+
+        - alert: PrometheusStorageNearlyFull
+          expr: >-
+            kubelet_volume_stats_available_bytes{persistentvolumeclaim=~"prometheus-.*"}
+            / kubelet_volume_stats_capacity_bytes{persistentvolumeclaim=~"prometheus-.*"} < 0.10
+          for: 10m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Prometheus PVC is over 90% full"
+            description: >-
+              PVC {{ $labels.persistentvolumeclaim }} has only
+              {{ $value | humanizePercentage }} free.
+
     - name: gateway.health
       rules:
         - alert: GatewayRouteUnhealthy
