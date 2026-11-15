@@ -1,0 +1,49 @@
+global:
+  alwaysAppendIdentifierToResourceName: true
+controllers:
+  main:
+    enabled: true
+    strategy: Recreate
+    containers:
+      main:
+        env:
+          TZ: America/Chicago
+        image:
+          repository: ghcr.io/esphome/esphome
+          tag: 2026.10.2
+          pullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+defaultPodOptions:
+  hostNetwork: true
+route:
+  main:
+    kind: HTTPRoute
+    parentRefs:
+      - name: "internal"
+        namespace: "gateway-svcs"
+        sectionName: websecure-gw
+    hostnames:
+      - "esphome.jsck.network"
+    rules:
+      - name: "default"
+        backendRefs:
+          - name: esphome-main
+            port: 6052
+        matches:
+          - path:
+              value: /
+              type: PathPrefix
+service:
+  main:
+    controller: main
+    enabled: true
+    ports:
+      http:
+        port: 6052
+persistence:
+  data:
+    enabled: true
+    type: persistentVolumeClaim
+    accessMode: ReadWriteOnce
+    size: 16Gi

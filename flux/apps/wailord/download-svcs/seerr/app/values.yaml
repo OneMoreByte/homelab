@@ -1,0 +1,65 @@
+global:
+  alwaysAppendIdentifierToResourceName: true
+controllers:
+  main:
+    enabled: true
+    strategy: Recreate
+    containers:
+      main:
+        env:
+          TZ: America/Chicago
+          UID: 1000
+          GID: 1000
+          PORT: 5055
+          DB_TYPE: postgres
+          DB_HOST: seerr-pg-cluster-rw
+          DB_USER: seerr
+          DB_PASS:
+            valueFrom:
+              secretKeyRef:
+                name: seerr-db-secret
+                key: password
+        image:
+          repository: ghcr.io/seerr-team/seerr
+          tag: v3.5.2
+          pullPolicy: IfNotPresent
+defaultPodOptions:
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: 5055
+route:
+  main:
+    kind: HTTPRoute
+    annotations:
+      external-dns.kubernetes.io/target: "home.jackhil.de"
+    parentRefs:
+      - name: "external"
+        namespace: "gateway-svcs"
+        sectionName: websecure-gw
+    hostnames:
+      - "requests.jackhil.de"
+    rules:
+      - name: "default"
+        backendRefs:
+          - name: seerr-main
+            port: 5055
+        matches:
+          - path:
+              value: /
+              type: PathPrefix
+persistence:
+  config:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 4Gi
+    advancedMounts:
+      main:
+        main:
+          - path: /app/config

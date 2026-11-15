@@ -14,62 +14,6 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  values:
-    global:
-      alwaysAppendIdentifierToResourceName: true
-    controllers:
-      smart-exporter:
-        enabled: true
-        strategy: Recreate
-        type: daemonset
-        containers:
-          main:
-            image:
-              repository: prometheuscommunity/smartctl-exporter
-              tag: latest@sha256:a76e08dbf5db4781fefd1ed81c65ad46ae8d2849dae6b6d3acebcde2fc4e59d6
-              pullPolicy: IfNotPresent
-
-            ports:
-              - name: "metrics"
-                containerPort: 9633
-            securityContext:
-              # Hate this
-              runAsUser: 0
-              runAsGroup: 0
-              privileged: true
-
-      zfs-exporter:
-        enabled: true
-        strategy: Recreate
-        type: daemonset
-        containers:
-          main:
-            image:
-              repository: ghcr.io/onemorebyte/zfs_exporter_talos
-              tag: v2.4.1
-              pullPolicy: IfNotPresent
-            securityContext:
-              privileged: true
-            ports:
-              - name: "metrics"
-                containerPort: 9134
-        pod:
-          nodeSelector:
-            zfs: yes
-
-    podMonitor:
-      smart-exporter:
-        enabled: true
-        controller:
-          identifier: smart-exporter
-        podMetricsEndpoints:
-          - port: "metrics"
-            relabelings:
-              - sourceLabels: [ __meta_kubernetes_pod_node_name ]
-                targetLabel: node
-      zfs-exporter:
-        enabled: true
-        controller:
-          identifier: zfs-exporter
-        podMetricsEndpoints:
-          - port: "metrics"
+  valuesFrom:
+    - kind: ConfigMap
+      name: disk-monitoring-values

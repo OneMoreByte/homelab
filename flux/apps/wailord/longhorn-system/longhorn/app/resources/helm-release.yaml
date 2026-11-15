@@ -18,39 +18,6 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  values:
-    longhornManager:
-      log:
-        format: json
-    longhornDriver:
-      log:
-        format: json
-    persistence:
-      defaultClass: true
-      defaultFsType: ext4
-      defaultClassReplicaCount: 3
-      defaultDataLocality: best-effort
-      storageOverProvisioningPercentage: "300"
-    defaultSettings:
-      defaultDataPath: "/var/mnt/longhorn"
-      V2DataEngine: false
-      allowInstanceManagerAutomaticUpgrade: true
-    defaultBackupStore:
-      backupTarget: "s3://longhorn-backups@central-1/"
-      backupTargetCredentialsSecret: "longhorn-backup-secret"
-
-    httproute:
-      enabled: true
-      parentRefs:
-        - name: "internal"
-          namespace: "gateway-svcs"
-          sectionName: websecure-gw
-      hostnames:
-        - "longhorn.jsck.network"
-
-    metrics:
-      serviceMonitor:
-        enabled: true
-
-    networkPolicies:
-      restrictInternalTraffic: false
+  valuesFrom:
+    - kind: ConfigMap
+      name: longhorn-values

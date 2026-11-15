@@ -1,0 +1,45 @@
+global:
+  alwaysAppendIdentifierToResourceName: true
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          repository: ghcr.io/home-assistant/home-assistant
+          tag: 2026.11.1
+          pullPolicy: IfNotPresent
+        env:
+          TZ: America/Chicago
+          PYTHONPATH: /config/deps
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: &svc_port 8123
+route:
+  main:
+    kind: HTTPRoute
+    annotations:
+      external-dns.kubernetes.io/target: "home.jackhil.de"
+    parentRefs:
+      - name: "external"
+        namespace: "gateway-svcs"
+        sectionName: websecure-gw
+    hostnames:
+      - "home.jackhil.de"
+    rules:
+      - name: "default"
+        backendRefs:
+          - identifier: main
+            port: *svc_port
+        matches:
+          - path:
+              value: /
+              type: PathPrefix
+persistence:
+  config:
+    enabled: true
+    type: persistentVolumeClaim
+    accessMode: ReadWriteOnce
+    size: 12Gi

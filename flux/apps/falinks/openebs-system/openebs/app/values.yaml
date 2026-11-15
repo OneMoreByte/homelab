@@ -1,0 +1,20 @@
+alloy:
+  enabled: false
+loki:
+  enabled: false
+engines:
+  local:
+    lvm:
+      enabled: false
+    zfs:
+      enabled: false
+    rawfile:
+      enabled: false
+  replicated:
+    mayastor:
+      enabled: false
+localpv-provisioner:
+  localpv:
+    basePath: "/var/mnt/persistent-data"
+  hostpathClass:
+    isDefaultClass: true

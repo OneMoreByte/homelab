@@ -14,59 +14,6 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  values:
-    global:
-      alwaysAppendIdentifierToResourceName: true
-    defaultPodOptions:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - theroom
-    controllers:
-      main:
-        containers:
-          main:
-            image:
-              repository: docker.io/eclipse-mosquitto
-              tag: 2.0.22
-    ingress:
-      main:
-        enabled: false
-    service:
-      main:
-        enabled: true
-        controller: main
-        type: LoadBalancer
-        ports:
-          mqtt:
-            enabled: true
-            port: 1883
-    configMaps:
-      config:
-        enabled: true
-        data:
-          mosquitto.conf: |
-            per_listener_settings false
-            listener 1883
-            allow_anonymous true
-            persistence true
-            persistence_location /data/
-    persistence:
-      config:
-        enabled: true
-        type: configMap
-        identifier: config
-        advancedMounts:
-          main:
-            main:
-              - path: /mosquitto/config/
-      data:
-        enabled: true
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 8Gi
+  valuesFrom:
+    - kind: ConfigMap
+      name: mqtt-values

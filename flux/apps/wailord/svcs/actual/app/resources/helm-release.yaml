@@ -14,57 +14,6 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  values:
-    global:
-      alwaysAppendIdentifierToResourceName: true
-    controllers:
-      main:
-        enabled: true
-        strategy: Recreate
-        containers:
-          main:
-            image:
-              repository: docker.io/actualbudget/actual-server
-              tag: 26.11.0
-              pullPolicy: IfNotPresent
-            env:
-              ACTUAL_OPENID_SERVER_HOSTNAME: &hostname budget.jackhil.de
-
-    service:
-      main:
-        controller: main
-        ports:
-          http:
-            port: &svc_port 5006
-
-    route:
-      main:
-        kind: HTTPRoute
-        annotations:
-          external-dns.kubernetes.io/target: "home.jackhil.de"
-        parentRefs:
-          - name: "external"
-            namespace: "gateway-svcs"
-            sectionName: websecure-gw
-        hostnames:
-          - *hostname
-        rules:
-          - name: "default"
-            backendRefs:
-              - identifier: main
-                port: *svc_port
-            matches:
-              - path:
-                  value: /
-                  type: PathPrefix
-
-    persistence:
-      config:
-        enabled: false
-        type: emptyDir
-
-      data:
-        enabled: true
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 8Gi
+  valuesFrom:
+    - kind: ConfigMap
+      name: actual-values

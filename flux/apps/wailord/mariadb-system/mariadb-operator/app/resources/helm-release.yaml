@@ -18,8 +18,6 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  values:
-    webhook:
-      cert:
-        certManager:
-          enabled: true
+  valuesFrom:
+    - kind: ConfigMap
+      name: mariadb-operator-values

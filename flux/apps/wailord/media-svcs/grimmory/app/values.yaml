@@ -1,0 +1,116 @@
+global:
+  alwaysAppendIdentifierToResourceName: true
+controllers:
+  main:
+    enabled: true
+    strategy: Recreate
+    containers:
+      main:
+        image:
+          repository: ghcr.io/grimmory-tools/grimmory
+          tag: v3.5.0
+          pullPolicy: IfNotPresent
+        env:
+          TZ: "America/Chicago"
+          BOOKLORE_PORT: &svc_port 6060
+          DATABASE_URL: "jdbc:mariadb://booklore-db:3306/booklore"
+          DATABASE_USERNAME: "booklore"
+          DATABASE_PASSWORD:
+            secretKeyRef:
+              name: booklore-user-password
+              key: password
+        # Don't let it run the user changing code. We're doing it with the execution env
+        command: ["java", "--enable-native-access=ALL-UNNAMED", "--enable-preview", "-jar", "/app/app.jar"]
+    initContainers:
+      wait-for-zfs:
+        image:
+          repository: busybox
+          tag: latest
+        command:
+          - /bin/sh
+          - -c
+          - |
+            if [ ! -f /var/mnt/store/mount-state/.mounted ]; then
+              echo "Waiting for ZFS mount..."
+              sleep 30
+              exit 1
+            fi
+
+            if [ ! -f /var/mnt/fast-store/mount-state/.mounted ]; then
+              echo "Waiting for ZFS mount..."
+              sleep 30
+              exit 1
+            fi
+defaultPodOptions:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - bulk-datastore
+  hostNetwork: true
+  securityContext:
+    runAsUser: 11337
+    runAsGroup: 11337
+    fsGroup: 11337
+service:
+  main:
+    controller: main
+    type: LoadBalancer
+    ports:
+      http:
+        port: *svc_port
+route:
+  main:
+    kind: HTTPRoute
+    annotations:
+      external-dns.kubernetes.io/target: "home.jackhil.de"
+    parentRefs:
+      - name: "external"
+        namespace: "gateway-svcs"
+        sectionName: websecure-gw
+    hostnames:
+      - "books.jackhil.de"
+    rules:
+      - name: "default"
+        backendRefs:
+          - identifier: main
+            port: *svc_port
+        matches:
+          - path:
+              value: /
+              type: PathPrefix
+persistence:
+  config:
+    enabled: false
+    type: emptyDir
+  data:
+    enabled: true
+    type: hostPath
+    hostPath: /var/mnt/fast-store/k8s-hostpath/booklore
+    advancedMounts:
+      main:
+        main:
+          - path: /app/data
+  books:
+    enabled: true
+    type: hostPath
+    hostPath: /var/mnt/store/text-media
+    advancedMounts:
+      main:
+        main:
+          - path: /books
+  bookdrop:
+    enabled: true
+    type: emptyDir
+  mountstate:
+    enabled: true
+    type: hostPath
+    hostPath: /var/mnt/store/mount-state
+  mountstate-fast:
+    enabled: true
+    type: hostPath
+    hostPath: /var/mnt/fast-store/mount-state

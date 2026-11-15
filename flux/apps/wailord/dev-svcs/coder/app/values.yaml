@@ -9,7 +9,6 @@ coder:
       - name: dev-spaces
         workspacePerms: true
         enableDeployments: true
-
   httproute:
     enable: true
     parentRefs:

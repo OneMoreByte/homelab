@@ -1,0 +1,44 @@
+global:
+  alwaysAppendIdentifierToResourceName: true
+controllers:
+  main:
+    enabled: true
+    strategy: Recreate
+    containers:
+      main:
+        env:
+          TZ: America/Chicago
+        image:
+          repository: ghcr.io/koenkk/zigbee2mqtt
+          tag: 2.14.3
+          pullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+defaultPodOptions:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: zigbee
+                operator: In
+                values:
+                  - yes
+service:
+  main:
+    controller: main
+    type: NodePort
+    ports:
+      http:
+        port: 8080
+        nodePort: 30800
+persistence:
+  zigbee-config:
+    enabled: true
+    type: persistentVolumeClaim
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    advancedMounts:
+      main:
+        main:
+          - path: /app/data

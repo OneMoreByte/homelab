@@ -1,0 +1,53 @@
+global:
+  alwaysAppendIdentifierToResourceName: true
+controllers:
+  main:
+    enabled: true
+    strategy: Recreate
+    containers:
+      main:
+        env:
+          UID: 1000
+          GID: 1000
+          TZ: America/Chicago
+          IDK: man
+        image:
+          repository: ghcr.io/recyclarr/recyclarr
+          tag: 8.8.1
+          pullPolicy: IfNotPresent
+        probes:
+          liveness:
+            enabled: false
+          readiness:
+            enabled: false
+          startup:
+            enabled: false
+defaultPodOptions:
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+persistence:
+  config:
+    enabled: true
+    type: persistentVolumeClaim
+    accessMode: ReadWriteOnce
+    size: 8Gi
+  configfile:
+    enabled: true
+    type: configMap
+    name: recyclarr-config
+    advancedMounts:
+      main:
+        main:
+          - path: /config/recyclarr.yml
+            subPath: recyclarr.yml
+  secretfile:
+    enabled: true
+    type: secret
+    name: recyclarr-secrets-config
+    advancedMounts:
+      main:
+        main:
+          - path: /config/secrets.yml
+            subPath: secrets.yml

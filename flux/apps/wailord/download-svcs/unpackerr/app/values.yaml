@@ -1,0 +1,86 @@
+
+global:
+  alwaysAppendIdentifierToResourceName: true
+controllers:
+  main:
+    enabled: true
+    strategy: Recreate
+    containers:
+      main:
+        env:
+          TZ: America/Chicago
+          PUID: 11337
+          PGID: 11337
+        image:
+          repository: ghcr.io/hotio/unpackerr
+          tag: release-e4d26e0
+          pullPolicy: IfNotPresent
+        probes:
+          liveness:
+            enabled: true
+          readiness:
+            enabled: true
+          startup:
+            enabled: true
+    initContainers:
+      wait-for-zfs:
+        image:
+          repository: busybox
+          tag: latest
+        command:
+          - /bin/sh
+          - -c
+          - |
+            until [ -f /var/mnt/store/mount-state/.mounted ]; do
+              echo "Waiting for ZFS mount..."
+              sleep 2
+            done
+defaultPodOptions:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - bulk-datastore
+  securityContext:
+    fsGroup: 11337
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: 5656
+persistence:
+  config:
+    enabled: true
+    type: persistentVolumeClaim
+    accessMode: ReadWriteOnce
+    size: 8Gi
+  configfile:
+    enabled: true
+    type: secret
+    name: unpackerr-config
+    advancedMounts:
+      main:
+        main:
+          - path: /config/unpackerr.conf
+            subPath: unpackerr.conf
+  data:
+    enabled: true
+    type: hostPath
+    hostPath: /var/mnt/store/torrent/download
+    advancedMounts:
+      main:
+        main:
+          - path: /data
+  store:
+    enabled: true
+    type: hostPath
+    hostPath: /var/mnt/store/torrent/download
+  mountstate:
+    enabled: true
+    type: hostPath
+    hostPath: /var/mnt/store/mount-state

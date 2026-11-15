@@ -14,54 +14,6 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  values:
-    grafana:
-      enabled: false
-
-    alertmanager:
-      alertmanagerSpec:
-        alertmanagerConfigMatcherStrategy:
-          type: None
-        storageSpec:
-          volumeClaimTemplate:
-            spec:
-              accessModes: ["ReadWriteOnce"]
-              resources:
-                requests:
-                  storage: 5Gi
-
-        alertmanagerConfigSelectorNilUsesHelmValues: false
-        alertmanagerConfigSelector: {}
-        alertmanagerConfigNamespaceSelector: {}
-
-    prometheus:
-      prometheusSpec:
-        enableOTLPReceiver: true
-        enableFeatures:
-          - exemplar-storage
-
-        serviceMonitorSelectorNilUsesHelmValues: false
-        serviceMonitorSelector: { }
-        serviceMonitorNamespaceSelector: { }
-
-        podMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelector: {}
-        podMonitorNamespaceSelector: {}
-
-        probeSelectorNilUsesHelmValues: false
-        probeSelector: {}
-        probeNamespaceSelector: {}
-
-        ruleSelectorNilUsesHelmValues: false
-        ruleSelector: {}
-        ruleNamespaceSelector: {}
-
-        retention: 30d
-        storageSpec:
-          volumeClaimTemplate:
-            spec:
-              accessModes: ["ReadWriteOnce"]
-              resources:
-                requests:
-                  storage: 50Gi
-
+  valuesFrom:
+    - kind: ConfigMap
+      name: prometheus-values

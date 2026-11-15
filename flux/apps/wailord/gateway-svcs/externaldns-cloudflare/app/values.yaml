@@ -1,0 +1,22 @@
+provider:
+  name: cloudflare
+domainFilter:
+  - "*.jackhil.de"
+excludeDomains:
+  - "home.jackhil.de" # Managed with ddns
+sources:
+  - service
+  - ingress
+  - gateway-httproute
+  - gateway-grpcroute
+  - node
+triggerLoopOnEvent: true
+txtOwnerId: main
+txtPrefix: k8s.main.%{record_type}-
+policy: "upsert-only"
+env:
+  - name: CF_API_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: cloudflare-api-token
+        key: apiToken

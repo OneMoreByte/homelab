@@ -1,0 +1,122 @@
+
+global:
+  alwaysAppendIdentifierToResourceName: true
+controllers:
+  main:
+    replicas: 1
+    enabled: true
+    strategy: Recreate
+    containers:
+      main:
+        env:
+          TZ: America/Chicago
+          PUID: 11337
+          PGID: 11337
+        image:
+          repository: syncthing/syncthing
+          tag: 2.1.7
+          pullPolicy: IfNotPresent
+    initContainers:
+      wait-for-zfs:
+        image:
+          repository: busybox
+          tag: latest
+        command:
+          - /bin/sh
+          - -c
+          - |
+            if [ ! -f /var/mnt/store/mount-state/.mounted ]; then
+              echo "Waiting for ZFS mount..."
+              sleep 30
+              exit 1
+            fi
+defaultPodOptions:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - bulk-datastore
+  securityContext:
+    runAsUser: 11337
+    runAsGroup: 11337
+    fsGroup: 11337
+service:
+  webui:
+    enabled: true
+    primary: true
+    controller: main
+    ports:
+      webui:
+        port: 8384
+        protocol: TCP
+    type: ClusterIP
+  tcptransfer:
+    enabled: true
+    primary: false
+    ports:
+      tcptransfer:
+        port: 22000
+        protocol: TCP
+    type: ClusterIP
+  quictransfer:
+    enabled: true
+    primary: false
+    ports:
+      quictransfer:
+        port: 22000
+        protocol: UDP
+    type: ClusterIP
+  localdiscovery:
+    enabled: true
+    primary: false
+    ports:
+      localdiscovery:
+        port: 21027
+        protocol: UDP
+    type: NodePort
+route:
+  main:
+    kind: HTTPRoute
+    parentRefs:
+      - name: "internal"
+        namespace: "gateway-svcs"
+        sectionName: websecure-gw
+    hostnames:
+      - "syncthing.jsck.network"
+    rules:
+      - name: "default"
+        backendRefs:
+          - name: syncthing-webui
+            port: 8384
+        matches:
+          - path:
+              value: /
+              type: PathPrefix
+persistence:
+  config:
+    enabled: false
+    type: emptyDir
+  data:
+    enabled: true
+    type: hostPath
+    hostPath: /var/mnt/store/backups/syncthing
+    advancedMounts:
+      main:
+        main:
+          - path: /var/syncthing
+  roms:
+    enabled: true
+    type: hostPath
+    hostPath: /var/mnt/store/roms
+  music:
+    enabled: true
+    type: hostPath
+    hostPath: /var/mnt/store/music
+  mountstate:
+    enabled: true
+    type: hostPath
+    hostPath: /var/mnt/store/mount-state

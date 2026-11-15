@@ -1,0 +1,18 @@
+fullnameOverride: blackbox-exporter
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    memory: 64Mi
+config:
+  modules:
+    http_2xx:
+      prober: http
+      timeout: 10s
+      http:
+        valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+        valid_status_codes: [200, 201, 202, 204, 301, 302, 303, 307, 308]
+        method: GET
+        follow_redirects: true
+        preferred_ip_protocol: "ip4"
