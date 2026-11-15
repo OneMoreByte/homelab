@@ -43,7 +43,7 @@ metadata:
   name: cilium-internal-http-filter-redirect
 spec:
   parentRefs:
-  - name: cilium-internal
+  - name: internal
     sectionName: web-gw
   hostnames:
   - "*.jsck.network"

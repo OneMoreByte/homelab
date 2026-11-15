@@ -1,5 +1,13 @@
 grafana:
   enabled: false
+# Cilium's kube replacement makes this unneeded
+kubeProxy:
+  enabled: false
+# Prometheus can't reach these as is, and I don't care enough.
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
 alertmanager:
   alertmanagerSpec:
     alertmanagerConfigMatcherStrategy:

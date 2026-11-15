@@ -44,7 +44,7 @@ metadata:
   name: cilium-external-http-filter-redirect
 spec:
   parentRefs:
-  - name: cilium-internal
+  - name: external
     sectionName: web-gw
   hostnames:
   - "*.jackhil.de"
