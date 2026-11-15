@@ -13,6 +13,7 @@ generatorOptions:
 resources:
 - resources/helm-release.yaml
 - resources/helm-repo.yaml
+# Gateway API
 - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.6.1/config/crd/standard/gateway.networking.k8s.io_gatewayclasses.yaml
 - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.6.1/config/crd/standard/gateway.networking.k8s.io_gateways.yaml
 - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.6.1/config/crd/standard/gateway.networking.k8s.io_httproutes.yaml
@@ -20,3 +21,5 @@ resources:
 - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.6.1/config/crd/standard/gateway.networking.k8s.io_grpcroutes.yaml
 - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.6.1/config/crd/standard/gateway.networking.k8s.io_backendtlspolicies.yaml
 - https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.6.1/config/crd/standard/gateway.networking.k8s.io_tlsroutes.yaml
+# Network policy API
+- https://raw.githubusercontent.com/kubernetes-sigs/network-policy-api/refs/tags/v0.3.0/config/crd/standard/policy.networking.k8s.io_clusternetworkpolicies.yaml
