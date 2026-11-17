@@ -6,7 +6,7 @@ controllers:
       main:
         image:
           repository: ghcr.io/home-assistant/home-assistant
-          tag: 2026.11.1
+          tag: 2026.11.2
           pullPolicy: IfNotPresent
         env:
           TZ: America/Chicago
