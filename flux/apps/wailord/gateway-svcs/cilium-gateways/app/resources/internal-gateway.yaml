@@ -47,8 +47,7 @@ spec:
   parentRefs:
   - name: internal
     sectionName: web-gw
-  hostnames:
-  - "*.jsck.network"
+  hostnames: []
   rules:
   - filters:
     - type: RequestRedirect

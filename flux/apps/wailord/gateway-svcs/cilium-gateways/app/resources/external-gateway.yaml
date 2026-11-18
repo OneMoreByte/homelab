@@ -48,8 +48,7 @@ spec:
   parentRefs:
   - name: external
     sectionName: web-gw
-  hostnames:
-  - "*.jackhil.de"
+  hostnames: []
   rules:
   - filters:
     - type: RequestRedirect
