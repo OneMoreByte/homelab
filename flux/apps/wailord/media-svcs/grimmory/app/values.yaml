@@ -8,7 +8,7 @@ controllers:
       main:
         image:
           repository: ghcr.io/grimmory-tools/grimmory
-          tag: v3.5.0
+          tag: v3.5.1
           pullPolicy: IfNotPresent
         env:
           TZ: "America/Chicago"
