@@ -2,6 +2,8 @@ coder:
   env:
     - name: CODER_ACCESS_URL
       value: "https://coder.jackhil.de"
+    - name: CODER_OAUTH2_PROVIDER_ENABLE
+      value: "true"
     - name: CODER_OIDC_ISSUER_URL
       value: "https://auth.thescience.team/application/o/jsck-coder-oidc/"
     - name: CODER_OIDC_CLIENT_ID
