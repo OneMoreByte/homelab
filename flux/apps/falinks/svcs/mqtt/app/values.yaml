@@ -16,7 +16,7 @@ controllers:
       main:
         image:
           repository: docker.io/eclipse-mosquitto
-          tag: 2.0.22
+          tag: 2.0.23
 ingress:
   main:
     enabled: false
