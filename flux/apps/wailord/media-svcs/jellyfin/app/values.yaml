@@ -7,8 +7,8 @@ controllers:
     containers:
       main:
         image:
-          repository: ghcr.io/onemorebyte/jellyfin-pgsql
-          tag: 12.1-1
+          repository: ghcr.io/jellyfin/jellyfin
+          tag: 12.4
           pullPolicy: IfNotPresent
         env:
           TZ: America/Chicago
