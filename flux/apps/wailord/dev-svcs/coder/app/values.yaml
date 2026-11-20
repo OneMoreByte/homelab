@@ -1,7 +1,26 @@
 coder:
   env:
-    - name: "CODER_ACCESS_URL"
+    - name: CODER_ACCESS_URL
       value: "https://coder.jackhil.de"
+    - name: CODER_OIDC_ISSUER_URL
+      value: "https://auth.thescience.team/application/o/jsck-coder-oidc/"
+    - name: CODER_OIDC_CLIENT_ID
+      valueFrom:
+        secretKeyRef:
+          name: "coder-oidc-secret"
+          key: "client_id"
+    - name: CODER_OIDC_CLIENT_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: "coder-oidc-secret"
+          key: "client_secret"
+    - name: CODER_OIDC_SCOPES
+      value: "openid,profile,email,offline_access"
+    - name: CODER_OIDC_SIGN_IN_TEXT
+      value: "Sign in with The Science Team"
+    - name: CODER_OIDC_ICON_URL
+      value: "https://auth.thescience.team/static/dist/assets/icons/icon.svg"
+
   serviceAccount:
     workspacePerms: false
     enableDeployments: false

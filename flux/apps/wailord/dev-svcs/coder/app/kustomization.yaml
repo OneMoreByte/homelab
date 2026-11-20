@@ -16,3 +16,4 @@ resources:
   - resources/oci-repo.yaml
   - resources/postgres.yaml
   - resources/postgres-db-secret.yaml
+  - resources/oidc-secret.yaml
