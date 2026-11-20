@@ -22,6 +22,14 @@ coder:
       value: "Sign in with The Science Team"
     - name: CODER_OIDC_ICON_URL
       value: "https://auth.thescience.team/static/dist/assets/icons/icon.svg"
+    - name: CODER_PG_CONNECTION_URL
+      valueFrom:
+        secretKeyRef:
+          name: coder-connection-url
+          key: url
+    - name: CODER_OAUTH2_GITHUB_DEFAULT_PROVIDER_ENABLE
+      value: "false"
+
 
   serviceAccount:
     workspacePerms: false
