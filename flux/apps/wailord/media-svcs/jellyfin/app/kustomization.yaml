@@ -15,5 +15,6 @@ resources:
   - resources/helm-release.yaml
   - resources/oci-repo.yaml
   - resources/certificate.yaml
-  - resources/postgres.yaml
+# It was super fast, but we can wait until the official postgres support is a thing
+#  - resources/postgres.yaml
   - resources/postgres-db-secret.yaml
