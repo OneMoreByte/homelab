@@ -20,6 +20,8 @@ coder:
       value: "openid,profile,email,offline_access"
     - name: CODER_OIDC_SIGN_IN_TEXT
       value: "Sign in with The Science Team"
+    - name: CODER_OIDC_IGNORE_EMAIL_VERIFIED
+      value: "false"
     - name: CODER_OIDC_ICON_URL
       value: "https://auth.thescience.team/static/dist/assets/icons/icon.svg"
     - name: CODER_PG_CONNECTION_URL
