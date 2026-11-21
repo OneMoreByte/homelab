@@ -6,7 +6,7 @@ controllers:
       main:
         image:
           repository: ghcr.io/blakeblackshear/frigate
-          tag: 0.18.2
+          tag: 0.18.3
           pullPolicy: IfNotPresent
         env: []
         envFrom:
