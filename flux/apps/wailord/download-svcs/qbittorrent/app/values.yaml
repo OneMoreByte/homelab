@@ -6,7 +6,7 @@ controllers:
       main:
         image:
           repository: ghcr.io/autobrr/qui
-          tag: v1.33.0
+          tag: v1.37.0
           pullPolicy: IfNotPresent
         env:
           TZ: UTC

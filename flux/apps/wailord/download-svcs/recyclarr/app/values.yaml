@@ -10,10 +10,14 @@ controllers:
           UID: 1000
           GID: 1000
           TZ: America/Chicago
-          IDK: man
+          RECYCLARR_API_KEY:
+            valueFrom:
+              secretKeyRef:
+                name: recyclarr-api-key
+                key: api_key
         image:
           repository: ghcr.io/recyclarr/recyclarr
-          tag: 8.8.1
+          tag: 9.0.0
           pullPolicy: IfNotPresent
         probes:
           liveness:
