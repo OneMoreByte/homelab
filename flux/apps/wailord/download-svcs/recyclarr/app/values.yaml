@@ -13,7 +13,7 @@ controllers:
           IDK: man
         image:
           repository: ghcr.io/recyclarr/recyclarr
-          tag: 8.8.1
+          tag: 9.0.0
           pullPolicy: IfNotPresent
         probes:
           liveness:
