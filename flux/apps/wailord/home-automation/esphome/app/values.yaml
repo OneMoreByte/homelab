@@ -10,7 +10,7 @@ controllers:
           TZ: America/Chicago
         image:
           repository: ghcr.io/esphome/esphome
-          tag: 2026.10.2
+          tag: 2026.11.1
           pullPolicy: IfNotPresent
         securityContext:
           privileged: true
